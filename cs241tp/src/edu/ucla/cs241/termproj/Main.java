@@ -11,7 +11,7 @@ public class Main {
     }
 
     private void run() {
-        System.out.println("Hello Team Members of CS 241A Term Project!");        
+        System.out.println("Hello Team Members of CS 241A Term Project!");
     }
-    
+
 }

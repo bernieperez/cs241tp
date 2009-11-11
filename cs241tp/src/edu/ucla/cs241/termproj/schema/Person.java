@@ -1,18 +1,20 @@
 package edu.ucla.cs241.termproj.schema;
 
 public class Person {
-    
+
     private String firstName;
+
     private String lastName;
+
     private int age;
-    
+
     public Person() {
     }
 
     /**
      * Getters and Setters
      */
-    
+
     public String getFirstName() {
         return firstName;
     }
