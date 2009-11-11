@@ -4,15 +4,20 @@ import java.util.ArrayList;
 
 public class Course {
     private ArrayList<Student> enrolled;
+
     private Instructor instructor;
+
     private Department department;
+
     private String name;
+
     private int section;
+
     private int room;
-    
+
     public Course() {
     }
-    
+
     /**
      * Getters and Setters
      */
@@ -64,5 +69,5 @@ public class Course {
     public void setRoom(int room) {
         this.room = room;
     }
-    
+
 }

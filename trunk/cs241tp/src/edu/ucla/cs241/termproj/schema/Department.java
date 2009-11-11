@@ -4,11 +4,12 @@ import java.util.ArrayList;
 
 public class Department {
     private String name;
+
     private ArrayList<Course> courses;
-    
+
     public Department() {
     }
-    
+
     /**
      * Getters and Setters
      */
@@ -28,6 +29,5 @@ public class Department {
     public void setCourses(ArrayList<Course> courses) {
         this.courses = courses;
     }
-    
-    
+
 }
