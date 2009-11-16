@@ -1,0 +1,38 @@
+<!--
+Demo for JVI UserAuthentication API.
+-->
+
+<project name="UserAuthentication" default="run" basedir=".">
+	
+    <import file="../../common.xml"/>
+    
+    <target name="removedb" description="removedb" >
+            <exec executable="removedb" failonerror="false">
+            <arg line="-f jvidb1"/>
+            </exec>
+    </target>
+    <target name="makedb" description="makedb">
+        <exec executable="makedb"  failonerror="false">
+        <arg line="jvidb1"/>
+        </exec>
+    </target>
+    
+    <target name="createdb" description="createdb">
+            <exec executable="createdb"  failonerror="false">
+            <arg line="jvidb1"/>
+            </exec>
+    </target>
+	
+    <target name="run" depends="clean,compile,removedb,makedb,createdb"
+        description="Run the demo">
+        <java classname="AddUser" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="jvidb1 dbuser versant rw"/>
+        </java>
+        <java classname="StudAccess" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="jvidb1 dbuser versant"/>
+        </java>
+    </target>
+
+</project>

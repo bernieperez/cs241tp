@@ -1,0 +1,799 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="9" zv="Cache for Windows NT (Intel) 5.0.13 (Build 5607U)" ts="2005-01-31 17:33:39">
+<Project name="Default__system" LastModified="2005-01-31 17:33:39">
+  <Items>
+    <ProjectItem name="QuizService.IQuizService" type="CLS"/>
+    <ProjectItem name="QuizService.MultipleChoiceQuestion" type="CLS"/>
+    <ProjectItem name="SOAPService.Contact" type="CLS"/>
+    <ProjectItem name="SOAPService.DataSet" type="CLS"/>
+    <ProjectItem name="SOAPService.PhoneNumber" type="CLS"/>
+    <ProjectItem name="SOAPService.SOAPServiceSoap" type="CLS"/>
+    <ProjectItem name="SOAPService.SOAPServiceSoap.AddPhoneNumber" type="CLS"/>
+    <ProjectItem name="SOAPService.SOAPServiceSoap.GetContact" type="CLS"/>
+    <ProjectItem name="SOAPService.SOAPServiceSoap.GetContactByName" type="CLS"/>
+    <ProjectItem name="SOAPService.SOAPServiceSoap.GetContactByType" type="CLS"/>
+    <ProjectItem name="SOAPService.SOAPServiceSoap.RunPhoneNumberQuery" type="CLS"/>
+    <ProjectItem name="SOAPService.SOAPServiceSoap.SaveContact" type="CLS"/>
+    <ProjectItem name="TemperatureService.TemperaturePort" type="CLS"/>
+    <ProjectItem name="TestQuizService.mac" type="MAC"/>
+    <ProjectItem name="TestTemperatureService.mac" type="MAC"/>
+  </Items>
+</Project>
+<Class name="QuizService.IQuizService">
+<Super>%SOAP.WebClient</Super>
+<TimeChanged>59931,62572</TimeChanged>
+<TimeCreated>59931,62572</TimeCreated>
+
+<Method name="addNewEntry">
+<Final>1</Final>
+<FormalSpec>mcq:QuizService.MultipleChoiceQuestion,rightAnswer:%String</FormalSpec>
+<ProcedureBlock>1</ProcedureBlock>
+<ReturnType>%xsd.int</ReturnType>
+<WebMethod>1</WebMethod>
+<SoapBindingStyle>rpc</SoapBindingStyle>
+<SoapBodyUse>encoded</SoapBodyUse>
+<SoapNameSpace>http://tempuri.org/QuizService</SoapNameSpace>
+<Implementation><![CDATA[ Quit ..WebMethod("addNewEntry").Invoke(##this,"addNewEntry",.mcq,.rightAnswer)
+]]></Implementation>
+</Method>
+
+<Method name="checkCorrectAnswerById">
+<Final>1</Final>
+<FormalSpec>id:%xsd.int,guessedAnswer:%String</FormalSpec>
+<ProcedureBlock>1</ProcedureBlock>
+<ReturnType>%Boolean</ReturnType>
+<WebMethod>1</WebMethod>
+<SoapBindingStyle>rpc</SoapBindingStyle>
+<SoapBodyUse>encoded</SoapBodyUse>
+<SoapNameSpace>http://tempuri.org/QuizService</SoapNameSpace>
+<Implementation><![CDATA[ Quit ..WebMethod("checkCorrectAnswerById").Invoke(##this,"checkCorrectAnswerById",.id,.guessedAnswer)
+]]></Implementation>
+</Method>
+
+<Method name="getCorrectAnswerForQuestionById">
+<Final>1</Final>
+<FormalSpec>id:%xsd.int</FormalSpec>
+<ProcedureBlock>1</ProcedureBlock>
+<ReturnType>%String</ReturnType>
+<WebMethod>1</WebMethod>
+<SoapBindingStyle>rpc</SoapBindingStyle>
+<SoapBodyUse>encoded</SoapBodyUse>
+<SoapNameSpace>http://tempuri.org/QuizService</SoapNameSpace>
+<Implementation><![CDATA[ Quit ..WebMethod("getCorrectAnswerForQuestionById").Invoke(##this,"getCorrectAnswerForQuestionById",.id)
+]]></Implementation>
+</Method>
+
+<Method name="getRandomQuestion">
+<Final>1</Final>
+<ProcedureBlock>1</ProcedureBlock>
+<ReturnType>QuizService.MultipleChoiceQuestion</ReturnType>
+<WebMethod>1</WebMethod>
+<SoapBindingStyle>rpc</SoapBindingStyle>
+<SoapBodyUse>encoded</SoapBodyUse>
+<SoapNameSpace>http://tempuri.org/QuizService</SoapNameSpace>
+<Implementation><![CDATA[ Quit ..WebMethod("getRandomQuestion").Invoke(##this,"getRandomQuestion")
+]]></Implementation>
+</Method>
+
+<Method name="getRandomQuestionByDifficltyLvl">
+<Final>1</Final>
+<FormalSpec>difficultyLevel:%String</FormalSpec>
+<ProcedureBlock>1</ProcedureBlock>
+<ReturnType>QuizService.MultipleChoiceQuestion</ReturnType>
+<WebMethod>1</WebMethod>
+<SoapBindingStyle>rpc</SoapBindingStyle>
+<SoapBodyUse>encoded</SoapBodyUse>
+<SoapNameSpace>http://tempuri.org/QuizService</SoapNameSpace>
+<Implementation><![CDATA[ Quit ..WebMethod("getRandomQuestionByDifficultyLevel").Invoke(##this,"getRandomQuestionByDifficultyLevel",.difficultyLevel)
+]]></Implementation>
+</Method>
+
+<Parameter name="LOCATION">
+<Description>
+This is the URL used to access the web service.</Description>
+<Default>http://www.hlrs.de:80/quiz/quiz</Default>
+</Parameter>
+
+<Parameter name="NAMESPACE">
+<Description>
+This is the namespace used by the Service</Description>
+<Default>http://www.themindelectric.com/wsdl/QuizService/</Default>
+</Parameter>
+
+<Parameter name="SERVICENAME">
+<Description>
+This is the name of the Service</Description>
+<Default>QuizService</Default>
+</Parameter>
+
+<Parameter name="TYPENAMESPACE">
+<Description>
+This is the namespace used for types by the Service</Description>
+<Default>http://www.themindelectric.com/package/</Default>
+</Parameter>
+</Class>
+<Class name="QuizService.MultipleChoiceQuestion">
+<Description>
+Created from: http://www.hlrs.de/quiz/quiz.wsdl</Description>
+<Super>%RegisteredObject,%XML.Adaptor</Super>
+<TimeChanged>59931,62572</TimeChanged>
+<TimeCreated>59931,62572</TimeCreated>
+
+<Parameter name="XMLNAME">
+<Default>MultipleChoiceQuestion</Default>
+</Parameter>
+
+<Parameter name="XMLSEQUENCE">
+<Default>1</Default>
+</Parameter>
+
+<Property name="id">
+<Type>%xsd.int</Type>
+<Required>1</Required>
+<Parameter name="XMLNAME" value="id"/>
+</Property>
+
+<Property name="question">
+<Type>%String</Type>
+<Required>1</Required>
+<Parameter name="XMLNAME" value="question"/>
+</Property>
+
+<Property name="answerA">
+<Type>%String</Type>
+<Required>1</Required>
+<Parameter name="XMLNAME" value="answerA"/>
+</Property>
+
+<Property name="answerB">
+<Type>%String</Type>
+<Required>1</Required>
+<Parameter name="XMLNAME" value="answerB"/>
+</Property>
+
+<Property name="answerC">
+<Type>%String</Type>
+<Required>1</Required>
+<Parameter name="XMLNAME" value="answerC"/>
+</Property>
+
+<Property name="answerD">
+<Type>%String</Type>
+<Required>1</Required>
+<Parameter name="XMLNAME" value="answerD"/>
+</Property>
+
+<Property name="difficultyLevel">
+<Type>%xsd.int</Type>
+<Required>1</Required>
+<Parameter name="XMLNAME" value="difficultyLevel"/>
+</Property>
+</Class>
+<Class name="SOAPService.Contact">
+<Description>
+Created from: http://localhost/csp/tutorials/SOAPTutorial.SOAPService.cls?WSDL=1</Description>
+<Super>%RegisteredObject,%XML.Adaptor</Super>
+<TimeChanged>59931,63157</TimeChanged>
+<TimeCreated>59931,63157</TimeCreated>
+
+<Parameter name="XMLNAME">
+<Default>Contact</Default>
+</Parameter>
+
+<Parameter name="XMLSEQUENCE">
+<Default>1</Default>
+</Parameter>
+
+<Property name="Name">
+<Type>%String</Type>
+<Required>1</Required>
+<Parameter name="XMLNAME" value="Name"/>
+</Property>
+
+<Property name="PhoneNumbers">
+<Type>SOAPService.PhoneNumber</Type>
+<Collection>list</Collection>
+<Parameter name="XMLITEMNAME" value="PhoneNumber"/>
+<Parameter name="XMLNAME" value="PhoneNumbers"/>
+<Parameter name="XMLPROJECTION" value="COLLECTION"/>
+</Property>
+
+<Property name="ContactType">
+<Type>%String</Type>
+<Parameter name="VALUELIST" value=",Business,Personal"/>
+<Parameter name="XMLNAME" value="ContactType"/>
+</Property>
+</Class>
+<Class name="SOAPService.DataSet">
+<Description>
+Created from: http://localhost/csp/tutorials/SOAPTutorial.SOAPService.cls?WSDL=1</Description>
+<Super>%RegisteredObject,%XML.Adaptor</Super>
+<TimeChanged>59927,30172</TimeChanged>
+<TimeCreated>59927,30172</TimeCreated>
+
+<Parameter name="XMLNAME">
+<Default>DataSet</Default>
+</Parameter>
+
+<Parameter name="XMLSEQUENCE">
+<Default>1</Default>
+</Parameter>
+
+<Property name="Missing">
+<Description>
+ERROR: Missing Property name in Schema. </Description>
+<Type>%String</Type>
+<Required>1</Required>
+<Parameter name="XMLNAME"/>
+</Property>
+
+<Property name="any">
+<Type>%XML.String</Type>
+<SqlFieldName>_any</SqlFieldName>
+<Parameter name="XMLNAME" value="any"/>
+<Parameter name="XMLPROJECTION" value="ANY"/>
+</Property>
+</Class>
+<Class name="SOAPService.PhoneNumber">
+<Description>
+Created from: http://localhost/csp/tutorials/SOAPTutorial.SOAPService.cls?WSDL=1</Description>
+<Super>%RegisteredObject,%XML.Adaptor</Super>
+<TimeChanged>59931,63157</TimeChanged>
+<TimeCreated>59931,63157</TimeCreated>
+
+<Parameter name="XMLNAME">
+<Default>PhoneNumber</Default>
+</Parameter>
+
+<Parameter name="XMLSEQUENCE">
+<Default>1</Default>
+</Parameter>
+
+<Property name="Number">
+<Type>%String</Type>
+<Parameter name="XMLNAME" value="Number"/>
+</Property>
+
+<Property name="PhoneNumberType">
+<Type>%String</Type>
+<Parameter name="VALUELIST" value=",Business,Home,Mobile,Fax"/>
+<Parameter name="XMLNAME" value="PhoneNumberType"/>
+</Property>
+</Class>
+<Class name="SOAPService.SOAPServiceSoap.AddPhoneNumber">
+<Import>SOAPService</Import>
+<IncludeCode>%occInclude,%soap</IncludeCode>
+<Super>%SOAP.ProxyDescriptor</Super>
+<TimeChanged>59931,63158</TimeChanged>
+<TimeCreated>59931,63158</TimeCreated>
+<GeneratedBy>SOAPService.SOAPServiceSoap</GeneratedBy>
+
+<Method name="Invoke">
+<FormalSpec>%Client,%Action,phone:SOAPService.PhoneNumber,id:%String</FormalSpec>
+<ReturnType>%Library.Integer</ReturnType>
+<ServerOnly>1</ServerOnly>
+<Implementation><![CDATA[
+ Set ..phone=phone,..id=id
+ Do %Client.InvokeClient(##this,"AddPhoneNumber",%Action)
+ Quit ..%Result
+]]></Implementation>
+</Method>
+
+<Method name="Reset">
+<ServerOnly>1</ServerOnly>
+<Implementation><![CDATA[ Quit
+]]></Implementation>
+</Method>
+
+<Parameter name="METHODNAMESPACE">
+<Default>http://tempuri.org</Default>
+</Parameter>
+
+<Parameter name="NAMESPACE">
+<Default>http://tempuri.org</Default>
+</Parameter>
+
+<Parameter name="SOAPBINDINGSTYLE">
+<Default>document</Default>
+</Parameter>
+
+<Parameter name="SOAPBODYUSE">
+<Default>literal</Default>
+</Parameter>
+
+<Parameter name="TYPENAMESPACE">
+<Default>http://tempuri.org</Default>
+</Parameter>
+
+<Parameter name="XMLDEFAULTREFERENCE">
+<Default>complete</Default>
+</Parameter>
+
+<Parameter name="XMLRESULTNAME">
+<Default>%Result</Default>
+</Parameter>
+
+<Property name="%Result">
+<Type>%Library.Integer</Type>
+<Parameter name="XMLIO" value="IN"/>
+<Parameter name="XMLNAME" value="AddPhoneNumberResult"/>
+</Property>
+
+<Property name="phone">
+<Type>SOAPService.PhoneNumber</Type>
+<Parameter name="XMLIO" value="OUT"/>
+</Property>
+
+<Property name="id">
+<Type>%Library.String</Type>
+<Parameter name="XMLIO" value="OUT"/>
+</Property>
+</Class>
+<Class name="SOAPService.SOAPServiceSoap">
+<Super>%SOAP.WebClient</Super>
+<TimeChanged>59931,63157</TimeChanged>
+<TimeCreated>59931,63157</TimeCreated>
+
+<Method name="AddPhoneNumber">
+<Final>1</Final>
+<FormalSpec>phone:SOAPService.PhoneNumber,id:%String</FormalSpec>
+<ProcedureBlock>1</ProcedureBlock>
+<ReturnType>%Integer</ReturnType>
+<WebMethod>1</WebMethod>
+<SoapBindingStyle>document</SoapBindingStyle>
+<SoapBodyUse>literal</SoapBodyUse>
+<Implementation><![CDATA[ Quit ..WebMethod("AddPhoneNumber").Invoke(##this,"http://tempuri.org/SOAPTutorial.SOAPService.AddPhoneNumber",.phone,.id)
+]]></Implementation>
+</Method>
+
+<Method name="GetContact">
+<Final>1</Final>
+<FormalSpec>id:%String</FormalSpec>
+<ProcedureBlock>1</ProcedureBlock>
+<ReturnType>SOAPService.Contact</ReturnType>
+<WebMethod>1</WebMethod>
+<SoapBindingStyle>document</SoapBindingStyle>
+<SoapBodyUse>literal</SoapBodyUse>
+<Implementation><![CDATA[ Quit ..WebMethod("GetContact").Invoke(##this,"http://tempuri.org/SOAPTutorial.SOAPService.GetContact",.id)
+]]></Implementation>
+</Method>
+
+<Method name="GetContactByName">
+<Final>1</Final>
+<FormalSpec>*GetContactByNameResult:%ListOfObjects(ELEMENTTYPE="SOAPService.Contact",XMLITEMNAME="Contact",XMLNAME="GetContactByNameResult"),Name:%String</FormalSpec>
+<ProcedureBlock>1</ProcedureBlock>
+<WebMethod>1</WebMethod>
+<SoapBindingStyle>document</SoapBindingStyle>
+<SoapBodyUse>literal</SoapBodyUse>
+<Implementation><![CDATA[ Do (..WebMethod("GetContactByName")).Invoke(##this,"http://tempuri.org/SOAPTutorial.SOAPService.GetContactByName",.GetContactByNameResult,.Name)
+]]></Implementation>
+</Method>
+
+<Method name="GetContactByType">
+<Final>1</Final>
+<FormalSpec>*GetContactByTypeResult:%ListOfObjects(ELEMENTTYPE="SOAPService.Contact",XMLITEMNAME="Contact",XMLNAME="GetContactByTypeResult"),type:%String</FormalSpec>
+<ProcedureBlock>1</ProcedureBlock>
+<WebMethod>1</WebMethod>
+<SoapBindingStyle>document</SoapBindingStyle>
+<SoapBodyUse>literal</SoapBodyUse>
+<Implementation><![CDATA[ Do (..WebMethod("GetContactByType")).Invoke(##this,"http://tempuri.org/SOAPTutorial.SOAPService.GetContactByType",.GetContactByTypeResult,.type)
+]]></Implementation>
+</Method>
+
+<Method name="RunPhoneNumberQuery">
+<Final>1</Final>
+<FormalSpec>contactId:%String,phoneNumberType:%String</FormalSpec>
+<ProcedureBlock>1</ProcedureBlock>
+<ReturnType>%XML.DataSet</ReturnType>
+<WebMethod>1</WebMethod>
+<SoapBindingStyle>document</SoapBindingStyle>
+<SoapBodyUse>literal</SoapBodyUse>
+<Implementation><![CDATA[ Quit ..WebMethod("RunPhoneNumberQuery").Invoke(##this,"http://tempuri.org/SOAPTutorial.SOAPService.RunPhoneNumberQuery",.contactId,.phoneNumberType)
+]]></Implementation>
+</Method>
+
+<Method name="SaveContact">
+<Final>1</Final>
+<FormalSpec>contact:SOAPService.Contact</FormalSpec>
+<ProcedureBlock>1</ProcedureBlock>
+<ReturnType>%Integer</ReturnType>
+<WebMethod>1</WebMethod>
+<SoapBindingStyle>document</SoapBindingStyle>
+<SoapBodyUse>literal</SoapBodyUse>
+<Implementation><![CDATA[ Quit ..WebMethod("SaveContact").Invoke(##this,"http://tempuri.org/SOAPTutorial.SOAPService.SaveContact",.contact)
+]]></Implementation>
+</Method>
+
+<Parameter name="LOCATION">
+<Description>
+This is the URL used to access the web service.</Description>
+<Default>http://localhost/csp/tutorials/SOAPTutorial.SOAPService.cls</Default>
+</Parameter>
+
+<Parameter name="NAMESPACE">
+<Description>
+This is the namespace used by the Service</Description>
+<Default>http://tempuri.org</Default>
+</Parameter>
+
+<Parameter name="SERVICENAME">
+<Description>
+This is the name of the Service</Description>
+<Default>SOAPService</Default>
+</Parameter>
+</Class>
+<Class name="SOAPService.SOAPServiceSoap.GetContact">
+<Import>SOAPService</Import>
+<IncludeCode>%occInclude,%soap</IncludeCode>
+<Super>%SOAP.ProxyDescriptor</Super>
+<TimeChanged>59931,63158</TimeChanged>
+<TimeCreated>59931,63158</TimeCreated>
+<GeneratedBy>SOAPService.SOAPServiceSoap</GeneratedBy>
+
+<Method name="Invoke">
+<FormalSpec>%Client,%Action,id:%String</FormalSpec>
+<ReturnType>SOAPService.Contact</ReturnType>
+<ServerOnly>1</ServerOnly>
+<Implementation><![CDATA[
+ Set ..id=id
+ Do %Client.InvokeClient(##this,"GetContact",%Action)
+ Quit ..%Result
+]]></Implementation>
+</Method>
+
+<Method name="Reset">
+<ServerOnly>1</ServerOnly>
+<Implementation><![CDATA[ Quit
+]]></Implementation>
+</Method>
+
+<Parameter name="METHODNAMESPACE">
+<Default>http://tempuri.org</Default>
+</Parameter>
+
+<Parameter name="NAMESPACE">
+<Default>http://tempuri.org</Default>
+</Parameter>
+
+<Parameter name="SOAPBINDINGSTYLE">
+<Default>document</Default>
+</Parameter>
+
+<Parameter name="SOAPBODYUSE">
+<Default>literal</Default>
+</Parameter>
+
+<Parameter name="TYPENAMESPACE">
+<Default>http://tempuri.org</Default>
+</Parameter>
+
+<Parameter name="XMLDEFAULTREFERENCE">
+<Default>complete</Default>
+</Parameter>
+
+<Parameter name="XMLRESULTNAME">
+<Default>%Result</Default>
+</Parameter>
+
+<Property name="%Result">
+<Type>SOAPService.Contact</Type>
+<Parameter name="XMLIO" value="IN"/>
+<Parameter name="XMLNAME" value="GetContactResult"/>
+</Property>
+
+<Property name="id">
+<Type>%Library.String</Type>
+<Parameter name="XMLIO" value="OUT"/>
+</Property>
+</Class>
+<Class name="SOAPService.SOAPServiceSoap.GetContactByName">
+<Import>SOAPService</Import>
+<IncludeCode>%occInclude,%soap</IncludeCode>
+<Super>%SOAP.ProxyDescriptor</Super>
+<TimeChanged>59931,63158</TimeChanged>
+<TimeCreated>59931,63158</TimeCreated>
+<GeneratedBy>SOAPService.SOAPServiceSoap</GeneratedBy>
+
+<Method name="Invoke">
+<FormalSpec>%Client,%Action,*GetContactByNameResult:%ListOfObjects(ELEMENTTYPE="SOAPService.Contact",XMLITEMNAME="Contact",XMLNAME="GetContactByNameResult"),Name:%String</FormalSpec>
+<ServerOnly>1</ServerOnly>
+<Implementation><![CDATA[
+ Set ..Name=Name
+ Do %Client.InvokeClient(##this,"GetContactByName",%Action)
+ Set GetContactByNameResult=..GetContactByNameResult
+ Quit
+]]></Implementation>
+</Method>
+
+<Method name="Reset">
+<ServerOnly>1</ServerOnly>
+<Implementation><![CDATA[ Quit
+]]></Implementation>
+</Method>
+
+<Parameter name="METHODNAMESPACE">
+<Default>http://tempuri.org</Default>
+</Parameter>
+
+<Parameter name="NAMESPACE">
+<Default>http://tempuri.org</Default>
+</Parameter>
+
+<Parameter name="SOAPBINDINGSTYLE">
+<Default>document</Default>
+</Parameter>
+
+<Parameter name="SOAPBODYUSE">
+<Default>literal</Default>
+</Parameter>
+
+<Parameter name="TYPENAMESPACE">
+<Default>http://tempuri.org</Default>
+</Parameter>
+
+<Parameter name="XMLDEFAULTREFERENCE">
+<Default>complete</Default>
+</Parameter>
+
+<Parameter name="XMLRESULTNAME"/>
+
+<Property name="GetContactByNameResult">
+<Type>SOAPService.Contact</Type>
+<Collection>list</Collection>
+<Parameter name="XMLIO" value="IN"/>
+<Parameter name="XMLITEMNAME" value="Contact"/>
+<Parameter name="XMLNAME" value="GetContactByNameResult"/>
+</Property>
+
+<Property name="Name">
+<Type>%Library.String</Type>
+<Parameter name="XMLIO" value="OUT"/>
+</Property>
+</Class>
+<Class name="SOAPService.SOAPServiceSoap.GetContactByType">
+<Import>SOAPService</Import>
+<IncludeCode>%occInclude,%soap</IncludeCode>
+<Super>%SOAP.ProxyDescriptor</Super>
+<TimeChanged>59931,63158</TimeChanged>
+<TimeCreated>59931,63158</TimeCreated>
+<GeneratedBy>SOAPService.SOAPServiceSoap</GeneratedBy>
+
+<Method name="Invoke">
+<FormalSpec>%Client,%Action,*GetContactByTypeResult:%ListOfObjects(ELEMENTTYPE="SOAPService.Contact",XMLITEMNAME="Contact",XMLNAME="GetContactByTypeResult"),type:%String</FormalSpec>
+<ServerOnly>1</ServerOnly>
+<Implementation><![CDATA[
+ Set ..type=type
+ Do %Client.InvokeClient(##this,"GetContactByType",%Action)
+ Set GetContactByTypeResult=..GetContactByTypeResult
+ Quit
+]]></Implementation>
+</Method>
+
+<Method name="Reset">
+<ServerOnly>1</ServerOnly>
+<Implementation><![CDATA[ Quit
+]]></Implementation>
+</Method>
+
+<Parameter name="METHODNAMESPACE">
+<Default>http://tempuri.org</Default>
+</Parameter>
+
+<Parameter name="NAMESPACE">
+<Default>http://tempuri.org</Default>
+</Parameter>
+
+<Parameter name="SOAPBINDINGSTYLE">
+<Default>document</Default>
+</Parameter>
+
+<Parameter name="SOAPBODYUSE">
+<Default>literal</Default>
+</Parameter>
+
+<Parameter name="TYPENAMESPACE">
+<Default>http://tempuri.org</Default>
+</Parameter>
+
+<Parameter name="XMLDEFAULTREFERENCE">
+<Default>complete</Default>
+</Parameter>
+
+<Parameter name="XMLRESULTNAME"/>
+
+<Property name="GetContactByTypeResult">
+<Type>SOAPService.Contact</Type>
+<Collection>list</Collection>
+<Parameter name="XMLIO" value="IN"/>
+<Parameter name="XMLITEMNAME" value="Contact"/>
+<Parameter name="XMLNAME" value="GetContactByTypeResult"/>
+</Property>
+
+<Property name="type">
+<Type>%Library.String</Type>
+<Parameter name="XMLIO" value="OUT"/>
+</Property>
+</Class>
+<Class name="SOAPService.SOAPServiceSoap.RunPhoneNumberQuery">
+<Import>SOAPService</Import>
+<IncludeCode>%occInclude,%soap</IncludeCode>
+<Super>%SOAP.ProxyDescriptor</Super>
+<TimeChanged>59931,63158</TimeChanged>
+<TimeCreated>59931,63158</TimeCreated>
+<GeneratedBy>SOAPService.SOAPServiceSoap</GeneratedBy>
+
+<Method name="Invoke">
+<FormalSpec>%Client,%Action,contactId:%String,phoneNumberType:%String</FormalSpec>
+<ReturnType>%XML.DataSet</ReturnType>
+<ServerOnly>1</ServerOnly>
+<Implementation><![CDATA[
+ Set ..contactId=contactId,..phoneNumberType=phoneNumberType
+ Do %Client.InvokeClient(##this,"RunPhoneNumberQuery",%Action)
+ Quit ..%Result
+]]></Implementation>
+</Method>
+
+<Method name="Reset">
+<ServerOnly>1</ServerOnly>
+<Implementation><![CDATA[ Quit
+]]></Implementation>
+</Method>
+
+<Parameter name="METHODNAMESPACE">
+<Default>http://tempuri.org</Default>
+</Parameter>
+
+<Parameter name="NAMESPACE">
+<Default>http://tempuri.org</Default>
+</Parameter>
+
+<Parameter name="SOAPBINDINGSTYLE">
+<Default>document</Default>
+</Parameter>
+
+<Parameter name="SOAPBODYUSE">
+<Default>literal</Default>
+</Parameter>
+
+<Parameter name="TYPENAMESPACE">
+<Default>http://tempuri.org</Default>
+</Parameter>
+
+<Parameter name="XMLDEFAULTREFERENCE">
+<Default>complete</Default>
+</Parameter>
+
+<Parameter name="XMLRESULTNAME">
+<Default>%Result</Default>
+</Parameter>
+
+<Property name="%Result">
+<Type>%XML.DataSet</Type>
+<Parameter name="XMLIO" value="IN"/>
+<Parameter name="XMLNAME" value="RunPhoneNumberQueryResult"/>
+</Property>
+
+<Property name="contactId">
+<Type>%Library.String</Type>
+<Parameter name="XMLIO" value="OUT"/>
+</Property>
+
+<Property name="phoneNumberType">
+<Type>%Library.String</Type>
+<Parameter name="XMLIO" value="OUT"/>
+</Property>
+</Class>
+<Class name="SOAPService.SOAPServiceSoap.SaveContact">
+<Import>SOAPService</Import>
+<IncludeCode>%occInclude,%soap</IncludeCode>
+<Super>%SOAP.ProxyDescriptor</Super>
+<TimeChanged>59931,63158</TimeChanged>
+<TimeCreated>59931,63158</TimeCreated>
+<GeneratedBy>SOAPService.SOAPServiceSoap</GeneratedBy>
+
+<Method name="Invoke">
+<FormalSpec>%Client,%Action,contact:SOAPService.Contact</FormalSpec>
+<ReturnType>%Library.Integer</ReturnType>
+<ServerOnly>1</ServerOnly>
+<Implementation><![CDATA[
+ Set ..contact=contact
+ Do %Client.InvokeClient(##this,"SaveContact",%Action)
+ Quit ..%Result
+]]></Implementation>
+</Method>
+
+<Method name="Reset">
+<ServerOnly>1</ServerOnly>
+<Implementation><![CDATA[ Quit
+]]></Implementation>
+</Method>
+
+<Parameter name="METHODNAMESPACE">
+<Default>http://tempuri.org</Default>
+</Parameter>
+
+<Parameter name="NAMESPACE">
+<Default>http://tempuri.org</Default>
+</Parameter>
+
+<Parameter name="SOAPBINDINGSTYLE">
+<Default>document</Default>
+</Parameter>
+
+<Parameter name="SOAPBODYUSE">
+<Default>literal</Default>
+</Parameter>
+
+<Parameter name="TYPENAMESPACE">
+<Default>http://tempuri.org</Default>
+</Parameter>
+
+<Parameter name="XMLDEFAULTREFERENCE">
+<Default>complete</Default>
+</Parameter>
+
+<Parameter name="XMLRESULTNAME">
+<Default>%Result</Default>
+</Parameter>
+
+<Property name="%Result">
+<Type>%Library.Integer</Type>
+<Parameter name="XMLIO" value="IN"/>
+<Parameter name="XMLNAME" value="SaveContactResult"/>
+</Property>
+
+<Property name="contact">
+<Type>SOAPService.Contact</Type>
+<Parameter name="XMLIO" value="OUT"/>
+</Property>
+</Class>
+<Class name="TemperatureService.TemperaturePort">
+<Super>%SOAP.WebClient</Super>
+<TimeChanged>59931,62540</TimeChanged>
+<TimeCreated>59931,62540</TimeCreated>
+
+<Method name="getTemp">
+<Final>1</Final>
+<FormalSpec>zipcode:%String</FormalSpec>
+<ProcedureBlock>1</ProcedureBlock>
+<ReturnType>%xsd.float</ReturnType>
+<WebMethod>1</WebMethod>
+<SoapBindingStyle>rpc</SoapBindingStyle>
+<SoapBodyUse>encoded</SoapBodyUse>
+<SoapNameSpace>urn:xmethods-Temperature</SoapNameSpace>
+<Implementation><![CDATA[ Quit ..WebMethod("getTemp").Invoke(##this,"",.zipcode)
+]]></Implementation>
+</Method>
+
+<Parameter name="LOCATION">
+<Description>
+This is the URL used to access the web service.</Description>
+<Default>http://services.xmethods.net:80/soap/servlet/rpcrouter</Default>
+</Parameter>
+
+<Parameter name="NAMESPACE">
+<Description>
+This is the namespace used by the Service</Description>
+<Default>http://www.xmethods.net/sd/TemperatureService.wsdl</Default>
+</Parameter>
+
+<Parameter name="SERVICENAME">
+<Description>
+This is the name of the Service</Description>
+<Default>TemperatureService</Default>
+</Parameter>
+</Class>
+<Routine name="TestQuizService" type="MAC" languagemode="0" timestamp="59931,62813"><![CDATA[
+TestQuizService
+	set service = ##class(QuizService.IQuizService).%New()
+	set question = service.getRandomQuestion()
+	write "The question is: "_question.question, !
+	write "Answer A is: "_question.answerA,!
+]]></Routine>
+<Routine name="TestTemperatureService" type="MAC" languagemode="0" timestamp="59931,62836"><![CDATA[
+TestTemperatureService
+	set service = ##class(TemperatureService.TemperaturePort).%New()
+	write "The temperature is: "_service.getTemp("02142")
+]]></Routine>
+<Checksum value="2866205993"/>
+</Export>

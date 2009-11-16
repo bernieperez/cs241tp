@@ -1,0 +1,15 @@
+com.versant
+com.versant.connector.cci
+com.versant.connector.common
+com.versant.connector.jvi.cci
+com.versant.connector.jvi.nonmanaged
+com.versant.event
+com.versant.fund
+com.versant.helper
+com.versant.jvi
+com.versant.odmg
+com.versant.odmg3
+com.versant.trans
+com.versant.util
+com.versant.util.backup
+com.versant.xa

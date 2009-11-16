@@ -1,0 +1,697 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="22" zv="Cache for Windows (x86-32) 2008.2 (Build 375U)" ts="2008-04-01 14:20:08">
+<Class name="ZenTutorial.Application">
+<Description>
+ZenTutorial.Application</Description>
+<Super>%ZEN.application</Super>
+<TimeChanged>61082,56627</TimeChanged>
+<TimeCreated>60618,38077.595113</TimeCreated>
+
+<Parameter name="APPLICATIONNAME">
+<Description>
+This is the name of this application.</Description>
+<Default>ZenContacts</Default>
+</Parameter>
+
+<Parameter name="HOMEPAGE">
+<Description>
+This is the URL of the main starting page of this application.</Description>
+<Default>ZenTutorial.HomePage.cls</Default>
+</Parameter>
+
+<XData name="Style">
+<Description>
+This Style block contains application-wide CSS style definitions.</Description>
+<Data><![CDATA[
+<style type="text/css">
+</style>
+]]></Data>
+</XData>
+</Class>
+
+
+<Class name="ZenTutorial.ContactModel">
+<Super>%ZEN.DataModel.ObjectDataModel</Super>
+<TimeChanged>61083,40606.437301</TimeChanged>
+<TimeCreated>60722,38222.533733</TimeCreated>
+
+<Property name="Name">
+<Type>%String</Type>
+</Property>
+
+<Property name="ContactType">
+<Type>%String</Type>
+<Parameter name="ZENSQL" value="SELECT DISTINCT %EXACT ContactType from ZenTutorial.Contact"/>
+</Property>
+
+<Property name="Street">
+<Type>%String</Type>
+</Property>
+
+<Property name="City">
+<Type>%String</Type>
+</Property>
+
+<Property name="State">
+<Type>%String</Type>
+</Property>
+
+<Property name="Zip">
+<Type>%String</Type>
+</Property>
+
+<Method name="%OnOpenSource">
+<Description>
+Load an instance of the source object for this DataModel.</Description>
+<FormalSpec>pID:%String</FormalSpec>
+<ReturnType>%RegisteredObject</ReturnType>
+<Implementation><![CDATA[
+    	Set pStatus = $$$OK
+    	Quit ##class(ZenTutorial.Contact).%OpenId(pID)
+]]></Implementation>
+</Method>
+
+<Method name="%OnLoadModel">
+<Description>
+This callback method does the actual work of loading values 
+from the source object.</Description>
+<FormalSpec>pSource:ZenTutorial.Contact</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    Set ..Name = pSource.Name
+    Set ..ContactType = pSource.ContactType
+    Set ..Street = pSource.Address1.Street
+    Set ..City = pSource.Address1.City
+    Set ..State = pSource.Address1.State
+    Set ..Zip = pSource.Address1.Zip
+    
+    Quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="%OnSaveSource">
+<Description>
+Load an instance of the source object for this DataModel.</Description>
+<FormalSpec>pSource:ZenTutorial.Contact</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	Set tSC = pSource.%Save()
+	Set ..%id = pSource.%Id()
+	Quit tSC
+]]></Implementation>
+</Method>
+
+<Method name="%OnStoreModel">
+<Description>
+This callback method does the actual work of storing values into
+the source object.</Description>
+<FormalSpec>pSource:ZenTutorial.Contact</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    Set pSource.Name = ..Name
+    Set pSource.ContactType = ..ContactType
+    Set pSource.Address1.Street = ..Street
+    Set pSource.Address1.City = ..City
+    Set pSource.Address1.State = ..State
+    Set pSource.Address1.Zip = ..Zip
+    
+    Quit pSource.%Save()
+]]></Implementation>
+</Method>
+
+<Method name="%OnDeleteSource">
+<Description>
+Delete instance of associated source object.</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>pID:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[	Quit ##class(ZenTutorial.Contact).%DeleteId(pID)
+]]></Implementation>
+</Method>
+
+<Method name="%OnNewSource">
+<Description>
+Load an instance of a new (unsaved) source object for this DataModel.</Description>
+<FormalSpec>*pSC:%Status=$$$OK</FormalSpec>
+<ReturnType>%RegisteredObject</ReturnType>
+<Implementation><![CDATA[	Quit ##class(ZenTutorial.Contact).%New()
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="ZenTutorial.HomePage">
+<Super>%ZEN.Component.page</Super>
+<TimeChanged>61087,44578.204718</TimeChanged>
+<TimeCreated>60597,60009.228379</TimeCreated>
+
+<Parameter name="APPLICATION">
+<Description>
+Class name of application this page belongs to.</Description>
+<Default>ZenTutorial.Application</Default>
+</Parameter>
+
+<Parameter name="PAGENAME">
+<Description>
+Displayed name of this page.</Description>
+<Default>HomePage</Default>
+</Parameter>
+
+<Parameter name="DOMAIN">
+<Description>
+Domain used for localization.</Description>
+</Parameter>
+
+<XData name="Style">
+<Description>
+This Style block contains page-specific CSS style definitions.</Description>
+<Data><![CDATA[
+<style type="text/css">
+body {
+	font-family: arial;
+}
+
+/* Style classes for use on this page */
+
+/* Table Styeles */
+table.tpTable caption{
+		 
+	background: transparent;
+	font-size: 1.4em;
+	font-weight: bold;
+	text-align: left;
+    border: none;
+		
+	}
+	
+	/*even rows*/
+	.tpEven {
+	color: black;
+	background: #ebf3ff;
+    }
+    
+    /*odd rows*/
+   .tpOdd {
+	color: black;
+	background: white;
+	}
+	
+	/* this is a selected row */
+	table.tpTable tr.tpSelected {
+	background: #3d80df;
+	color: white;
+	}
+	
+	tr.tpOdd:hover,tr.tpEven:hover {
+	background-color: #3d80df;
+	color: #ffffff;
+	}
+	
+
+	/*table header style */
+table.tpTable th {
+	border-right: 1px solid gray;
+	border-bottom: 1px solid gray;
+	background: #C5D6D6;
+	color: black;
+	font-weight: bold;
+	text-align: left;
+	padding: 2px;
+	overflow: hidden;
+}
+
+/* selected column header (th) */
+table.tpTable th.tpHdrSelected {
+	background: #3d80df;
+}
+
+table.tpFilterLayout td {
+	border: none;
+	background: #C5D6D6;
+}
+
+/*Caption and form border */
+.fieldset{
+	background: #FFFFFF;
+	border: solid 2px #ebf3ff;
+	color: #000000;
+	font-size: 1em;
+	font-family: arial;
+		
+}
+/* text control styles */
+.text
+{
+	font-size: .8em;
+	font-family: arial;
+    color: #000000;
+    background-color: #ffffff;
+    padding: 2px;
+    border: solid 1px grey;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    height: 25px;
+		
+}	
+
+/* datacombo styles */
+.comboboxInput  {
+    font-size: .8em;
+    font-family: arial;
+    color: #000000;  
+    padding: 2px;
+    border: solid 1px grey;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    height: 20px;
+ }	
+</style>
+]]></Data>
+</XData>
+
+<XData name="Contents">
+<Description>
+This XML block defines the contents of this page.</Description>
+<XMLNamespace>http://www.intersystems.com/zen</XMLNamespace>
+<Data><![CDATA[
+<page title="Zen Contacts" xmlns:zentutorial="http://www.intersystems.com/ZenTutorial" xmlns="http://www.intersystems.com/zen">
+    <zentutorial:MenuComposite width="100%"/>
+    
+    <hgroup width="100%" >
+    
+        <vgroup width="5%">
+        </vgroup>
+        
+        <vgroup width="90%">  
+            <tableNavigator id="contactNav" tablePaneId="contactTable"/>
+              <link align="left" caption="new contact" href="javascript:zenPage.newContact();"/>
+            <hgroup>
+                <!--Contacts Table -->
+
+                
+                <tablePane
+                    width="900px"
+                    id="contactTable" 
+                    tableName="ZenTutorial.Contact"
+                    maxRows="1000" 
+                    pageSize="10" 
+                    showRowNumbers="true"
+                    showZebra="true" 
+                    useSnapshot="true"
+                    extraColumnWidth="5%"
+                    onselectrow="zenPage.clearPhones();zenPage.hideContactForm();"
+                    caption="US Contacts"
+                    valueColumn="ID"
+                    >
+                   	
+                    <column colName="ID" hidden="true"/>		 
+                    <column header="Name" width="20%" colName="Name" filterType="text"/>
+                    <column header="Type" width="9%" colName="ContactType"/>	
+                    <column header="Street" width="20%" colName="Address1_Street"/>
+                    <column header="City" width="12%" colName="Address1_City"/>		 
+                    <column header="State" width="5%" colName="Address1_State"/>	
+                    <column header="Zip" width="7%" colName="Address1_Zip"/>
+                    <column header=""	width="5%" linkCaption="edit" link="javascript:zenPage.showContactForm('#(%query.ID)#');"/>		
+                    <column header="" width="12%" linkCaption="view phones" link="javascript:zenPage.displayPhones('#(%query.ID)#', '#(%query.Name)#');"/>			
+                </tablePane>
+                <spacer width=".5em"/>
+				
+              <dataController id="contactData" 
+               	modelClass="ZenTutorial.ContactModel"
+               	 modelId="" />
+                <fieldSet id="contactFormGroup" hidden="true" legend="Edit Contact">
+                <form id="contactForm" controllerId="contactData" 
+                layout="vertical"
+                          cellStyle="padding: 2px; padding-left: 5px; padding-right: 5px;">
+  					<text label="Name" dataBinding="Name" required="true" size="25" />
+  					 <spacer height=".5"/>
+  					 <dataCombo label="Type" name="ContactType" id="ContactType" size="25"
+                                       dropdownHeight="150px"
+                                       editable="false"
+                                       unrestricted="true"
+                  					   dataBinding="ContactType" />                                 
+        			<spacer height=".5"/>
+  					<text label="Street" dataBinding = "Street" size="25"/>
+  					<spacer height=".5"/>
+  					<text label="City" dataBinding = "City" size="25"/>
+  					<spacer height=".5"/>
+  					<hgroup>
+  					<text label="State" dataBinding = "State" onvalidate="return zenPage.validateState(zenThis);" invalidMessage="State must contain 2 capital letters" size="2"/>
+  					<spacer width="5"/>
+  					<text label="Zip" dataBinding = "Zip" onvalidate="return zenPage.validateZip(zenThis);" invalidMessage="Zip must be 5 digits" size="10"/>
+  					</hgroup>
+  					<spacer height=".5"/>
+  					<hgroup>
+  					<button caption="Save" onclick="zenPage.saveContact();" />
+  					<spacer width="5"/>
+  					<button caption="Delete" onclick="zenPage.deleteContact();" />		
+					</hgroup>
+				</form>
+				</fieldSet>
+            </hgroup>
+            
+            <spacer  height="2"/>
+   	
+   			<vgroup hidden="true" id="phoneDisplay">
+   			 <link  caption="new phone" align="left" href="javascript:zenPage.newPhone();"/>
+            <hgroup>
+                <!-- Phone Table -->
+                <tablePane
+                    width="300px"
+                    id="phoneTable"
+                    enclosingClass="FormGroup"
+                    hidden="false"
+                    maxRows="1000"  
+                    showRowNumbers="true" 
+                    showZebra="true" 
+                    useSnapshot="false"	
+                    caption=""	
+                    sql="SELECT ID,Number, PhoneNumberType From ZenTutorial.PhoneNumber Where Contact=?"		
+                    extraColumnWidth="10"
+                    onselectrow="zenPage.hidePhoneForm();"         
+                >
+                    <parameter value="0" />
+                    <column colName="ID" hidden="true"/>
+                    <column colName="Number" width="55" />
+                    <column header="Type" width="35" colName="PhoneNumberType"/>
+                    <column header=""	width="15" linkCaption="edit" link="javascript:zenPage.showPhoneForm('#(%query.ID)#');"/>		
+                </tablePane>
+           
+                <!--Phone Form -->
+                <dataController id="phoneData" 
+               	modelClass="ZenTutorial.PhoneNumberModel"
+               	 modelId=""/>
+                <fieldSet id="phoneFormGroup" 
+                          enclosingClass="FormGroup" hidden="true"  legend="Edit Phone Number">   
+                     <form id="phoneForm" controllerId="phoneData" >
+  					<text id = "txtNumber" label="Number" dataBinding="Number" required="true" onvalidate="return zenPage.validatePhoneNumber(zenThis);"  invalidMessage="Number must be 'nnn-nnn-nnnn'" />
+  					  <spacer height=".5"/>
+  					  <dataCombo label="Type:" name="PhoneNumberType" id="PhoneNumberType" size="25"
+                                       dropdownHeight="150px"
+                                       editable="false"
+                                       unrestricted="true"
+                  					   dataBinding="PhoneNumberType" />                                 
+        
+  					<spacer height=".5"/>
+  						<hgroup>
+  					<button caption="Save" onclick="zenPage.savePhone();" />
+  					<button caption="Delete" onclick="zenPage.deletePhone();"/>	
+  					<spacer width="5"/>	
+  							
+					</hgroup>
+				</form>
+                     
+                </fieldSet>	
+            </hgroup>
+            </vgroup>
+        </vgroup> 
+        <vgroup width="5%">
+        </vgroup>
+    </hgroup>
+</page>
+]]></Data>
+</XData>
+
+<Method name="showContactForm">
+<FormalSpec>id</FormalSpec>
+<Language>javascript</Language>
+<Implementation><![CDATA[
+	
+	var controller = zenPage.getComponentById('contactData');
+	controller.setProperty('modelId',id);
+	var contactFormGroup=zenPage.getComponentById("contactFormGroup");
+	contactFormGroup.setProperty('hidden',false);
+]]></Implementation>
+</Method>
+
+<Method name="showPhoneForm">
+<FormalSpec>id</FormalSpec>
+<Language>javascript</Language>
+<Implementation><![CDATA[
+	
+	var controller = zenPage.getComponentById('phoneData');
+	controller.setProperty('modelId',id);
+	var phoneFormGroup=zenPage.getComponentById('phoneFormGroup');	
+	phoneFormGroup.setHidden(false);
+	var phoneDisplay=zenPage.getComponentById('phoneDisplay');
+	phoneDisplay.setHidden(false);
+]]></Implementation>
+</Method>
+
+<Method name="validateState">
+<FormalSpec>comp</FormalSpec>
+<Language>javascript</Language>
+<Implementation><![CDATA[
+	
+	//State value must be exactly two capital letters
+	return (/^[A-Z]{2}$/.test(comp.getValue()));
+]]></Implementation>
+</Method>
+
+<Method name="validateZip">
+<FormalSpec>comp</FormalSpec>
+<Language>javascript</Language>
+<Implementation><![CDATA[
+	//Zip value must be exactly 5 digits
+	return (/^\d{5}$/.test(comp.getValue()));
+]]></Implementation>
+</Method>
+
+<Method name="displayPhones">
+<Description>
+displayPhones</Description>
+<FormalSpec>id,name</FormalSpec>
+<Language>javascript</Language>
+<Implementation><![CDATA[
+	
+	var phoneDisplay=zenPage.getComponentById('phoneDisplay');	
+	var phoneTable=zenPage.getComponentById('phoneTable');
+	phoneTable.setProperty('parameters',1, id);
+	phoneTable.setHidden(false);
+	phoneDisplay.setProperty('hidden',false);
+]]></Implementation>
+</Method>
+
+<Method name="validatePhoneNumber">
+<FormalSpec>comp</FormalSpec>
+<Language>javascript</Language>
+<Implementation><![CDATA[
+	//Phone number must be nnn-nnn-nnnn
+	return (/^\d{3}-\d{3}-\d{4}$/.test(comp.getValue()));
+]]></Implementation>
+</Method>
+
+<Method name="hideContactForm">
+<Language>javascript</Language>
+<Implementation><![CDATA[
+	var contactForm=zenPage.getComponentById('contactForm');
+	contactForm.reset();
+	var contactFormGroup=zenPage.getComponentById('contactFormGroup');
+	contactFormGroup.setHidden(true);
+]]></Implementation>
+</Method>
+
+<Method name="hidePhoneForm">
+<Language>javascript</Language>
+<Implementation><![CDATA[
+	var phoneForm=zenPage.getComponentById('phoneForm');
+	phoneForm.reset();
+	var phoneFormGroup=zenPage.getComponentById('phoneFormGroup');
+	phoneFormGroup.setHidden(true);
+]]></Implementation>
+</Method>
+
+<Method name="clearPhones">
+<Language>javascript</Language>
+<Implementation><![CDATA[
+	var phoneTable=zenPage.getComponentById("phoneTable");
+	var phoneDisplay=zenPage.getComponentById("phoneDisplay");
+	if (phoneTable !=null)
+	{
+		phoneTable.setHidden(true);
+		phoneDisplay.setProperty('hidden',true);
+		
+				
+	}
+	this.hidePhoneForm();
+]]></Implementation>
+</Method>
+
+<Method name="saveContact">
+<Description>
+save contact model to database</Description>
+<Language>javascript</Language>
+<Implementation><![CDATA[
+	// validate and save form
+	var form = zenPage.getComponentById('contactForm');
+	var id = form.save();
+	var table=zenPage.getComponentById('contactTable');
+	//refresh data in contact table
+	table.executeQuery();
+]]></Implementation>
+</Method>
+
+<Method name="savePhone">
+<Description>
+save phone model to database</Description>
+<Language>javascript</Language>
+<Implementation><![CDATA[
+	// validate and save form
+	var form = zenPage.getComponentById('phoneForm');
+	form.save();
+	var table=zenPage.getComponentById('phoneTable');
+	//refresh data in phone table
+	table.executeQuery();
+]]></Implementation>
+</Method>
+
+<Method name="deleteContact">
+<Description>
+Delete current item from database</Description>
+<Language>javascript</Language>
+<Implementation><![CDATA[
+	var controller = zenPage.getComponentById('contactData');
+	controller.deleteId(controller.getModelId());
+
+	var table = zenPage.getComponentById('contactTable');
+	table.executeQuery(true);
+	controller.update();
+	zenPage.clearPhones();
+]]></Implementation>
+</Method>
+
+<Method name="newContact">
+<Description>
+Create new object via dataModel</Description>
+<Language>javascript</Language>
+<Implementation><![CDATA[
+	var controller = zenPage.getComponentById('contactData');
+	var contactFormGroup=zenPage.getComponentById("contactFormGroup");
+	contactFormGroup.setProperty('hidden',false);
+	controller.createNewObject();
+	zenPage.clearPhones();
+]]></Implementation>
+</Method>
+
+<Method name="deletePhone">
+<Description>
+Delete current item from database</Description>
+<Language>javascript</Language>
+<Implementation><![CDATA[
+	
+	var controller = zenPage.getComponentById('phoneData');
+	controller.deleteId(controller.getModelId());
+	
+	var table = zenPage.getComponentById('phoneTable');
+	table.executeQuery(true);
+	controller.update();
+	zenPage.hidePhoneForm();
+]]></Implementation>
+</Method>
+
+<Method name="newPhone">
+<Description>
+Create new object via dataModel</Description>
+<Language>javascript</Language>
+<Implementation><![CDATA[
+	
+	var table=zenPage.getComponentById('contactTable');
+	var id = table.getProperty('value');
+	zenPage.showPhoneForm();
+	var controller = zenPage.getComponentById('phoneData');
+	controller.createNewObject();
+	controller.setDataByName("ContactID",id);
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="ZenTutorial.PhoneNumberModel">
+<Super>%ZEN.DataModel.ObjectDataModel</Super>
+<TimeChanged>61087,51570.334205</TimeChanged>
+<TimeCreated>60722,53233.555715</TimeCreated>
+
+<Property name="ContactID">
+<Type>%String</Type>
+</Property>
+
+<Property name="Number">
+<Type>%String</Type>
+</Property>
+
+<Property name="PhoneNumberType">
+<Type>%String</Type>
+<Parameter name="ZENSQL" value="SELECT DISTINCT %EXACT PhoneNumberType from ZenTutorial.PhoneNumber ORDER By PhoneNumberType"/>
+</Property>
+
+<Method name="%OnOpenSource">
+<FormalSpec>pID:%String</FormalSpec>
+<ReturnType>%RegisteredObject</ReturnType>
+<Implementation><![CDATA[
+    	//Set pStatus = $$$OK
+    	Quit ##class(ZenTutorial.PhoneNumber).%OpenId(pID)
+]]></Implementation>
+</Method>
+
+<Method name="%OnLoadModel">
+<Description>
+This callback method does the actual work of loading values 
+from the source object.</Description>
+<FormalSpec>pSource:ZenTutorial.PhoneNumber</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    Set ..Number = pSource.Number
+    Set ..PhoneNumberType = pSource.PhoneNumberType
+    
+    if (pSource.Contact '="")
+    {    
+	    Set ..ContactID = pSource.Contact.%Id()	    
+    
+    }
+    
+    Quit $$$OK
+]]></Implementation>
+</Method>
+
+<Method name="%OnStoreModel">
+<Description>
+This callback method does the actual work of storing values into
+the source object.</Description>
+<FormalSpec>pSource:ZenTutorial.PhoneNumber</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+    Set pSource.Number = ..Number
+    Set pSource.PhoneNumberType = ..PhoneNumberType
+    
+    if (pSource.%Id()="")
+    {
+	    Set contact = ##class(ZenTutorial.Contact).%OpenId(..ContactID)
+	    Set pSource.Contact=contact
+	    Do contact.%Save()
+	    
+    }
+    
+    Quit pSource.%Save()
+]]></Implementation>
+</Method>
+
+<Method name="%OnNewSource">
+<Description>
+Load an instance of a new (unsaved) source object for this DataModel.</Description>
+<FormalSpec>*pSC:%Status=$$$OK</FormalSpec>
+<ReturnType>%RegisteredObject</ReturnType>
+<Implementation><![CDATA[	Quit ##class(ZenTutorial.PhoneNumber).%New()
+]]></Implementation>
+</Method>
+
+<Method name="%OnDeleteSource">
+<Description>
+Delete instance of associated source object.</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>pID:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[	Quit ##class(ZenTutorial.PhoneNumber).%DeleteId(pID)
+]]></Implementation>
+</Method>
+</Class>
+</Export>

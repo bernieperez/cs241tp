@@ -1,0 +1,9 @@
+<project name="build" default="deploy" basedir=".">
+  <target name="deploy">
+    <ant antfile="build_ws.xml" dir="${basedir}/../../" target="smp_stateless_setup"/>
+    
+  </target>
+  <target name="run">
+  <ant antfile="build_ws.xml" dir="${basedir}/../../" target="smp_stateless_run"/>
+  </target>
+</project>

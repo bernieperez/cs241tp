@@ -1,0 +1,25 @@
+# Configuration file: persistent categories of classes
+# Format: [p/c/a/n]   Class name (including package info)
+a Hooks
+a List*
+a NLGames
+a ODMG*
+a OL*
+a StockMarket
+a Trans*
+a VHashtableExample
+a Vql*
+a VVectorExample
+a TransVATDemo
+c Employee
+c HookedPerson
+c StockQuote
+
+
+c model.Company
+c model.Department
+c model.DepartmentWithDList
+c model.Person
+c model.Game
+
+n **

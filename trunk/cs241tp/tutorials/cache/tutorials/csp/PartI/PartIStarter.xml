@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="18" zv="Cache for Windows (Intel) 5.1 (Build 775U)" ts="2005-10-06 10:27:02">
+<Class name="CSPTutorial.Contact">
+<ClassType>persistent</ClassType>
+<Language>basic</Language>
+<ProcedureBlock>1</ProcedureBlock>
+<Super>%Persistent,%Populate</Super>
+<TimeCreated>60138,42793.087391</TimeCreated>
+
+<Property name="Name">
+<Description>
+Represents a contact's name</Description>
+<Type>%String</Type>
+<Required>1</Required>
+<Parameter name="POPSPEC" value="Name()"/>
+<Parameter name="TRUNCATE" value="0"/>
+</Property>
+
+<UDLText>
+<Content><![CDATA[
+//Relationship PhoneNumbers As CSPTutorial.PhoneNumber [ Cardinality = children, Inverse = Contact ];
+
+]]></Content>
+</UDLText>
+
+<Property name="ContactType">
+<Description>
+Describes the nature of the contact: Personal or Business</Description>
+<Type>%String</Type>
+<Parameter name="TRUNCATE" value="0"/>
+<Parameter name="VALUELIST" value=",Business,Personal"/>
+</Property>
+
+<Query name="ByContactType">
+<Type>%SQLQuery</Type>
+<FormalSpec>type:%String</FormalSpec>
+<SqlQuery>SELECT Name FROM Contact
+ WHERE (ContactType = :type)</SqlQuery>
+</Query>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>^CSPTutorial.ContactD</DataLocation>
+<DefaultData>ContactDefaultData</DefaultData>
+<IdLocation>^CSPTutorial.ContactD</IdLocation>
+<IndexLocation>^CSPTutorial.ContactI</IndexLocation>
+<StreamLocation>^CSPTutorial.ContactS</StreamLocation>
+<Data name="ContactDefaultData">
+<Structure>listnode</Structure>
+<Subscript/>
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>ContactType</Value>
+</Value>
+<Value name="3">
+<Value>Name</Value>
+</Value>
+</Data>
+<Property name="ContactType">
+</Property>
+<Property name="Name">
+</Property>
+</Storage>
+</Class>
+</Export>

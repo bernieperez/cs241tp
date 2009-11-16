@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="9" zv="Cache for Windows NT (Intel) 5.0.13 (Build 5607U)" ts="2005-02-01 08:23:39">
+<Class name="SOAPTutorial.Contact">
+<ClassType>persistent</ClassType>
+<Language>basic</Language>
+<ProcedureBlock>1</ProcedureBlock>
+<Super>%Persistent,%Populate,%XML.Adaptor</Super>
+<TimeChanged>59931,61614.279775</TimeChanged>
+<TimeCreated>59926,72207.520099</TimeCreated>
+<ClassDefinitionError>0</ClassDefinitionError>
+
+<Property name="Name">
+<Description>
+Represents a contact's name</Description>
+<Type>%String</Type>
+<Required>1</Required>
+<Parameter name="POPSPEC" value="Name()"/>
+</Property>
+
+<Property name="PhoneNumbers">
+<Type>SOAPTutorial.PhoneNumber</Type>
+<Cardinality>children</Cardinality>
+<Inverse>Contact</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<Property name="ContactType">
+<Description>
+Describes the nature of the contact: Personal or Business</Description>
+<Type>%String</Type>
+<Parameter name="VALUELIST" value=",Business,Personal"/>
+<Parameter name="XMLPROJECTION" value="ELEMENT"/>
+</Property>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>^SOAPTutorial.ContactD</DataLocation>
+<DefaultData>ContactDefaultData</DefaultData>
+<IdLocation>^SOAPTutorial.ContactD</IdLocation>
+<IndexLocation>^SOAPTutorial.ContactI</IndexLocation>
+<StreamLocation>^SOAPTutorial.ContactS</StreamLocation>
+<Data name="ContactDefaultData">
+<Structure>listnode</Structure>
+<Subscript/>
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>ContactType</Value>
+</Value>
+<Value name="3">
+<Value>Name</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+<Class name="SOAPTutorial.ContactList">
+<ClassType>serial</ClassType>
+<ProcedureBlock>1</ProcedureBlock>
+<Super>%Library.ListOfObjects</Super>
+<TimeChanged>59926,73658.843991</TimeChanged>
+<TimeCreated>59931,62906.536565</TimeCreated>
+<ClassDefinitionError>0</ClassDefinitionError>
+
+<Parameter name="ELEMENTTYPE">
+<Default>SOAPTutorial.Contact</Default>
+</Parameter>
+
+<Storage name="Custom">
+<Type>%Library.CompleteCustomStorage</Type>
+</Storage>
+</Class>
+<Class name="SOAPTutorial.PhoneNumber">
+<ClassType>persistent</ClassType>
+<ProcedureBlock>1</ProcedureBlock>
+<Super>%Persistent,%Populate,%XML.Adaptor</Super>
+<TimeChanged>59926,72519.467281</TimeChanged>
+<TimeCreated>59926,72207.542786</TimeCreated>
+<ClassDefinitionError>0</ClassDefinitionError>
+
+<Property name="Contact">
+<Type>SOAPTutorial.Contact</Type>
+<Cardinality>parent</Cardinality>
+<Inverse>PhoneNumbers</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<Property name="Number">
+<Description>
+Represents a phone number</Description>
+<Type>%String</Type>
+<Parameter name="POPSPEC" value="USPhone()"/>
+</Property>
+
+<Property name="PhoneNumberType">
+<Description>
+Represents the type of phone number, e.g., work, home, mobile, fax, etc.</Description>
+<Type>%String</Type>
+<Parameter name="VALUELIST" value=",Business,Home,Mobile,Fax"/>
+</Property>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>{%%PARENT}("PhoneNumbers")</DataLocation>
+<DefaultData>PhoneNumberDefaultData</DefaultData>
+<IdLocation>^SOAPTutorial.ContactC("PhoneNumbers")</IdLocation>
+<IndexLocation>^SOAPTutorial.PhoneNumberI</IndexLocation>
+<StreamLocation>^SOAPTutorial.PhoneNumberS</StreamLocation>
+<Data name="PhoneNumberDefaultData">
+<Structure>listnode</Structure>
+<Subscript/>
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>Number</Value>
+</Value>
+<Value name="3">
+<Value>PhoneNumberType</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+<Class name="SOAPTutorial.SOAPService">
+<Description>
+SOAPTutorial.SOAPService</Description>
+<ProcedureBlock>1</ProcedureBlock>
+<Super>%SOAP.WebService</Super>
+<TimeChanged>59932,30194.843366</TimeChanged>
+<TimeCreated>59931,62906.571566</TimeCreated>
+<ClassDefinitionError>0</ClassDefinitionError>
+
+<Parameter name="SERVICENAME">
+<Description>
+Name of the WebService.</Description>
+<Default>SOAPService</Default>
+</Parameter>
+
+<Parameter name="NAMESPACE">
+<Description>
+TODO: change this to actual SOAP namespace.
+SOAP Namespace for the WebService</Description>
+<Default>http://tempuri.org</Default>
+</Parameter>
+
+<Method name="GetContact">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>id:%String</FormalSpec>
+<ReturnType>SOAPTutorial.Contact</ReturnType>
+<WebMethod>1</WebMethod>
+<Implementation><![CDATA[
+	if ##class(SOAPTutorial.Contact).%ExistsId(id) {
+		quit ##class(SOAPTutorial.Contact).%OpenId(id)
+		}
+	else {
+		quit ""
+		}
+]]></Implementation>
+</Method>
+
+<Method name="SaveContact">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>contact:SOAPTutorial.Contact</FormalSpec>
+<ReturnType>%Integer</ReturnType>
+<WebMethod>1</WebMethod>
+<Implementation><![CDATA[
+	set sc = contact.%Save()
+	if sc {
+		quit contact.%Id()
+		}
+	else {
+		quit 0
+		}
+]]></Implementation>
+</Method>
+
+<Method name="RunPhoneNumberQuery">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>contactId:%String,phoneNumberType:%String</FormalSpec>
+<ReturnType>%XML.DataSet</ReturnType>
+<WebMethod>1</WebMethod>
+<Implementation><![CDATA[
+	set query = ##class(%XML.DataSet).%New("%DynamicQuery:SQL")
+	set sql = "SELECT p.PhoneNumberType, p.Number FROM SOAPTutorial.Contact" 
+ 	set sql = sql_" as c inner join SOAPTutorial.PhoneNumber as p"
+	set sql = sql_" on p.Contact=c.ID WHERE c.ID=? AND p.PhoneNumberType=?"
+ 	do query.Prepare(sql)
+ 	do query.SetArgs(contactId, phoneNumberType)
+ 	quit query
+]]></Implementation>
+</Method>
+
+<Method name="GetContactByName">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>Name:%String</FormalSpec>
+<ReturnType>SOAPTutorial.ContactList</ReturnType>
+<WebMethod>1</WebMethod>
+<Implementation><![CDATA[
+	set rs=##class(%ResultSet).%New("%DynamicQuery:SQL")
+	set query="SELECT %Id FROM SOAPTutorial.Contact WHERE Name %STARTSWITH ?"
+	set list=##class(SOAPTutorial.ContactList).%New()
+	do rs.Prepare(query)
+	do rs.Execute(Name)
+	while rs.Next()
+	{
+		set ref=##class(SOAPTutorial.Contact).%OpenId(rs.Get("ID"))
+		do list.Insert(ref)	
+	}
+	quit list
+]]></Implementation>
+</Method>
+
+<Method name="AddPhoneNumber">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>phone:SOAPTutorial.PhoneNumber,id:%String</FormalSpec>
+<ReturnType>%Integer</ReturnType>
+<WebMethod>1</WebMethod>
+<Implementation><![CDATA[
+	set contact = ##class(SOAPTutorial.Contact).%OpenId(id)
+	set phone.Contact = contact
+	if contact.%Save() {
+		quit contact.%Id()
+		}
+	else {
+		quit 0
+		}
+]]></Implementation>
+</Method>
+
+<Method name="GetContactByType">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>type:%String</FormalSpec>
+<ReturnType>SOAPTutorial.ContactList</ReturnType>
+<WebMethod>1</WebMethod>
+<Implementation><![CDATA[
+	set rs=##class(%ResultSet).%New("%DynamicQuery:SQL")
+	set query="SELECT %Id FROM SOAPTutorial.Contact WHERE ContactType = ?"
+	set list=##class(SOAPTutorial.ContactList).%New()
+	do rs.Prepare(query)
+	do rs.Execute(type)
+	while rs.Next()
+	{
+		set ref=##class(SOAPTutorial.Contact).%OpenId(rs.Get("ID"))
+		do list.Insert(ref)	
+	}
+	quit list
+]]></Implementation>
+</Method>
+</Class>
+<Project name="ServerSolution" LastModified="2005-02-01 08:23:39">
+  <Items>
+    <ProjectItem name="SOAPTutorial.Contact" type="CLS"/>
+    <ProjectItem name="SOAPTutorial.ContactList" type="CLS"/>
+    <ProjectItem name="SOAPTutorial.PhoneNumber" type="CLS"/>
+    <ProjectItem name="SOAPTutorial.SOAPService" type="CLS"/>
+    <ProjectItem name="TestAddPhoneNumber.MAC" type="MAC"/>
+  </Items>
+</Project>
+<Routine name="TestAddPhoneNumber" type="MAC" languagemode="0" timestamp="59931,63056"><![CDATA[
+TestAddPhoneNumber
+	set phone = ##class(SOAPTutorial.PhoneNumber).%New()
+	set phone.Number = "617-111-1111"
+	set phone.PhoneNumberType = "Fax"
+	set id = "1"
+	write ##class(SOAPTutorial.SOAPService).AddPhoneNumber(phone, id)
+]]></Routine>
+<Checksum value="43148734"/>
+</Export>

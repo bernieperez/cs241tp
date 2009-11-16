@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="9" zv="Cache for Windows NT (Intel) 5.0.13 (Build 5607U)" ts="2005-01-31 17:12:07">
+<Project name="Default__system" LastModified="2005-01-31 17:12:07">
+  <Items>
+    <ProjectItem name="SOAPTutorial.Contact" type="CLS"/>
+    <ProjectItem name="SOAPTutorial.PhoneNumber" type="CLS"/>
+  </Items>
+</Project>
+<Class name="SOAPTutorial.Contact">
+<ClassType>persistent</ClassType>
+<Language>basic</Language>
+<ProcedureBlock>1</ProcedureBlock>
+<Super>%Persistent,%Populate,%XML.Adaptor</Super>
+<TimeChanged>59931,61614.279775</TimeChanged>
+<TimeCreated>59926,72207.520099</TimeCreated>
+<ClassDefinitionError>0</ClassDefinitionError>
+
+<Property name="Name">
+<Description>
+Represents a contact's name</Description>
+<Type>%String</Type>
+<Required>1</Required>
+<Parameter name="POPSPEC" value="Name()"/>
+</Property>
+
+<Property name="PhoneNumbers">
+<Type>SOAPTutorial.PhoneNumber</Type>
+<Cardinality>children</Cardinality>
+<Inverse>Contact</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<Property name="ContactType">
+<Description>
+Describes the nature of the contact: Personal or Business</Description>
+<Type>%String</Type>
+<Parameter name="VALUELIST" value=",Business,Personal"/>
+<Parameter name="XMLPROJECTION" value="ELEMENT"/>
+</Property>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>^SOAPTutorial.ContactD</DataLocation>
+<DefaultData>ContactDefaultData</DefaultData>
+<IdLocation>^SOAPTutorial.ContactD</IdLocation>
+<IndexLocation>^SOAPTutorial.ContactI</IndexLocation>
+<StreamLocation>^SOAPTutorial.ContactS</StreamLocation>
+<Data name="ContactDefaultData">
+<Structure>listnode</Structure>
+<Subscript/>
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>ContactType</Value>
+</Value>
+<Value name="3">
+<Value>Name</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+<Class name="SOAPTutorial.PhoneNumber">
+<ClassType>persistent</ClassType>
+<ProcedureBlock>1</ProcedureBlock>
+<Super>%Persistent,%Populate,%XML.Adaptor</Super>
+<TimeChanged>59926,72519.467281</TimeChanged>
+<TimeCreated>59926,72207.542786</TimeCreated>
+<ClassDefinitionError>0</ClassDefinitionError>
+
+<Property name="Contact">
+<Type>SOAPTutorial.Contact</Type>
+<Cardinality>parent</Cardinality>
+<Inverse>PhoneNumbers</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<Property name="Number">
+<Description>
+Represents a phone number</Description>
+<Type>%String</Type>
+<Parameter name="POPSPEC" value="USPhone()"/>
+</Property>
+
+<Property name="PhoneNumberType">
+<Description>
+Represents the type of phone number, e.g., work, home, mobile, fax, etc.</Description>
+<Type>%String</Type>
+<Parameter name="VALUELIST" value=",Business,Home,Mobile,Fax"/>
+</Property>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>{%%PARENT}("PhoneNumbers")</DataLocation>
+<DefaultData>PhoneNumberDefaultData</DefaultData>
+<IdLocation>^SOAPTutorial.ContactC("PhoneNumbers")</IdLocation>
+<IndexLocation>^SOAPTutorial.PhoneNumberI</IndexLocation>
+<StreamLocation>^SOAPTutorial.PhoneNumberS</StreamLocation>
+<Data name="PhoneNumberDefaultData">
+<Structure>listnode</Structure>
+<Subscript/>
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>Number</Value>
+</Value>
+<Value name="3">
+<Value>PhoneNumberType</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+<Checksum value="2479357871"/>
+</Export>

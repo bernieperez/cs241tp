@@ -1,0 +1,1662 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>Cach&eacute; and Ensemble Maintenance Kit Release Notes Archive</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<STYLE type="text/css">
+/* HTML StyleSheet for DocBook */
+/* Copyright (c) 2001-2009, InterSystems Corp. ALL RIGHTS RESERVED. */
+
+BODY                            {color: black;
+                                 background: white;
+                                 margin: 0px;
+                                 padding: 0px;
+                                 font-family: verdana,arial,helvetica,sans-serif;}
+
+BODY.Dialog                     {color: black;
+                                 background: silver;
+                                 font-family: Verdana,Arial,Helvetica,sans-serif;
+                                 margin: 10px;}
+
+HR                              {clear: both;}
+
+/* title bar */
+
+TABLE.Banner                    {background: #5290EC;
+                                 padding: 0px;
+                                 margin: 0px;
+                                 border-bottom: black solid 1px;}
+
+
+TABLE.ClassBanner               {color: white;
+                                 background: #5290EC;
+                                 font-family: Verdana,Arial,Helvetica,sans-serif;}
+
+TABLE.Label                     {color: black;
+                                 background: #CBE6EB;
+                                 font-size: 1em;
+                                 font-family: Verdana,Arial,Helvetica,sans-serif;}
+
+
+SPAN.SearchWord                 {color: black;
+                                 background: yellow;
+                                 font-weight: bold;}
+
+TR.Category                     {font-family: Verdana,Arial,Helvetica,sans-serif;
+                                 background: #CBE6EB;
+                                 color: black;}
+
+TD.BannerLogo                   {padding-left: 2px;}
+
+TR.TitleRow                     {background: blue;
+                                 color: white;}
+TR.DarkRow                      {background: #DDDDDD;}
+TR.LightRow                     {background: #FFFFFF;}
+
+TABLE.Paragraph                 {padding: 0px;
+                                 margin-bottom: 0px;}
+
+/* tables */
+
+TABLE.CALSTable                 {background: white;
+                                 font-family: Verdana,Arial,Helvetica,sans-serif;
+                                 border-color: black;
+                                 border-width: 1px;
+                                 border-style: solid;}
+
+TABLE.CALSTable TH              {background: #E0E0E0;
+                                 text-align: left;
+                                 font-family: Verdana,Arial,Helvetica,sans-serif;
+                                 border-bottom: black solid 1px;}
+
+TABLE.CALSTable TH.Frame-all    {border-right: black solid 1px;}
+
+TABLE.CALSTable TH.Frame-sides  {border-right: black solid 1px;}
+
+
+TABLE.CALSTable TD              {background: #F0F0FF;}
+
+TABLE.CALSTable TD.Frame-all    {border-bottom: gray solid 1px;
+                                 border-right: gray solid 1px;}
+
+TABLE.CALSTable TD.Frame-sides  {border-right: gray solid 1px;}
+
+TABLE.CALSTable TD.Frame-bottom {border-bottom: gray solid 1px;}
+
+TABLE.MainMenu                  {margin: 1px;
+                                 padding: 0px;
+                                 background: #BB0000;
+                                 border-color: black;
+                                 border-width: 1px;
+                                 border-style: solid;}
+
+DIV.Footer                      {color: black;
+                                 font-family: Verdana,Arial,sans-serif;}
+TD.Footer                       {font-size: 8pt;
+                                 font-family: Verdana,Arial,sans-serif;}
+
+DIV.BookTitle                   {color: yellow;
+                                 font-family: Verdana,Arial,sans-serif;
+                                 font-size: 0.8em;
+                                 margin-left: 5px;}
+
+DIV.BookTitle A                 {text-decoration: none;
+                                 color: yellow;}
+
+DIV.ChapterTitle                {color: white;
+                                 font-family: Verdana,Arial,sans-serif;
+                                 font-size: 1.6em;
+                                 margin-bottom: 1px;
+                                 margin-left: 5px;}
+
+SPAN.ChapterTitleNo             {color: white;
+                                 font-family: Verdana,Arial,sans-serif;
+                                 font-size: 0.7em;}
+
+DIV.para UL                     {margin-top: 0pt;
+                                 margin-bottom: 0pt;}
+DIV.para UL LI                  {margin-top: 0pt;
+                                 margin-bottom: 0pt;}
+
+UL                              {margin-bottom: 0px;}
+OL                              {margin-bottom: 0px;}
+
+/* block styles */
+
+DIV                             {}
+
+DIV.para                        {color: black;
+                                 margin-bottom: 10px;
+                                 line-height: 125%;
+                                 margin-left: 20px;
+                                 margin-right: 80px;
+                                 font-family: Verdana,Arial,sans-serif;}
+
+/* first para in chapter */
+
+DIV.para1                       {color: black;
+                                 margin-bottom: 10px;
+                                 line-height: 125%;
+                                 margin-left: 20px;
+                                 margin-right: 80px;
+                                 font-family: Verdana,Arial,sans-serif;}
+
+DIV.para1:first-letter          {color: black;
+                                 font-size: 1.6em;}
+
+
+DIV.formalparatitle             {color: blue;
+                                 margin-bottom: 10px;
+                                 line-height: 125%;
+                                 margin-right: 80px;
+                                 font-weight: bold;
+                                 font-family: Verdana,Arial,sans-serif;}
+
+DIV.literallayout               {background: white;
+                                 color: black;
+                                 border-color: white;
+                                 border-width: 1px;
+                                 border-style: solid;
+                                 font-family: courier,monospace;
+                                 font-size: 1.2em;
+                                 text-align: left;
+                                 margin-right: 0px;
+                                 line-height: 125%;
+                                 margin-left: 80px;
+                                 margin-right: 80px;
+                                 margin-bottom: 10px;
+                                 padding-left: 10px;
+                                 padding-top: 0px;
+                                 padding-bottom: 0px;}
+
+DIV.programlisting              {background: #E0E0E0;
+                                 color: black;
+                                 border-color: black;
+                                 border-width: 1px;
+                                 border-style: solid;
+                                 font-family: courier,monospace;
+                                 text-align: left;
+                                 margin-right: 0px;
+                                 font-size: 1.2em;
+                                 line-height: 125%;
+                                 margin-left: 20px;
+                                 margin-right: 80px;
+                                 margin-bottom: 10px;
+                                 padding-left: 10px;
+                                 padding-top: 0px;
+                                 padding-bottom: 0px;}
+
+
+DIV.sect1                       {color: blue;
+                                 border-color: black;
+                                 border-width: 1px;
+                                 border-style: none;
+                                 font-family: Verdana,Arial,sans-serif;
+                                 font-size: 1.8em;
+                                 font-weight: bold;
+                                 margin-right: 5px;
+                                 margin-top: 20px;
+                                 border-top: black solid 1px;
+                                 margin-bottom: 10px;
+                                 padding-left: 10px;
+                                 padding-top: 12px;
+                                 padding-bottom: 5px;}
+
+DIV.sect2                       {color: blue;
+                                 border-color: black;
+                                 border-width: 1px;
+                                 border-style: none;
+                                 font-family: Verdana,Arial,sans-serif;
+                                 font-size: 1.6em;
+                                 font-weight: bold;
+                                 margin-right: 80px;
+                                 margin-left: 20px;
+                                 margin-top: 10px;
+                                 margin-bottom: 10px;
+                                 padding-left: 0px;
+                                 padding-top: 2px;
+                                 padding-bottom: 2px;}
+
+DIV.sect3                       {color: blue;
+                                 font-family: Verdana,Arial,sans-serif;
+                                 font-size: 1.2em;
+                                 font-weight: bold;
+                                 margin-right: 80px;
+                                 margin-left: 20px;
+                                 margin-top: 5px;
+                                 margin-bottom: 5px;
+                                 padding-left: 0px;
+                                 padding-top: 2px;
+                                 padding-bottom: 2px;}
+
+DIV.sect4                       {color: black;
+                                 font-family: Verdana,Arial,sans-serif;
+                                 font-size: 1.0em;
+                                 font-weight: normal;
+                                 margin-right: 80px;
+                                 margin-left: 20px;
+                                 margin-top: 5px;
+                                 margin-bottom: 5px;
+                                 padding-left: 0px;
+                                 padding-top: 0px;
+                                 padding-bottom: 0px;}
+
+/* admonitions */
+
+SPAN.caution                    {color: red;
+                                 font-weight: bold;}
+
+DIV.caution                     {background: #FFDDFF;
+                                 color: black;
+                                 font-family: Verdana,Arial,sans-serif;
+                                 border-color: black;
+                                 border-width: 1px;
+                                 border-style: solid;
+                                 margin-right: 80px;
+                                 margin-left: 20px;
+                                 margin-bottom: 10px;
+                                 line-height: 125%;
+                                 padding: 3pt;}
+
+DIV.caution DIV.para            {margin-left: 0px;}
+
+SPAN.important                  {color: blue;
+                                 font-weight: bold;}
+
+DIV.important                   {background: #FFDDFF;
+                                 color: black;
+                                 font-family: Verdana,Arial,sans-serif;
+                                 border-color: black;
+                                 border-width: 1px;
+                                 border-style: solid;
+                                 margin-right: 80px;
+                                 margin-left: 20px;
+                                 margin-bottom: 10px;
+                                 line-height: 125%;
+                                 padding: 3pt;}
+
+DIV.important DIV.para          {margin-left: 0px;}
+
+SPAN.note                       {color: blue;
+                                 font-weight: bold;}
+
+SPAN.question                   {color: blue;
+                                 font-weight: bold;}
+SPAN.answer                     {color: blue;
+                                 font-weight: bold;}
+
+DIV.note                        {background: #FFDDFF;
+                                 color: black;
+                                 font-family: Verdana,Arial,sans-serif;
+                                 border-color: black;
+                                 border-width: 1px;
+                                 border-style: solid;
+                                 margin-right: 80px;
+                                 margin-left: 20px;
+                                 margin-bottom: 10px;
+                                 line-height: 125%;
+                                 padding: 3pt;}
+
+DIV.note DIV.para               {margin-left: 0px;}
+
+SPAN.tip                        {color: blue;
+                                 font-weight: bold;}
+
+DIV.tip                         {background: #FFDDFF;
+                                 color: black;
+                                 font-family: Verdana,Arial,sans-serif;
+                                 border-color: black;
+                                 border-width: 1px;
+                                 border-style: solid;
+                                 margin-right: 80px;
+                                 margin-left: 20px;
+                                 margin-bottom: 10px;
+                                 line-height: 125%;
+                                 padding: 3pt;}
+
+DIV.tip DIV.para                {margin-left: 0px;}
+
+SPAN.warning                    {color: red;
+                                 font-weight: bold;}
+
+DIV.warning                     {background: #FFDDFF;
+                                 color: black;
+                                 font-family: Verdana,Arial,sans-serif;
+                                 border-color: black;
+                                 border-width: 1px;
+                                 border-style: solid;
+                                 margin-right: 80px;
+                                 margin-left: 20px;
+                                 margin-bottom: 10px;
+                                 line-height: 125%;
+                                 padding: 3pt;}
+
+DIV.warning DIV.para            {margin-left: 0px;}
+
+/* tables */
+
+DIV.table_title                 {color: blue;
+                                 font-weight: bold;
+                                 margin-top: 20px;
+                                 margin-bottom: 10px;
+                                 margin-left: 80px;
+                                 margin-right: 80px;
+                                 text-align: center;}
+
+DIV.table                       {margin-left: 80px;
+                                 margin-right: 80px;
+                                 margin-bottom: 20px;}
+
+DIV.informaltable               {margin-left: 80px;
+                                 margin-right: 80px;
+                                 margin-bottom: 20px;}
+
+/* blocks-inside-of-tables styles */
+
+/* block styles */
+
+TD.block                        {margin-left: 0px;}
+
+TD.block OL                     {margin-left: 0px;}
+
+TD.block LI                     {color: black;
+                                 margin-left: 0px;
+                                 margin-right: 0px;}
+
+TD.block DIV.para               {color: red;
+                                 margin-bottom: 10px;
+                                 line-height: 125%;
+                                 margin-left: 0px;
+                                 margin-right: 0px;
+                                 font-family: Verdana,Arial,sans-serif;}
+
+TD.block LI DIV.para            {margin-left: 20px;}
+
+TD.block DIV.literallayout      {background: white;
+                                 color: black;
+                                 border-color: white;
+                                 border-width: 1px;
+                                 border-style: solid;
+                                 font-family: courier,monospace;
+                                 text-align: left;
+                                 margin-right: 0px;
+                                 line-height: 125%;
+                                 margin-left: 0px;
+                                 margin-right: 0px;
+                                 margin-bottom: 10px;
+                                 padding-left: 10px;
+                                 padding-top: 0px;
+                                 padding-bottom: 0px;}
+
+TD.block DIV.programlisting     {background: #E0E0E0;
+                                 color: black;
+                                 border-color: black;
+                                 border-width: 1px;
+                                 border-style: solid;
+                                 font-family: courier,monospace;
+                                 text-align: left;
+                                 margin-right: 0px;
+                                 line-height: 125%;
+                                 margin-left: 0px;
+                                 margin-right: 0px;
+                                 margin-bottom: 10px;
+                                 padding-left: 10px;
+                                 padding-top: 0px;
+                                 padding-bottom: 0px;}
+
+.menuItem                       {border-right: black 1px solid;
+                                 border-top: black 1px solid;
+                                 padding-left: 20px;
+                                 font-size: 8pt;
+                                 border-left: black 1px solid;
+                                 width: 100px;
+                                 color: black;
+                                 border-bottom: black 1px solid;
+                                 font-family: sans-serif;
+                                 background-color: menu}
+
+.highlightitem                  {padding-left: 20px;
+                                 font-size: 8pt;
+                                 width: 100px;
+                                 color: white;
+                                 font-family: sans-serif;
+                                 background-color: highlight}
+
+DIV.UNRESOLVED			{color: red;
+                                 text-align: center;
+                                 margin-bottom: 10px;
+                                 line-height: 125%;
+                                 margin-left: 20px;
+                                 margin-right: 80px;
+                                 font-family:
+                                 Verdana,Arial,sans-serif;
+				 font-size: 1.8em;
+				 font-weight: bold;
+				 background: #E0E0E0;
+                                 border-color: red;
+                                 border-width: 3px;
+                                 border-style: solid;
+                                 margin-bottom: 10px;
+                                 padding-left: 10px;
+                                 padding-top: 10px;
+                                 padding-bottom: 10px;}
+</STYLE>
+</HEAD>
+<BODY>
+<TABLE class=ClassBanner cellSpacing=0 cellPadding=0 width="100%" border=0>
+<TBODY>
+<TR>
+<TD align=right>
+<TR>
+<TD align=left>
+<DIV CLASS="BookTitle" align=left><br>InterSystems Documentation&nbsp;
+</DIV>
+</TD>
+</TR>
+<TR>
+<TD align=right>
+<DIV CLASS="ChapterTitle" align=left>Cach&eacute; and Ensemble Maintenance Kit Release Notes Archive<BR><BR></DIV>
+</TD>
+</TR>
+</TBODY>
+</TABLE>
+<BR>
+<DIV CLASS="para1">Welcome and thank you for using InterSystems products.
+</DIV>
+<DIV CLASS="para">
+The current maintenance kits are Cach&eacute; and Ensemble 2009.1.2.
+This document is only part of the available maintenance kit documentation.
+The full set of documents is available in the <EM>docs</EM> subdirectory of the product installation
+directory. Release notes and related material are available as follows:
+<P>
+<UL>
+<LI>
+Late-breaking information about the release: <EM>&lt;install-dir&gt;\docs\cache\en-us\relnotes\cache\readme.1st</EM> or <EM>&lt;install-dir&gt;\docs\cache\en-us\relnotes\ensemble\readme.1st</EM>
+<LI>
+Release notes for 2009.1.2: <em>&lt;install-dir&gt;\docs\cache\en-us\relnotes\cache\relnotes.htm</em> or <em>&lt;install-dir&gt;\docs\cache\en-us\relnotes\ensemble\relnotes.htm</em>
+
+</LI><LI>
+Release notes for the previous maintenance kits since 2009.1: <em>&lt;install-dir&gt;\docs\cache\en-us\relnotes\cache\prenotes.htm</em> or <em>&lt;install-dir&gt;\docs\cache\en-us\relnotes\ensemble\prenotes.htm</em>  (this document)
+</LI>
+</UL>
+</DIV>
+<DIV CLASS="para">
+This document is a historical archive of changes since the original 2009.1 release, but prior to the current maintenance kit.
+Changes unique to the current maintenance kit are described in <EM>relnotes.htm</EM>.
+</DIV>
+<DIV CLASS="para">
+This document includes the following sections:
+<P>
+<UL>
+<LI>
+<A href="#Overview">General Announcements</A>
+<LI>
+<A href="#Alerts">InterSystems News, Alerts, and Advisories</A>
+</LI>
+<LI>
+<A href="#Online_Documentation">Online Documentation</A>
+</LI>
+<LI>
+<A href="#ChangeReps">Change Reports for the Previous Maintenance Kit</A>
+</LI>
+</UL>
+</DIV>
+
+<!-- ------------------------------------------------------------ -->
+
+<DIV CLASS="sect1"><A name="Overview"></A>General Announcements</DIV>
+<DIV CLASS="para">
+InterSystems advises all users to recompile their application classes as part
+of the upgrade process so as to take advantage of all the performance
+improvements as well as other changes that may affect them in this release.
+</DIV>
+<DIV CLASS="para">
+Anyone
+upgrading from a Cach&eacute; release at or before 5.0
+will need a new license key.
+</DIV>
+<BR CLEAR="ALL">
+
+<!-- ------------------------------------------------------------ -->
+
+
+
+<DIV CLASS="sect1"><A name="Alerts"></A>InterSystems News, Alerts and Advisories</DIV>
+<DIV CLASS="para">
+From time to time, InterSystems publishes items of immediate
+importance to
+users of our software.  These include
+alerts, mission critical issues, important updates, fixes, and release
+announcements.
+<P>
+The most current list can be obtained from the
+<A href="http://www.intersystems.com/support/cflash/index.html">InterSystems Web site</A>.
+<P>
+Users should check this list periodically to obtain the latest information on
+issues that may have an effect on the operation of their site.
+</DIV>
+<BR CLEAR="ALL">
+
+<!-- ------------------------------------------------------------ -->
+
+<DIV CLASS="sect1"><A name="Online_Documentation"></A>Online Documentation</DIV>
+<DIV CLASS="para">
+As a convenience to our users, InterSystems provides
+online access to documentation for recent product versions at the
+<A href="http://docs.intersystems.com">InterSystems documentation Web site</A>.
+</DIV>
+<BR CLEAR="ALL">
+
+<!-- ------------------------------------------------------------ -->
+<DIV CLASS="sect1"><a name="ChangeReps">Change Reports for the Previous Maintenance Kit</A></DIV>
+
+<div class="para">The first (and only) maintenance release for 2009.1 is 2009.1.1.  Version 2009.1.1 of Cach&eacute; includes the following changes:</div>
+
+<UL>
+<LI>CSP.Gateway
+<UL>
+<LI><A HREF="#200911CMT755">Correct Unicode character handling for UTF-8</A></LI>
+</UL>
+</LI>
+<LI>Documentation.Tutorials
+<UL>
+<LI><A HREF="#200911DEN023_DEN024_DEN021_DEN022">Update Tutorials</A></LI>
+</UL>
+</LI>
+<LI>Ensemble
+<UL>
+<LI><A HREF="#200911DMC685">Ensemble: Fix Ens.DataType.Class for "extends self"</A></LI>
+<LI><A HREF="#200911HCR099">Ensemble upgrades to preserve previous CSP application settings</A></LI>
+<LI><A HREF="#200911HCR101">Ensemble globals mapped from ENSLIB to be created with proper collation</A></LI>
+</UL>
+</LI>
+<LI>Ensemble.Adapter
+<UL>
+<LI><A HREF="#200911TAP843">Fix low-order byte stream cleanup logic in Snapshot class when SQL Adapter is finished with a low-order byte</A></LI>
+<LI><A HREF="#200911TAP844">Fix IPv6 parsing for TCP, HTTP, and CST adapters</A></LI>
+<LI><A HREF="#200911TAP855">Fix EnsLib.SQL.Snapshot.ImportFromResultSet()</A></LI>
+<LI><A HREF="#200911TAP864">Tolerate whitespace in stored procedure queries invoked via SQL Adapters</A></LI>
+</UL>
+</LI>
+<LI>Ensemble.HL7/EDI
+<UL>
+<LI><A HREF="#200911TAP861">Fix X12 Group Identifier and TypeVersion accessors to get correct GS field values</A></LI>
+</UL>
+</LI>
+<LI>Ensemble.JavaGateway
+<UL>
+<LI><A HREF="#200911TAP851">Return and check status codes from initialization methods in SQL JDBC &amp; Java Gateway adapters</A></LI>
+</UL>
+</LI>
+<LI>Ensemble.ManagementPortal
+<UL>
+<LI><A HREF="#200911HCR098">Additional workaround to IE8 bug that causes blank screens in the Ensemble Mgmt Portal</A></LI>
+<LI><A HREF="#200911TAP850">Don't count disabled conditions in TAP833 MsgBrowser query optimization</A></LI>
+<LI><A HREF="#200911TAP853">Fix UNDEFINED nActions in X12 &amp; EDIFACT ReplyStandard.OnGetReplyAction()</A></LI>
+</UL>
+</LI>
+<LI>Installation
+<UL>
+<LI><A HREF="#200911TRW678_IYB606">Support install of Perl/Python bindings on macx64</A></LI>
+</UL>
+</LI>
+<LI>Installation.UNIX
+<UL>
+<LI><A HREF="#200911TRW667">CSP Gateway regex workaround for OS X 10.4 Apache 2.2 bug</A></LI>
+</UL>
+</LI>
+<LI>Installation.Windows
+<UL>
+<LI><A HREF="#200911ALE1766">Change custom setup type accelerator key in setup role dialog</A></LI>
+<LI><A HREF="#200911ALE1782">Fix an access violation in setup bootstrapper when instance name is longer than directory length</A></LI>
+<LI><A HREF="#200911ALE1791">Update VC redistributables installation to include ATL security update</A></LI>
+</UL>
+</LI>
+<LI>Languages.COS
+<UL>
+<LI><A HREF="#200911CDS1571">Fix breakpoint handling with ;;comments</A></LI>
+</UL>
+</LI>
+<LI>Languages.MVCommands
+<UL>
+<LI><A HREF="#200911GGC303">Better support for MV printing and transactions</A></LI>
+<LI><A HREF="#200911GGC306">Correct emulations for MultiValue KEYIN() function</A></LI>
+</UL>
+</LI>
+<LI>MgtPortal
+<UL>
+<LI><A HREF="#200911YSD2213">SMP - Configure Devices - Fix problems with loading SubType list and using IE8</A></LI>
+</UL>
+</LI>
+<LI>Migration.TSQL
+<UL>
+<LI><A HREF="#200911AGC1178">TSQL - Restore correct parsing of "%" operator now that "%" can begin a name</A></LI>
+</UL>
+</LI>
+<LI>Object
+<UL>
+<LI><A HREF="#200911MXT1172">Fix typo in IsString method of %SAML AttributeValue</A></LI>
+</UL>
+</LI>
+<LI>Object.Activate
+<UL>
+<LI><A HREF="#200911YSD2243">ActivateWizard - Change $$$Text to $$$TextJS for javascript alerts</A></LI>
+</UL>
+</LI>
+<LI>Object.Library
+<UL>
+<LI><A HREF="#200911DMC678">ObjectiveCache: Support d_decimal type (D_DECIMAL_ID)</A></LI>
+</UL>
+</LI>
+<LI>Object.NETGateway
+<UL>
+<LI><A HREF="#200911AND1064">Java/.Net Gateway: Fix &lt;COMMAND&gt; error in Gateway.%ExpressImport</A></LI>
+</UL>
+</LI>
+<LI>Object.Soap
+<UL>
+<LI><A HREF="#200911MXT1171">Fix Role element of SOAP 1.2 fault</A></LI>
+</UL>
+</LI>
+<LI>Object.Sys
+<UL>
+<LI><A HREF="#200911CDS1574">Fix misspelled nThreadsPerCore method name</A></LI>
+</UL>
+</LI>
+<LI>Object.XML
+<UL>
+<LI><A HREF="#200911MXT1174">Fix %XML.Reader to return SAX parser validation errors</A></LI>
+</UL>
+</LI>
+<LI>SQL.GateWay
+<UL>
+<LI><A HREF="#200911MIT922">Correct error reporting for insert/update statements through JDBC Gateway</A></LI>
+</UL>
+</LI>
+<LI>SQL.Query Processing
+<UL>
+<LI><A HREF="#200911AK742">Recompute "needed for output" flag</A></LI>
+<LI><A HREF="#200911AK744">Fix BSL with %INLIST condition</A></LI>
+<LI><A HREF="#200911PVA179">Fix execution time &lt;undefined&gt; for a query with multiple opportunities for OR to UNION optimization</A></LI>
+</UL>
+</LI>
+<LI>Studio
+<UL>
+<LI><A HREF="#200911DVU2542">Disable syntax check related actions</A></LI>
+</UL>
+</LI>
+<LI>System
+<UL>
+<LI><A HREF="#200911JLC1287_JLC1291_JLC1312">Update core counting and detection of Hyper-Threading Technology on x86 chips</A></LI>
+<LI><A HREF="#200911JLC1301">Don't set multi-dimensional flag in $zobjexport if maxpropsize = 0</A></LI>
+<LI><A HREF="#200911JO2283">Disable database truncation</A></LI>
+<LI><A HREF="#200911RFD472">Fix &lt;ACCVIO&gt; when a process HALTs with an open XDEV device</A></LI>
+<LI><A HREF="#200911RJW1728">Prevent access violation when inet_ntop() returns failure</A></LI>
+</UL>
+</LI>
+<LI>System.Callin/Callout
+<UL>
+<LI><A HREF="#200911SAP1205">Use thread safe ttyname_r in threaded Callin</A></LI>
+</UL>
+</LI>
+<LI>System.Journaling
+<UL>
+<LI><A HREF="#200911HYY1477">Fix &lt;UNDEFINED&gt; error in journal restore when a target database is not journaled</A></LI>
+</UL>
+</LI>
+<LI>System.Lock
+<UL>
+<LI><A HREF="#200911SML1150">Fix missing delock due to lock count update is delayed</A></LI>
+</UL>
+</LI>
+<LI>System.Shadowing
+<UL>
+<LI><A HREF="#200911HYY1465">Fix an &lt;UNDEFINED&gt; error on starting a non-cluster shadow</A></LI>
+</UL>
+</LI>
+<LI>Utilities
+<UL>
+<LI><A HREF="#200911STC1626_et_al">CPF Converter handles mappings as in 2008.2 and earlier</A></LI>
+<LI><A HREF="#200911STC1641">Fix $ZEOF handling in Config.CPF</A></LI>
+</UL>
+</LI>
+</UL>
+
+
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70507 -->
+<A name="200911CMT755"></A>
+<DIV CLASS="sect3">Category: CSP.Gateway</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: CMT755</DIV>
+<DIV CLASS="sect3">Summary: Correct Unicode character handling for UTF-8</DIV>
+<BR>
+<!-- Documentation: 0 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change ensures that escaped Unicode characters are
+properly extracted and passed to the function that
+un-escapes them and converts to UTF-8.
+Previously, this issue could prevent query strings with embedded Unicode
+characters from being decoded correctly.
+</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 69964, 70267, 69910,69942 -->
+<A name="200911DEN023_DEN024_DEN021_DEN022"></A>
+<DIV CLASS="sect3">Category: Documentation.Tutorials</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: DEN023, DEN024, DEN021, DEN022</DIV>
+<DIV CLASS="sect3">Summary: Update Tutorials</DIV>
+<BR>
+<!-- Documentation: 0 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">These changes update the following tutorials:
+<UL>
+<LI CLASS="separate">Web Applications Tutorial (TWEB) to show Web Form
+Wizard launched from Studio Templates Menu</LI>
+<LI CLASS="separate">Screen Captures for 2009.1 in Cach&eacute;
+QuickStart Tutorial (TQKS)</LI>
+<LI CLASS="separate">CSP Tutorial to show launching Web Form Wizard
+from Studio Templates</LI>
+<LI CLASS="separate">CSP tutorial example to add warning so users do
+not use code as a CSP login page</LI>
+</UL>
+</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70337 -->
+<A name="200911DMC685"></A>
+<DIV CLASS="sect3">Category: Ensemble</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: DMC685</DIV>
+<DIV CLASS="sect3">Summary: Ensemble: Fix Ens.DataType.Class for "extends self"</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">The datatype Ens.DataType.Class has a parameter
+EXTENDS that allows the user to require that the value of the type
+extend the indicated class.  Before this change, however, if you tried to use the
+EXTENDS class as the value, then the validation would fail because a
+class isn't considered to be derived from itself (which isn't really
+proper polymorphic behavior).</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70349 -->
+<A name="200911HCR099"></A>
+<DIV CLASS="sect3">Category: Ensemble</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: HCR099</DIV>
+<DIV CLASS="sect3">Summary: Ensemble upgrades to preserve previous CSP application settings</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">When upgrading Ensemble, the upgrade process
+overwrote the CSP application definitions for each of the
+Ensemble-enabled namespaces.  In case the user had modified settings
+such as resource required, matching roles, description, timeout, these
+modifications would be lost upon an upgrade.
+<P>
+This change corrects that situation.
+Now, if the CSP application for a namespace's Ensemble Portal already
+exists, the upgrade process  opens its definition and only sets the
+following properties, keeping the previous values for all other properties:
+CookiePath, LockCSPName, NameSpace, Path, Recurse, ServeFiles,
+UseCookies, LoginPage.
+</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70818 -->
+<A name="200911HCR101"></A>
+<DIV CLASS="sect3">Category: Ensemble</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: HCR101</DIV>
+<DIV CLASS="sect3">Summary: Ensemble globals mapped from ENSLIB to be created with proper collation</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">
+This change corrects a problem that can occur on a Spanish system
+during an Ensemble upgrade.  The collation for Ensemble globals with
+subscript level mapping from ENSLIB was not set correctly and could
+cause a collation mismatch error depending on the default collation
+for the database.
+<P>
+This would only happen on systems whose default collation is not
+Cach&eacute; Standard, and in namespaces created during installation or
+post-installation such as ENSEMBLE (but not ENSDEMO which is created
+later in the process).
+<P>
+This correction adds new entries for all Ensemble globals mapped from
+ENSLIB with settings Collation = 5 (Cach&eacute; Standard) and IsKeep
+= 1. It also properly handles existing local data that may exist in
+the local database for the globals that are mapped at the subscript
+level only.
+</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 69574 -->
+<A name="200911TAP843"></A>
+<DIV CLASS="sect3">Category: Ensemble.Adapter</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: TAP843</DIV>
+<DIV CLASS="sect3">Summary: Fix low-order byte stream cleanup logic in Snapshot class when SQL Adapter is finished with a low-order byte</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change fixes a bug that causes a stream storage
+for low-order byte data retrieved by the SQL Adapters into a Snapshot object to
+be killed improperly.
+The stream data in question is stored in the ^CacheStream global.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 69584 -->
+<A name="200911TAP844"></A>
+<DIV CLASS="sect3">Category: Ensemble.Adapter</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: TAP844</DIV>
+<DIV CLASS="sect3">Summary: Fix IPv6 parsing for TCP, HTTP, and CST adapters</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change fixes a defect introduced with IPv6 parsing
+in the TCP Inbound Adapter and its subclasses. The bug results in an
+invalid IP address when a port is specified in both the Port setting
+and as part of the AllowedIPAddresses setting.
+<P>
+The correct behavior when port is doubly specified is for the Port
+setting value to be ignored and the AllowedIPAddresses value to take
+precedence. This change restores the correct behavior.
+</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70374 -->
+<A name="200911TAP855"></A>
+<DIV CLASS="sect3">Category: Ensemble.Adapter</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: TAP855</DIV>
+<DIV CLASS="sect3">Summary: Fix EnsLib.SQL.Snapshot.ImportFromResultSet()</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change fixes errors in the method
+ImportFromResultSet() in class EnsLib.SQL.Snapshot that prevented it
+from working, in particular the use of an undefined variable
+tGblRef.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70538 -->
+<A name="200911TAP864"></A>
+<DIV CLASS="sect3">Category: Ensemble.Adapter</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: TAP864</DIV>
+<DIV CLASS="sect3">Summary: Tolerate whitespace in stored procedure queries invoked via SQL Adapters</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change enhances the parser used to determine
+which Stored Procedure arguments are being used as parameters in an
+invocation of ExecuteProcedure() on the SQL Inbound or Outbound
+Adapter.
+<P>
+This change also improves disconnect detection around calls to DropStatement()</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70472 -->
+<A name="200911TAP861"></A>
+<DIV CLASS="sect3">Category: Ensemble.HL7/EDI</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: TAP861</DIV>
+<DIV CLASS="sect3">Summary: Fix X12 Group Identifier and TypeVersion accessors to get correct GS field values</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change fixes the accessor methods used by X12
+to get TypeValue and Identifier calculated property values in the case
+where the document is an X12 Group, that is,  starts with a GS segment.
+Formerly these fields were extracted as if the document were a
+TransactionSet starting with an ST segment; this yielded the wrong
+field values.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 69908 -->
+<A name="200911TAP851"></A>
+<DIV CLASS="sect3">Category: Ensemble.JavaGateway</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: TAP851</DIV>
+<DIV CLASS="sect3">Summary: Return and check status codes from
+  initialization methods in SQL JDBC &amp; Java Gateway adapters</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change makes the initialization methods return
+status code values and makes the methods that call them check those
+return values consistently.  This improves behavior when an associated
+JavaGateway configuration item cannot be located for an SQL Operation or
+Service configured for JDBC.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70282 -->
+<A name="200911HCR098"></A>
+<DIV CLASS="sect3">Category: Ensemble.ManagementPortal</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: HCR098</DIV>
+<DIV CLASS="sect3">Summary: Additional workaround to IE8 bug that causes blank screens in the Ensemble Mgmt Portal</DIV>
+<BR>
+<!-- Documentation: 0 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">Internet Explorer 8 has a bug that causes it to
+acquire a wrong size in frameset.rows for the first frame in a
+frameset.
+<P>
+IE8 bug report can be found at:
+http://connect.microsoft.com/IE/feedback/ViewFeedback.aspx?FeedbackID=432864
+<P>
+It affects the Ensemble Management Portal as most of the pages contain frames.
+<P>
+There were other changes to workaround this situation.
+This new version also introduces a new
+behavior regarding resizing of the title frame, regardless of browser
+version.
+<P>
+In case the title frame size is reduced we will keep the
+chosen size.  In case it's enlarged, it will be set back to its original
+size of 100 pixels.  There's nothing below so it's pointless to have
+it larger than 100 pixels.  This makes the workaround easier
+and also it seems to be better than the previous behavior.
+<P>
+The
+behavior
+is also in effect for IE6 and IE7 in order to have all
+users see the same regardless of browser version.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 69905 -->
+<A name="200911TAP850"></A>
+<DIV CLASS="sect3">Category: Ensemble.ManagementPortal</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: TAP850</DIV>
+<DIV CLASS="sect3">Summary: Don't count disabled conditions in MsgBrowser query optimization</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">Before this change, a previous correction modified
+the queries generated by the Message Browser page when there is only
+one simple equality SearchTable condition.  This change fixes that
+modification to work when there is only one *enabled* SearchTable
+condition (and it is a simple equality condition). Disabled conditions
+no longer count.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70296 -->
+<A name="200911TAP853"></A>
+<DIV CLASS="sect3">Category: Ensemble.ManagementPortal</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: TAP853</DIV>
+<DIV CLASS="sect3">Summary: Fix UNDEFINED nActions in X12 &amp; EDIFACT ReplyStandard.OnGetReplyAction()</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change fixes a case where the variable nActions
+is defined after it is used.  This change also removes an obsolete
+property %ReplyActions.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 69898, 70564 -->
+<A name="200911TRW678_IYB606"></A>
+<DIV CLASS="sect3">Category: Installation</DIV>
+<DIV CLASS="sect3">Platforms: Macintosh</DIV>
+<DIV CLASS="sect3">DevKey: TRW678, IYB606</DIV>
+<DIV CLASS="sect3">Summary: Support install of Perl/Python bindings on macx64</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change now enables the Perl/Python bindings to be installed on MACX64</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 69622 -->
+<A name="200911TRW667"></A>
+<DIV CLASS="sect3">Category: Installation.UNIX</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: TRW667</DIV>
+<DIV CLASS="sect3">Summary: CSP Gateway regex workaround for OS X 10.4 Apache 2.2 bug</DIV>
+<BR>
+<!-- Documentation: 0 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">
+The regular expression used by the CSP gateway configuration in Apache's
+httpd.conf file has been modified to work around a bug in the Mac OS X 10.4
+provided Apache.
+</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 69631 -->
+<A name="200911ALE1766"></A>
+<DIV CLASS="sect3">Category: Installation.Windows</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: ALE1766</DIV>
+<DIV CLASS="sect3">Summary: Change custom setup type accelerator key in setup role dialog</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change alters the custom setup accelerator key in setup
+role dialog to "u" to avoid conflict with "Server" setup type
+key.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70280 -->
+<A name="200911ALE1782"></A>
+<DIV CLASS="sect3">Category: Installation.Windows</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: ALE1782</DIV>
+<DIV CLASS="sect3">Summary: Fix an access violation in setup bootstrapper when instance name is longer than directory length</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change corrects an access violation error in
+the setup bootstrapper that was
+happening when instance name was longer than installation directory
+name.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70503 -->
+<A name="200911ALE1791"></A>
+<DIV CLASS="sect3">Category: Installation.Windows</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: ALE1791</DIV>
+<DIV CLASS="sect3">Summary: Update VC redistributables installation to include ATL security update</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change updates the Microsoft VC2008 SP1
+redistributable packages to include <A HREF="http://www.microsoft.com/downloads/details.aspx?familyid=2051a0c1-c9b5-4b0a-a8f5-770a549fd78c&amp;displaylang=en">ATL security update</A>.
+</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 69809 -->
+<A name="200911CDS1571"></A>
+<DIV CLASS="sect3">Category: Languages.COS</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: CDS1571</DIV>
+<DIV CLASS="sect3">Summary: Fix breakpoint handling with ;;comments</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">If a breakpoint was set on the line immediately following a ;;comment, the
+breakpoint would be ignored.  This is now corrected.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 69616 -->
+<A name="200911GGC303"></A>
+<DIV CLASS="sect3">Category: Languages.MVCommands</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: GGC303</DIV>
+<DIV CLASS="sect3">Summary: Better support for MV printing and transactions</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change makes the MultiValue spooler more robust
+when it comes to handling printing with transactions, notably
+transaction rollbacks.
+<P>
+All MultiValue print job updates are now performed outside of a
+transaction. This means that any transaction rollbacks that occur in
+the application will not affect the print job in any way and the data
+in the print job will remain intact and uncorrupted.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 69806 -->
+<A name="200911GGC306"></A>
+<DIV CLASS="sect3">Category: Languages.MVCommands</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: GGC306</DIV>
+<DIV CLASS="sect3">Summary: Correct emulations for MultiValue KEYIN() function</DIV>
+<BR>
+<!-- Documentation: 0 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">The PICK emulation for KEYIN() was incorrect in that
+it was echoing according to the ECHO ON/OFF status. In this emulation,
+it should never echo.  This change implements that behavior.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 69891 -->
+<A name="200911YSD2213"></A>
+<DIV CLASS="sect3">Category: MgtPortal</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: YSD2213</DIV>
+<DIV CLASS="sect3">Summary: SMP - Configure Devices - Fix problems with loading SubType list and using IE8</DIV>
+<BR>
+<!-- Documentation: 0 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">
+This changes corrects problems in the Management Portal page:
+<BR>
+[Home] &gt; [Configuration] &gt; [Device Settings] &gt; [Devices]
+<BR>
+namely,
+<P>
+<UL>
+<LI CLASS="separate">When editing device, some of the property values
+may not be loaded when using IE8.</LI>
+<LI CLASS="saparate">The "SubType" drop-down list may not be populated, and the value
+not shown as selected.</LI>
+<LI CLASS="separate"> After deleting a device item, it returned to the
+Device Settings page. It should stay on the same page and just
+refresh the tables for devices, magnetic tapes, and subtypes.</LI>
+</UL>
+</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 68668 -->
+<A name="200911AGC1178"></A>
+<DIV CLASS="sect3">Category: Migration.TSQL</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: AGC1178</DIV>
+<DIV CLASS="sect3">Summary: TSQL - Restore correct parsing of "%" operator now that "%" can begin a name</DIV>
+<BR>
+<!-- Documentation: 0 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">
+This change corrects an error in the TQSL parser that interpreted a
+name beginning legally with "%" as an expression involving the "%"
+operator.
+</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 69938 -->
+<A name="200911MXT1172"></A>
+<DIV CLASS="sect3">Category: Object</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: MXT1172</DIV>
+<DIV CLASS="sect3">Summary: Fix typo in IsString method of %SAML AttributeValue</DIV>
+<BR>
+<!-- Documentation: 0 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This corrects a typographic error in the IsString
+method of %SAML AttributeValue that negated a validity check.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70449 -->
+<A name="200911YSD2243"></A>
+<DIV CLASS="sect3">Category: Object.Activate</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: YSD2243</DIV>
+<DIV CLASS="sect3">Summary: ActivateWizard - Change $$$Text to $$$TextJS for javascript alerts</DIV>
+<BR>
+<!-- Documentation: 0 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">
+This change fixes a problem where a javascript error may occur when
+the wizard tries to display a warning message and, (A) the user
+clicked the Finish button without first selecting a row, or (B) the user
+selected more than 10 rows.
+</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 69892 -->
+<A name="200911DMC678"></A>
+<DIV CLASS="sect3">Category: Object.Library</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: DMC678</DIV>
+<DIV CLASS="sect3">Summary: ObjectiveCache: Support d_decimal type (D_DECIMAL_ID)</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">Another change added support for a new d_decimal type for %Numeric and %Decimal types to be projected via the
+C++ binding.
+<P>
+Since the Objective-C binding uses the C++ binding for its underlying
+connection to Cach&eacute;, it was necessary to make additional changes to
+the Objective-C binding to project d_decimal types as NSNumber
+(actually, a subclass NSDecimalNumber).</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 69700 -->
+<A name="200911AND1064"></A>
+<DIV CLASS="sect3">Category: Object.NETGateway</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: AND1064</DIV>
+<DIV CLASS="sect3">Summary: Java/.Net Gateway: Fix &lt;COMMAND&gt; error in Gateway.%ExpressImport</DIV>
+<BR>
+<!-- Documentation: 0 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">
+This changes corrects an error where an expected value from a method
+call was not returned.
+</DIV
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 69922 -->
+<A name="200911MXT1171"></A>
+<DIV CLASS="sect3">Category: Object.Soap</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: MXT1171</DIV>
+<DIV CLASS="sect3">Summary: Fix Role element of SOAP 1.2 fault</DIV>
+<BR>
+<!-- Documentation: 0 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change corrects a Role element of SOAP 1.2
+fault which was not properly terminated.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70081 -->
+<A name="200911CDS1574"></A>
+<DIV CLASS="sect3">Category: Object.Sys</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: CDS1574</DIV>
+<DIV CLASS="sect3">Summary: Fix misspelled nThreadsPerCore method name</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">The nThreadsPerCore method of the $SYSTEM.CPU class
+was misspelled as nTheadsPerCore.  This fixes the misspelling.
+</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70151 -->
+<A name="200911MXT1174"></A>
+<DIV CLASS="sect3">Category: Object.XML</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: MXT1174</DIV>
+<DIV CLASS="sect3">Summary: Fix %XML.Reader to return SAX parser validation errors</DIV>
+<BR>
+<!-- Documentation: 0 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change alters the  %XML.Reader to return SAX parser validation
+errors.  The SAX parser was reporting the error, but there was a
+mismatch between %XML.Reader and the Cach&eacute; interface to the parser.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70356 -->
+<A name="200911MIT922"></A>
+<DIV CLASS="sect3">Category: SQL.GateWay</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: MIT922</DIV>
+<DIV CLASS="sect3">Summary: Correct error reporting for insert/update statements through JDBC Gateway</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change corrects an error introduced in 2009.1
+where return value of executeUpdate was assigned to %ROWCOUNT.
+The error manifests itself as the absence of error messages for an
+unsuccessful operation.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70460 -->
+<A name="200911AK742"></A>
+<DIV CLASS="sect3">Category: SQL.Query Processing</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: AK742</DIV>
+<DIV CLASS="sect3">Summary: Recompute "needed for output" flag</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">An optimization was added identifying cases where
+fields in certain views mentioned in a query were not actually
+essential to processing the query, resulting in improved run-time
+performance for those queries.
+</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70653 -->
+<A name="200911AK744"></A>
+<DIV CLASS="sect3">Category: SQL.Query Processing</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: AK744</DIV>
+<DIV CLASS="sect3">Summary: Fix BSL with %INLIST condition </DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">
+A correction was made to the code-generation of certain queries that use a
+multi-index access strategy, for example queries that use the %INLIST
+comparison operator, or queries of the form:
+</DIV>
+<DIV CLASS="literallayout"><PRE>
+    SELECT id FROM t WHERE x=:a OR (x IS NULL AND :a IS NULL)
+</PRE></DIV>
+<DIV CLASS="para">
+where t.x has an index and t has a multi-field IDKEY.
+</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 69067 -->
+<A name="200911PVA179"></A>
+<DIV CLASS="sect3">Category: SQL.Query Processing</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: PVA179</DIV>
+<DIV CLASS="sect3">Summary: Fix execution time &lt;undefined&gt; for a query with multiple opportunities for OR to UNION optimization</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">A problem has been fixed where an &lt;undefined&gt;
+could occur during execution of query that had two or more WHERE
+clauses, each of which has an OR that is subject to an OR to UNION
+optimization.
+<P>
+For the problem to occur, one
+of these OR conditions must be present in subquery of the
+query/subquery containing the other OR.
+<P>
+It is also possible this problem could arise with only one OR to UNION
+candidate. In that case, the query with an OR would have to also
+contain a subquery against an irreducible FROM clause subquery that
+had outer references to the query containing the OR.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 69212 -->
+<A name="200911DVU2542"></A>
+<DIV CLASS="sect3">Category: Studio</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: DVU2542</DIV>
+<DIV CLASS="sect3">Summary: Disable syntax check related actions</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change implements the following: when a user
+disables syntax checking (Options-&gt;Editor-&gt;Syntax Check and
+Assist-&gt;Enable Syntax Checking "unchecked"), all syntax check
+parser related actions, including studio assist, tooltips and context
+sensitive menu for particular syntax element will be disabled.
+<P>
+Turning syntax checking in this way avoids unnecesaary work by Studio
+when scrolling through a large document.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 68682, 69130, 70576 -->
+<A name="200911JLC1287_JLC1291_JLC1312"></A>
+<DIV CLASS="sect3">Category: System</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: JLC1287, JLC1291, JLC1312</DIV>
+<DIV CLASS="sect3">Summary: Update core counting and detection of Hyper-Threading Technology on x86 chips</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change correctly identifies when HyperThreading Technology is
+activated on recent Intel x86 chips (Nehalem-based), and how many cores
+are present.</DIV>
+
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 69760 -->
+<A name="200911JLC1301"></A>
+<DIV CLASS="sect3">Category: System</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: JLC1301</DIV>
+<DIV CLASS="sect3">Summary: Don't set multi-dimensional flag in $zobjexport if maxpropsize = 0</DIV>
+<BR>
+<!-- Documentation: 0 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change corrects the behavior of object export.
+The multidimensional flag is only set if the property size is greater
+than zero.  This change allows the xDBC connections to optimize their
+handling of properties  only when they actually change.
+</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70965 -->
+<A name="200911JO2283"></A>
+<DIV CLASS="sect3">Category: System</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: JO2283</DIV>
+<DIV CLASS="sect3">Summary: Disable database truncation</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">
+This change disables the feature that returns unused space from a
+database to the filesystem. An attempt to invoke this functionality
+will have no effect, that is, no space will be returned.
+<P>
+This will remain disabled until there is a correction for a condition
+where an attempt by different processes to truncate and to expand the
+same database at the same time results in a hung system.
+</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70807 -->
+<A name="200911RFD472"></A>
+<DIV CLASS="sect3">Category: System</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: RFD472</DIV>
+<DIV CLASS="sect3">Summary: Fix &lt;ACCVIO&gt; when a process HALTs with an open XDEV device</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">
+This change corrects a situation, present only in 2009.1, that could
+cause Cach&eacute; to halt with an access violation error when a
+process halts leaving an XDEV in an open state.
+</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70465 -->
+<A name="200911RJW1728"></A>
+<DIV CLASS="sect3">Category: System</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: RJW1728</DIV>
+<DIV CLASS="sect3">Summary: Prevent access violation when inet_ntop() returns failure</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">The use of inet_ntop() to translate IP addresses was
+introduced in the system code when IPV6 support was introduced in
+Cach&eacute; 2009.1.  Checks for a zero return value
+were not made everywhere, which could lead to an access violation if
+inet_ntop() could not translate the binary address to display format.
+This problem has been corrected.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 69928 -->
+<A name="200911SAP1205"></A>
+<DIV CLASS="sect3">Category: System.Callin/Callout</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: SAP1205</DIV>
+<DIV CLASS="sect3">Summary: Use thread safe ttyname_r in threaded Callin</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">
+This change now makes starting up Cach&eacute; work with a threaded
+Callin application.
+</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70516 -->
+<A name="200911HYY1477"></A>
+<DIV CLASS="sect3">Category: System.Journaling</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: HYY1477</DIV>
+<DIV CLASS="sect3">Summary: Fix &lt;UNDEFINED&gt; error in journal restore when a target database is not journaled</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">
+This change corrects a situation where an attempt to restore a journal
+involving an unjournaled database could result in an
+&LT;UNDEFINED&gt; error.
+<P>
+The problem was introduced in 2009.1.0.
+</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70332 -->
+<A name="200911SML1150"></A>
+<DIV CLASS="sect3">Category: System.Lock</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: SML1150</DIV>
+<DIV CLASS="sect3">Summary: Fix missing delock due to lock count update is delayed</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change fixes a problem where the delock (L -^A)
+command might skip its operation and leave the lock in lock
+table.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 69646 -->
+<A name="200911HYY1465"></A>
+<DIV CLASS="sect3">Category: System.Shadowing</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: HYY1465</DIV>
+<DIV CLASS="sect3">Summary: Fix an &lt;UNDEFINED&gt; error on starting a non-cluster shadow</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This changes addresses a defect that resulted in an
+error like the following:
+</DIV>
+<DIV CLASS="literallayout"><PRE>
+&lt;UNDEFINED&gt;zSourceEventsExecute+29^SYS.Shadowing.Shadow.1 *req("4"))
+</PRE></DIV>
+<DIV CLASS="para">
+when the user started a non-cluster shadow after specifying
+the name of the shadow to start, but before giving a
+list of Source Events to choose to start shadowing at.
+<P>
+The problem is believed to be present in Cach&eacute; 5.1 and forward (all
+releases containing HYY1119).
+</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70048, 70191, 70212, 70215, 70261, 70645, 70873, 70900 -->
+<A name="200911STC1626_et_al"></A>
+<DIV CLASS="sect3">Category: Utilities</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: STC1626, STC1637, STC1638, STC1639, STC1641, STC1650, STC1651, STC1660, SML1158</DIV>
+<DIV CLASS="sect3">Summary: CPF Converter handles mappings as in 2008.2 and earlier</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">
+These changes properly handle the conversion of mappings present in
+a 2008.2 (or earlier) configuration file to an equivalent set of
+mappings in 2009.1.  The major features of this conversion are:
+<P>
+<OL>
+<LI CLASS="separate">All mappings (globals, routines,
+subscript-levels) are subject to the same rules.</LI>
+<LI CLASS="separate">Any overlaps found are converted into
+an equivalent, order-independent sequence of non-overlapped
+mappings.</LI>
+</OL>
+</DIV>
+
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70261 -->
+<A name="200911STC1641"></A>
+<DIV CLASS="sect3">Category: Utilities</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: STC1641</DIV>
+<DIV CLASS="sect3">Summary: Fix $ZEOF handling in Config.CPF</DIV>
+<BR>
+<!-- Documentation: 0 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">
+This change corrects an error in end-of-file checking when reading the
+CPF file that could result in an infinite loop.
+</DIV>
+
+<HR SIZE=0>
+
+<BR CLEAR="ALL">
+
+<DIV CLASS="para">&copy; 2009, InterSystems Corporation. All rights reserved.</DIV>
+
+</body></html>
+

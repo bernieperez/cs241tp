@@ -1,0 +1,4 @@
+# Configuration file: persistent categories of classes
+# Format: [p/c/a/n]   Class name (including package info)
+c model.Person
+n **

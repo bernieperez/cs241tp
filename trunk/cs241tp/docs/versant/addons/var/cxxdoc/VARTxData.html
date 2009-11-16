@@ -1,0 +1,597 @@
+<HTML>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+		<title>Versant Object Database</title>
+		<style type="text/css" media="all"> <!--
+		
+#header { margin: 0; padding: 0; background: #FFF url(../../../html_resources/images/bckgr_header_api.gif) no-repeat left -10px scroll; clear: both; height: 65px; padding-top: 15px; }
+h1#head-jdo { height: 29px; width: 330px; text-indent: -99em; padding: 0; margin: 0 0 0 32px; background: #FFF url(../../../html_resources/images/Vsnt_ObjectDatabase_JDO.gif) no-repeat left top scroll; }
+h1#head-jvi { height: 29px; width: 330px; text-indent: -99em; padding: 0; margin: 0 0 0 32px; background: #FFF url(../../../html_resources/mages/Vsnt_ObjectDatabase_JVI.gif) no-repeat left top scroll; }
+h1#head-vxml { height: 29px; width: 480px; text-indent: -99em; padding: 0; margin: 0 0 0 32px; background: #FFF url(../../../html_resources/images/Vsnt_ObjectDatabase_VXML.gif) no-repeat left top scroll; }
+h1#head-vhistle { height: 29px; width: 480px; text-indent: -99em; padding: 0; margin: 0 0 0 32px; background: #FFF url(../../../html_resources/images/Vsnt_ObjectDatabase_Vhistle.gif) no-repeat left top scroll; }
+#sitenav { clear: both; float: none; border-bottom: 1px solid #CCC; background-color: #E5E5E5; width: 100%; }
+.hr { height: 0; font-size: 0; line-height: 0; clear: both; }
+.hr hr { height: 0; font-size: 0; line-height: 0; display: none; }
+li { font-size: 12px; font-family: Arial, Helvetica, sans-serif; color: #000; }
+.tabs { float: left; background-color: transparent; list-style: none; margin: 0; padding: 10px 0 0 30px; list-style-image: none; }
+.tabs li { float: left; margin-right: 3px; font-weight: bold; background: url(../../../html_resources/images/tabs.png) no-repeat right top; border-left: 1px solid #CCC; line-height: normal; }
+.tabs li a { display: block; padding: 4px 10px 3px 9px; border: none; outline: none; background: url(../../../html_resources/images/tabs.png) no-repeat right top; color: #444; text-decoration: none; }
+.tabs li a:hover { color: #161616; text-decoration: none; background-position: right -40px; }
+.tabs li.selected { position: relative; margin-bottom: -1px; background-position: right -40px; }
+.tabs li.selected a { display: block; padding: 4px 10px 4px 9px; background: url(../../../html_resources/images/tabs.png) no-repeat right -40px; font-weight: bold; color: #000; }
+.tabs li.selected span { display: block; padding: 4px 10px 4px 9px; background: url(../../../html_resources/images/tabs.png) no-repeat right -40px; font-weight: bold; color: #000; }
+* html .tabs { margin-bottom: 0; }
+
+
+/* Versant
+   Javadoc style sheet */
+
+/* Page background color */
+body {
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:10pt;
+    font-style:normal;
+    color:black;
+    background-color:#FFFFFF
+    margin: 0;
+    padding: 0; }
+    }
+
+/* Headings */
+H1  {
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:14pt;
+    font-weight:bold;
+    font-style:normal;
+    color:black;
+    background-color:inherit;
+    }
+H2  {
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:12pt;
+    font-weight:bold;
+    font-style:normal;
+    color:black;
+    background-color:inherit;
+    }
+H3  {
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:10pt;
+    font-weight:bold;
+    font-style:italic;
+    color:black;
+    background-color:inherit;
+    }
+H4 { 
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:9pt;
+    font-weight:normal;
+    font-style:italic;
+    color:black;
+    background-color:inherit;
+    }
+
+/* Table colors */
+.TableHeadingColor {
+    color:inherit;
+    background-color:#E0E0E0;
+    }
+.TableSubHeadingColor {
+    color:inherit;
+    background:#EEEEEE;
+    }
+.TableRowColor {
+    color:inherit;
+    background:#FFFFFF
+    }
+
+/* Font used in left-hand frame lists */
+.FrameTitleFont {
+    font-size:100%;
+    font-family:Helvetica, Arial, sans-serif
+    }
+.FrameHeadingFont { 
+    font-size:100%;
+    font-family:Helvetica, Arial, sans-serif;
+    font-weight:bold;
+    font-style:normal;
+    color:black;
+    background-color:inherit;
+    }
+.FrameItemFont {
+    font-size:90%;
+    font-family:Helvetica, Arial, sans-serif
+    }
+
+/* Navigation bar fonts and colors */
+.NavBarCell1 {
+    color:inherit;
+    background-color:#EEEEEE;
+    }
+.NavBarCell1Rev {
+    color:inherit;
+    background-color:#BB0000;
+    }
+.NavBarFont1 {
+    font-family:Arial, Helvetica, sans-serif;
+    color:black;
+    background-color:inherit;
+    }
+.NavBarFont1Rev {
+    font-family: Arial, Helvetica, sans-serif;
+    color:white;
+    background-color:inherit;
+    }
+.NavBarCell2 {
+    font-family:Arial, Helvetica, sans-serif;
+    color:inherit;
+    background-color:#DDAAAA;
+    }
+.NavBarCell3 {
+    font-family:Arial, Helvetica, sans-serif;
+    color:inherit;
+    background-color:#FFDDDD;
+    }
+
+P, TD  {
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:10pt;
+    font-style:normal;
+    color:black;
+    background-color:inherit;
+    }
+
+/*
+DD {
+    font-family:Courier;
+    font-size:10pt;
+    font-style:normal;
+    color:black;
+    background-color:inherit;
+    }
+*/
+
+A {
+    color:black;
+    background-color:inherit;
+    }
+    
+A:hover {
+    color:#BB0000;
+    background-color:inherit;
+    }
+
+UL {
+    font-family:Arial, Helvetica, sans-serif; 
+    font-size:10pt; 
+    font-style:normal; 
+    line-height:16pt ; 
+    list-style-image:url(checkmark_cube.gif)
+    }
+
+OL {
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:10pt;
+    font-style:normal;
+    line-height:16pt
+    }
+
+.top {
+    font-size:9px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    text-align:right;
+    text-decoration:none
+    }
+
+.none {
+    font-style:normal;
+    text-decoration:none
+    }
+
+.link {
+    text-decoration:none;
+    color:#000000;
+    background-color:inherit;
+    }
+
+.bold {
+    font-weight:bold
+    }
+
+
+
+	--></style>
+	</head>
+	<BODY>
+		<div id="sitenav">
+			<ul id="sitenav-tabs" class="tabs">
+				<li>
+					<a href="http://www.versant.com" target="_top" title="Versant Corporate Website">www.versant.com</a></li>
+				<li>
+					<a href="http://www.versant.com/developer" target="_top" title="Versant Developer Center Website">
+						Developer Center</a></li>
+				<li class="selected">
+					<a href="../../../info.html" target="_top" title="Versant Object Database Java Documentation">
+						Documentation</a></li>
+			</ul>
+			<div class="hr"><hr />
+			</div> <!-- end sitenav -->
+		</div>
+		<div id="header">
+			<h1 id="head-vhistle">Versant Object Database</h1>
+		</div>
+		<DL>
+			<DD>
+				Interface for API based replication</DD>
+		</DL>
+		<HR>
+		<P><B>[ <A HREF="allclasses-frame.html">allclasses-frame</A> | <A HREF="../../../../h/var/vartxdata.h">
+					Source</A> | <A HREF="keyweb.html">Keywords</A> | <A HREF="#aag">Summary</A>
+				| <A HREF="#parents">Ancestors</A> | <A HREF="#flat">All Members</A> | <A HREF="#children">
+					Descendants</A> ]</B>
+		<P>&nbsp;
+			<H2>
+				<A NAME="quickind"></A>Quick Index</H2>
+			<DL>
+				<DD>
+					<A HREF="#FILE">FILE</A></DD>
+				<DD>
+					<A HREF="#DESCRIPTION">DESCRIPTION</A></DD>
+			</DL>
+			<A NAME="aag"></A>
+			<HR>
+			<H2>
+				Class Summary</H2>
+		class VAR_DLL_EXPIMP VARTxData
+		<P>
+		{
+		<P><B><I>public</I></B>:
+			<DL>
+				<DD>
+					<B>static</B> void <A HREF="VARTxData.html#void_Initialize()$">Initialize</A>();</DD>
+				<DD>
+					<B>static</B> void <A HREF="VARTxData.html#void_Cleanup()$">Cleanup</A>();</DD>
+				<DD>
+					<B>static</B> VARTxData* <A HREF="VARTxData.html#VARTxData*_getCurrent()$">getCurrent</A>();</DD>
+				<DD>
+					<A HREF="VARTxData.html#VARTxData(VSession_*session)$">VARTxData</A>(VSession 
+					*session);</DD>
+				<DD>
+					<A HREF="VARTxData.html#VARTxData(PDOM_*dom)$">VARTxData</A>(PDOM *dom);</DD>
+				<DD>
+					~<I><A HREF="VARTxData.html#~VARTxData()$">VARTxData</A></I>();</DD>
+				<DD>
+					void <A HREF="VARTxData.html#void_add(const_char_*channelName,_LinkVstrAny_created,_LinkVstrAny_modified,_LinkVstrAny_deleted)$">
+						add</A>(const char *channelName, LinkVstrAny created, LinkVstrAny modified, 
+					LinkVstrAny deleted);</DD>
+				<DD>
+					void <A HREF="VARTxData.html#void_addCreated(const_char_*channelName,_LinkVstrAny_created)$">
+						addCreated</A>(const char *channelName, LinkVstrAny created);</DD>
+				<DD>
+					void <A HREF="VARTxData.html#void_addCreated(const_char_*channelName,_LinkAny_created)$">
+						addCreated</A>(const char *channelName, LinkAny created);</DD>
+				<DD>
+					void <A HREF="VARTxData.html#void_addModified(const_char_*channelName,_LinkVstrAny_modified)$">
+						addModified</A>(const char *channelName, LinkVstrAny modified);</DD>
+				<DD>
+					void <A HREF="VARTxData.html#void_addModified(const_char_*channelName,_LinkAny_modified)$">
+						addModified</A>(const char *channelName, LinkAny modified);</DD>
+				<DD>
+					void <A HREF="VARTxData.html#void_addDeleted(const_char_*channelName,_LinkVstrAny_deleted)$">
+						addDeleted</A>(const char *channelName, LinkVstrAny deleted);</DD>
+				<DD>
+					void <A HREF="VARTxData.html#void_addDeleted(const_char_*channelName,_LinkAny_deleted)$">
+						addDeleted</A>(const char *channelName, LinkAny deleted);</DD>
+				<DD>
+					void <A HREF="VARTxData.html#void_prepareToEndTransaction(const_char_*dbi_,_LinkVstrAny_*commitObjects_)$">
+						prepareToEndTransaction</A>(const char *dbi , LinkVstrAny *commitObjects );</DD>
+			</DL>
+			<B><I>protected</I></B>:
+			<BR>
+		}; // VARTxData
+		<P>Back to the <A HREF="#topofdoc">top</A> of <I>VARTxData</I>
+		<P>&nbsp;<A NAME="FILE"></A>&nbsp;
+			<HR>
+			<H3>
+				FILE</H3>
+		vartxdata.h
+		<P>Back to the <A HREF="#topofdoc">top</A> of <I>VARTxData</I>
+		<P>&nbsp;<A NAME="DESCRIPTION"></A>&nbsp;
+			<HR>
+			<H3>
+				DESCRIPTION</H3>
+		VARTxData creates a replication request and adds the request to the persistent 
+		request queue (The persistent request queue is processed by the replication 
+		server). A request contains loids of the objects to be replicated. Objects 
+		belonging to more than one channel can be replicated in one transaction. Name 
+		of the channel for a group of objects is specified by the user. There should be 
+		only one VARTxData object per session. Method "prepareToEndTransaction" should 
+		be called before ending the transaction, i.e. irrsepective of whether a 
+		transaction is committed or rolled back. Use plain commit for committing the 
+		transaction. If any another flavour of commit for e.g. xactwithvstr, checkpoint 
+		commit is used then the objects added in the "commitObjects" linkvstr should be 
+		committed with the commit, locks should be released and the objects should be 
+		released from the cache.
+		<P>
+		Static methods Initialize Cleanup getCurrent should be used only in multi 
+		threaded - multi session environment. If these methods are used then don't use 
+		any constructor to create VARTxData object.
+		<P>Back to the <A HREF="#topofdoc">top</A> of <I>VARTxData</I>
+		<P>&nbsp;<A NAME="AUTHOR"></A>&nbsp;
+			<HR>
+			<H3>
+				void Initialize();</H3>
+		Initialize. necessary only for MSMT (multi session multi threaded)
+		<P>
+		THROWS:
+		<P>None
+			<PRE>&nbsp;&nbsp;&nbsp; static void <A HREF="#void_Initialize()$">Initialize</A>();</PRE>
+			Back to the <A HREF="#topofdoc">top</A> of <I>VARTxData</I>
+		<P><A NAME="void_Cleanup()$"></A>
+			<HR>
+			<H3>
+				void Cleanup();</H3>
+		Finalize necessary only for MSMT (multi session multi threaded)
+		<P>
+		THROWS:
+		<P>None
+			<PRE>&nbsp;&nbsp;&nbsp; static void <A HREF="#void_Cleanup()$">Cleanup</A>();</PRE>
+			Back to the <A HREF="#topofdoc">top</A> of <I>VARTxData</I>
+		<P><A NAME="VARTxData*_getCurrent()$"></A>
+			<HR>
+			<H3>
+				VARTxData* getCurrent();</H3>
+		getCurrent. use only for MSMT (multi session multi threaded)
+		<P>
+		RETURNS: VARTxData* txData for the current session THROWS:
+		<P>None
+			<PRE>&nbsp;&nbsp;&nbsp; static VARTxData* <A HREF="#VARTxData*_getCurrent()$">getCurrent</A>();</PRE>
+			Back to the <A HREF="#topofdoc">top</A> of <I>VARTxData</I>
+		<P><A NAME="VARTxData(VSession_*session)$"></A>
+			<HR>
+			<H3>
+				VARTxData(VSession *session);</H3>
+			Constructor. Don't use in MSMT environment
+			<DL>
+				<DL>
+					<DT><I>in</I><B> session</B></DT>
+					<DD>
+						THROWS:</DD>
+				</DL>
+			</DL>
+			None
+			<PRE>&nbsp;&nbsp;&nbsp; <A HREF="#VARTxData(PDOM_*dom)$">VARTxData</A>(VSession *session);</PRE>
+			Back to the <A HREF="#topofdoc">top</A> of <I>VARTxData</I>
+		<P><A NAME="VARTxData(PDOM_*dom)$"></A>
+			<HR>
+			<H3>
+				VARTxData(PDOM *dom);</H3>
+		Constructor.
+		<P>Don't use in MSMT environment
+			<DL>
+				<DL>
+					<DT><I>in</I><B> dom</B></DT>
+					<DD>
+						THROWS:</DD>
+				</DL>
+			</DL>
+			None
+			<PRE>&nbsp;&nbsp;&nbsp; <A HREF="#VARTxData(PDOM_*dom)$">VARTxData</A>(PDOM *dom);</PRE>
+			Back to the <A HREF="#topofdoc">top</A> of <I>VARTxData</I>
+		<P><A NAME="~VARTxData()$"></A>
+			<HR>
+			<H3>
+				~VARTxData();</H3>
+		Destructor.
+		<P>
+		THROWS:
+		<P>None
+			<PRE>&nbsp;&nbsp;&nbsp; virtual ~VARTxData();</PRE>
+			Back to the <A HREF="#topofdoc">top</A> of <I>VARTxData</I>
+		<P><A NAME="void_add(const_char_*channelName,_LinkVstrAny_created,_LinkVstrAny_modified,_LinkVstrAny_deleted)$"></A>
+			<HR>
+			<H3>
+				void add(const char *channelName, LinkVstrAny created, LinkVstrAny modified, 
+				LinkVstrAny deleted);</H3>
+			add adds objects to be replicated ARGUMENTS:
+			<DL>
+				<DL>
+					<DT><I>in</I></DT>
+					<DD>
+						channelName name of the channel created created objects modified modified 
+						object deleted deleted object</DD>
+				</DL>
+			</DL>
+		RETURNS:
+		<P>THROWS:
+			<PRE>&nbsp;&nbsp;&nbsp; void&nbsp; <A HREF="#void_add(const_char_*channelName,_LinkVstrAny_created,_LinkVstrAny_modified,_LinkVstrAny_deleted)$">add</A>(const char *channelName, LinkVstrAny created,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LinkVstrAny modified,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LinkVstrAny deleted);</PRE>
+			Back to the <A HREF="#topofdoc">top</A> of <I>VARTxData</I>
+		<P><A NAME="void_addCreated(const_char_*channelName,_LinkVstrAny_created)$"></A>
+			<HR>
+			<H3>
+				void addCreated(const char *channelName, LinkVstrAny created);</H3>
+			addCreated adds created objects to be replicated ARGUMENTS:
+			<DL>
+				<DL>
+					<DT><I>in</I></DT>
+					<DD>
+						channelName name of the channel created created objects</DD>
+				</DL>
+			</DL>
+		RETURNS:
+		<P>THROWS:
+			<PRE>&nbsp;&nbsp;&nbsp; void&nbsp; <A HREF="#void_addCreated(const_char_*channelName,_LinkAny_created)$">addCreated</A>(const char *channelName, LinkVstrAny created);</PRE>
+			Back to the <A HREF="#topofdoc">top</A> of <I>VARTxData</I>
+		<P><A NAME="void_addCreated(const_char_*channelName,_LinkAny_created)$"></A>
+			<HR>
+			<H3>
+				void addCreated(const char *channelName, LinkAny created);</H3>
+			addCreated adds created object to be replicated ARGUMENTS:
+			<DL>
+				<DL>
+					<DT><I>in</I></DT>
+					<DD>
+						channelName name of the channel created created object</DD>
+				</DL>
+			</DL>
+		RETURNS:
+		<P>THROWS:
+			<PRE>&nbsp;&nbsp;&nbsp; void&nbsp; <A HREF="#void_addCreated(const_char_*channelName,_LinkAny_created)$">addCreated</A>(const char *channelName, LinkAny created);</PRE>
+			Back to the <A HREF="#topofdoc">top</A> of <I>VARTxData</I>
+		<P><A NAME="void_addModified(const_char_*channelName,_LinkVstrAny_modified)$"></A>
+			<HR>
+			<H3>
+				void addModified(const char *channelName, LinkVstrAny modified);</H3>
+			addModified adds modified object to be replicated ARGUMENTS:
+			<DL>
+				<DL>
+					<DT><I>in</I></DT>
+					<DD>
+						channelName name of the channel modified modified objects</DD>
+				</DL>
+			</DL>
+		RETURNS:
+		<P>THROWS:
+			<PRE>&nbsp;&nbsp;&nbsp; void&nbsp; <A HREF="#void_addModified(const_char_*channelName,_LinkAny_modified)$">addModified</A>(const char *channelName, LinkVstrAny modified);</PRE>
+			Back to the <A HREF="#topofdoc">top</A> of <I>VARTxData</I>
+		<P><A NAME="void_addModified(const_char_*channelName,_LinkAny_modified)$"></A>
+			<HR>
+			<H3>
+				void addModified(const char *channelName, LinkAny modified);</H3>
+			addModified adds modified object to be replicated ARGUMENTS:
+			<DL>
+				<DL>
+					<DT><I>in</I></DT>
+					<DD>
+						channelName name of the channel modified modified object</DD>
+				</DL>
+			</DL>
+		RETURNS:
+		<P>THROWS:
+			<PRE>&nbsp;&nbsp;&nbsp; void&nbsp; <A HREF="#void_addModified(const_char_*channelName,_LinkAny_modified)$">addModified</A>(const char *channelName, LinkAny modified);</PRE>
+			Back to the <A HREF="#topofdoc">top</A> of <I>VARTxData</I>
+		<P><A NAME="void_addDeleted(const_char_*channelName,_LinkVstrAny_deleted)$"></A>
+			<HR>
+			<H3>
+				void addDeleted(const char *channelName, LinkVstrAny deleted);</H3>
+			addDeleted adds deleted objects to be replicated ARGUMENTS:
+			<DL>
+				<DL>
+					<DT><I>in</I></DT>
+					<DD>
+						channelName name of the channel deleted deleted objects</DD>
+				</DL>
+			</DL>
+		RETURNS:
+		<P>THROWS:
+			<PRE>&nbsp;&nbsp;&nbsp; void&nbsp; <A HREF="#void_addDeleted(const_char_*channelName,_LinkAny_deleted)$">addDeleted</A>(const char *channelName, LinkVstrAny deleted);</PRE>
+			Back to the <A HREF="#topofdoc">top</A> of <I>VARTxData</I>
+		<P><A NAME="void_addDeleted(const_char_*channelName,_LinkAny_deleted)$"></A>
+			<HR>
+			<H3>
+				void addDeleted(const char *channelName, LinkAny deleted);</H3>
+			addDeleted adds deleted object to be replicated ARGUMENTS:
+			<DL>
+				<DL>
+					<DT><I>in</I></DT>
+					<DD>
+						channelName name of the channel deleted deleted object</DD>
+				</DL>
+			</DL>
+		RETURNS:
+		<P>THROWS:
+			<PRE>&nbsp;&nbsp;&nbsp; void&nbsp; <A HREF="#void_addDeleted(const_char_*channelName,_LinkAny_deleted)$">addDeleted</A>(const char *channelName, LinkAny deleted);</PRE>
+			Back to the <A HREF="#topofdoc">top</A> of <I>VARTxData</I>
+		<P><A NAME="void_prepareToEndTransaction(const_char_*dbi_,_LinkVstrAny_*commitObjects_)$"></A>
+			<HR>
+			<H3>
+				void prepareToEndTransaction(const char *dbi , LinkVstrAny *commitObjects );</H3>
+			prepareToEndTransaction Creates persistent request object which is used by the 
+			replication server to replicate the objects. call this method before commit. It 
+			is recommended that you use plain commit. But if any other form of commit is 
+			used(such as checkpoint commit) then ensure that objects added in the 
+			commitObjects should be committed, locks should be released after the commit 
+			and objects are released from the cache. ARGUMENTS:
+			<DL>
+				<DL>
+					<DT><I>in</I></DT>
+					<DD>
+						db name of the database in which request is created Not required if db is same 
+						as default db.</DD>
+					<DT><I>out</I></DT>
+					<DD>
+						commitObjects objects created/updated by this method Not required if the plain 
+						commit is used.</DD>
+				</DL>
+			</DL>
+		RETURNS:
+		<P>THROWS:
+			<PRE>&nbsp;&nbsp;&nbsp; void&nbsp; <A HREF="#void_prepareToEndTransaction(const_char_*dbi_,_LinkVstrAny_*commitObjects_)$">prepareToEndTransaction</A>(const char *dbi = NULL,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LinkVstrAny *commitObjects = NULL);</PRE>
+			Back to the <A HREF="#topofdoc">top</A> of <I>VARTxData</I>
+		<P><A NAME="flat"></A>
+			<HR>
+			<H2>
+				All Members</H2>
+			<DL>
+				<DT><B>public:</B></DT>
+				<DD>
+					<B>static</B> void <A HREF="VARTxData.html#void_Initialize()$">Initialize</A>();</DD>
+				<DD>
+					<B>static</B> void <A HREF="VARTxData.html#void_Cleanup()$">Cleanup</A>();</DD>
+				<DD>
+					<B>static</B> VARTxData* <A HREF="VARTxData.html#VARTxData*_getCurrent()$">getCurrent</A>();</DD>
+				<DD>
+					void <A HREF="VARTxData.html#void_add(const_char_*channelName,_LinkVstrAny_created,_LinkVstrAny_modified,_LinkVstrAny_deleted)$">
+						add</A>(const char *channelName, LinkVstrAny created, LinkVstrAny modified, 
+					LinkVstrAny deleted);</DD>
+				<DD>
+					void <A HREF="VARTxData.html#void_addCreated(const_char_*channelName,_LinkVstrAny_created)$">
+						addCreated</A>(const char *channelName, LinkVstrAny created);</DD>
+				<DD>
+					void <A HREF="VARTxData.html#void_addCreated(const_char_*channelName,_LinkAny_created)$">
+						addCreated</A>(const char *channelName, LinkAny created);</DD>
+				<DD>
+					void <A HREF="VARTxData.html#void_addModified(const_char_*channelName,_LinkVstrAny_modified)$">
+						addModified</A>(const char *channelName, LinkVstrAny modified);</DD>
+				<DD>
+					void <A HREF="VARTxData.html#void_addModified(const_char_*channelName,_LinkAny_modified)$">
+						addModified</A>(const char *channelName, LinkAny modified);</DD>
+				<DD>
+					void <A HREF="VARTxData.html#void_addDeleted(const_char_*channelName,_LinkVstrAny_deleted)$">
+						addDeleted</A>(const char *channelName, LinkVstrAny deleted);</DD>
+				<DD>
+					void <A HREF="VARTxData.html#void_addDeleted(const_char_*channelName,_LinkAny_deleted)$">
+						addDeleted</A>(const char *channelName, LinkAny deleted);</DD>
+				<DD>
+					void <A HREF="VARTxData.html#void_prepareToEndTransaction(const_char_*dbi_,_LinkVstrAny_*commitObjects_)$">
+						prepareToEndTransaction</A>(const char *dbi , LinkVstrAny *commitObjects );</DD>
+				<DT><B>protected:</B></DT>
+			</DL>
+			Back to the <A HREF="#topofdoc">top</A>
+		of VARTxData
+		<P>&nbsp;<A NAME="parents"></A>&nbsp;
+			<HR>
+			<H2>
+				Ancestors</H2>
+		Class does not inherit from any other class.
+		<P>
+		&nbsp;
+		<P>Back to the <A HREF="#topofdoc">top</A>
+		of VARTxData
+		<P>&nbsp;<A NAME="children"></A>&nbsp;
+			<HR>
+			<H2>
+				Descendants</H2>
+		Class is not inherited by any others.
+		<P>
+		&nbsp;
+		<P>Back to the <A HREF="#topofdoc">top</A>
+		of VARTxData
+		<P>
+		&nbsp;
+	</BODY>
+</HTML>

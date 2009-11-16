@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="22" zv="Cache for Windows (x86-32) 2008.2 (Build 420U)" ts="2008-09-16 09:34:30">
+<Class name="SecurityTutorial.AuthorizationTests">
+<Super>%RegisteredObject,%XML.Adaptor</Super>
+<TimeChanged>61244,48881.764894</TimeChanged>
+<TimeCreated>61236,42941.599474</TimeCreated>
+
+<Method name="CreateTestData">
+<ClassMethod>1</ClassMethod>
+<Implementation><![CDATA[		Set ^TestData = "MyInitialData"
+]]></Implementation>
+</Method>
+
+<Method name="HelloUser">
+<ClassMethod>1</ClassMethod>
+<Implementation><![CDATA[
+		
+		Write "User ", $Username
+]]></Implementation>
+</Method>
+
+<Method name="UpdateTestData">
+<ClassMethod>1</ClassMethod>
+<Implementation><![CDATA[		Set ^TestData = "MyUpdatedData"
+]]></Implementation>
+</Method>
+
+<Method name="ReadTestData">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+		
+		Quit ^TestData
+]]></Implementation>
+</Method>
+
+<Method name="ProtectedMethod">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+		if ($System.Security.Check("ProtectedMethod","U"))
+		{
+			Quit $Username
+				
+		}
+		
+		Else
+		{
+			Quit "Error: Insufficient Privileges"	
+		}
+]]></Implementation>
+</Method>
+</Class>
+</Export>

@@ -1,0 +1,1566 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="22" zv="Cache for Windows (x86-32) 2009.1.2 (Build 602U)" ts="2009-10-26 13:49:23">
+<Project name="COS" LastModified="2009-10-26 11:15:56">
+  <Items>
+    <ProjectItem name="CosTutorial.Person" type="CLS"/>
+    <ProjectItem name="RightTriangle.MAC" type="MAC"/>
+    <ProjectItem name="badroutine.MAC" type="MAC"/>
+    <ProjectItem name="compareloop.MAC" type="MAC"/>
+    <ProjectItem name="datent.MAC" type="MAC"/>
+    <ProjectItem name="datentobj.MAC" type="MAC"/>
+    <ProjectItem name="dbconvert.MAC" type="MAC"/>
+    <ProjectItem name="fibonacci.MAC" type="MAC"/>
+    <ProjectItem name="forexample.MAC" type="MAC"/>
+    <ProjectItem name="funcexample.MAC" type="MAC"/>
+    <ProjectItem name="hello.MAC" type="MAC"/>
+    <ProjectItem name="lookup.MAC" type="MAC"/>
+    <ProjectItem name="lookup1.MAC" type="MAC"/>
+    <ProjectItem name="lookup2.MAC" type="MAC"/>
+    <ProjectItem name="lookupobj.MAC" type="MAC"/>
+    <ProjectItem name="loopend.MAC" type="MAC"/>
+    <ProjectItem name="loopstart.MAC" type="MAC"/>
+    <ProjectItem name="nameloop.MAC" type="MAC"/>
+    <ProjectItem name="passbyref.MAC" type="MAC"/>
+    <ProjectItem name="postcond.MAC" type="MAC"/>
+    <ProjectItem name="procexample.MAC" type="MAC"/>
+    <ProjectItem name="publicvarsexample.MAC" type="MAC"/>
+    <ProjectItem name="root.MAC" type="MAC"/>
+    <ProjectItem name="simpleloop.MAC" type="MAC"/>
+    <ProjectItem name="survivor.MAC" type="MAC"/>
+  </Items>
+</Project>
+
+
+<Class name="CosTutorial.Person">
+<ClassType>persistent</ClassType>
+<Super>%Persistent</Super>
+<TimeChanged>61660,49591.337066</TimeChanged>
+<TimeCreated>58776,45024</TimeCreated>
+
+<Property name="DOB">
+<Type>%Date</Type>
+</Property>
+
+<Property name="Name">
+<Type>%String</Type>
+</Property>
+
+<Property name="LastName">
+<Type>%String</Type>
+<Calculated>1</Calculated>
+<SqlComputeCode>set {LastName}=$p({Name},",",1)</SqlComputeCode>
+<SqlComputed>1</SqlComputed>
+<Parameter name="COLLATION" value="EXACT"/>
+</Property>
+
+<Property name="FirstName">
+<Type>%String</Type>
+<Calculated>1</Calculated>
+<SqlComputeCode>set {FirstName}=$p({Name},",",2)</SqlComputeCode>
+<SqlComputed>1</SqlComputed>
+<Parameter name="COLLATION" value="EXACT"/>
+</Property>
+
+<Property name="Phone">
+<Type>%String</Type>
+<Parameter name="COLLATION" value="EXACT"/>
+<Parameter name="MAXLEN" value="12"/>
+</Property>
+
+<Index name="DOB">
+<Description>
+Index for property DOB</Description>
+<Properties>DOB</Properties>
+</Index>
+
+<Index name="Name">
+<Description>
+Index for LastName,FirstName</Description>
+<Properties>LastName,FirstName</Properties>
+</Index>
+
+<Index name="Phone">
+<Description>
+Uniqueness index for property Phone</Description>
+<Properties>Phone</Properties>
+<Unique>1</Unique>
+</Index>
+
+<Parameter name="MANAGEDEXTENT">
+<Default>0</Default>
+</Parameter>
+
+<Storage name="Default">
+<Type>%CacheStorage</Type>
+<DataLocation>^PersonD</DataLocation>
+<DefaultData>PersonDefaultData</DefaultData>
+<IdLocation>^PersonD</IdLocation>
+<IndexLocation>^PersonI</IndexLocation>
+<StreamLocation>^CosTutor.PersonS</StreamLocation>
+<Data name="PersonDefaultData">
+<Value name="1">
+<Value>Name</Value>
+</Value>
+<Value name="2">
+<Value>Phone</Value>
+</Value>
+<Value name="3">
+<Value>DOB</Value>
+</Value>
+<Value name="4">
+<Value>%%CLASSNAME</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+
+
+<Routine name="RightTriangle" type="MAC" languagemode="0" timestamp="58807,43766"><![CDATA[
+RightTriangle /* compute area and hypotenuse of a right triangle
+               this routine contains examples of new ObjectScript features */
+ write !, "Compute the area and hypotenuse of a right triangle",
+       !, "given the lengths of its two sides."    
+ read !!, "First, choose a unit of measurement. ",
+       !, "(i)nches, (f)eet, (m)iles, ",
+          "(c)entimeters, m(e)ters, (k)ilometers: ", units
+ // translate units to a full word
+ set units = $case( $extract( units, 1), "i":"inches", "f":"feet",
+                                         "m":"miles",  "c":"centimeters",
+                                         "e":"meters", "k":"kilometers",
+                                            :"units" )
+ do { read !!, "Length of side 1: ", side1
+      quit:(side1 = "")  // exit the do loop
+    }
+ while $$IsNegative( side1 )
+ quit:(side1 = "")  // exit the routine
+ do { read !,  "Length of side 2: ", side2
+      quit:(side2 = "")  // exit the do loop
+    }
+ while $$IsNegative( side2 )
+ quit:(side2 = "")  // exit the routine
+ do Compute( units, side1, side2)
+ quit
+ 
+IsNegative(num ) PUBLIC // is num negative?
+ { if (num '> 0) {
+     write "  Enter a positive number." 
+     quit 1 // return "true"
+    }
+   else {
+     write "  Accepted."
+     quit 0 // return "false"
+    }
+ }
+    
+Compute(units, A, B ) // compute and display area and hypotenuse
+ { set area  = ( A * B ) / 2, 
+       area = $justify( area, 0, 2),
+       %X = ( A ** 2 ) + ( B ** 2 )  // set up %X, which INT%SQROOT requires
+   do INT^%SQROOT                    // INT^%SQROOT returns its result by setting %Y
+   set hypot = $justify( %Y, 0, 2)   // now, round %Y to 2 places
+   write !!, "The area of this triangle is ", area, " square ", units, ".",
+         !!, "The hypotenuse is ", hypot, " ", units, "."
+ }
+ 
+ 
+ 
+ 
+]]></Routine>
+
+
+<Routine name="badroutine" type="MAC" languagemode="0" timestamp="59806,47145"><![CDATA[
+badroutine ; a simple error
+start ;
+	set a=1
+	set b=2
+	write c
+]]></Routine>
+
+
+<Routine name="compareloop" type="MAC" languagemode="0" timestamp="59871,66237"><![CDATA[
+compareloop ; different styles of looping
+	/* The first three loops are logically equivalent,
+	    but the 1st is recommended over the 2nd and 3rd versions, */
+	/* The 4th loop is a copy of the third loop,
+	    but without the internal quit, so there's a logical error. */
+	   
+usefor write !, "Using For"
+    for  
+        {
+        set x = $random(10)
+        quit:(x = 5)  // this quit ends the code block AND terminates the loop
+		write !, x
+        }
+        
+usewhile write !!, "Using While"
+    set x = ""
+    while x '= 5 // this condition is evaluated each time, for no reason
+        {
+        set x = $random(10)
+        quit:(x = 5)  // this quit ends the code block AND terminates the loop
+		write !, x
+        }
+        
+usedo write !!, "Using Do/While"
+    do 
+        {
+        set x = $random(10)
+        quit:(x = 5)  // this quit ends the code block AND terminates the loop
+		write !, x
+		}
+    while x '= 5 // this condition is evaluated each time, for no reason
+    
+badusedo write !!, "Using Do/While, but it writes the terminating 5"
+    do 
+        {
+        set x = $random(10)
+		write !, x
+		}
+    while x '= 5 // this condition terminates the loop (a little too late)
+    
+ 
+]]></Routine>
+
+
+<Routine name="datent" type="MAC" languagemode="0" timestamp="58807,43501"><![CDATA[
+datent ; second data entry routine
+ 
+main ; main loop section
+ do {
+     do prompt()
+     quit:(name = "")
+     do display()
+     do store()
+    }
+ while name'=""
+ quit
+ 
+prompt() [name, phone, intdob]   
+ ; procedure for prompting
+ {
+ do {
+     read !, "Name: ", name
+     quit:(name = "")  ; user entered nothing
+     set name = $$validName( name )
+    }
+ while name = 0
+ quit:(name = "")  ; exit procedure
+         
+ do {
+     read !, "Phone (617): ", phone
+     set phone = $$validPhone( phone )
+    }
+ while phone = 0
+ 
+ do {
+     read !, "DOB: ", dob
+     set intdob = $$validDOB( dob )
+    }
+ while intdob = 0
+ write !!
+ }
+ 
+display() [name, phone, intdob] PUBLIC
+ ; display the data
+ {
+ write !, "Name:", ?20, name
+ write !, "Phone:", ?20, phone
+ write !, "DOB:", ?20, $zdate(intdob, 2)
+ write !!
+ }
+ 
+store()  [name, phone, intdob]
+ ; store the data
+ {
+ read !, "Store? (y/n): ", yn                 ; see if user wants to store
+ if ( yn '= "y" ) {                           ; only go on if user says yes
+     write "...not stored."
+     quit
+    }
+ 
+ set id = $increment( ^PersonD )              ; use $i to generate a new id
+ set rec = name _ "^" _ phone _ "^" _ intdob  ; concatenate the data into a record
+ set ^PersonD( id ) = rec                     ; store the record
+ 
+ set ln = $piece(name, ",", 1), 
+     fn = $piece(name, ",", 2)                ; break name for storage in index
+ 
+ /* the next three statements store data in subscripts
+    because of the automatic sorting of subscripts,
+    this has the effect of building 3 indexes: name, phone, and DOB */
+ set ^PersonI( "Name", ln, fn, id) = ""       ; store the name
+ set ^PersonI( "Phone", phone) = id           ; store the UNIQUE phone
+ set ^PersonI( "DOB", intdob, id) = ""        ; store the DOB
+ write "...stored"                            ; done
+ }
+ 
+validName(name)  PUBLIC ; validate a Name
+ /* returns 0 for an invalid name and writes error message
+    returns the unchanged name otherwise */
+ {
+ if ( name?1u.l1","1u.l) {
+     quit name }
+ else {
+     write !,"Last,First"
+     quit 0
+    }
+ }
+        
+validPhone(phone) PUBLIC ; validate a phone number
+ /* returns 0 for invalid phone numbers and writes error message
+    returns the valid phone number with default area code added if necessary */
+ {
+ if ( phone?.1(3n1"-")3n1"-"4n ) {
+     set:(phone?3n1"-"4n) phone = "617-" _ phone ; add default area code
+     if $data( ^PersonI( "Phone", phone)) {
+         write !, "Phone number in use"
+         quit 0 
+        }
+     else {
+         quit phone }
+    }
+ else {
+     write !, "###-###-#### or ###-####"
+     quit 0
+    }
+ }
+ 
+validDOB(date) PUBLIC ; validate a Date of Birth
+ /* returns 0 for invalid dates and writes error message
+    returns internal format for valid dates */
+ {
+ set convdate = $zdateh(date, 5,,,,,,, -1)
+ if (convdate = -1) {
+     write !,"Date in the past"
+     quit 0 ; invalid date
+    }
+ elseif ( convdate > $piece( $horolog, ",", 1)) {
+     write !,"Date in the past"
+     quit 0 ; invalid because it's in the future
+    }
+ else {
+     quit convdate ; valid date
+    }
+ }
+]]></Routine>
+
+
+<Routine name="datentobj" type="MAC" languagemode="0" timestamp="59053,923"><![CDATA[
+datentobj ; second data entry routine
+ 
+main ; main loop section
+ do {
+     do prompt()
+     quit:(name = "")
+     do display()
+     do store()
+    }
+ while name'=""
+ quit
+ 
+prompt() [name, phone, intdob]   
+ ; procedure for prompting
+ {
+ do {
+     read !, "Name: ", name
+     quit:(name = "")  ; user entered nothing
+     set name = $$validName( name )
+    }
+ while name = 0
+ quit:(name = "")  ; exit procedure
+         
+ do {
+     read !, "Phone (617): ", phone
+     set phone = $$validPhone( phone )
+    }
+ while phone = 0
+ 
+ do {
+     read !, "DOB: ", dob
+     set intdob = $$validDOB( dob )
+    }
+ while intdob = 0
+ write !!
+ }
+ 
+display() [name, phone, intdob] PUBLIC
+ ; display the data
+ {
+ write !, "Name:", ?20, name
+ write !, "Phone:", ?20, phone
+ write !, "DOB:", ?20, $zdate(intdob, 2)
+ write !!
+ }
+ 
+store()  [name, phone, intdob]
+ ; store the data
+ {
+ read !, "Store? (y/n): ", yn                 ; see if user wants to store
+ if ( yn '= "y" ) {                           ; only go on if user says yes
+     write "...not stored."
+     quit
+    }
+ 
+ set per = ##class(CosTutorial.Person).%New() ; create a new person
+ set per.Name = name
+ set per.Phone = phone
+ set per.DOB = intdob
+ do per.%Save()       ; store the record, in a transaction, including storage in indexes!
+ set per = ""         ; release the person object
+ write "...stored"    ; done
+ }
+ 
+validName(name)  PUBLIC ; validate a Name
+ /* returns 0 for an invalid name and writes error message
+    returns the unchanged name otherwise */
+ {
+ if ( name?1u.l1","1u.l) {
+     quit name }
+ else {
+     write !,"Last,First"
+     quit 0
+    }
+ }
+        
+validPhone(phone) PUBLIC ; validate a phone number
+ /* returns 0 for invalid phone numbers and writes error message
+    returns the valid phone number with default area code added if necessary */
+ {
+ if ( phone?.1(3n1"-")3n1"-"4n ) {
+     set:(phone?3n1"-"4n) phone = "617-" _ phone ; add default area code
+     if $data( ^PersonI( "Phone", phone)) {
+         write !, "Phone number in use"
+         quit 0 
+        }
+     else {
+         quit phone }
+    }
+ else {
+     write !, "###-###-#### or ###-####"
+     quit 0
+    }
+ }
+ 
+validDOB(date) PUBLIC ; validate a Date of Birth
+ /* returns 0 for invalid dates and writes error message
+    returns internal format for valid dates */
+ {
+ set convdate = $zdateh(date, 5,,,,,,, -1)
+ if (convdate = -1) {
+     write !,"Date in the past"
+     quit 0 ; invalid date
+    }
+ elseif ( convdate > $piece( $horolog, ",", 1)) {
+     write !,"Date in the past"
+     quit 0 ; invalid because it's in the future
+    }
+ else {
+     quit convdate ; valid date
+    }
+ }
+]]></Routine>
+
+
+<Routine name="dbconvert" type="MAC" languagemode="0" timestamp="58807,43552"><![CDATA[
+dbconvert() PUBLIC ; convert ^PersonD from pieces to lists ; 24 Oct 1999  11:10 PM
+ ; also make a slight change to the structure of ^PersonI("Phone")
+ {
+ for id = 1 : 1 : ^PersonD {          ; for each entry in ^PersonD
+     set rec = ^PersonD(id)           ; get the record
+     set pieces = $length(rec, "^")   ; how many ^ pieces are there?
+     for j = 1 : 1 : pieces {         ; for each piece
+         set $list(newrec, j) =
+             $piece(rec, "^", j)      ; set the jth list item to the jth piece
+        }
+     set ^PersonD(id) = newrec        ; store the new record back
+     set ph = $piece(rec, "^", 2)     ; get the phone number
+     kill ^PersonI("Phone", ph)       ; delete the old record
+     set ^PersonI("Phone", ph, id)="" ; save id in the subscript
+    }
+ }
+ 
+goback() PUBLIC ; convert back from lists to pieces
+ ; also make a slight change to the structure of ^PersonI("Phone")
+ {
+ for id = 1 : 1 : ^PersonD {          ; for each entry in ^PersonD
+     set rec = ^PersonD(id)           ; get the record
+     set items = $listlength(rec)     ; how many list items are there?
+     for j = 1 : 1 : items {          ; for each item
+         set $piece(newrec, "^", j) = 
+             $list(rec, j)            ; set the jth piece to the jth list item
+        }
+     set ^PersonD(id) = newrec        ; store the record back
+     set ph = $list(rec, 2)           ; get the phone number
+     set ^PersonI("Phone", ph) = id   ; save id normally
+     kill ^PersonI("Phone", ph, id)   ; delete the old record
+    }
+ }
+]]></Routine>
+
+
+<Routine name="fibonacci" type="MAC" languagemode="0" timestamp="58807,43563"><![CDATA[
+fibonacci ; generate Fibonacci sequences
+ read !, "Generate Fibonacci sequence up to where? ", upto
+ set t1 = 1, t2 = 1, fib = 1
+ write !
+ do {
+     write fib,"  "  set fib = t1 + t2, t1 = t2, t2 = fib
+    }
+ while ( fib '> upto )
+ 
+ set t1 = 1, t2 = 1, fib = 1
+ write !
+ while ( fib '> upto ) {
+     write fib,"  "  set fib = t1 + t2, t1 = t2, t2 = fib
+    }
+ 
+ 
+ 
+]]></Routine>
+
+
+<Routine name="forexample" type="MAC" languagemode="0" timestamp="59869,57608"><![CDATA[
+forexample ; examples of the for construct
+ for i = 1:1:8 {
+     write !, "I ", i, " the sandbox."
+    }
+ write !!
+ for b = "John", "Paul", "George", "Ringo" {
+     write !, "Was ", b, " the leader? "
+     read yn
+    }
+ write !!
+ for i = 1:1 {
+     read !, "Capital of MA? ", a
+     if a = "BOSTON" {
+         write "...did it in ", i, " tries"
+         quit
+        }
+    }
+ write !!
+ for  {
+     read !, "Know what? ", wh
+     quit:(wh = "NO!")
+     write "   That's what!"
+    }
+    
+    
+    
+    
+]]></Routine>
+
+
+<Routine name="funcexample" type="MAC" languagemode="0" timestamp="58807,43590"><![CDATA[
+funcexample ; example of extrinsic function
+ read !, "Enter a number: ", num
+ set fact = $$fact( num )
+ write !, "The factorial of ", num, " is ", fact
+ quit
+fact(number) PUBLIC
+ ; compute factorial
+ {
+ if number < 1 {quit "Error!"}
+ if (number = 1) || (number = 2) {quit number}
+ set x = number * $$fact( number - 1 )
+ quit x
+ }
+ 
+ 
+]]></Routine>
+
+
+<Routine name="hello" type="MAC" languagemode="0" timestamp="58807,43607"><![CDATA[
+hello ; hello world routine
+ write !, "hello world"
+ write !, "bye"
+end quit  ; end 
+ 
+ 
+]]></Routine>
+
+
+<Routine name="lookup" type="MAC" languagemode="0" timestamp="61229,69468"><![CDATA[
+lookup ; display an ordered list of matches
+ ; user can enter full or partial name, full or partial phone, or a valid date
+ ; pick from a list of matches, and edit their choice
+ 
+main ; main section
+ ; start looping
+ for  {
+     do getsubmit() ; let user submit a string for lookup
+     quit:(submit = "")
+     do:(id '= 0) edit( id )
+    }
+ quit
+ 
+getsubmit() [submit, id] ; ask user what to search for, and take appropriate action    
+ {
+ set id = 0
+ read !, "Lookup: ", submit
+ quit:(submit = "")  ; user entered nothing
+ ; figure out what user entered
+ if (submit = "?") { ; display help
+     do help()
+     quit
+    }
+ elseif submit?3n.1(1"-"3n.1(1"-"4n)) { ; allow full or partial phone numbers
+     write "...finding phone number"
+     do phone( .id ) quit:(id = 0)
+     do display(id, "table") ; display the chosen person
+    }
+ elseif $$NameFormat( .submit )?1u.l.1(1","1u.l) { ; verify the name
+     write "...finding name"
+     do name( .id ) quit:(id = 0)
+     do display(id, "table") ; display the chosen person
+    }
+ elseif $$validDOB^datent( submit ) { ; use validDOB^datent to verify the DOB
+     write "...finding birthday"
+     do dob( .id ) quit:(id = 0)
+     do display(id, "table") ; display the chosen person
+     quit
+    }
+ else { ; else it's an error
+     write ", name, or phone" }
+ }
+ 
+help()  ; display different types of lookups
+ {
+ write !, "You can enter:"
+ write !?10, "* full name: Smith,John", !?10, "* last name: Smith"
+ write !?10, "* partial name: Sm,J or Smith,J or Sm,John"
+ write !?10, "* phone number with area code: 617-621-0600"
+ write !?10, "* partial phone numbers: 617 or 617-621"
+ write !?10, "* date of birth", !!
+ }
+ 
+dob(id) [submit, list]  ; perform dob lookup
+ ; no partial matches
+ ; if user picks a name from the list, id is returned to the caller
+ {
+ kill list
+ set intdob = $$validDOB^datent( submit ) ; convert dob
+ ; is the date of birth in the index?
+ if '$data( ^PersonI("DOB", intdob) ) { ; determine if there are any matches
+     write "...no matches"
+     quit
+    }
+ set loopid = ""
+ ; loop through ids, and number them
+ for count = 1 : 1 {
+     set loopid = $order( ^PersonI("DOB", intdob, loopid) )
+     quit:(loopid = "")
+     set list( count ) = loopid
+     write !, count, ") "
+     do display(loopid, "line")
+    }
+ do select( .id )
+ }
+ 
+phone(id) [submit, list]  ; perform phone lookup
+ ; if user picks a name from the list, id is returned to the caller
+ {
+ kill list
+ set count = 0 ; assume no matches
+ set origph = submit
+ set:( origph?3n ) origph = origph _ "-" ; change to a string instead of a number
+ ; origph may be an exact match, so find preceding phone
+ set ph = $order( ^PersonI("Phone", origph), -1)
+ /* loop through phone numbers, and number them, quit as soon as phone doesn't match original
+    loopid holds the ONE id per phone number */
+ for count = 1 : 1 {
+     set ph = $order( ^PersonI("Phone", ph), 1, loopid)
+     quit:( $extract(ph, 1, $length(origph)) '= origph )
+     set list( count ) = loopid
+     write !, count, ") "
+     do display(loopid, "line")
+    }
+ if '$data( list ) { ; were there matches?
+     write "...no matches"
+     quit
+    }
+ do select( .id )
+ }
+ 
+name(id) [submit, list]  ; perform name lookup
+ ; if user picks a name from the list, id is returned to the caller
+ {
+ kill list
+ set count = 0 ; assume no matches
+ set origln = $piece(submit, ",", 1), origfn = $piece(submit, ",", 2)
+ ; origln may be an exact match, so find preceding last name
+ set ln = $order( ^PersonI("Name", origln), -1)
+ ; loop through last names, quit as soon as last name doesn't match original
+ for  {
+     set ln = $order( ^PersonI("Name", ln))
+     quit:($extract(ln, 1, $length(origln)) '= origln)
+     ; origfn may be "". Otherwise, it may be an exact match, so find preceding first name
+     if (origfn = "") { set fn = "" }
+     else { set fn = $order( ^PersonI("Name", ln, origfn), -1) }
+     ; loop through first names, quit as soon as first name doesn't match original, or is ""
+     for  {
+         set fn = $order( ^PersonI("Name", ln, fn))
+         quit:(($extract(fn, 1, $length(origfn)) '= origfn) || (fn = ""))
+         set loopid = ""
+         ; loop through ids
+         for  {
+             set loopid = $order( ^PersonI("Name", ln, fn, loopid))
+             quit:( loopid = "" )
+             set count = count + 1
+             set list( count ) = loopid
+             write !, count, ") "
+             do display(loopid, "line")
+            }
+        }
+     }
+ if '$data( list ) { ; were there matches?
+     write "...no matches"
+     quit
+    }
+ do select( .id )
+ }
+ 
+select(id) [list]  ; choose from the displayed items, and set up id
+ ; id is 0 if no choice is made, id is >0 when user makes a choice
+ {
+ for  {
+     read !!, "Choose by number: ", choice
+     quit:(choice = "")
+     set id = $get( list( choice ), 0)
+     quit:(id '= 0)  ; valid choice
+     write !,"Invalid choice"
+    }
+ }
+ 
+edit(id) ; allow user to choose, and edit their choice
+ {
+ for  {
+     read !, "Edit? (y/n): " ,yn
+     if yn '= "y" {
+         write "...no changes."
+         quit
+        }
+     ; try to lock the record
+     lock +^PersonD( id ):5
+     if $test { ; the lock was sucessful
+         quit  }
+     else {
+         write "...someone else is editing this person" }
+    }
+ quit:(yn '= "y")
+ do load( id )
+ do reprompt()
+ read !, "Store? (y/n): ", yn
+ if yn '= "y" {
+     write "...no changes."
+     lock -^PersonD( id ) ; unlock the record
+     quit
+    }
+ do update( id )
+ lock -^PersonD( id ) ; unlock the record
+ }
+ 
+reprompt() [name, phone, intdob, 
+                 newname, newphone, newintdob]  ; show current data and allow user to update it
+ {
+ do {
+     write !, "Name: ", name, "=> " read newname
+     set:(newname = "") newname = name ; default
+     set newname = $$validName^datent( newname )
+    }
+ while newname = 0
+ 
+ do {
+     write !, "Phone (617): ", phone, "=> " read newphone
+     set:(newphone = "") newphone = phone ; default
+     set newphone = $$validPhone^datent( newphone )
+    }
+ while newphone = 0
+ 
+ do {
+     write !, "DOB: ", $zdate(intdob, 2), "=> " read newdob
+     set:(newdob = "") newdob = $zdate(intdob, 2) ; default
+     set newintdob = $$validDOB^datent( newdob )
+    }
+ while newintdob = 0
+ 
+ write !!
+ }
+ 
+update(id) [rec, name, phone, intdob, 
+                 newname, newphone, newintdob]  ; update ^PersonD and ^PersonI
+ {
+ set newrec = newname _ "^" _ newphone _ "^" _ newintdob ; concatenate the data into a record
+ if rec = newrec {
+     write "...no changes made."
+     quit
+    }
+ tstart  ; start a transaction
+ set ^PersonD( id ) = newrec ; store the record
+ if newname '= name { ; kill old name and add new name to index
+     set ln = $piece(name, ",", 1), fn = $piece(name, ",", 2)
+     set nln = $piece(newname, ",", 1), nfn = $piece(newname, ",", 2)
+     kill ^PersonI("Name", ln, fn, id)
+     set ^PersonI("Name", nln, nfn, id) = ""
+    }
+ if newphone '= phone { ; kill old phone and add new phone to index
+     kill ^PersonI("Phone", phone)
+     set ^PersonI("Phone", newphone) = id
+    }
+ if newintdob '= intdob { ; kill old dob and add new dob to index
+     kill ^PersonI("DOB", intdob, id)
+     set ^PersonI("DOB", newintdob, id) = ""
+    }
+ tcommit  ; commit the transaction
+ write "...updated."
+ }
+ 
+display(id,style)       [name, phone, intdob]  ; given an id, get data and write it
+ {
+ do load( id )
+ if style = "line" {
+     write name, ?20, phone, ?35, $zdate(intdob, 2) }
+ else {
+     write # ; clear screen
+     do display^datent()
+    }
+ }
+ 
+load(id) [rec, name, phone, intdob]  ; load a person into local variables
+ {
+ set rec = ^PersonD( id )
+ set name = $piece(rec, "^", 1)
+ set phone = $piece(rec, "^", 2)
+ set intdob = $piece(rec, "^", 3)
+ }       
+ 
+NameFormat(name)  ; change user's entry into proper name format
+ ; SMITH,JOHN and smith,john -> Smith,John
+ ; if name is passed-by-reference, it will be changed
+ {
+ set ln = $piece(name, ",", 1), fn = $piece(name, ",", 2)
+ set ln = $$up( $extract(ln)) _ $$low( $extract(ln, 2, $length(ln)))
+ if fn = "" { ; return last name only
+     set name = ln
+     quit name
+    }
+ set fn = $$up( $extract(fn)) _ $$low( $extract(fn, 2, $length(fn)))
+ set name=ln _ "," _ fn ; return full name
+ quit name
+ }
+ 
+up(text)  ; translate text to upper case
+ { quit $translate(text, "abcdefghijklmnopqrstuvwxyz", "ABCDEFGHIJKLMNOPQRSTUVWXYZ") }
+ 
+low(text)  ; translate text to lower case
+ { quit $translate(text, "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz") }
+ 
+]]></Routine>
+
+
+<Routine name="lookup1" type="MAC" languagemode="0" timestamp="58807,43635"><![CDATA[
+lookup1 ; display an ordered list of matches
+ ; user can enter a valid date of birth
+ 
+main ; main section
+ ; start looping
+ for  {
+     do getsubmit()  ; let user submit a string for lookup
+     quit:(submit = "")
+    }
+ quit
+ 
+getsubmit() [submit] ; ask user what to search for, and take appropriate action    
+ {
+ read !, "Lookup: ", submit
+ quit:(submit = "")  ; user entered nothing
+ ; figure out what user entered
+ if (submit = "?") {  ; display help
+     do help()
+     quit
+    }
+ if $$validDOB^datent( submit ) {  ; use validDOB^datent to verify the DOB
+     write "...finding birthday"
+     do dob()
+     quit
+    }
+ }
+ 
+help()  ; display different types of lookups
+ { write !, "You can enter:", !?10, "* date of birth", !! }
+ 
+dob() [submit]  ; perform dob lookup
+ ; no partial matches
+ {
+ set intdob = $$validDOB^datent( submit )  ; convert dob
+ ; is the date of birth in the index?
+ if '$data( ^PersonI("DOB", intdob) ) {  ; determine if there are any matches
+     write "...no matches"
+     quit
+    }
+ set loopid = ""
+ ; loop through ids, and number them
+ for count = 1 : 1 {
+     set loopid = $order( ^PersonI("DOB", intdob, loopid) )
+     quit:(loopid = "")
+     write !, count, ") "
+     do display( loopid )
+    }
+ }
+ 
+display(id) ; given an id, get data and write it
+ {
+ set rec = ^PersonD( id )
+ set name = $piece(rec, "^", 1)
+ set phone = $piece(rec, "^", 2)
+ set intdob = $piece(rec, "^", 3)
+ write name, ?20, phone, ?35, $zdate(intdob, 2)
+ }
+]]></Routine>
+
+
+<Routine name="lookup2" type="MAC" languagemode="0" timestamp="58811,65326"><![CDATA[
+lookup2 ; display an ordered list of matches
+ ; user can enter full or partial name, full or partial phone, or a valid date
+ ; pick from a list of matches, and edit their choice
+ 
+main ; main section
+ ; start looping
+ for  {
+     do getsubmit() ; let user submit a string for lookup
+     quit:(submit = "")
+    }
+ quit
+ 
+getsubmit() [submit] ; ask user what to search for, and take appropriate action    
+ {
+ set id = 0
+ read !, "Lookup: ", submit
+ quit:(submit = "")  ; user entered nothing
+ ; figure out what user entered
+ if (submit = "?") { ; display help
+     do help()
+     quit
+    }
+ elseif submit?3n.1(1"-"3n.1(1"-"4n)) { ; allow full or partial phone numbers
+     write "...finding phone number"
+     do phone( .id ) quit:(id = 0)
+     do display(id, "table") ; display the chosen person
+    }
+ elseif $$NameFormat( .submit )?1u.l.1(1","1u.l) { ; verify the name
+     write "...finding name"
+     do name( .id ) quit:(id = 0)
+     do display(id, "table") ; display the chosen person
+    }
+ elseif $$validDOB^datent( submit ) { ; use validDOB^datent to verify the DOB
+     write "...finding birthday"
+     do dob( .id ) quit:(id = 0)
+     do display(id, "table") ; display the chosen person
+     quit
+    }
+ else { ; else it's an error
+     write ", name, or phone" }
+ }
+ 
+help()  ; display different types of lookups
+ {
+ write !, "You can enter:"
+ write !?10, "* full name: Smith,John", !?10, "* last name: Smith"
+ write !?10, "* partial name: Sm,J or Smith,J or Sm,John"
+ write !?10, "* phone number with area code: 617-621-0600"
+ write !?10, "* partial phone numbers: 617 or 617-621"
+ write !?10, "* date of birth", !!
+ }
+ 
+dob(id) [submit, list]  ; perform dob lookup
+ ; no partial matches
+ ; if user picks a name from the list, id is returned to the caller
+ {
+ kill list
+ set intdob = $$validDOB^datent( submit ) ; convert dob
+ ; is the date of birth in the index?
+ if '$data( ^PersonI("DOB", intdob) ) { ; determine if there are any matches
+     write "...no matches"
+     quit
+    }
+ set loopid = ""
+ ; loop through ids, and number them
+ for count = 1 : 1 {
+     set loopid = $order( ^PersonI("DOB", intdob, loopid) )
+     quit:(loopid = "")
+     set list( count ) = loopid
+     write !, count, ") "
+     do display(loopid, "line")
+    }
+ do select( .id )
+ }
+ 
+phone(id) [submit, list]  ; perform phone lookup
+ ; if user picks a name from the list, id is returned to the caller
+ {
+ kill list
+ set count = 0 ; assume no matches
+ set origph = submit
+ set:( origph?3n ) origph = origph _ "-" ; change to a string instead of a number
+ ; origph may be an exact match, so find preceding phone
+ set ph = $order( ^PersonI("Phone", origph), -1)
+ /* loop through phone numbers, and number them, quit as soon as phone doesn't match original
+    loopid holds the ONE id per phone number */
+ for count = 1 : 1 {
+     set ph = $order( ^PersonI("Phone", ph), 1, loopid)
+     quit:( $extract(ph, 1, $length(origph)) '= origph )
+     set list( count ) = loopid
+     write !, count, ") "
+     do display(loopid, "line")
+    }
+ if '$data( list ) { ; were there matches?
+     write "...no matches"
+     quit
+    }
+ do select( .id )
+ }
+ 
+name(id) [submit, list]  ; perform name lookup
+ ; if user picks a name from the list, id is returned to the caller
+ {
+ kill list
+ set count = 0 ; assume no matches
+ set origln = $piece(submit, ",", 1), origfn = $piece(submit, ",", 2)
+ ; origln may be an exact match, so find preceding last name
+ set ln = $order( ^PersonI("Name", origln), -1)
+ ; loop through last names, quit as soon as last name doesn't match original
+ for  {
+     set ln = $order( ^PersonI("Name", ln))
+     quit:($extract(ln, 1, $length(origln)) '= origln)
+     ; origfn may be "". Otherwise, it may be an exact match, so find preceding first name
+     if (origfn = "") { set fn = "" }
+     else { set fn = $order( ^PersonI("Name", ln, origfn), -1) }
+     ; loop through first names, quit as soon as first name doesn't match original, or is ""
+     for  {
+         set fn = $order( ^PersonI("Name", ln, fn))
+         quit:(($extract(fn, 1, $length(origfn)) '= origfn) || (fn = ""))
+         set loopid = ""
+         ; loop through ids
+         for  {
+             set loopid = $order( ^PersonI("Name", ln, fn, loopid))
+             quit:( loopid = "" )
+             set count = count + 1
+             set list( count ) = loopid
+             write !, count, ") "
+             do display(loopid, "line")
+            }
+        }
+     }
+ if '$data( list ) { ; were there matches?
+     write "...no matches"
+     quit
+    }
+ do select( .id )
+ }
+ 
+select(id) [list]  ; choose from the displayed items, and set up id
+ ; id is 0 if no choice is made, id is >0 when user makes a choice
+ {
+ for  {
+     read !!, "Choose by number: ", choice
+     quit:(choice = "")
+     set id = $get( list( choice ), 0)
+     quit:(id '= 0)  ; valid choice
+     write !,"Invalid choice"
+    }
+ }
+ 
+display(id, style)       [name, phone, intdob]  ; given an id, get data and write it
+ {
+ set rec = ^PersonD( id )
+ set name = $piece(rec, "^", 1)
+ set phone = $piece(rec, "^", 2)
+ set intdob = $piece(rec, "^", 3)
+ if style = "line" {
+     write name, ?20, phone, ?35, $zdate(intdob, 2) }
+ else {
+     write # ; clear screen
+     do display^datent()
+    }
+ }
+ 
+NameFormat(name) ; change user's entry into proper name format
+ ; SMITH,JOHN and smith,john -> Smith,John
+ ; if name is passed-by-reference, it will be changed
+ {
+ set ln = $piece(name, ",", 1), fn = $piece(name, ",", 2)
+ set ln = $$up($extract(ln)) _ $$low($extract(ln, 2, $length(ln)))
+ if fn = "" { ; return last name only
+     set name = ln
+     quit name
+    }
+ set fn = $$up($extract(fn)) _ $$low($extract(fn, 2, $length(fn)))
+ set name=ln _ "," _ fn ; return full name
+ quit name
+ }
+ 
+up(text)  ; translate text to upper case
+ { quit $translate(text, "abcdefghijklmnopqrstuvwxyz", "ABCDEFGHIJKLMNOPQRSTUVWXYZ") }
+ 
+low(text)  ; translate text to lower case
+ { quit $translate(text, "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz") }
+]]></Routine>
+
+
+<Routine name="lookupobj" type="MAC" languagemode="0" timestamp="61229,79105"><![CDATA[
+lookupobj ; display an ordered list of matches
+ ; user can enter full or partial name, full or partial phone, or a valid date
+ ; pick from a list of matches, and edit their choice
+ 
+main ; main section
+ ; start looping
+ for  {
+     do getsubmit() ; let user submit a string for lookup
+     quit:(submit = "")
+     do:(id '= 0) edit( id )
+    }
+ quit
+ 
+getsubmit() [submit, id] ; ask user what to search for, and take appropriate action    
+ {
+ set id = 0
+ read !, "Lookup: ", submit
+ quit:(submit = "")  ; user entered nothing
+ ; figure out what user entered
+ if (submit = "?") { ; display help
+     do help()
+     quit
+    }
+ elseif submit?3n.1(1"-"3n.1(1"-"4n)) { ; allow full or partial phone numbers
+     write "...finding phone number"
+     do phone( .id ) quit:(id = 0)
+     do display(id, "table") ; display the chosen person
+    }
+ elseif $$NameFormat( .submit )?1u.l.1(1","1u.l) { ; verify the name
+     write "...finding name"
+     do name( .id ) quit:(id = 0)
+     do display(id, "table") ; display the chosen person
+    }
+ elseif $$validDOB^datent( submit ) { ; use validDOB^datent to verify the DOB
+     write "...finding birthday"
+     do dob( .id ) quit:(id = 0)
+     do display(id, "table") ; display the chosen person
+     quit
+    }
+ else { ; else it's an error
+     write ", name, or phone" }
+ }
+ 
+help()  ; display different types of lookups
+ {
+ write !, "You can enter:"
+ write !?10, "* full name: Smith,John", !?10, "* last name: Smith"
+ write !?10, "* partial name: Sm,J or Smith,J or Sm,John"
+ write !?10, "* phone number with area code: 617-621-0600"
+ write !?10, "* partial phone numbers: 617 or 617-621"
+ write !?10, "* date of birth", !!
+ }
+ 
+dob(id) [submit, list]  ; perform dob lookup
+ ; no partial matches
+ ; if user picks a name from the list, id is returned to the caller
+ {
+ kill list
+ set intdob = $$validDOB^datent( submit ) ; convert dob
+ ; is the date of birth in the index?
+ if '$data( ^PersonI("DOB", intdob) ) { ; determine if there are any matches
+     write "...no matches"
+     quit
+    }
+ set loopid = ""
+ ; loop through ids, and number them
+ for count = 1 : 1 {
+     set loopid = $order( ^PersonI("DOB", intdob, loopid) )
+     quit:(loopid = "")
+     set list( count ) = loopid
+     write !, count, ") "
+     do display(loopid, "line")
+    }
+ do select( .id )
+ }
+ 
+phone(id) [submit, list]  ; perform phone lookup
+ ; if user picks a name from the list, id is returned to the caller
+ {
+ kill list
+ set count = 0 ; assume no matches
+ set origph = submit
+ set:( origph?3n ) origph = origph _ "-" ; change to a string instead of a number
+ ; origph may be an exact match, so find preceding phone
+ set ph = $order( ^PersonI("Phone", origph), -1)
+ /* loop through phone numbers, and number them, quit as soon as phone doesn't match original
+    loopid holds the ONE id per phone number */
+ for count = 1 : 1 {
+     set ph = $order( ^PersonI("Phone", ph))
+     set:( ph '= "") loopid = $order( ^PersonI("Phone", ph, ""))
+     quit:( $extract(ph, 1, $length(origph)) '= origph )
+     set list( count ) = loopid
+     write !, count, ") "
+     do display(loopid, "line")
+    }
+ if '$data( list ) { ; were there matches?
+     write "...no matches"
+     quit
+    }
+ do select( .id )
+ }
+ 
+name(id) [submit, list]  ; perform name lookup
+ ; if user picks a name from the list, id is returned to the caller
+ {
+ kill list
+ set count = 0 ; assume no matches
+ set origln = $piece(submit, ",", 1), origfn = $piece(submit, ",", 2)
+ ; origln may be an exact match, so find preceding last name
+ set ln = $order( ^PersonI("Name", origln), -1)
+ ; loop through last names, quit as soon as last name doesn't match original
+ for  {
+     set ln = $order( ^PersonI("Name", ln))
+     quit:($extract(ln, 1, $length(origln)) '= origln)
+     ; origfn may be "". Otherwise, it may be an exact match, so find preceding first name
+     if (origfn = "") { set fn = "" }
+     else { set fn = $order( ^PersonI("Name", ln, origfn), -1) }
+     ; loop through first names, quit as soon as first name doesn't match original, or is ""
+     for  {
+         set fn = $order( ^PersonI("Name", ln, fn))
+         quit:(($extract(fn, 1, $length(origfn)) '= origfn) || (fn = ""))
+         set loopid = ""
+         ; loop through ids
+         for  {
+             set loopid = $order( ^PersonI("Name", ln, fn, loopid))
+             quit:( loopid = "" )
+             set count = count + 1
+             set list( count ) = loopid
+             write !, count, ") "
+             do display(loopid, "line")
+            }
+        }
+     }
+ if '$data( list ) { ; were there matches?
+     write "...no matches"
+     quit
+    }
+ do select( .id )
+ }
+ 
+select(id) [list]  ; choose from the displayed items, and set up id
+ ; id is 0 if no choice is made, id is >0 when user makes a choice
+ {
+ for  {
+     read !!, "Choose by number: ", choice
+     quit:(choice = "")
+     set id = $get( list( choice ), 0)
+     quit:(id '= 0)  ; valid choice
+     write !,"Invalid choice"
+    }
+ }
+ 
+edit(id) ; allow user to choose, and edit their choice
+ {
+ for  {
+     read !, "Edit? (y/n): " ,yn
+     if yn '= "y" {
+         write "...no changes."
+         quit
+        }
+     ; try to lock the record
+     lock +^PersonD( id ):5
+     if $test { ; the lock was sucessful
+         quit  }
+     else {
+         write "...someone else is editing this person" }
+    }
+ quit:(yn '= "y")
+ do load( id )
+ do reprompt()
+ read !, "Store? (y/n): ", yn
+ if yn '= "y" {
+     write "...no changes."
+     lock -^PersonD( id ) ; unlock the record
+     quit
+    }
+ do update( id )
+ lock -^PersonD( id ) ; unlock the record
+ }
+ 
+reprompt() [name, phone, intdob, 
+                 newname, newphone, newintdob]  ; show current data and allow user to update it
+ {
+ do {
+     write !, "Name: ", name, "=> " read newname
+     set:(newname = "") newname = name ; default
+     set newname = $$validName^datent( newname )
+    }
+ while newname = 0
+ 
+ do {
+     write !, "Phone (617): ", phone, "=> " read newphone
+     set:(newphone = "") newphone = phone ; default
+     set newphone = $$validPhone^datent( newphone )
+    }
+ while newphone = 0
+ 
+ do {
+     write !, "DOB: ", $zdate(intdob, 2), "=> " read newdob
+     set:(newdob = "") newdob = $zdate(intdob, 2) ; default
+     set newintdob = $$validDOB^datent( newdob )
+    }
+ while newintdob = 0
+ 
+ write !!
+ }
+ 
+update(id) [newname, newphone, newintdob]  ; update ^PersonD and ^PersonI
+ {
+ set per = ##class(CosTutorial.Person).%OpenId(id)
+ set per.Name = newname
+ set per.Phone = newphone
+ set per.DOB = newintdob
+ do per.%Save()                  ; this updates indices too, all within a transaction!
+ set per = ""
+ write "...updated."
+ }
+ 
+display(id,style)       [name, phone, intdob]  ; given an id, get data and write it
+ {
+ do load( id )
+ if style = "line" {
+     write name, ?20, phone, ?35, $zdate(intdob, 2) }
+ else {
+     write # ; clear screen
+     do display^datent()
+    }
+ }
+ 
+load(id) [name, phone, intdob]  ; load a person into local variables
+ {
+ set per = ##class(CosTutorial.Person).%OpenId(id)
+ set name = per.Name
+ set phone = per.Phone
+ set intdob = per.DOB
+ set per = ""
+ }       
+ 
+NameFormat(name)  ; change user's entry into proper name format
+ ; SMITH,JOHN and smith,john -> Smith,John
+ ; if name is passed-by-reference, it will be changed
+ {
+ set ln = $piece(name, ",", 1), fn = $piece(name, ",", 2)
+ set ln = $$up( $extract(ln)) _ $$low( $extract(ln, 2, $length(ln)))
+ if fn = "" { ; return last name only
+     set name = ln
+     quit name
+    }
+ set fn = $$up( $extract(fn)) _ $$low( $extract(fn, 2, $length(fn)))
+ set name=ln _ "," _ fn ; return full name
+ quit name
+ }
+ 
+up(text)  ; translate text to upper case
+ { quit $translate(text, "abcdefghijklmnopqrstuvwxyz", "ABCDEFGHIJKLMNOPQRSTUVWXYZ") }
+ 
+low(text)  ; translate text to lower case
+ { quit $translate(text, "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz") }
+ 
+]]></Routine>
+
+
+<Routine name="loopend" type="MAC" languagemode="0" timestamp="58807,43692"><![CDATA[
+loopend ; loop through last names
+ read "Search for: ",sub
+ set ln = $order( ^PersonI("Name", sub), -1)
+ for {
+     set ln = $order( ^PersonI("Name", ln) )
+     quit:( $extract(ln, 1, $length(sub)) '= sub )
+     write !, ln
+ }
+     
+ 
+ 
+ 
+ 
+ 
+]]></Routine>
+
+
+<Routine name="loopstart" type="MAC" languagemode="0" timestamp="58807,43701"><![CDATA[
+loopstart ; loop through last names
+ read "Search for: ",sub
+ set ln = $order( ^PersonI("Name", sub), -1)
+ for {
+     set ln = $order( ^PersonI("Name", ln) )
+     quit:(ln = "")
+     write !, ln
+   }        
+ 
+ 
+ 
+ 
+ 
+]]></Routine>
+
+
+<Routine name="nameloop" type="MAC" languagemode="0" timestamp="58807,43713"><![CDATA[
+nameloop ; loop through the name index
+ set ln = ""
+ For  {
+     set ln = $order( ^PersonI("Name", ln) )
+     quit:(ln = "")
+     set fn = ""
+     for  {
+         set fn = $order( ^PersonI("Name", ln, fn) )
+         quit:(fn = "")
+         set id = ""
+         for  {
+             set id = $order( ^PersonI("Name", ln, fn, id) )
+             quit:(id = "")
+             set rec = ^PersonD(id)
+             write !, $piece( rec, "^", 1), ?15, $piece( rec, "^", 2),
+                 ?30, $zdate( $piece( rec, "^", 3) )
+            }
+        }
+    }
+ 
+ 
+ 
+]]></Routine>
+
+
+<Routine name="passbyref" type="MAC" languagemode="0" timestamp="58811,43307"><![CDATA[
+passbyref ; passing parameters by value and reference
+ ; pass by value
+ read !, "Enter a number: ", num
+ set dblnum = $$dblbyval( num )
+ write !, num, " doubled is: ", dblnum
+ 
+ ; num passed IN and OUT by reference
+ write !, num
+ do dblbyref1( .num )
+ write " doubled is: ", num
+ 
+ ; num passed IN by value
+ ; result passed OUT by reference
+ do dblbyref2(num, .result)
+ write !, num, " doubled again is: ", result
+ quit
+ 
+dblbyval(anynum) PUBLIC
+ { quit anynum * 2 }
+ 
+dblbyref1(anynum) PUBLIC
+ { set anynum = anynum * 2
+ quit }
+ 
+dblbyref2(anynum, double) PUBLIC
+ { set double = anynum * 2
+ quit }
+ 
+ 
+ 
+]]></Routine>
+
+
+<Routine name="postcond" type="MAC" languagemode="0" timestamp="58807,43731"><![CDATA[
+postcond ; postconditionals versus If construct
+ if name="" { quit  }                       ; you should replace this
+ quit:(name = "")                           ; with this postconditional
+ 
+ if name="" { write "...Exiting" quit  }    ; 2 commands after the if, so do this
+ write:name="" "...Exiting" quit:name=""    ; instead of this
+ 
+ 
+ 
+]]></Routine>
+
+
+<Routine name="procexample" type="MAC" languagemode="0" timestamp="58807,43739"><![CDATA[
+procexample ; examples of procedures
+ read !, "Enter a number: ", x
+ if x = 4  {do proc1()}   ; call a procedure
+ quit    ; end of the main routine
+ 
+proc1() ; a private procedure
+ {
+ write !, "setting a"  set a = 1
+ write !, "setting b"  set b = 2
+ write !, "setting c"  set c = 3
+ write !, "setting d"  set d = 4
+ }
+ 
+proc2(num) PUBLIC
+ ; a public procedure with a parameter
+ { write !, "my favorite number is ",num }
+ 
+ 
+]]></Routine>
+
+
+<Routine name="publicvarsexample" type="MAC" languagemode="0" timestamp="58807,43749"><![CDATA[
+publicvarsexample 
+ ; examples of public variables
+ ;
+ do proc1()   ; call a procedure
+ quit    ; end of the main routine
+ ;
+proc1() [a, b]
+ ; a private procedure
+ ; "c" and "d" are private variables
+ {
+ write !, "setting a"  set a = 1
+ write !, "setting b"  set b = 2
+ write !, "setting c"  set c = 3
+ set d = a + b + c
+ write !, "The sum is: ", d
+ }
+ 
+ 
+ 
+]]></Routine>
+
+
+<Routine name="root" type="MAC" languagemode="0" timestamp="59869,57449"><![CDATA[
+root ; root for my favorite team
+ read "Team: ", t
+ if ( t = "METS" ) {
+     write !, "Go METS!" }
+ else {
+     write !, "Boo ", t, "!" }
+ quit
+ 
+ 
+ 
+]]></Routine>
+
+
+<Routine name="simpleloop" type="MAC" languagemode="0" timestamp="58807,43799"><![CDATA[
+simpleloop ; loop through last names
+ set ln = ""
+ for  {
+     set ln = $order( ^PersonI("Name", ln) )
+     quit:(ln = "")
+     write !, ln
+    }
+     
+ 
+ 
+ 
+ 
+ 
+]]></Routine>
+
+
+<Routine name="survivor" type="MAC" languagemode="0" timestamp="58807,43832"><![CDATA[
+survivor ; celebrate or complain
+celebrate() PUBLIC
+ { Write !, "Yippee! I won!" }
+ 
+complain() PUBLIC
+ { write !, "Oh well, I lost." }
+                     
+                     
+]]></Routine>
+</Export>

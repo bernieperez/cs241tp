@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="21" zv="Cache for Windows (Intel) 2007.1 (Build 245)" ts="2006-10-30 11:34:52">
+<Class name="CSPTutorial.Contact">
+<ClassType>persistent</ClassType>
+<Language>basic</Language>
+<ProcedureBlock>1</ProcedureBlock>
+<Super>%Persistent,%Populate</Super>
+<TimeCreated>60138,42793.087391</TimeCreated>
+
+<Property name="Name">
+<Description>
+Represents a contact's name</Description>
+<Type>%String</Type>
+<Required>1</Required>
+<Parameter name="POPSPEC" value="Name()"/>
+<Parameter name="TRUNCATE" value="0"/>
+</Property>
+
+<Property name="PhoneNumbers">
+<Type>CSPTutorial.PhoneNumber</Type>
+<Cardinality>children</Cardinality>
+<Inverse>Contact</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<Property name="ContactType">
+<Description>
+Describes the nature of the contact: Personal or Business</Description>
+<Type>%String</Type>
+<Parameter name="TRUNCATE" value="0"/>
+<Parameter name="VALUELIST" value=",Business,Personal"/>
+</Property>
+
+<Query name="ByContactType">
+<Type>%SQLQuery</Type>
+<FormalSpec>type:%String</FormalSpec>
+<SqlQuery>SELECT Name FROM Contact
+ WHERE (ContactType = :type)</SqlQuery>
+</Query>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>^CSPTutorial.ContactD</DataLocation>
+<DefaultData>ContactDefaultData</DefaultData>
+<IdLocation>^CSPTutorial.ContactD</IdLocation>
+<IndexLocation>^CSPTutorial.ContactI</IndexLocation>
+<StreamLocation>^CSPTutorial.ContactS</StreamLocation>
+<Data name="ContactDefaultData">
+<Structure>listnode</Structure>
+<Subscript/>
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>ContactType</Value>
+</Value>
+<Value name="3">
+<Value>Name</Value>
+</Value>
+</Data>
+<Property name="ContactType">
+</Property>
+<Property name="Name">
+</Property>
+</Storage>
+</Class>
+
+
+<Class name="CSPTutorial.PhoneNumber">
+<ClassType>persistent</ClassType>
+<ProcedureBlock>1</ProcedureBlock>
+<Super>%Persistent,%Populate</Super>
+<TimeCreated>60138,42701.853782</TimeCreated>
+
+<Property name="Contact">
+<Type>CSPTutorial.Contact</Type>
+<Cardinality>parent</Cardinality>
+<Inverse>PhoneNumbers</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<Property name="Number">
+<Description>
+Represents a phone number</Description>
+<Type>%String</Type>
+<Parameter name="POPSPEC" value="USPhone()"/>
+<Parameter name="TRUNCATE" value="0"/>
+</Property>
+
+<Property name="PhoneNumberType">
+<Description>
+Represents the type of phone number, e.g., work, home, mobile, fax, etc.</Description>
+<Type>%String</Type>
+<Parameter name="TRUNCATE" value="0"/>
+<Parameter name="VALUELIST" value=",Business,Home,Mobile,Fax"/>
+</Property>
+
+<Query name="RetrieveByContactName">
+<Type>%SQLQuery</Type>
+<FormalSpec>name:%String</FormalSpec>
+<SqlQuery><![CDATA[SELECT %ID FROM PhoneNumber
+Where (Contact->Name)=:name
+order by PhoneNumberType]]></SqlQuery>
+</Query>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>{%%PARENT}("PhoneNumbers")</DataLocation>
+<DefaultData>PhoneNumberDefaultData</DefaultData>
+<IdLocation>^CSPTutorial.ContactC("PhoneNumbers")</IdLocation>
+<IndexLocation>^CSPTutorial.PhoneNumberI</IndexLocation>
+<StreamLocation>^CSPTutorial.PhoneNumberS</StreamLocation>
+<Data name="PhoneNumberDefaultData">
+<Structure>listnode</Structure>
+<Subscript/>
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>Number</Value>
+</Value>
+<Value name="3">
+<Value>PhoneNumberType</Value>
+</Value>
+</Data>
+<Property name="Contact">
+</Property>
+<Property name="Number">
+</Property>
+<Property name="PhoneNumberType">
+</Property>
+<Property name="childsub">
+</Property>
+</Storage>
+</Class>
+
+
+<CSP name="Error.CSP" application="/csp/user/" default="1"><![CDATA[
+<html>
+<head>
+
+<!-- Put your page Title here -->
+<title>	Cache Server Page </title>
+
+</head>
+
+<body>
+<h1>Error: Invalid Login</h1>
+</body>
+</html>
+]]></CSP>
+
+
+<CSP name="LogIn.CSP" application="/csp/user/" default="1"><![CDATA[
+<html>
+<head>
+
+<!-- Put your page Title here -->
+<title>	Cache Server Page </title>
+
+</head>
+
+<body>
+<form name="edit" method="post" action="StateTest.CSP">
+<p>User Name: <input type="text" name="txtUserName" value="#($Get(%session.Data("Usr",1)))#"></p>
+<p>Password: <input type="text" name="txtPassword" value="#($Get(%session.Data("Pwd",1)))#"></p>
+<p><input type="submit" name="btnSignIn" value="SignIn"></p>
+</form>
+</body>
+</html>
+]]></CSP>
+</Export>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="22" zv="Cache for Windows (Intel) 2007.2 (Build 250U)" ts="2007-06-12 16:11:20">
+<Class name="MVFILE.Services">
+<Description>
+MVFILE.Services</Description>
+<Language>mvbasic</Language>
+<ProcedureBlock>1</ProcedureBlock>
+<Super>%SOAP.WebService</Super>
+<TimeCreated>60775,51685.608258</TimeCreated>
+
+<Parameter name="SERVICENAME">
+<Description>
+Name of the WebService.</Description>
+<Default>Services</Default>
+</Parameter>
+
+<Parameter name="NAMESPACE">
+<Description>
+TODO: change this to actual SOAP namespace.
+SOAP Namespace for the WebService</Description>
+<Default>http://tempuri.org</Default>
+</Parameter>
+
+<Method name="Search">
+<Description>
+TODO: add arguments and implementation.
+Search</Description>
+<FormalSpec>ID:%String,ATTRNAME:%String,VNO:%String</FormalSpec>
+<ReturnType>%String</ReturnType>
+<WebMethod>1</WebMethod>
+<Implementation><![CDATA[
+	OPEN "DICT", "PERSON" ELSE RETURN "DICT Not Open"
+	READV ATTR.AMC FROM ATTRNAME,2
+	OPEN "PERSON" TO PERSFILE ELSE RETURN "File Not Open"
+	READV ATTR FROM PERSFILE,ID, ATTR.AMC
+	VM=CHAR(253)
+	VALUE = FIELD(ATTR,VM,VNO)
+	RETURN VALUE
+]]></Implementation>
+</Method>
+
+<Method name="Update">
+<FormalSpec>ID:%String,ATTRNAME:%String,VNO:%String,VALUE:%String</FormalSpec>
+<WebMethod>1</WebMethod>
+<Implementation><![CDATA[
+	OPEN "DICT","PERSON" ELSE STOP
+	READV ATTR.AMC FROM ATTRNAME,2 ELSE STOP
+	OPEN "PERSON" TO PERSFILE ELSE STOP
+	READ PERSON FROM PERSFILE,ID ELSE STOP
+	PERSON = REPLACE(PERSON,ATTR.AMC,VNO;VALUE)
+	WRITE PERSON ON PERSFILE, ID
+	RETURN
+]]></Implementation>
+</Method>
+</Class>
+</Export>

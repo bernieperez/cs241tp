@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="22" zv="Cache for Windows (Intel) 2007.2 (Build 248U)" ts="2007-05-22 11:14:59">
+<Document name="GETVALUE.mvb"><![CDATA[
+SUBROUTINE GETVALUE(ID,ATTRNAME,VNO,VALUE)
+OPEN "DICT", "PERSON"ELSE STOP
+READV ATTR.AMC FROM ATTRNAME,2 ELSE STOP
+OPEN "PERSON" TO PERSFILE ELSE STOP
+READV ATTR FROM PERSFILE,ID,ATTR.AMC ELSE STOP
+VM=CHAR(253)
+VALUE=FIELD(ATTR,VM,VNO)
+RETURN
+
+
+]]></Document>
+
+<Class name="MVExample.Search">
+<Language>mvbasic</Language>
+<Super>%RegisteredObject,%XML.Adaptor</Super>
+<TimeCreated>60747,43443.599644</TimeCreated>
+
+<Method name="GetValue">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>ID:%String,ATTRNAME:%String,VNO:%String</FormalSpec>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	CALL GETVALUE(ID,ATTRNAME,VNO,VALUE)
+	RETURN VALUE
+]]></Implementation>
+</Method>
+
+<Method name="SetValue">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>ID:%String,ATTRNAME:%String,VNO:%String,VALUE:%String</FormalSpec>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	CALL SETVALUE(ID,ATTRNAME,VNO,VALUE)
+	RETURN VALUE
+]]></Implementation>
+</Method>
+</Class>
+</Export>

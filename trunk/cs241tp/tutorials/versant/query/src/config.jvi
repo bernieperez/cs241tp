@@ -1,0 +1,22 @@
+p model.Author
+p model.Book
+p model.Comment
+p model.Merchandise
+p model.AbstractPerson
+p model.Person
+p model.Singer
+p model.Supplier
+p model.Singer
+p model.CD
+p model.Chapter
+p model.Song
+p model.Customer
+p model.Item
+p model.Order
+p model.Address
+p model.Broker
+p model.Dealer
+p model.Vehicle
+
+n **
+

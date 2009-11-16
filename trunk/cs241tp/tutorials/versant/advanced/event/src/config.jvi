@@ -1,0 +1,4 @@
+c model.StockQuote
+a StockTrader*
+a StockWatcher*
+n **

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="22" zv="Cache for Windows (Intel) 2007.2 (Build 250U)" ts="2007-05-23 15:00:17">
+<CSP name="Person.CSP" application="/csp/myaccount/" default="1"><![CDATA[
+<%@ PAGE LANGUAGE="mvBASIC" %>
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css"
+href="table_style.css" />
+<title>	Cache Server Page </title>
+
+</head>
+
+<body>
+<table align="center">
+<tr><th>Name</th><th>Age</th><th >Hair</th> <th>View Phones</th></tr>
+<caption>Person List</caption>
+
+</table>
+		
+</body>
+</html>
+]]></CSP>
+
+
+<CSP name="Phones.CSP" application="/csp/myaccount/" default="1"><![CDATA[
+<%@ PAGE LANGUAGE="mvBASIC" %>
+<html>
+<head>
+<link rel="stylesheet" type="text/css"
+href="table_style.css" />
+
+<!-- Put your page Title here -->
+<title>	Cache Server Page </title>
+
+</head>
+
+
+<body>
+<table align="center">
+<caption>Phone List</caption>
+<tr><th>Name</th><th>Phones</th> </tr>
+
+</table>
+</body>
+</html>
+]]></CSP>
+</Export>

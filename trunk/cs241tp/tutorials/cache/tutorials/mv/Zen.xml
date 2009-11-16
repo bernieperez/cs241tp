@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="22" zv="Cache for Windows (x86-32) 2008.1.1 (Build 579U)" ts="2008-10-10 16:31:12">
+<Class name="MVFILE.PersonModel">
+<Description>
+</Description>
+<Language>mvbasic</Language>
+<Super>%ZEN.DataModel.ObjectDataModel</Super>
+<TimeCreated>60795,41449.167556</TimeCreated>
+
+<Property name="ItemId">
+<Type>%String</Type>
+</Property>
+
+<Property name="Name">
+<Type>%String</Type>
+</Property>
+
+<Property name="Age">
+<Type>%String</Type>
+</Property>
+
+<Property name="Hair">
+<Type>%String</Type>
+</Property>
+
+<Property name="Phones">
+<Type>%String</Type>
+</Property>
+
+<Method name="%OnOpenSource">
+<FormalSpec>pID:%String,pConcurrency:%Integer=-1,*pSC:%Status</FormalSpec>
+<ReturnType>%RegisteredObject</ReturnType>
+<Implementation><![CDATA[
+ 
+Return "MVFILE.PERSON"->%OpenId(pID,pConcurrency,pSC)
+]]></Implementation>
+</Method>
+
+<Method name="%OnSaveSource">
+<FormalSpec>pSource:MVFILE.PERSON</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+tSC = pSource->%Save()
+IF ("%SYSTEM.Status"->IsOK(tSC))THEN  
+ @ME->%id = pSource->%Id()
+END
+Return tSC
+]]></Implementation>
+</Method>
+
+<Method name="%OnLoadModel">
+<FormalSpec>pSource:MVFILE.PERSON</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+@ME->ItemId = pSource->ItemId
+@ME->Name = pSource->NAME
+@ME->Hair = pSource->HAIR
+@ME->Age = pSource->AGE
+FOR I=1 TO pSource->PHONE->Count()
+  @ME->Phones = @ME->Phones:pSource->PHONE->GetAt(I):" "
+NEXT I 
+Return "%SYSTEM.Status"->OK()
+]]></Implementation>
+</Method>
+
+<Method name="%OnStoreModel">
+<FormalSpec>pSource:MVFILE.PERSON</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+ pSource->ItemId = @ME->ItemId  
+pSource->NAME = @ME->Name
+pSource->HAIR = @ME->Hair
+pSource->AGE = @ME->Age
+pSource->PHONE->Clear()
+FOR I=1 to DCOUNT(@ME->Phones," ")
+  pSource->PHONE->InsertAt(FIELD(@ME->Phones," ",I),I)
+NEXT I
+Return pSource->%Save()
+]]></Implementation>
+</Method>
+
+<Method name="%OnDeleteSource">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>pID:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[	Return "MVFILE.PERSON"->%DeleteId(pID)
+]]></Implementation>
+</Method>
+
+<Method name="%OnNewSource">
+<FormalSpec>*pSC:%Status</FormalSpec>
+<ReturnType>%RegisteredObject</ReturnType>
+<Implementation><![CDATA[
+
+	Return "MVFILE.PERSON"->%New()
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="MVFILE.PersonPage">
+<Description>
+Created using the page template: Default</Description>
+<Super>%ZEN.Component.page</Super>
+<TimeCreated>60779,55226.491062</TimeCreated>
+
+<Parameter name="APPLICATION">
+<Description>
+Class name of application this page belongs to.</Description>
+</Parameter>
+
+<Parameter name="PAGENAME">
+<Description>
+Displayed name of this page.</Description>
+<Default>PersonPage</Default>
+</Parameter>
+
+<Parameter name="DOMAIN">
+<Description>
+Domain used for localization.</Description>
+</Parameter>
+
+<XData name="Style">
+<Description>
+This Style block contains page-specific CSS style definitions.</Description>
+<Data><![CDATA[
+<style type="text/css">
+</style>
+]]></Data>
+</XData>
+
+<XData name="Contents">
+<Description>
+This XML block defines the contents of this page.</Description>
+<XMLNamespace>http://www.intersystems.com/zen</XMLNamespace>
+<Data><![CDATA[
+<page xmlns="http://www.intersystems.com/zen" title="Zen Persons">
+
+<dataController id="personData"  
+    modelClass="MVFILE.PersonModel" 
+    modelId=""
+/>
+
+<tablePane
+align="center"
+  width="900px"
+    id="personTable" 
+    tableName="MVFILE.PERSON"
+    maxRows="1000" 
+    pageSize="10" 
+    showRowNumbers="true" 
+    showZebra="true" 
+    useSnapshot="true"
+    caption="PERSON"
+    nowrap="false"
+    onselectrow ="zenPage.displayForm(zenThis);"
+    valueColumn="ID"
+
+>
+ <column colName="ID" width="20" />
+ <column header="ItemId" colName="ItemId" width="50" />
+   <column header="Name" width="175"  colName="NAME" filterType="text"/>
+   <column header="Hair" width="100" colName="HAIR"/>
+   <column header="Age" width="30"  colName="AGE"/>
+   <column header="Phone" width="100" colName="PHONE"/>
+</tablePane>
+
+
+<form id="personForm" 
+         controllerId="personData" 
+         layout="vertical"
+         cellStyle="padding: 2px; padding-left: 5px; padding-right: 5px;"
+         hidden="true"
+         align="center">
+  <text label="ItemId:" dataBinding="ItemId" id="ItemId" name="ItemId" size="15"/>       
+ <text label="Name:" dataBinding="Name" id="Name" name="Name" size="25"/>
+ <text label="Hair:" dataBinding="Hair" id="Hair" name="Hair" size="25"/>
+ <text label="Age:" dataBinding="Age" id="Age" name="Age" size="25"/>
+ <textarea label="Phones:" dataBinding="Phones" id="Phones" name="Phones"/>
+ <hgroup>
+ <button caption="Save" onclick="zenPage.savePerson();" />
+ <button caption="New" onclick="zenPage.createPerson();"/>
+ <button caption="Delete" onclick="zenPage.deletePerson();"/>
+ </hgroup>
+</form>
+
+</page>
+]]></Data>
+</XData>
+
+<Method name="savePerson">
+<Description>
+save contact model to database</Description>
+<Language>javascript</Language>
+<Implementation><![CDATA[
+  // validate and save form
+  var form = zenPage.getComponentById('personForm');
+  form.save();
+  var table=zenPage.getComponentById('personTable');
+  //refresh data in contact table
+  table.executeQuery();
+]]></Implementation>
+</Method>
+
+<Method name="deletePerson">
+<Language>javascript</Language>
+<Implementation><![CDATA[
+  var controller = zenPage.getComponentById('personData');
+  controller.deleteId(controller.getModelId());
+  var table = zenPage.getComponentById('personTable');
+   //refresh data in contact table
+  table.executeQuery(true);
+  controller.update();
+]]></Implementation>
+</Method>
+
+<Method name="createPerson">
+<Language>javascript</Language>
+<Implementation><![CDATA[
+   var controller = zenPage.getComponentById('personData');
+  controller.createNewObject();
+]]></Implementation>
+</Method>
+
+<Method name="displayForm">
+<FormalSpec>id</FormalSpec>
+<Language>javascript</Language>
+<Implementation><![CDATA[
+	//retrieve id of selected person
+	var table = this.getComponentById('personTable');
+	var id = table.getProperty('value');
+	
+	//set controller to selected person
+	var controller = zenPage.getComponentById('personData');
+    controller.setProperty('modelId',id);
+   
+   //display form 
+    var contactFormGroup=zenPage.getComponentById("personForm");
+  	contactFormGroup.setProperty('hidden',false);
+]]></Implementation>
+</Method>
+</Class>
+</Export>

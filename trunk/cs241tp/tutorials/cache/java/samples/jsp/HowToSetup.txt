@@ -1,0 +1,145 @@
+
+How to set up Cache taglib usage samples. 
+
+This document describes how to set up Cache taglib usage samples with
+Tomcat 4.1 and 4.0. It was tested with Tomcat 4.1.12 and 4.0.4. No
+other JSP engines has been tested yet. 
+
+You need the following components to set up JSP samples:
+
+ - CacheDB.jar from 5.1 branch
+
+ - Cache tag library definition file. Its path in source control:
+   //VSS/Main/Latest/Objects/Java/samples/jsp/WEB-INF/cache.tld
+
+ - Set of jsp sample files. They can be found in source control in
+   //VSS/Main/Latest/Objects/Java/samples/jsp directory.
+
+ - Optionally, sample of web.xml file. Its path in source control:
+   //VSS/Main/Latest/Objects/Java/samples/jsp/WEB-INF/web.xml
+
+Step 1. You need a servlet context for samples. You may use one of
+existing contexts or define a new one. If you are using unmodified
+Tomcat installation I recommend to define a new context. Contexts are
+defined in server.xml file, which can be found in Tomcat home
+directory (the directory where you unpacked Tomcat archive) in "conf"
+subdirectory.  You can add the following lines to server.xml file:
+
+        <Context path="/cache" 
+                 docBase="cache" 
+                 crossContext="true"
+                 debug="5" 
+                 reloadable="true" > 
+          <Logger className="org.apache.catalina.logger.FileLogger"
+                     prefix="localhost_cache_log." suffix=".txt"
+        	  timestamp="true"/>
+        </Context>
+
+Those lines should be added after last defined context and before
+closing tag for Host. I.e. the last line above should be 
+
+		</Context>
+
+(close the previous context) and the first line below should be 
+
+	   </Host>
+
+If you are using development environment with source control, you may
+set docBase to "w:/Java/samples/jsp". In this case you may skip steps
+2 and 3 of this document and go directly to step 4. Just make sure to
+fetch recursively the contents of
+//VSS/Main/Latest/Objects/Java/samples/jsp. You server.xml will then
+look like:
+
+        </Context>
+
+        <Context path="/cache" 
+                 docBase="w:/Java/samples/jsp" 
+                 crossContext="true"
+                 debug="5" 
+                 reloadable="true" > 
+          <Logger className="org.apache.catalina.logger.FileLogger"
+                     prefix="localhost_cache_log." suffix=".txt"
+        	  timestamp="true"/>
+        </Context>
+      </Host>
+
+    </Engine>
+
+  </Service>
+
+Step 2. You now need to set up directory for context. If you specified
+docBase without leading '/' or "x:/", like "cache", you need to create
+corresponding directory under Tomcat home webapps
+subdirectory. Normally, webapps contains at least "ROOT" and "examples"
+directories, so you adding "cache" to them. If you specified a fully
+qualified path to docBase, like "w:/Java/samples/jsp" you need to
+ensure that the specified directory exists. Context directory should
+be writable for Tomcat.
+
+Copy all *.jsp files to the context directory. 
+
+Then you need to create WEB-INF subdirectory inside your context
+directory. 
+
+Copy cache.tld file into the WEB-INF subdirectory inside your context.
+
+Step 3. You need to set up web.xml file for your context. You may
+either copy one which is included in samples or add a few lines to
+your existing file. Note that if you use any special servlet mappings
+or other tag libraries in addition to Cache, you will need to
+integrate web.xml files rather then copy one from samples. If you did
+not understand the previous statement then you are probably OK just
+copying the supplied file.
+
+The lines you need to add to your web.xml are:
+
+	<taglib>
+	  <taglib-uri>/cache</taglib-uri> 
+	  <taglib-location>/WEB-INF/cache.tld</taglib-location> 
+	</taglib>
+
+If you use other tag libraries they should be defined in a separate
+<taglib> element, e.g:
+
+    <taglib>
+        <taglib-uri>
+			http://jakarta.apache.org/tomcat/debug-taglib
+        </taglib-uri>
+        <taglib-location>
+           /WEB-INF/jsp/debug-taglib.tld
+        </taglib-location>
+    </taglib>
+
+	<taglib>
+	  <taglib-uri>/cache</taglib-uri> 
+	  <taglib-location>/WEB-INF/cache.tld</taglib-location> 
+	</taglib>
+
+
+Step 4. You need to place CacheDB.jar in Tomcat's classpath. There are
+several ways to do so. You can modify bin/setclasspath.bat to add the
+jar to Tomcat classpath, you can copy it to common/lib subdirectory in
+Tomcat home, or you can add it to lib directory under you context. If
+you have only one context which works with Cache, the latter is
+probably the most preferable way. To do so, create lib directory under
+WEB-INF directory of your context and copy CacheDB.jar there. You
+WEB-INF directory should contain at least the following:
+
+114 C% ls -R w:\Java\samples\jsp\WEB-INF
+w:\Java\samples\jsp\WEB-INF:
+cache.tld  lib/      web.xml  
+
+w:\Java\samples\jsp\WEB-INF/lib:
+CacheDB.jar
+
+Step 5. Now start up the tomcat and if you did not change any of its
+standard settings, got to the URL:
+
+http://localhost:8080/cache
+
+with your favorite browser.
+
+That is it.
+
+

@@ -1,0 +1,45 @@
+<project name="SetupExample" default="all" basedir=".">
+  <!-- set global properties for this build -->
+  <property environment="env"/>
+  <property file="common.properties"/>
+  <property name="build" value="./build"/>
+
+  <target name="all" depends="clean, init, compile_model, enhance"/>
+
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure -->
+    <mkdir dir="${build}"/>
+  </target>
+
+  <target name="clean">
+    <delete dir="${build}"/>
+  </target>
+
+  <target name="compile_model" depends="init">
+    <javac srcdir="./model" destdir="${build}"
+       includes="*.java" />
+  </target>
+
+  <target name="enhance" depends="compile_model">
+    <java classname="com.versant.Enhance" fork="yes" failonerror="yes">
+      <arg line="-config ./model/config.jvi -in ${build} -out ${build}"/>
+      <classpath>
+        <pathelement path="${build};${java.class.path}"/>
+        <pathelement path="${JCA_CLASSPATH}"/>
+      </classpath>
+    </java>
+  </target>
+  
+  <target name="setupdb">
+    <java classname="com.versant.DefineClass" fork="yes" failonerror="yes">
+      <arg line="-noprompt -db ${DB_NAME} model.Member model.Account"/>
+      <classpath>
+        <pathelement path="${build};${java.class.path}"/>
+        <pathelement path="${JCA_CLASSPATH}"/>
+      </classpath>
+    </java>
+  </target>
+
+</project>
