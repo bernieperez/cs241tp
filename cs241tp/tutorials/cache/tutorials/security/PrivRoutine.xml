@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="22" zv="Cache for Windows (x86-32) 2007.2 (Build 361U)" ts="2007-11-08 14:10:06">
+<Routine name="PrivRoutineExample" type="MAC" languagemode="0" timestamp="60936,39648"><![CDATA[
+PrivRoutineExample
+ 
+	write !, "Welcome to the Privileged App Routine"
+	write !, "User before: ", $USERNAME
+	write !, "Roles before: ", $ROLES
+	
+	Set status=$System.Security.AddRoles("MyPrivilegedRoutineApplication")
+	
+	write !, "User after: ", $USERNAME
+	write !, "Roles after: ", $ROLES
+	
+]]></Routine>
+</Export>

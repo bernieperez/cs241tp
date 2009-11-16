@@ -1,0 +1,1617 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>Cach&eacute; and Ensemble Maintenance Kit Release Notes</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<STYLE type="text/css">
+/* HTML StyleSheet for DocBook */
+/* Copyright (c) 2001-2009, InterSystems Corp. ALL RIGHTS RESERVED. */
+
+BODY                            {color: black;
+                                 background: white;
+                                 margin: 0px;
+                                 padding: 0px;
+                                 font-family: verdana,arial,helvetica,sans-serif;}
+
+BODY.Dialog                     {color: black;
+                                 background: silver;
+                                 font-family: Verdana,Arial,Helvetica,sans-serif;
+                                 margin: 10px;}
+
+DIV.centered                    {color: black;
+                                 text-align: center;
+                                 margin-bottom: 10px;
+                                 line-height: 125%;
+                                 margin-left: 20px;
+                                 margin-right: 80px;
+                                 font-family: Verdana,Arial,sans-serif;}
+
+HR                              {clear: both;}
+
+/* title bar */
+
+TABLE.Banner                    {background: #5290EC;
+                                 padding: 0px;
+                                 margin: 0px;
+                                 border-bottom: black solid 1px;}
+
+
+TABLE.ClassBanner               {color: white;
+                                 background: #5290EC;
+                                 font-family: Verdana,Arial,Helvetica,sans-serif;}
+
+TABLE.Label                     {color: black;
+                                 background: #CBE6EB;
+                                 font-size: 1em;
+                                 font-family: Verdana,Arial,Helvetica,sans-serif;}
+
+
+SPAN.SearchWord                 {color: black;
+                                 background: yellow;
+                                 font-weight: bold;}
+
+TR.Category                     {font-family: Verdana,Arial,Helvetica,sans-serif;
+                                 background: #CBE6EB;
+                                 color: black;}
+
+TD.BannerLogo                   {padding-left: 2px;}
+
+TR.TitleRow                     {background: blue;
+                                 color: white;}
+TR.DarkRow                      {background: #DDDDDD;}
+TR.LightRow                     {background: #FFFFFF;}
+
+TABLE.Paragraph                 {padding: 0px;
+                                 margin-bottom: 0px;}
+
+/* tables */
+
+TABLE.CALSTable                 {background: white;
+                                 font-family: Verdana,Arial,Helvetica,sans-serif;
+                                 border-color: black;
+                                 border-width: 1px;
+                                 border-style: solid;}
+
+TABLE.CALSTable TH              {background: #E0E0E0;
+                                 text-align: left;
+                                 font-family: Verdana,Arial,Helvetica,sans-serif;
+                                 border-bottom: black solid 1px;}
+
+TABLE.CALSTable TH.Frame-all    {border-right: black solid 1px;}
+
+TABLE.CALSTable TH.Frame-sides  {border-right: black solid 1px;}
+
+
+TABLE.CALSTable TD              {background: #F0F0FF;}
+
+TABLE.CALSTable TD.Frame-all    {border-bottom: gray solid 1px;
+                                 border-right: gray solid 1px;}
+
+TABLE.CALSTable TD.Frame-sides  {border-right: gray solid 1px;}
+
+TABLE.CALSTable TD.Frame-bottom {border-bottom: gray solid 1px;}
+
+TABLE.MainMenu                  {margin: 1px;
+                                 padding: 0px;
+                                 background: #BB0000;
+                                 border-color: black;
+                                 border-width: 1px;
+                                 border-style: solid;}
+
+DIV.Footer                      {color: black;
+                                 font-family: Verdana,Arial,sans-serif;}
+TD.Footer                       {font-size: 8pt;
+                                 font-family: Verdana,Arial,sans-serif;}
+
+DIV.BookTitle                   {color: yellow;
+                                 font-family: Verdana,Arial,sans-serif;
+                                 font-size: 0.8em;
+                                 margin-left: 5px;}
+
+DIV.BookTitle A                 {text-decoration: none;
+                                 color: yellow;}
+
+DIV.ChapterTitle                {color: white;
+                                 font-family: Verdana,Arial,sans-serif;
+                                 font-size: 1.6em;
+                                 margin-bottom: 1px;
+                                 margin-left: 5px;}
+
+SPAN.ChapterTitleNo             {color: white;
+                                 font-family: Verdana,Arial,sans-serif;
+                                 font-size: 0.7em;}
+
+DIV.para UL                     {margin-top: 0pt;
+                                 margin-bottom: 0pt;}
+DIV.para UL LI                  {margin-top: 0pt;
+                                 margin-bottom: 0pt;}
+
+UL                              {margin-bottom: 0px;}
+OL                              {margin-bottom: 0px;}
+
+LI.separate                     {margin-top: 10px; }
+
+/* block styles */
+
+DIV                             {}
+
+DIV.para                        {color: black;
+                                 margin-bottom: 10px;
+                                 line-height: 125%;
+                                 margin-left: 20px;
+                                 margin-right: 80px;
+                                 font-family: Verdana,Arial,sans-serif;}
+
+/* first para in chapter */
+
+DIV.para1                       {color: black;
+                                 margin-bottom: 10px;
+                                 line-height: 125%;
+                                 margin-left: 20px;
+                                 margin-right: 80px;
+                                 font-family: Verdana,Arial,sans-serif;}
+
+DIV.para1:first-letter          {color: black;
+                                 font-size: 1.6em;}
+
+
+DIV.formalparatitle             {color: blue;
+                                 margin-bottom: 10px;
+                                 line-height: 125%;
+                                 margin-right: 80px;
+                                 font-weight: bold;
+                                 font-family: Verdana,Arial,sans-serif;}
+
+DIV.literallayout               {background: white;
+                                 color: black;
+                                 border-color: white;
+                                 border-width: 1px;
+                                 border-style: solid;
+                                 font-family: courier,monospace;
+                                 font-size: 1.2em;
+                                 text-align: left;
+                                 margin-right: 0px;
+                                 line-height: 125%;
+                                 margin-left: 80px;
+                                 margin-right: 80px;
+                                 margin-bottom: 10px;
+                                 padding-left: 10px;
+                                 padding-top: 0px;
+                                 padding-bottom: 0px;}
+
+DIV.programlisting              {background: #E0E0E0;
+                                 color: black;
+                                 border-color: black;
+                                 border-width: 1px;
+                                 border-style: solid;
+                                 font-family: courier,monospace;
+                                 text-align: left;
+                                 margin-right: 0px;
+                                 font-size: 1.2em;
+                                 line-height: 125%;
+                                 margin-left: 20px;
+                                 margin-right: 80px;
+                                 margin-bottom: 10px;
+                                 padding-left: 10px;
+                                 padding-top: 0px;
+                                 padding-bottom: 0px;}
+
+
+DIV.sect1                       {color: blue;
+                                 border-color: black;
+                                 border-width: 1px;
+                                 border-style: none;
+                                 font-family: Verdana,Arial,sans-serif;
+                                 font-size: 1.8em;
+                                 font-weight: bold;
+                                 margin-right: 5px;
+                                 margin-top: 20px;
+                                 border-top: black solid 1px;
+                                 margin-bottom: 10px;
+                                 padding-left: 10px;
+                                 padding-top: 2px;
+                                 padding-bottom: 5px;}
+
+DIV.sect2                       {color: blue;
+                                 border-color: black;
+                                 border-width: 1px;
+                                 border-style: none;
+                                 font-family: Verdana,Arial,sans-serif;
+                                 font-size: 1.6em;
+                                 font-weight: bold;
+                                 margin-right: 80px;
+                                 margin-left: 20px;
+                                 margin-top: 10px;
+                                 margin-bottom: 10px;
+                                 padding-left: 0px;
+                                 padding-top: 2px;
+                                 padding-bottom: 2px;}
+
+DIV.sect3                       {color: blue;
+                                 font-family: Verdana,Arial,sans-serif;
+                                 font-size: 1.2em;
+                                 font-weight: bold;
+                                 margin-right: 80px;
+                                 margin-left: 20px;
+                                 margin-top: 5px;
+                                 margin-bottom: 5px;
+                                 padding-left: 0px;
+                                 padding-top: 2px;
+                                 padding-bottom: 2px;}
+
+DIV.sect4                       {color: black;
+                                 font-family: Verdana,Arial,sans-serif;
+                                 font-size: 1.0em;
+                                 font-weight: normal;
+                                 margin-right: 80px;
+                                 margin-left: 20px;
+                                 margin-top: 5px;
+                                 margin-bottom: 5px;
+                                 padding-left: 0px;
+                                 padding-top: 0px;
+                                 padding-bottom: 0px;}
+
+/* admonitions */
+
+SPAN.caution                    {color: red;
+                                 font-weight: bold;}
+
+DIV.caution                     {background: #FFDDFF;
+                                 color: black;
+                                 font-family: Verdana,Arial,sans-serif;
+                                 border-color: black;
+                                 border-width: 1px;
+                                 border-style: solid;
+                                 margin-right: 80px;
+                                 margin-left: 20px;
+                                 margin-bottom: 10px;
+                                 line-height: 125%;
+                                 padding: 3pt;}
+
+DIV.caution DIV.para            {margin-left: 0px;}
+
+SPAN.important                  {color: blue;
+                                 font-weight: bold;}
+
+DIV.important                   {background: #FFDDFF;
+                                 color: black;
+                                 font-family: Verdana,Arial,sans-serif;
+                                 border-color: black;
+                                 border-width: 1px;
+                                 border-style: solid;
+                                 margin-right: 80px;
+                                 margin-left: 20px;
+                                 margin-bottom: 10px;
+                                 line-height: 125%;
+                                 padding: 3pt;}
+
+DIV.important DIV.para          {margin-left: 0px;}
+
+SPAN.note                       {color: blue;
+                                 font-weight: bold;}
+
+SPAN.question                   {color: blue;
+                                 font-weight: bold;}
+SPAN.answer                     {color: blue;
+                                 font-weight: bold;}
+
+DIV.note                        {background: #FFDDFF;
+                                 color: black;
+                                 font-family: Verdana,Arial,sans-serif;
+                                 border-color: black;
+                                 border-width: 1px;
+                                 border-style: solid;
+                                 margin-right: 80px;
+                                 margin-left: 20px;
+                                 margin-bottom: 10px;
+                                 line-height: 125%;
+                                 padding: 3pt;}
+
+DIV.note DIV.para               {margin-left: 0px;}
+
+SPAN.tip                        {color: blue;
+                                 font-weight: bold;}
+
+DIV.tip                         {background: #FFDDFF;
+                                 color: black;
+                                 font-family: Verdana,Arial,sans-serif;
+                                 border-color: black;
+                                 border-width: 1px;
+                                 border-style: solid;
+                                 margin-right: 80px;
+                                 margin-left: 20px;
+                                 margin-bottom: 10px;
+                                 line-height: 125%;
+                                 padding: 3pt;}
+
+DIV.tip DIV.para                {margin-left: 0px;}
+
+SPAN.warning                    {color: red;
+                                 font-weight: bold;}
+
+DIV.warning                     {background: #FFDDFF;
+                                 color: black;
+                                 font-family: Verdana,Arial,sans-serif;
+                                 border-color: black;
+                                 border-width: 1px;
+                                 border-style: solid;
+                                 margin-right: 80px;
+                                 margin-left: 20px;
+                                 margin-bottom: 10px;
+                                 line-height: 125%;
+                                 padding: 3pt;}
+
+DIV.warning DIV.para            {margin-left: 0px;}
+
+/* tables */
+
+DIV.table_title                 {color: blue;
+                                 font-weight: bold;
+                                 margin-top: 20px;
+                                 margin-bottom: 10px;
+                                 margin-left: 80px;
+                                 margin-right: 80px;
+                                 text-align: center;}
+
+DIV.table                       {margin-left: 80px;
+                                 margin-right: 80px;
+                                 margin-bottom: 20px;}
+
+DIV.informaltable               {margin-left: 80px;
+                                 margin-right: 80px;
+                                 margin-bottom: 20px;}
+
+/* blocks-inside-of-tables styles */
+
+/* block styles */
+
+TD.block                        {margin-left: 0px;}
+
+TD.block OL                     {margin-left: 0px;}
+
+TD.block LI                     {color: black;
+                                 margin-left: 0px;
+                                 margin-right: 0px;}
+
+TD.block DIV.para               {color: red;
+                                 margin-bottom: 10px;
+                                 line-height: 125%;
+                                 margin-left: 0px;
+                                 margin-right: 0px;
+                                 font-family: Verdana,Arial,sans-serif;}
+
+TD.block LI DIV.para            {margin-left: 20px;}
+
+TD.block DIV.literallayout      {background: white;
+                                 color: black;
+                                 border-color: white;
+                                 border-width: 1px;
+                                 border-style: solid;
+                                 font-family: courier,monospace;
+                                 text-align: left;
+                                 margin-right: 0px;
+                                 line-height: 125%;
+                                 margin-left: 0px;
+                                 margin-right: 0px;
+                                 margin-bottom: 10px;
+                                 padding-left: 10px;
+                                 padding-top: 0px;
+                                 padding-bottom: 0px;}
+
+TD.block DIV.programlisting     {background: #E0E0E0;
+                                 color: black;
+                                 border-color: black;
+                                 border-width: 1px;
+                                 border-style: solid;
+                                 font-family: courier,monospace;
+                                 text-align: left;
+                                 margin-right: 0px;
+                                 line-height: 125%;
+                                 margin-left: 0px;
+                                 margin-right: 0px;
+                                 margin-bottom: 10px;
+                                 padding-left: 10px;
+                                 padding-top: 0px;
+                                 padding-bottom: 0px;}
+
+.menuItem                       {border-right: black 1px solid;
+                                 border-top: black 1px solid;
+                                 padding-left: 20px;
+                                 font-size: 8pt;
+                                 border-left: black 1px solid;
+                                 width: 100px;
+                                 color: black;
+                                 border-bottom: black 1px solid;
+                                 font-family: sans-serif;
+                                 background-color: menu}
+
+.highlightitem                  {padding-left: 20px;
+                                 font-size: 8pt;
+                                 width: 100px;
+                                 color: white;
+                                 font-family: sans-serif;
+                                 background-color: highlight}
+
+DIV.UNRESOLVED			{color: red;
+                                 text-align: center;
+                                 margin-bottom: 10px;
+                                 line-height: 125%;
+                                 margin-left: 20px;
+                                 margin-right: 80px;
+                                 font-family:
+                                 Verdana,Arial,sans-serif;
+				 font-size: 1.8em;
+				 font-weight: bold;
+				 background: #E0E0E0;
+                                 border-color: red;
+                                 border-width: 3px;
+                                 border-style: solid;
+                                 margin-bottom: 10px;
+                                 padding-left: 10px;
+                                 padding-top: 10px;
+                                 padding-bottom: 10px;}
+</STYLE>
+</HEAD>
+<BODY>
+<TABLE class=ClassBanner cellSpacing=0 cellPadding=0 width="100%" border=0>
+<TBODY>
+<TR>
+<TD align=right>
+<TR>
+<TD align=left>
+<DIV CLASS="BookTitle" align=left><br>InterSystems Documentation&nbsp;
+</DIV>
+</TD>
+</TR>
+<TR>
+<TD align=right>
+<DIV CLASS="ChapterTitle" align=left>Cach&eacute; and Ensemble Maintenance Kit Release Notes<BR><BR></DIV>
+</TD>
+</TR>
+</TBODY>
+</TABLE>
+<BR>
+<DIV CLASS="para">
+This document provides a list of the changes between versions
+2009.1.1
+and
+2009.1.2
+for Cach&eacute; and Ensemble.
+</DIV>
+<DIV CLASS="para">
+The release notes are available in the <EM>\Docs</EM> subdirectory of
+your installation.
+<P>
+Late-breaking information about this kit can be found
+in: <EM>\relnotes\readme.1st</EM>
+</DIV>
+<DIV CLASS="para">
+Topics in this document include:
+<P>
+<UL>
+<LI><A href="#Overview">General Announcements</A></LI>
+<LI><A href="#RestrictedRights">Restricted Rights Legend</A></LI>
+<LI><A href="#Alerts">InterSystems News, Alerts, and Advisories</A></LI>
+<LI><A href="#Online_Documentation">Online Documentation</A></LI>
+<LI><A href="#Changedesc">Description of a Change Report</A></LI>
+<LI><A href="#Criticaldesc">Change Reports for This Maintenance Kit</A></LI>
+</UL>
+</DIV>
+<BR CLEAR="ALL">
+
+<!-- ------------------------------------------------------------ -->
+
+<A name="Overview"></A>
+
+<DIV CLASS="sect1">General Announcements</DIV>
+<DIV CLASS="sect2">Upgrading From Prior Released Versions</DIV>
+<DIV CLASS="para">Customers running on any prior released version of
+Cach&eacute; may upgrade to this version of Cach&eacute; during
+installation. When upgrading across multiple versions, intermediate
+upgrade steps may be necessary depending on the inter-release
+compatibility requirements. The release notes for the intervening
+releases will contain that information.
+<P>
+After each upgrade step, the following conditions apply:
+<DIV>
+<P>
+<UL>
+<LI CLASS="separate">
+Routines
+<P>
+Compiled routines are upward-compatible from version to version and do
+not need to be recompiled unless specified otherwise in the upgrade
+notes for a specific release.
+<P>
+Because most versions contain improvements in the routine compiler, in
+the generated code, and/or efficiencies in the runtime support,
+customers may decide to recompile their routines to take advantage of
+new features and meta-routine information. Those customers whose
+actions implicitly access this underlying information must recompile
+their routines. An example of such access is source-level debugging on
+version X of code compiled on version earlier than X.
+<P>
+If you recompile routines, they should be recompiled after classes are
+recompiled.</LI>
+<P>
+<LI CLASS="Separate">Classes, SQL, Projections, Proxy Classes
+<P>
+InterSystems requires that all classes be recompiled after an
+upgrade. The following command will upgrade and compile the class
+dictionaries in every namespace:
+<PRE>
+    Do $SYSTEM.OBJ.CompileAllNamespaces("u")
+</PRE>
+<P>
+You must regenerate any proxy classes used in the upgraded instance by
+following the instructions in the appropriate guide(s) in
+the Cach&eacute; Language Bindings set. You must also purge any cached
+queries in any upgraded namespace by issuing the command:
+<PRE>
+    Do $SYSTEM.SQL.Purge()
+</PRE>
+<P>
+in that namespace.</LI>
+<P>
+<LI CLASS="separate">Exported XML
+<P>
+Unless specified in the upgrade notes for a specific release, exported
+XML files can be imported into later releases.
+<P>
+The reverse is NOT true. Later versions could be using new features
+not present in earlier versions, and could have a different class
+dictionary version number which alters how these classes are stored
+internally that can not be undone when importing to a previous
+version.</LI>
+<P>
+<LI CLASS="separate">
+Debugging
+<P>
+InterSystems also recommends recompiling routines and classes for
+applications under development. This synchronizes the debugger with
+the expected format of the compiled code.</LI>
+</UL>
+
+<DIV CLASS="sect2">Upgrading ECP Configurations</DIV>
+<DIV CLASS="para">The following guidelines apply to the process of
+upgrading ECP configurations:</DIV>
+
+<UL>
+<LI CLASS="saparate">Unless explicitly noted for a particular version,
+the protocol used to communicate among ECP systems is fully compatible
+across versions.</LI>
+<P>
+<LI CLASS="separate">For ECP configurations consisting of stateless,
+independent database and application servers, an ECP configuration may
+be updated incrementally, system by system.
+<P>
+The
+application servers should be upgraded to the new version first.  Once
+all application servers have been upgraded, the database servers can
+be serially upgraded.</LI>
+</UL>
+<DIV CLASS="para">If your database or application servers hold local
+transaction information until the transactions are completed, or if
+you have questions or concerns about how to upgrade your ECP
+configuration, please
+contact <A HREF="http://www.intersystems.com/support/">InterSystems
+Worldwide Customer Support</A>.
+</DIV>
+<BR CLEAR="ALL">
+
+<!-- ------------------------------------------------------------ -->
+
+<A name="RestrictedRights"></A>
+
+<DIV CLASS="sect1">Restricted Rights Legend</DIV>
+<DIV CLASS="para">
+Use, duplication, or disclosure by the Government is subject to
+restrictions as set forth in subparagraph (c)(1)(ii) of the Rights in
+Technical Data and Computer Software clause at DFARS 252.227-7013.
+</DIV>
+<DIV CLASS="centered">
+InterSystems Corporation
+<BR>
+One Memorial Drive
+<BR>
+Cambridge, MA 02142
+</DIV>
+<DIV CLASS="para">
+When acquired by the Government, commercial computer software and
+related documentation bearing this legend are subject to the
+following:
+<P>
+<OL TYPE="A">
+<LI class="separate">Title to and ownership of the software and documentation shall
+remain with the Contractor.</LI>
+<LI class="separate">Use of the software and documentation shall be limited to the
+facility for which it is acquired.</LI>
+<LI class="separate">The Government shall not provide or otherwise make available the
+software or documentation, or any portion thereof, in any form, to any
+third party without the prior written approval of the Contractor.
+Third parties do not include prime contractors, subcontractors and
+agents of the Government who have the Government's permission to use
+the licensed software and documentation at the facility, and who have
+agreed to use the licensed software and documentation only in
+accordance with these restrictions.  This provision does not limit the
+right of the Government to use software, documentation, or information
+therein, which the Government has or may obtain without
+restrictions.</LI>
+<LI class="separate">The Government shall have the right to use the computer software
+and documentation with the computer for which it is acquired at any
+other facility to which that computer may be transferred; to use the
+computer software and documentation with a backup computer when the
+primary computer is inoperative; to copy computer programs for
+safekeeping (archives) or backup purposes; and to modify the software
+and documentation or combine it with other software.  Provided that
+the unmodified portions shall remain subject to these restrictions.</LI>
+</OL>
+</DIV>
+<DIV CLASS="centered">
+END OF LEGEND
+</DIV>
+<BR CLEAR="ALL">
+
+<!-- ------------------------------------------------------------ -->
+
+<A name="Alerts"></A>
+
+<DIV CLASS="sect1">InterSystems News, Alerts and Advisories</DIV>
+<DIV CLASS="para">
+From time to time, InterSystems publishes items of immediate
+importance to
+users of our software.  These include
+alerts, mission critical issues, important updates, fixes, and release
+announcements.
+<P>
+The most current list can be obtained from the
+<A href="http://www.intersystems.com/support/cflash/index.html">InterSystems Website</A>.
+<P>
+Users should check this list periodically to obtain the latest information on
+issues that may have an effect on the operation of their site.
+</DIV>
+<BR CLEAR="ALL">
+
+<!-- ------------------------------------------------------------ -->
+
+<A name="Online_Documentation"></A>
+
+<DIV CLASS="sect1">Online Documentation</DIV>
+<DIV CLASS="para">
+As a convenience to our users, InterSystems provides
+online access to documentation for recent product versions at the
+<A href="http://www.intersystems.com">InterSystems Website</A>.
+From the home page, choose the <B>Support & Education</B> tab, then
+choose the <B>Support</B> menu item for the product you are interested
+in, for example, <B>Cach&eacute; Support</B>.
+Links to the available documentation can be found on the support page
+for each product.
+</DIV>
+<BR CLEAR="ALL">
+
+<!-- ------------------------------------------------------------ -->
+
+<DIV CLASS="sect1"><a name="Changedesc"></a>Description of a Change Report</div>
+<DIV CLASS="para">To help you assess the impact of this maintenance kit on your
+applications, the remaining topics in this document describe each
+modification in detail.
+</DIV>
+<DIV CLASS="para">
+If you need assistance evaluating the effect on your application(s),
+system(s), or related plans, please contact the
+InterSystems Worldwide Support Center:
+<P>
+<UL>
+<LI>Phone:&nbsp;&nbsp;+1&nbsp;&nbsp;617&nbsp;&nbsp;621-0700</LI>
+<LI>Fax:&nbsp;&nbsp;+1&nbsp;&nbsp;617&nbsp;&nbsp;734-9391</LI>
+<LI>Email:&nbsp;&nbsp;support@intersystems.com</LI>
+</UL>
+</DIV>
+<BR CLEAR="ALL">
+
+<!-- ------------------------------------------------------------ -->
+
+<DIV CLASS="sect1"><A name="Criticaldesc">Change Reports for This Maintenance Kit</A></DIV>
+
+<UL>
+<LI>CSP.Gateway
+<UL>
+<LI><A HREF="#CMT762_CMT763">Build universal bundles for the x86-64 Mac OS X platform</A></LI>
+</UL>
+</LI>
+<LI>Ensemble
+<UL>
+<LI><A HREF="#MC986">Restore transaction level in user error traps</A></LI>
+<LI><A HREF="#TAP874">Fix SQL queries used in MessageHeader Purge() when KeepIntegrity = true</A></LI>
+</UL>
+</LI>
+<LI>Ensemble.Adapter
+<UL>
+<LI><A HREF="#TAP842">Account for long key subscripts that may contain Unicode in SQL Adapter cache tables</A></LI>
+<LI><A HREF="#TAP882">Fix SQL adapter Large Object issues</A></LI>
+<LI><A HREF="#TAP892">Fix SQL Adapter ExecuteProcedure with both OutputParam and Result Snapshot nullifies Snapshot list</A></LI>
+</UL>
+</LI>
+<LI>Ensemble.DTL
+<UL>
+<LI><A HREF="#DDP030">Don't modify %session.AppTimeout for Ensemble SVG in Studio</A></LI>
+</UL>
+</LI>
+<LI>Installation.Windows
+<UL>
+<LI><A HREF="#ALE1809">Correct name for Cach&eacute; startup shortcut created on non-English systems</A></LI>
+</UL>
+</LI>
+<LI>Languages
+<UL>
+<LI><A HREF="#SJ2588_SJ2589_SJ2590">Fix a problem in assembly language optimization on Intel x86 platforms with addition</A></LI>
+</UL>
+</LI>
+<LI>Networking.ECP
+<UL>
+<LI><A HREF="#GK713">Fixed an ECP hang</A></LI>
+</UL>
+</LI>
+<LI>Object.C++
+<UL>
+<LI><A HREF="#IYB607">C++ binding, mark all zobjval client nodes as valid after the zobjval client value gets updated from the server</A></LI>
+</UL>
+</LI>
+<LI>Object.DotNet
+<UL>
+<LI><A HREF="#IYB610_IYB611">CacheProvider, don't use Shadow in Open() methods of generated VB code</A></LI>
+<LI><A HREF="#IYB612">Dotnet_generator: report compiler errors when generating an assembly</A></LI>
+</UL>
+</LI>
+<LI>Object.Java
+<UL>
+<LI><A HREF="#MAB836">Fix deadlock in collections for Full Java Binding</A></LI>
+</UL>
+</LI>
+<LI>Object.LanguageBindings
+<UL>
+<LI><A HREF="#DMC688">ObjectiveCache: More precise conversion of NSDecimalNumber to d_decimal</A></LI>
+</UL>
+</LI>
+<LI>Object.Library
+<UL>
+<LI><A HREF="#MIT927">Fix normalization code for %currency and %Decimal</A></LI>
+</UL>
+</LI>
+<LI>Object.XML
+<UL>
+<LI><A HREF="#JN781">Correct workaround of Virtual Memory Deallocation on HP Itanium</A></LI>
+</UL>
+</LI>
+<LI>SQL.GateWay
+<UL>
+<LI><A HREF="#MIT933">Honor delimited id setting for linked tables in joins</A></LI>
+</UL>
+</LI>
+<LI>SQL.Server
+<UL>
+<LI><A HREF="#DPV3481">SQL:  Correct problem that did not allow {%row} to resolve properly</A></LI>
+</UL>
+</LI>
+<LI>SQL.SQLFiler/TableCompiler
+<UL>
+<LI><A HREF="#DPV3473">SQL Filer:  Perform immediate unlock of shared lock acquired on foreign key referenced row after this row has been filed</A></LI>
+</UL>
+</LI>
+<LI>Studio
+<UL>
+<LI><A HREF="#ALE1806">Set blank username/password for Studio server connection in minimal security install</A></LI>
+<LI><A HREF="#MC988">Fix memory leak caused by stringlist.cpp</A></LI>
+</UL>
+</LI>
+<LI>System
+<UL>
+<LI><A HREF="#JLC1321">Fix hang in terminal read when pasting a UTF-8 string</A></LI>
+<LI><A HREF="#JLC1323">Identify Mac OS X with 64-bit kernel in cplatname</A></LI>
+<LI><A HREF="#JLC1324">Redirect standard file descriptors to /dev/null in $zf(-2)</A></LI>
+<LI><A HREF="#JO2274">Release retained gbuf in use cmd before we issue any system calls</A></LI>
+<LI><A HREF="#SML1165">Namespace re-activation protection</A></LI>
+<LI><A HREF="#SOH120">Fix loop bound in LocToUTC, $ZU(193,xxx,1)</A></LI>
+<LI><A HREF="#SJ2577">Fix core dump with $zu(70,4,"")</A></LI>
+</UL>
+</LI>
+<LI>System.Cluster Specific
+<UL>
+<LI><A HREF="#RJW1738">Cluster resource, ISCCres2003.dll, not working on 64 bit Windows clusters</A></LI>
+</UL>
+</LI>
+<LI>System.I/O
+<UL>
+<LI><A HREF="#HYY1485">Fix stream READs on a device opened with compression/decompression enabled (/GZIP)</A></LI>
+<LI><A HREF="#RFD477">Fix check for OPEN pipe device on OpenVMS</A></LI>
+</UL>
+</LI>
+<LI>System.Monitoring
+<UL>
+<LI><A HREF="#RFD471">Fix Cach&eacute; Diagnostic Report for HP-UX</A></LI>
+</UL>
+</LI>
+<LI>System.Shadowing
+<UL>
+<LI><A HREF="#HYY1486">Write shadow copy of journal file in RAW mode on OpenVMS</A></LI>
+</UL>
+</LI>
+<LI>Utilities
+<UL>
+<LI><A HREF="#STC1668">Delete mappings when deleting a namespace</A></LI>
+<LI><A HREF="#STC1669">Fix COMM port handling with new config classes</A></LI>
+<LI><A HREF="#STC1670">Allow IP address to be used as server name</A></LI>
+<LI><A HREF="#STC1672">Don't fail installation if we can't update the CPF file</A></LI>
+<LI><A HREF="#STC1678">Allow null device name for DDP</A></LI>
+</UL>
+</LI>
+<LI>Utilities.Configuration
+<UL>
+<LI><A HREF="#SML1161">Fix SLM mapping when user defined mapping override system default mapping</A></LI>
+<LI><A HREF="#SML1164">Fix mapping got &lt;UNDEFINED;gt; error when index needs to be re-aligned</A></LI>
+</UL>
+</LI>
+</UL>
+
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 71071, 71279 -->
+<A NAME="CMT762_CMT763"></A>
+<DIV CLASS="sect3">Category: CSP.Gateway</DIV>
+<DIV CLASS="sect3">Platforms: Macintosh</DIV>
+<DIV CLASS="sect3">DevKey: CMT762, CMT763</DIV>
+<DIV CLASS="sect3">Summary: Build universal bundles for the x86-64 Mac OS X platform</DIV>
+<BR>
+<!-- Documentation: 0 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change modifies the compiler/link settings such that universal
+bundles will be built for the x86-64 Mac OS X platform. 
+The previous settings prevented the Management Portal from working
+properly on 64-bit systems.
+</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 71010 -->
+<A NAME="MC986"></A>
+<DIV CLASS="sect3">Category: Ensemble</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: MC986</DIV>
+<DIV CLASS="sect3">Summary: Restore transaction level in user error traps</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change restores the transaction level in user
+error traps.
+<P>
+When application code errs with a transaction level &gt; 0,
+Cach&eacute; does a TROLLBACK in
+the error trap. Otherwise, the transaction level will never go down to
+0 and this will cause inconsistencies in processing afterwards.
+<P>
+This change added TROLLBACK for the user callback in Business
+Services, Processes and Operations.
+</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 71054 -->
+<A NAME="TAP874"></A>
+<DIV CLASS="sect3">Category: Ensemble</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: TAP874</DIV>
+<DIV CLASS="sect3">Summary: Fix SQL queries used in MessageHeader Purge() when KeepIntegrity = true</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change fixes the SQL queries used in the
+Ens.MessageHeader Purge() method when that method is called with the
+argument KeepIntegrity = 1.  Because of a subtle SQL syntax problem
+the previous form of the query did not correctly identify rows to
+purge that should be purged.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 69539 -->
+<A NAME="TAP842"></A>
+<DIV CLASS="sect3">Category: Ensemble.Adapter</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: TAP842</DIV>
+<DIV CLASS="sect3">Summary: Account for long key subscripts that may contain Unicode in SQL Adapter cache tables</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change improves the previous truncation algorithm
+used for turning query strings into cache table keys. It now uses a
+shorter truncation limit in order to avoid &lt;SUBSCRIPT&gt; errors
+even when the allowed subscript length is halved due to the text
+containing Unicode characters.
+<P>
+This change also fixes three other places where similar cache table subscripts are 
+used.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 71630 -->
+<A NAME="TAP882"></A>
+<DIV CLASS="sect3">Category: Ensemble.Adapter</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: TAP882</DIV>
+<DIV CLASS="sect3">Summary: Fix SQL adapter Large Object issues</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change fixes three issues with SQL Large Object
+support:
+<P>
+<UL>
+<LI CLASS="separate">Large Object detection was not recognizing
+certain SQL Server types properly.</LI>
+<LI>JDBC calls to the removeLOB() cleanup function were missing an
+argument and therefore failing.</LI>
+<LI> The Large Object byte position appendage to the field ID in
+GetData/GetDataW() was not being tested properly, causing a failure to
+fetch all field data.</LI>
+</UL>
+<P>
+This change also adds Java type definitions to EnsSQLTypes.inc and
+adds new methods each to EnsLib.SQL.GatewayConnection and
+EnsLib.SQL.Snapshot:
+<P>
+<UL>
+<LI CLASS="separate">GetColumnSQLType - Returns the SQLtype integer of column 'pColumn'
+in the result set.</LI>
+<LI CLASS="separate">GetColumnIsLOB - Returns whether column 'pColumn'
+is a LOB (Stream) column.</LI>
+<LI CLASS="separate">GetColumnIsBinary - Returns whether column
+'pColumn' contains binary data.</LI>
+</UL>
+</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 71799 -->
+<A NAME="TAP892"></A>
+<DIV CLASS="sect3">Category: Ensemble.Adapter</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: TAP892</DIV>
+<DIV CLASS="sect3">Summary: Fix SQL Adapter ExecuteProcedure with both OutputParam and Result Snapshot nullifies Snapshot list</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change fixes a bug that causes the SQL Adapter
+to eliminate some or all output result snapshots generated from a
+stored procedure call if the SP also had any scalar output
+parameters.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 71706 -->
+<A NAME="DDP030"></A>
+<DIV CLASS="sect3">Category: Ensemble.DTL</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: DDP030</DIV>
+<DIV CLASS="sect3">Summary: Don't modify %session.AppTimeout for Ensemble SVG in Studio</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This changes forces Ensemble to respect the default
+CSP application timeout when opening DTL in Studio. Previously,
+this was overridden to be set to "never", which caused CSP session
+licenses to be held in perpetuity; only manual intervention or an
+Ensemble restart would release the licenses.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 71432 -->
+<A NAME="ALE1809"></A>
+<DIV CLASS="sect3">Category: Installation.Windows</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: ALE1809</DIV>
+<DIV CLASS="sect3">Summary: Correct name for Cach&eacute; startup shortcut created on non-English systems</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">In version 2009.1, a  Windows installation on non-English systems
+would create a Start Menu shortcut in the Startup folder as "Launcher"
+rather than &lt;INSTANCENAME&gt;. As a result, after a reboot users could
+have two cubes for the same instance, if it was an upgrade from 2008.2
+or below. This change
+fixes the problem.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 71517, 71518, 71521 -->
+<A NAME="SJ2588_SJ2589_SJ2590"></A>
+<DIV CLASS="sect3">Category: Languages</DIV>
+<DIV CLASS="sect3">Platforms: x86</DIV>
+<DIV CLASS="sect3">DevKey: SJ2588, SJ2589, SJ2590</DIV>
+<DIV CLASS="sect3">Summary: Fix a problem in assembly language optimization on Intel x86 platforms with addition</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change corrects a problem when adding two large
+numbers.  If each number has 19 digits, and each has 
+a single digit after the decimal point, and the sum will not
+fit in a 64-bit signed number, the application can get a &lt;SYSTEM&gt; or
+other error when trying to save or use the result.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 69554 -->
+<A NAME="GK713"></A>
+<DIV CLASS="sect3">Category: Networking.ECP</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: GK713</DIV>
+<DIV CLASS="sect3">Summary: Fixed an ECP hang</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change corrects an issue where, in rare
+conditions, ECP daemons might be out of sync and search for locally
+cached blocks.  This caused an unexpected delay in responding to
+various requests.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70589 -->
+<A NAME="IYB607"></A>
+<DIV CLASS="sect3">Category: Object.C++</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: IYB607</DIV>
+<DIV CLASS="sect3">Summary: C++ binding, mark all zobjval client nodes as valid after the zobjval client value gets updated from the server</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">
+Sometimes, when processing a client request, the server did not send
+cache updates for properties that were modified on the client.  Thus
+resulted in excessive calls to the server instead of getting the value
+from the cache.
+<P>
+This change forces the client to assume that after a
+roundtrip to the server the client cache must be valid, even if the
+server didn't send any updates. As a result, the client should not send
+extra messages to the server.
+</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70905, 71030 -->
+<A NAME="IYB610_IYB611"></A>
+<DIV CLASS="sect3">Category: Object.DotNet</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: IYB610, IYB611</DIV>
+<DIV CLASS="sect3">Summary: CacheProvider, don't use Shadow in Open() methods of generated VB code</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">
+VisualBasic and C# have slightly different rules regarding how methods
+are shadowed and/or overloaded.  This change adjusts for the
+differences in the two languages thus removing VisualBasic compiler errors. 
+</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 71035 -->
+<A NAME="IYB612"></A>
+<DIV CLASS="sect3">Category: Object.DotNet</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: IYB612</DIV>
+<DIV CLASS="sect3">Summary: Dotnet_generator: report compiler errors when generating an assembly</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">
+Prior to this change, the .NET code generator did not report compiler errors
+when generating an assembly; it always reported a successful completion even
+when an assembly was not generated. With this change, any errors or
+warnings that
+occur
+are reported back to the user.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 71425 -->
+<A NAME="MAB836"></A>
+<DIV CLASS="sect3">Category: Object.Java</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: MAB836</DIV>
+<DIV CLASS="sect3">Summary: Fix deadlock in collections for Full Java Binding</DIV>
+<BR>
+<!-- Documentation: 0 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change corrects a problem where connection
+pooling by multiple Java applications accessing the same Cach&eacute;
+data could result in a deadlock.
+</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70942 -->
+<A NAME="DMC688"></A>
+<DIV CLASS="sect3">Category: Object.LanguageBindings</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: DMC688</DIV>
+<DIV CLASS="sect3">Summary: ObjectiveCache: More precise conversion of NSDecimalNumber to d_decimal</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This correction resolves an issue where large
+integer values were not being properly converted from NSNumbers into
+d_decimal.
+</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70709 -->
+<A NAME="MIT927"></A>
+<DIV CLASS="sect3">Category: Object.Library</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: MIT927</DIV>
+<DIV CLASS="sect3">Summary: Fix normalization code for %currency and %Decimal</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">In some cases $DOUBLE values could be stored in
+these datatypes.  With this change, the proper datatype is used.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70981 -->
+<A NAME="JN781"></A>
+<DIV CLASS="sect3">Category: Object.XML</DIV>
+<DIV CLASS="sect3">Platforms: HP-UX</DIV>
+<DIV CLASS="sect3">DevKey: JN781</DIV>
+<DIV CLASS="sect3">Summary: Correct workaround of Virtual Memory Deallocation on HP Itanium</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">On HP-UX Itanium, virtual memory was not being
+deallocated correctly. This became apparent when using
+%XML.Adaptor::XmlExportToString().  This change corrects the
+deallocation issues.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 71498 -->
+<A NAME="MIT933"></A>
+<DIV CLASS="sect3">Category: SQL.GateWay</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: MIT933</DIV>
+<DIV CLASS="sect3">Summary: Honor delimited id setting for linked tables in joins</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">The bug was fixed that the delimited ids setting was
+not honored in joins.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70984 -->
+<A NAME="DPV3481"></A>
+<DIV CLASS="sect3">Category: SQL.Server</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: DPV3481</DIV>
+<DIV CLASS="sect3">Summary: SQL:  Correct problem that did not allow {%row} to resolve properly</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">A problem has been corrected where the use
+of {%row} in %CacheSQLStorage definitions would cause a class compiler
+failure.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70631 -->
+<A NAME="DPV3473"></A>
+<DIV CLASS="sect3">Category: SQL.SQLFiler/TableCompiler</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: DPV3473</DIV>
+<DIV CLASS="sect3">Summary: SQL Filer:  Perform immediate unlock of shared lock acquired on foreign key referenced row after this row has been filed</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">When inserting or updating a row into a table that
+has a foreign key, Cach&eacute; acquires a lock on the referenced row that
+is released when the transaction ends. This
+lock is required to check the referential integrity of the foreign key
+constraint and ensure the row still exists from the time the lock is
+acquired until the time this row is inserted or updated.
+<P>
+If there are many rows
+inserted or updated in a single transaction and many foreign keys on
+the table, this could hold many locks in the lock table.
+<P>
+With this change, Cach&eacute; will no longer hold the lock for the duration
+of the transaction, but will release the lock after the row has been
+inserted or updated.  By this time the system has ensured referential
+integrity and the row in the referenced table cannot be updated or
+deleted during the course of this transaction because the referential
+action on the foreign key constraint will prevent the update or
+delete on the referenced table from occurring.
+</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 71333 -->
+<A NAME="ALE1806"></A>
+<DIV CLASS="sect3">Category: Studio</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: ALE1806</DIV>
+<DIV CLASS="sect3">Summary: Set blank username/password for Studio server connection in minimal security install</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">With this change, Windows installation will set the username and
+password to blanks when a minimal security setting is used to install a
+product.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 71046 -->
+<A NAME="MC988"></A>
+<DIV CLASS="sect3">Category: Studio</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: MC988</DIV>
+<DIV CLASS="sect3">Summary: Fix memory leak caused by stringlist.cpp</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change corrects a memory leak that occurred
+under certain uses of $LISTBUILD, $LISTGET and $LISTGETNEXT.
+</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 71249 -->
+<A NAME="JLC1321"></A>
+<DIV CLASS="sect3">Category: System</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: JLC1321</DIV>
+<DIV CLASS="sect3">Summary: Fix hang in terminal read when pasting a UTF-8 string</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change corrects a problem that could cause a
+process to hang when trying to read text pasted into the input stream
+that uses a multi-byte encoding such as UTF-8 or JIS.
+</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 71472 -->
+<A NAME="JLC1323"></A>
+<DIV CLASS="sect3">Category: System</DIV>
+<DIV CLASS="sect3">Platforms: Macintosh</DIV>
+<DIV CLASS="sect3">DevKey: JLC1323</DIV>
+<DIV CLASS="sect3">Summary: Identify Mac OS X with 64-bit kernel in cplatname</DIV>
+<BR>
+<!-- Documentation: 0 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change allows Cach&eacute; to properly
+recognize when it is running on the MAC OS 10.6 ("Snow Leopard") kernel.
+</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 71544 -->
+<A NAME="JLC1324"></A>
+<DIV CLASS="sect3">Category: System</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: JLC1324</DIV>
+<DIV CLASS="sect3">Summary: Redirect standard file descriptors to /dev/null in $zf(-2)</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">External programs started with $zf(-2,&lt;path&gt;)
+on Unix platforms now run with the standard file descriptors 0, 1 and
+2 redirected to /dev/null. Previously these three descriptors were
+closed before starting the program.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70236 -->
+<A NAME="JO2274"></A>
+<DIV CLASS="sect3">Category: System</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: JO2274</DIV>
+<DIV CLASS="sect3">Summary: Release retained gbuf in use cmd before we issue any system calls</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This correction resolves a defect where a process could get
+blocked in a USE command by the operating system and cause
+Cach&eacute; to
+hang if it had retained ownership of a global buffer.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 71570 -->
+<A NAME="SML1165"></A>
+<DIV CLASS="sect3">Category: System</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: SML1165</DIV>
+<DIV CLASS="sect3">Summary: Namespace re-activation protection</DIV>
+<BR>
+<!-- Documentation: 0 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change fixes a possible &lt;NAMESPACE&gt; or
+&lt;DIRECTORY&gt; error that could occur while 
+the system is re-activating the namespace
+table while a namespace is edited.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 68900 -->
+<A NAME="SOH120"></A>
+<DIV CLASS="sect3">Category: System</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: SOH120</DIV>
+<DIV CLASS="sect3">Summary: Fix loop bound in LocToUTC, $ZU(193,xxx,1)</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">$ZUTIL(193,x,1) converts a date  X to UTC.  If X
+represents the first day of the year, where (year mod 4)=1, the result
+might be incorrect.  This bug has been fixed.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 69627 -->
+<A NAME="SJ2577"></A>
+<DIV CLASS="sect3">Category: System</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: SJ2577</DIV>
+<DIV CLASS="sect3">Summary: Fix core dump with $zu(70,4,"")</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change fixes a problem where a core dump can
+occur when running the INTEGRIT utility.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 71206 -->
+<A NAME="RJW1738"></A>
+<DIV CLASS="sect3">Category: System.Cluster Specific</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: RJW1738</DIV>
+<DIV CLASS="sect3">Summary: Cluster resource, ISCCres2003.dll, not working on 64 bit Windows clusters</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">A problem has been corrected that could cause the
+Cach&eacute; cluster resource to fail. 
+<P>
+The symptom is that the cluster
+manager would become unresponsive and the Cach&eacute; cluster resource will
+not work.  This problem has been seen on 64-bit Windows, but may
+also occur on 32-bit Windows clusters.
+</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 71379 -->
+<A NAME="HYY1485"></A>
+<DIV CLASS="sect3">Category: System.I/O</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: HYY1485</DIV>
+<DIV CLASS="sect3">Summary: Fix stream READs on a device opened with compression/decompression enabled (/GZIP)</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This correction addresses an issue that could cause READs on a
+device opened with /GZIP (i.e., with stream compression/decompression
+enabled) to fail to read data. The problem is most prominent when the
+READ length is 32767, the default for stream READS without
+terminators or length specifier.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70974 -->
+<A NAME="RFD477"></A>
+<DIV CLASS="sect3">Category: System.I/O</DIV>
+<DIV CLASS="sect3">Platforms: OpenVMS</DIV>
+<DIV CLASS="sect3">DevKey: RFD477</DIV>
+<DIV CLASS="sect3">Summary: Fix check for OPEN pipe device on OpenVMS</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">Trying to OPEN a TCP device with the letter "Q" in
+the hostname was failing with an &lt;UNIMPLEMENTED&gt; error. This was
+due to a faulty check for a "pipe" on OpenVMS.  It has now been corrected.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 70769 -->
+<A NAME="RFD471"></A>
+<DIV CLASS="sect3">Category: System.Monitoring</DIV>
+<DIV CLASS="sect3">Platforms: HP-UX</DIV>
+<DIV CLASS="sect3">DevKey: RFD471</DIV>
+<DIV CLASS="sect3">Summary: Fix Cach&eacute; Diagnostic Report for HP-UX</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">The Cach&eacute; Diagnostic Report was using an unsupported
+option for the process list on HP-UX.  This has been corrected.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 71415 -->
+<A NAME="HYY1486"></A>
+<DIV CLASS="sect3">Category: System.Shadowing</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: HYY1486</DIV>
+<DIV CLASS="sect3">Summary: Write shadow copy of journal file in RAW mode on OpenVMS</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change corrects an issue that could cause a shadow server
+to produce corrupted copies of source journal files on OpenVMS if process
+default I/O table is not RAW (for example, the I/O table is EUC in locale 'jpuw').
+<P>
+The problem is believed to be present in all supported Cach&eacute; releases.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 71435 -->
+<A NAME="STC1668"></A>
+<DIV CLASS="sect3">Category: Utilities</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: STC1668</DIV>
+<DIV CLASS="sect3">Summary: Delete mappings when deleting a namespace</DIV>
+<BR>
+<!-- Documentation: 0 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">When a namespace is now deleted, all the cached
+mappings for it are also deleted. Previously, when the same name
+mapping was re-added, the cached mappings would be applied to the
+namespace.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 71439 -->
+<A NAME="STC1669"></A>
+<DIV CLASS="sect3">Category: Utilities</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: STC1669</DIV>
+<DIV CLASS="sect3">Summary: Fix COMM port handling with new config classes</DIV>
+<BR>
+<!-- Documentation: 0 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">With this change, the comm port server process now start and will
+handle comm port logins. Previously, the comm port server process would
+not start.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 71441 -->
+<A NAME="STC1670"></A>
+<DIV CLASS="sect3">Category: Utilities</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: STC1670</DIV>
+<DIV CLASS="sect3">Summary: Allow IP address to be used as server name</DIV>
+<BR>
+<!-- Documentation: 0 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">When upgrading to 2009.1, if an ECP server name was
+defined to be an IP address of the form n.n.n.n (for example,
+127.0.0.1, the loopback address), the installation would fail during
+the conversion of the CPF file. This has been fixed.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 71451 -->
+<A NAME="STC1672"></A>
+<DIV CLASS="sect3">Category: Utilities</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: STC1672</DIV>
+<DIV CLASS="sect3">Summary: Don't fail installation if we can't update the CPF file</DIV>
+<BR>
+<!-- Documentation: 0 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">Previously, if there was a problem converting the
+CPF file during an upgrade, the installation would fail.  The only
+recourse was to correct the CPF file, then re-install. 
+<P>
+Now the installation will complete, allowing administrators to fix the
+CPF file, and restart to be upgraded to the new version.</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 71849 -->
+<A NAME="STC1678"></A>
+<DIV CLASS="sect3">Category: Utilities</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: STC1678</DIV>
+<DIV CLASS="sect3">Summary: Allow null device name for DDP</DIV>
+<BR>
+<!-- Documentation: 0 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This fixes a problem where the system would not
+start if it was using DDP, and the DDP device name was left as null
+(which means use the default device.)</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 71102 -->
+<A NAME="SML1161"></A>
+<DIV CLASS="sect3">Category: Utilities.Configuration</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: SML1161</DIV>
+<DIV CLASS="sect3">Summary: Fix SLM mapping when user defined mapping override system default mapping</DIV>
+<BR>
+<!-- Documentation: 1 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change fixes an issue where 
+a user overrode a system default mapping such as %Z* routine
+resulting in the wrong destination for the %Z* mapping.
+</DIV>
+
+<HR SIZE=0>
+<!-- breakbreak -->
+<!-- ID: 71442 -->
+<A NAME="SML1164"></A>
+<DIV CLASS="sect3">Category: Utilities.Configuration</DIV>
+<DIV CLASS="sect3">Platforms: All</DIV>
+<DIV CLASS="sect3">DevKey: SML1164</DIV>
+<DIV CLASS="sect3">Summary: Fix mapping got &lt;UNDEFINED&gt; error when index needs to be re-aligned</DIV>
+<BR>
+<!-- Documentation: 0 -->
+<DIV CLASS="sect3">Description:</DIV>
+<BR>
+<DIV CLASS="para">This change fixes a situation where 
+an attempt to activate mappings resulted in an
+&lt;UNDEFINED&gt; error.  This occurred when there were many mapping entries and
+internally Cach&eacute; attempted to re-index the mapping array.</DIV>
+
+<HR SIZE=0>
+
+<BR CLEAR="ALL">
+
+
+
+</BODY></HTML>

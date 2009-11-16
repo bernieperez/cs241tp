@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<ejb-jar
+ xmlns="http://java.sun.com/xml/ns/j2ee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/ejb-jar_2_1.xsd"
+  version="2.1">
+  <enterprise-beans>
+      <session id="Session_1">
+      <ejb-name>SMP_Bank</ejb-name>
+      <home>smp.stateful.BankHome</home>
+      <remote>smp.stateful.Bank</remote>
+      <ejb-class>smp.stateful.BankBean</ejb-class>
+      <session-type>Stateful</session-type>
+      <transaction-type>Bean</transaction-type>
+      <env-entry>
+        <env-entry-name>connection-factory-jndi-name</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>eis/vodJNDILocal</env-entry-value>
+      </env-entry>
+  </session>
+  </enterprise-beans>
+  <assembly-descriptor>
+    <container-transaction>
+      <method>
+        <ejb-name>SMP_Bank</ejb-name>
+        <method-intf>Remote</method-intf>
+        <method-name>*</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+  </assembly-descriptor>
+</ejb-jar>

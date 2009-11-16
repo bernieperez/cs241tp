@@ -1,0 +1,251 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>Neutral Java Binding</title>
+</head>
+<body>
+<h2 style="text-align: center;">Neutral Java Binding</h2>
+<br>
+Neutral Java Binding is a way to use object model created inside
+Cach&eacute; with a third party DBMS via Light Java Binding. The main
+requirement to such a
+DBMS is that it supports JDBC.
+Its primary purpose is to make Java Binding applications compatible
+with other databases.<br>
+<br>
+At the current stage we support the following DBMS: Oracle, MySQL 5.0.1
+(MySQL 4.x does not support views) and
+Microsoft
+SQL Server 2000 (I have not tested it with SQL Server 2005). We can
+handle in
+Neutral Java Binding:
+<ul>
+    <li> Simple data creation, retrieval and update.</li>
+    <li> Embedded Objects (Sample.Address).</li>
+    <li> Collections represented as serial objects (FavouriteColors)</li>
+    <li> Simple inheritance (Employee -&gt; Person).</li>
+    <li> One to Many relationships (Company &#8211; Employee)</li>
+    <li> Bulk load by query.</li>
+</ul>
+&nbsp;
+We can not yet handle:
+<ul>
+    <li> Complex inheritance.</li>
+    <li> Parent &#8211; Child relationships.</li>
+    <li>Big classes, i.e. classes metadata for which is longer than 32K
+        in serialized form.
+    </li>
+    <li>Modifications of schema. Reexporting database schema causes
+        dropping all data tables. <br>
+    </li>
+    <li> What else?</li>
+</ul>
+Though testing of this functionality is in its embryonic stage, I
+verified that I can:<br>
+<ol>
+    <li> Export Sample.* tables and corresponding metadata.</li>
+    <li> Using Dynamic Java Binding on both sides (Cache and third party
+        DBMS) to
+        load content of Sample.* tables from Cache to MySQL.
+    </li>
+    <li> Run the following Java samples against MS SQL Server and MySQL:
+        <ul>
+            <li> CJTest1</li>
+            <li> CJTest2</li>
+            <li> CJTest3</li>
+            <li> CJTest4</li>
+            <li> CJTest5</li>
+            <li> CJTest8</li>
+            <li> CJTest9</li>
+        </ul>
+    </li>
+</ol>
+I did not run the following tests that are relational anyway:
+<ul>
+    <li> CJTest6.</li>
+    <li> CJTest7.</li>
+</ul>
+All samples succeeded with Oracle and MS SQL Server. The following
+sample failed
+with MySQL:
+<ul>
+    <li> CJTest9: Actually the first part has succeeded and the second
+        has failed. As far as I can understand it has failed because MySQL
+        returned wrong result for a fairly simple JOIN query.
+    </li>
+</ul>
+The new directory is created under //dev/latest/modules/java:
+//dev/latest/modules/java/thirdparty. It has its own samples
+subdirectory that contains modified Java Binding samples. I added a
+letter "m" to the end of the sample class to distinguish them from
+Cache Java Binding samples. Thus CJTest5 for neutral Java binding is
+called CJTest5m. Do not ask why "m", I do not know myself. Probably
+because I first tried them with MySQL. And I will ask back why CJTest?<br>
+
+<h3 style="text-align: center;">Running samples.</h3>
+<br>
+
+<h4>Running samples with MySQL.</h4>
+To run samples with My SQL one need to do the following:<br>
+<ol>
+    <li>In MySQL console create databases Sample and CACHE_SYS: <br>
+        <ul style="font-weight: bold;">
+            <li><span style="font-style: italic;">mysql&gt; create database
+CACHE_SYS;</span></li>
+            <li><span style="font-style: italic;">mysql&gt; create database
+SAMPLE;</span></li>
+        </ul>
+    </li>
+    <li>Export metadata for tables Sample.Person and Sample.Employee:<br>
+    <span style="font-style: italic; font-weight: bold;">java
+njb.Exporter&nbsp; -type mysql&nbsp; -target Person_Base Person Employee</span>
+    </li>
+    <li>Export metadata for table Sample.Company:<br>
+    <span style="font-weight: bold; font-style: italic;">java
+njb.Exporter&nbsp; -type mysql&nbsp; -target Company_Base Company</span>
+    </li>
+    <li>Export data for table Sample.Company: <br>
+    <span style="font-weight: bold; font-style: italic;">java
+njb.CLoader&nbsp; -type mysql&nbsp; -class Sample.Company -id all</span>
+    </li>
+    <li>Export data for table Sample.Person (data for Sample.Employee
+        will
+        be exported automatically because Employee is a subtable of Person):
+        <br>
+    <span style="font-weight: bold; font-style: italic;">java
+njb.CLoader&nbsp; -type mysql&nbsp; -class Sample.Person&nbsp; -id
+all&nbsp; -max 200</span></li>
+    <li>Run samples:<br>
+        <ul style="font-weight: bold; font-style: italic;">
+            <li> java njb.CJTest1m&nbsp; -type mysql</li>
+            <li> java njb.CJTest2m&nbsp; -type mysql</li>
+            <li> java njb.CJTest3m&nbsp; -type mysql</li>
+            <li> java njb.CJTest4m&nbsp; -type mysql</li>
+            <li> java njb.CJTest5m&nbsp; -type mysql</li>
+            <li> java njb.CJTest8m&nbsp; -type mysql</li>
+            <li> java njb.CJTest9m&nbsp; -type mysql&nbsp; -query y%</li>
+        </ul>
+    </li>
+</ol>
+<br>
+<h4>Running samples with MS SQL Server.</h4>
+It is similar to running samples with MySQL but replacing type <span
+    style="font-weight: bold; font-style: italic;">mysql </span>with <span
+    style="font-weight: bold; font-style: italic;">mssql</span>. To run
+samples with MS SQL Server one need to do the following:<br>
+<ol>
+    <li>In MS SQL Server create database <span
+        style="font-weight: bold; font-style: italic;">SAMPLES</span>.
+    </li>
+    <li>In MS SQL Server create user <span
+        style="font-style: italic; font-weight: bold;">"_SYSTEM"</span> with
+        password <span
+        style="font-weight: bold; font-style: italic;">"SYS" </span>and
+        set <span style="font-weight: bold; font-style: italic;">SAMPLES </span>as
+        its default database. You should
+        grant all permissions to this user for database <span
+        style="font-weight: bold; font-style: italic;">SAMPLES.</span>
+    </li>
+    <li>In <span style="font-weight: bold; font-style: italic;">SAMPLES</span>
+        database
+        create schemas <span style="font-weight: bold; font-style: italic;">Sample</span>
+        and <span
+        style="font-weight: bold; font-style: italic;">CACHE_SYS</span>.&nbsp;
+        In SQL Server 2000 this is done by creating users <span
+        style="font-weight: bold; font-style: italic;">Sample</span> and
+        <span style="font-weight: bold; font-style: italic;">CACHE_SYS</span>
+        in <span style="font-weight: bold; font-style: italic;">SAMPLES</span> database,
+        which may require similarly named server
+        logins. Grant user associated with <span
+        style="font-style: italic; font-weight: bold;">_SYSTEM </span>all
+        permissions to these new schemas. <br>
+    </li>
+    <li>Download and add to classpath <a
+        href="http://www.microsoft.com/downloads/details.aspx?FamilyID=07287B11-0502-461A-B138-2AA54BFDC03A&amp;displaylang=en">JDBC
+        driver for SQL Server</a></li>
+    <li>Export metadata for tables Sample.Person and Sample.Employee:<br>
+    <span style="font-style: italic; font-weight: bold;">java
+njb.Exporter&nbsp; -type mssql&nbsp; -target Person_Base Person Employee</span>
+    </li>
+    <li>Export metadata for table Sample.Company:<br>
+    <span style="font-weight: bold; font-style: italic;">java
+njb.Exporter&nbsp; -type mssql&nbsp; -target Company_Base Company</span>
+    </li>
+    <li>Export data for table Sample.Company: <br>
+    <span style="font-weight: bold; font-style: italic;">java
+njb.CLoader&nbsp; -type mssql&nbsp; -class Sample.Company -id all</span>
+    </li>
+    <li>Export data for table Sample.Person (data for Sample.Employee
+        will
+        be exported automatically because Employee is a subtable of Person):
+        <br>
+    <span style="font-weight: bold; font-style: italic;">java
+njb.CLoader&nbsp; -type mssql&nbsp; -class Sample.Person&nbsp; -id
+all&nbsp; -max 200</span></li>
+    <li>Run samples:<br>
+        <ul style="font-weight: bold; font-style: italic;">
+            <li> java njb.CJTest1m&nbsp; -type mssql</li>
+            <li> java njb.CJTest2m&nbsp; -type mssql</li>
+            <li> java njb.CJTest3m&nbsp; -type mssql</li>
+            <li> java njb.CJTest4m&nbsp; -type mssql</li>
+            <li> java njb.CJTest5m&nbsp; -type mssql</li>
+            <li> java njb.CJTest8m&nbsp; -type mssql</li>
+            <li> java njb.CJTest9m&nbsp; -type mssql&nbsp; -query y%</li>
+        </ul>
+    </li>
+</ol>
+<br>
+<h4>Running samples with Oracle.</h4>
+It is similar to running samples with MySQL but replacing type <span
+    style="font-weight: bold; font-style: italic;">mysql </span>with <span
+    style="font-weight: bold; font-style: italic;">oracle</span>. To run
+samples with Oracle on Intersystems machine <span
+    style="font-style: italic; font-weight: bold;">barbados </span>one
+need to do the following:<br>
+<ol>
+    <li>In Oracle Server create user <span
+        style="font-weight: bold; font-style: italic;">SAMPLE</span>.
+    </li>
+    <li>In Oracle Server create user <span
+        style="font-style: italic; font-weight: bold;">"CACHE_SYS"</span> with
+        password <span
+        style="font-weight: bold; font-style: italic;">"SYS"</span>
+        and
+        grant all permissions to this user for schema <span
+        style="font-weight: bold; font-style: italic;">SAMPLE.</span></li>
+    <li>Export metadata for tables Sample.Person and Sample.Employee:<br>
+    <span style="font-style: italic; font-weight: bold;">java
+njb.Exporter&nbsp; -type oracle&nbsp; -target Person_Base Person
+Employee</span></li>
+    <li>Export metadata for table Sample.Company:<br>
+    <span style="font-weight: bold; font-style: italic;">java
+njb.Exporter&nbsp; -type oracle&nbsp; -target Company_Base Company</span>
+    </li>
+    <li>Export data for table Sample.Company: <br>
+    <span style="font-weight: bold; font-style: italic;">java
+njb.CLoader&nbsp; -type oracle&nbsp; -class Sample.Company -id all</span>
+    </li>
+    <li>Export data for table Sample.Person (data for Sample.Employee
+        will
+        be exported automatically because Employee is a subtable of Person):
+        <br>
+    <span style="font-weight: bold; font-style: italic;">java
+njb.CLoader&nbsp; -type oracle&nbsp; -class Sample.Person&nbsp; -id
+all&nbsp; -max 200</span></li>
+    <li>Run samples (note capital "Y" in CJTest9m because oracle is case
+        sensitive):<br>
+        <ul style="font-weight: bold; font-style: italic;">
+            <li> java njb.CJTest1m&nbsp; -type oracle</li>
+            <li> java njb.CJTest2m&nbsp; -type oracle</li>
+            <li> java njb.CJTest3m&nbsp; -type oracle</li>
+            <li> java njb.CJTest4m&nbsp; -type oracle</li>
+            <li> java njb.CJTest5m&nbsp; -type oracle</li>
+            <li> java njb.CJTest8m&nbsp; -type oracle</li>
+            <li> java njb.CJTest9m&nbsp; -type oracle&nbsp; -query Y%</li>
+        </ul>
+    </li>
+</ol>
+<br>
+<br>
+</body>
+</html>

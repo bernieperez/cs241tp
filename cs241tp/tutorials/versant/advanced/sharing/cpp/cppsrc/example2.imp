@@ -1,0 +1,4 @@
+#include "car.h"
+
+O_CAPTURE_SCHEMA(Vehicle);
+O_CAPTURE_SCHEMA(Car);

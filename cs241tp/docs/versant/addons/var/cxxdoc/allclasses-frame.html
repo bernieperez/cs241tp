@@ -1,0 +1,258 @@
+<HTML>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+		<title>Versant Object Database</title>
+		<style type="text/css" media="all"> <!--
+		
+#header { margin: 0; padding: 0; background: #FFF url(../../../html_resources/images/bckgr_header_api.gif) no-repeat left -10px scroll; clear: both; height: 65px; padding-top: 15px; }
+h1#head-jdo { height: 29px; width: 330px; text-indent: -99em; padding: 0; margin: 0 0 0 32px; background: #FFF url(../../../html_resources/images/Vsnt_ObjectDatabase_JDO.gif) no-repeat left top scroll; }
+h1#head-jvi { height: 29px; width: 330px; text-indent: -99em; padding: 0; margin: 0 0 0 32px; background: #FFF url(../../../html_resources/mages/Vsnt_ObjectDatabase_JVI.gif) no-repeat left top scroll; }
+h1#head-vxml { height: 29px; width: 480px; text-indent: -99em; padding: 0; margin: 0 0 0 32px; background: #FFF url(../../../html_resources/images/Vsnt_ObjectDatabase_VXML.gif) no-repeat left top scroll; }
+h1#head-vhistle { height: 29px; width: 480px; text-indent: -99em; padding: 0; margin: 0 0 0 32px; background: #FFF url(../../../html_resources/images/Vsnt_ObjectDatabase_Vhistle.gif) no-repeat left top scroll; }
+#sitenav { clear: both; float: none; border-bottom: 1px solid #CCC; background-color: #E5E5E5; width: 100%; }
+.hr { height: 0; font-size: 0; line-height: 0; clear: both; }
+.hr hr { height: 0; font-size: 0; line-height: 0; display: none; }
+li { font-size: 12px; font-family: Arial, Helvetica, sans-serif; color: #000; }
+.tabs { float: left; background-color: transparent; list-style: none; margin: 0; padding: 10px 0 0 30px; list-style-image: none; }
+.tabs li { float: left; margin-right: 3px; font-weight: bold; background: url(../../../html_resources/images/tabs.png) no-repeat right top; border-left: 1px solid #CCC; line-height: normal; }
+.tabs li a { display: block; padding: 4px 10px 3px 9px; border: none; outline: none; background: url(../../../html_resources/images/tabs.png) no-repeat right top; color: #444; text-decoration: none; }
+.tabs li a:hover { color: #161616; text-decoration: none; background-position: right -40px; }
+.tabs li.selected { position: relative; margin-bottom: -1px; background-position: right -40px; }
+.tabs li.selected a { display: block; padding: 4px 10px 4px 9px; background: url(../../../html_resources/images/tabs.png) no-repeat right -40px; font-weight: bold; color: #000; }
+.tabs li.selected span { display: block; padding: 4px 10px 4px 9px; background: url(../../../html_resources/images/tabs.png) no-repeat right -40px; font-weight: bold; color: #000; }
+* html .tabs { margin-bottom: 0; }
+
+
+/* Versant
+   Javadoc style sheet */
+
+/* Page background color */
+body {
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:10pt;
+    font-style:normal;
+    color:black;
+    background-color:#FFFFFF
+    margin: 0;
+    padding: 0; }
+    }
+
+/* Headings */
+H1  {
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:14pt;
+    font-weight:bold;
+    font-style:normal;
+    color:black;
+    background-color:inherit;
+    }
+H2  {
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:12pt;
+    font-weight:bold;
+    font-style:normal;
+    color:black;
+    background-color:inherit;
+    }
+H3  {
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:10pt;
+    font-weight:bold;
+    font-style:italic;
+    color:black;
+    background-color:inherit;
+    }
+H4 { 
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:9pt;
+    font-weight:normal;
+    font-style:italic;
+    color:black;
+    background-color:inherit;
+    }
+
+/* Table colors */
+.TableHeadingColor {
+    color:inherit;
+    background-color:#E0E0E0;
+    }
+.TableSubHeadingColor {
+    color:inherit;
+    background:#EEEEEE;
+    }
+.TableRowColor {
+    color:inherit;
+    background:#FFFFFF
+    }
+
+/* Font used in left-hand frame lists */
+.FrameTitleFont {
+    font-size:100%;
+    font-family:Helvetica, Arial, sans-serif
+    }
+.FrameHeadingFont { 
+    font-size:100%;
+    font-family:Helvetica, Arial, sans-serif;
+    font-weight:bold;
+    font-style:normal;
+    color:black;
+    background-color:inherit;
+    }
+.FrameItemFont {
+    font-size:90%;
+    font-family:Helvetica, Arial, sans-serif
+    }
+
+/* Navigation bar fonts and colors */
+.NavBarCell1 {
+    color:inherit;
+    background-color:#EEEEEE;
+    }
+.NavBarCell1Rev {
+    color:inherit;
+    background-color:#BB0000;
+    }
+.NavBarFont1 {
+    font-family:Arial, Helvetica, sans-serif;
+    color:black;
+    background-color:inherit;
+    }
+.NavBarFont1Rev {
+    font-family: Arial, Helvetica, sans-serif;
+    color:white;
+    background-color:inherit;
+    }
+.NavBarCell2 {
+    font-family:Arial, Helvetica, sans-serif;
+    color:inherit;
+    background-color:#DDAAAA;
+    }
+.NavBarCell3 {
+    font-family:Arial, Helvetica, sans-serif;
+    color:inherit;
+    background-color:#FFDDDD;
+    }
+
+P, TD  {
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:10pt;
+    font-style:normal;
+    color:black;
+    background-color:inherit;
+    }
+
+/*
+DD {
+    font-family:Courier;
+    font-size:10pt;
+    font-style:normal;
+    color:black;
+    background-color:inherit;
+    }
+*/
+
+A {
+    color:black;
+    background-color:inherit;
+    }
+    
+A:hover {
+    color:#BB0000;
+    background-color:inherit;
+    }
+
+UL {
+    font-family:Arial, Helvetica, sans-serif; 
+    font-size:10pt; 
+    font-style:normal; 
+    line-height:16pt ; 
+    list-style-image:url(checkmark_cube.gif)
+    }
+
+OL {
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:10pt;
+    font-style:normal;
+    line-height:16pt
+    }
+
+.top {
+    font-size:9px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style:normal;
+    text-align:right;
+    text-decoration:none
+    }
+
+.none {
+    font-style:normal;
+    text-decoration:none
+    }
+
+.link {
+    text-decoration:none;
+    color:#000000;
+    background-color:inherit;
+    }
+
+.bold {
+    font-weight:bold
+    }
+
+
+
+	--></style>
+	</head>
+	<BODY>
+		<div id="sitenav">
+			<ul id="sitenav-tabs" class="tabs">
+				<li>
+					<a href="http://www.versant.com" target="_top" title="Versant Corporate Website">www.versant.com</a></li>
+				<li>
+					<a href="http://www.versant.com/developer" target="_top" title="Versant Developer Center Website">
+						Developer Center</a></li>
+				<li class="selected">
+					<a href="../../../info.html" target="_top" title="Versant Object Database Java Documentation">
+						Documentation</a></li>
+			</ul>
+			<div class="hr"><hr />
+			</div> <!-- end sitenav -->
+		</div>
+		<div id="header">
+			<h1 id="head-vhistle">Versant Object Database</h1>
+		</div>
+		<H1>
+			&nbsp;<A NAME="topofdoc"></A>Library allclasses-frame</H1>
+		<HR>
+		<P><B>[ <A HREF="keyweb.html">Keywords</A> | <A HREF="#classes">Classes</A> | <A HREF="#data">
+					Data</A> | <A HREF="#functions">Functions</A> ]</B>
+		<P>&nbsp;
+			<H2>
+				Quick Index</H2>
+		&nbsp;
+		<P><A NAME="classes"></A>
+			<HR>
+			<H2>
+				Classes</H2>
+			<DL>
+				<DL>
+					<DT><A HREF="VARTxData.html">VARTxData</A></DT>
+					<DD>
+						Interface for API based replication</DD>
+				</DL>
+			</DL>
+			Back to the <A HREF="#topofdoc">top</A> of <I>allclasses-frame</I>
+		<P>&nbsp;<A NAME="data"></A>&nbsp;
+			<HR>
+			<H2>
+				Data</H2>
+			Back to the <A HREF="#topofdoc">top</A> of <I>allclasses-frame</I>
+		<P>&nbsp;<A NAME="functions"></A>&nbsp;
+			<HR>
+			<H2>
+				Global Functions</H2>
+			Back to the <A HREF="#topofdoc">top</A> of <I>allclasses-frame</I>
+		<P>
+		&nbsp;
+	</BODY>
+</HTML>

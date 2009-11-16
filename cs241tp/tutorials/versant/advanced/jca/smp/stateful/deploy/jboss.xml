@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss>
+    <enterprise-beans>
+        <session>
+          <ejb-name>SMP_Bank</ejb-name>
+	   <transaction-descriptor><trans-timeout-seconds>1000</trans-timeout-seconds></transaction-descriptor>    
+          <jndi-name>smp.stateful.BankHome</jndi-name>
+        </session>
+     </enterprise-beans>
+</jboss>
+

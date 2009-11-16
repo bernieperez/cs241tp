@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="22" zv="Cache for Windows (x86-32) 2008.2 (Build 375U)" ts="2008-04-01 13:34:01">
+<Class name="ZenTutorial.CustomComponents.MenuComposite">
+<Description>
+ZenTutorial.CustomComponents.MenuComposite</Description>
+<Super>%ZEN.Component.composite</Super>
+<TimeChanged>61082,56618</TimeChanged>
+<TimeCreated>60653,34395.712115</TimeCreated>
+
+<Parameter name="NAMESPACE">
+<Description>
+This is the XML namespace for this component.</Description>
+<Default>http://www.intersystems.com/ZenTutorial</Default>
+</Parameter>
+
+<XData name="Style">
+<Description>
+This Style block contains component-specific CSS style definitions.</Description>
+<Data><![CDATA[
+<style type="text/css">
+
+/*
+ * Styles for components in this composite component
+ *
+ */
+.title {
+	background: #C5D6D6;
+	color: black;
+	font-size: 1.5em;
+	font-weight: bold;
+	padding: 5px;
+	border-bottom: 1px solid black;
+	text-align: center;
+}
+
+/* 
+ * Default style overrides
+ */
+/* Override default menu item style */
+a.menuItem {
+	font-size: 0.9em;
+	color: black;
+}
+
+a.menuItemDisabled {
+	font-size: 0.9em;
+	color: black;
+}
+</style>
+]]></Data>
+</XData>
+
+<XData name="Contents">
+<Description>
+Contents of this composite component.</Description>
+<Data><![CDATA[
+<composite>
+<html id="title" enclosingClass="title">ZEN Contacts</html>
+<hmenu width="100%">
+<menuItem id="m1" caption="Home" link="ZenTutorial.HomePage.cls" help="Go to display page" />
+<menuItem id="m2" caption="TBA" link="" help="To Be Added" />
+<menuItem id="m3" caption="TBA" link="" help="To Be Added" />
+</hmenu>
+</composite>
+]]></Data>
+</XData>
+</Class>
+</Export>

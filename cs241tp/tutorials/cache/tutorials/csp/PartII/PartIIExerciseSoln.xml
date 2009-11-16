@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="18" zv="Cache for Windows (Intel) 5.1 (Build 775U)" ts="2005-10-06 11:21:50">
+<CSP name="AddPhoneNumber.CSP" application="/csp/user/" default="1"><![CDATA[
+<html>
+<head>
+
+<!-- Put your page Title here -->
+<title>	Cache Server Page </title>
+
+</head>
+
+<body>
+<center><h1>Add Phone Number</h1></center>
+<script language="cache" Method="AddPhoneNumber" arguments="id: %String,num:%String, type:%String" returntype="%Boolean">
+
+if (##class(CSPTutorial.Contact).%ExistsId(id)){
+set contact=##class(CSPTutorial.Contact).%OpenId(id)
+Set pn=##class(CSPTutorial.PhoneNumber).%New()
+Set pn.Number=num
+Set pn.PhoneNumberType=type
+do contact.PhoneNumbers.Insert(pn)
+Set status=contact.%Save()
+	if (status){
+		&js<alert("#(status)#")>
+	}
+	else
+	{
+		&js<alert("not saving");>
+	}
+
+}
+else{
+&js<alert("not saving");>	
+}
+quit 1
+
+</script>
+
+<center>
+<table>
+<form name="form2" action="">
+	<tr>
+	<td>Phone Number Type:</td>
+	<td>
+			<select name="PhoneNumberType" >
+				<option value="Home">Home</option>
+				<option value="Business">Business</option>
+				<option value="Mobile">Mobile</option>
+				<option value="Fax">Fax</option>
+			</select>
+	</td>
+	</tr>
+	<tr>
+	<td>Number:</td>	
+	<td><input type="text" Name="Number" value=""></td>
+	</tr>
+	<td></td>
+	<tr>
+	<td></td>
+	<td>	<input type="button" value="Save Number" 
+			onClick="#server(..AddPhoneNumber(self.document.form2.id.value,self.document.form2.Number.value, self.document.form2.PhoneNumberType.value))#">
+	</td>
+	<td></td>
+	</tr>
+	<input type="hidden" Name="id" value="#($Get(%request.Data("OBJID",1)))#"/>
+</form>
+</table>
+<p><a href="Contact.CSP?OBJID=#($Get(%request.Data("OBJID",1)))#">Return to Contact Page</a></p>
+</center>
+	
+</body>
+</html>
+]]></CSP>
+
+
+<CSP name="Contact.CSP" application="/csp/user/" default="1"><![CDATA[
+<html>
+<head>
+
+<!-- Put your page Title here -->
+<title>	Cache Server Page </title>
+
+</head>
+
+<body>
+<h1 align="center">ContactDB.Contact</h1>
+<script language='javascript'>
+<!-- This function is needed by the search button on the form -->
+<!--
+function update(id)
+{
+     #server(..formLoad(id))#;
+     return true;
+}
+// -->
+</script>
+
+<!-- use CSP:OBJECT tag to create a reference to an instance of the class -->
+<csp:object name="objForm" classname="CSPTutorial.Contact" OBJID=#(%request.Get("OBJID"))#>
+
+<!-- use csp:search tag to create a javascript function to invoke a search page --> 
+<csp:search name="form_search" classname="CSPTutorial.Contact" where="ContactType" select="ContactType,Name"
+predicates="select">
+
+<form name="form" cspbind="objForm" cspjs="All" onsubmit='return form_validate();'>
+<center>
+<table cellpadding="3">
+  <tr>
+    <td><b><div align="right">ContactType:</div></b></td>
+    <td><select name="ContactType" cspbind="ContactType">
+        <option value=""></option>
+        <option value="Business">Business</option>
+        <option value="Personal">Personal</option>
+      </select></td>
+  </tr>
+  <tr>
+    <td><b><div align="right">*Name:</div></b></td>
+    <td><input type="text" name="Name" cspbind="Name" size="50" csprequired></td>
+  </tr>
+  <tr>
+  <td><font color="#666666"><b><div align="right">ID:</div></b></font></td>
+  <td><input type="text" name="sys_Id" cspbind="%Id()" size="10" readonly></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><input type="button" name="btnClear" value="Clear" onclick='form_new();'>
+      <input type="button" name="btnSave" value="Save" onclick='form_save();'>
+      <input type="button" name="btnSearch" value="Search" onclick='form_search();'></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><font color="#000088" size="2">(* Denotes required fields)</font></td>
+  </tr>
+</table>
+</center>
+</form>
+
+
+<script language="sql" name="rs" p1="#(objForm.%Id())#" mode="display">
+SELECT ID, PhoneNumberType FROM CSPTutorial.PhoneNumber WHERE Contact = ? Order By PhoneNumberType
+</script>
+
+<center>
+<csp:while condition="rs.Next()">
+<csp:object name="pn" classname="CSPTutorial.PhoneNumber" OBJID=#(rs.Data("ID"))# >
+<p><a href="Phone.CSP?OBJID=#(pn.%Id())#"> #(pn.PhoneNumberType)#  #(pn.Number)# </a></p>
+</csp:while>
+
+
+<p><a href="AddPhoneNumber.CSP?OBJID=#(%request.Get("OBJID"))#">AddPhoneNumber</a></p>
+</center>
+
+
+		
+</body>
+</html>
+]]></CSP>
+
+
+<CSP name="Phone.CSP" application="/csp/user/" default="1"><![CDATA[
+<html>
+<head>
+
+<!-- Put your page Title here -->
+<title>	Cache Server Page </title>
+
+</head>
+
+<body>
+
+
+<h1 align="center">CSPTutorial.PhoneNumber</h1>
+<script language='javascript'>
+<!-- This function is needed by the search button on the form -->
+<!--
+function update(id)
+{
+     #server(..formLoad(id))#;
+     return true;
+}
+// -->
+</script>
+
+<!-- use CSP:OBJECT tag to create a reference to an instance of the class -->
+<csp:object name="objForm" classname="CSPTutorial.PhoneNumber" OBJID=#($Get(%request.Data("OBJID",1)))#/>
+
+<!-- use csp:search tag to create a javascript function to invoke a search page --> 
+<csp:search name="form_search" classname="CSPTutorial.PhoneNumber" where="%Id()" options="popup,nopredicates" onselect="update">
+
+<!--<csp:search name="form_search" classname="CSPTutorial.Contact" Where= "Name" select="Name,ContactType" options="popup,predicates" onselect="update" order="Name">-->
+
+
+<form name="form" cspbind="objForm" cspjs="All" onsubmit='return form_validate();'>
+<center>
+<table cellpadding="3">
+  
+   <tr>
+    <td><font color="#666666"><b><div align="right">*Contact Name:</div></b></font></td>
+    <td><input type="text" name="ContactName" cspbind="Contact.Name" size="50" csprequired readonly></td>
+  </tr>
+  <tr>
+    <td><b><div align="right">PhoneNumberType:</div></b></td>
+    <td><select name="PhoneNumberType" cspbind="PhoneNumberType">
+        <option value=""></option>
+        <option value="Business">Business</option>
+        <option value="Fax">Fax</option>
+        <option value="Home">Home</option>
+        <option value="Mobile">Mobile</option>
+      </select></td>
+  </tr>
+  <tr>
+    <td><b><div align="right">*Number:</div></b></td>
+    <td><input type="text" name="Number" cspbind="Number" size=""></td>
+  </tr>
+  <tr>
+    <td><font color="#666666"><b><div align="right">ID:</div></b></font></td>
+    <td><input type="text" name="sys_Id" cspbind="%Id()" size="10" readonly></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><input type="button" name="btnClear" value="Clear" onclick='form_new();'>
+      <input type="button" name="btnSave" value="Save" onclick='form_save();'>
+      <input type="button" name="btnSearch" value="Search" onclick='form_search();'></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><font color="#000088" size="2">(* Denotes required fields)</font></td>
+  </tr>
+</table>
+</center>
+</form>
+
+<center>
+<script language="cache" runat="server">
+if (objForm.Contact '= "")
+{
+Write "<p><a href=Contact.CSP?OBJID="_objForm.Contact.%Id()_">Contact Page</a>" ;
+}
+</script>
+</center>
+</body>
+</html>
+]]></CSP>
+</Export>

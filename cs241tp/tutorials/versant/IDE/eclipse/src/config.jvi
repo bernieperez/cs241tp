@@ -1,0 +1,6 @@
+# Automatically generated Versant Enhancer Configuration File
+
+c demo.JVIDemo
+p model.Person
+p model.Address
+n **

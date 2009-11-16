@@ -1,0 +1,105 @@
+<!--
+Demo for JVI MemoryManagement API.
+-->
+
+<project name="MemoryManagement" default="list" basedir=".">
+	
+
+    <import file="../../common.xml"/>
+	
+           
+      <target name="removedb" description="removedb" >
+	  <exec executable="removedb" failonerror="false">
+	  <arg line="-f jvidb1"/>
+	 </exec>
+      </target>
+     <target name="removedb2" description="removedb2" >
+	  <exec executable="removedb" failonerror="false">
+	  <arg line="-f jvidb2"/>
+	 </exec>
+      </target>
+      
+     <target name="makedb" description="makedb">
+	  <exec executable="makedb"  failonerror="false">
+	    <arg line="jvidb1"/>
+	   </exec>
+     </target>
+      
+     <target name="makedb2" description="makedb">
+	  <exec executable="makedb"  failonerror="false">
+	    <arg line="jvidb2"/>
+	   </exec>
+     </target>
+	     
+     <target name="createdb" description="createdb">
+	  <exec executable="createdb"  failonerror="false">
+	    <arg line="jvidb1"/>
+	  </exec>  
+    </target>
+    <target name="createdb2" description="createdb2">
+	  <exec executable="createdb"  failonerror="false">
+	    <arg line="jvidb2"/>
+	  </exec>  
+    </target>
+    
+    <target name="list" description="list expample application" >
+        <echo message="Example applications:"/> 
+        <echo message="runVat"/> 
+        <echo message="runExample1"/>
+        <echo message="runGroupApiExample"/>
+        <echo message="runMultiDbExample"/>
+        <echo message="runMultiSessionExample"/>
+        <echo message="runPathQueryExample"/>
+        <echo message="runSchemaExample"/>
+    </target>
+    <target name="runVat" depends="clean, compile, removedb, makedb, createdb"
+        description="Run the Orderby application">
+        <java classname="FundVATDemo" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="jvidb1"/>
+        </java>
+    </target>
+    <target name="runExample1" depends="clean, compile, removedb, makedb, createdb"
+        description="Run the Orderby application">
+        <java classname="Example1" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="jvidb1"/>
+        </java>
+    </target>
+    <target name="runGroupApiExample" depends="clean, compile, removedb, makedb, createdb"
+        description="Run the Orderby application">
+        <java classname="GroupApiExample" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="jvidb1"/>
+        </java>
+    </target>
+    <target name="runMultiDbExample" depends="clean, compile, removedb, removedb2, makedb, makedb2, createdb, createdb2"
+        description="Run the Orderby application">
+        <java classname="MultiDbExample" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="jvidb1 jvidb2"/>
+        </java>
+    </target>
+    <target name="runMultiSessionExample" depends="clean, compile, removedb, makedb, createdb"
+        description="Run the Orderby application">
+        <java classname="MultiSessionExample" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="jvidb1 "/>
+        </java>
+    </target>
+    <target name="runPathQueryExample" depends="clean, compile, removedb, makedb, createdb"
+        description="Run the Orderby application">
+        <java classname="PathQueryExample" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="jvidb1 "/>
+        </java>
+    </target>
+    <target name="runSchemaExample" depends="clean, compile, removedb, makedb, createdb"
+        description="Run the Orderby application">
+        <java classname="SchemaExample" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="jvidb1 "/>
+        </java>
+    </target>
+
+</project>

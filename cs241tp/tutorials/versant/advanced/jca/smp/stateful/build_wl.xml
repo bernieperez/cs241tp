@@ -1,0 +1,10 @@
+<project name="build" default="deploy" basedir=".">
+ <property name="appserver" value="weblogic"/>
+  <target name="deploy">
+    <ant antfile="build_wl.xml" dir="${basedir}/../../" target="smp_stateful_setup"/>
+    
+  </target>
+  <target name="run">
+  <ant antfile="build_wl.xml" dir="${basedir}/../../" target="smp_stateful_run"/>
+  </target>
+</project>

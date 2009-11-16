@@ -1,0 +1,60 @@
+<!--
+Demo for JVI MemoryManagement API.
+-->
+
+<project name="MemoryManagement" default="run" basedir=".">
+	
+    <import file="../../common.xml"/>
+	
+           
+      <target name="removedb" description="removedb" >
+	  <exec executable="removedb" failonerror="false">
+	  <arg line="-f jvidb1"/>
+	 </exec>
+	 <exec executable="removedb" failonerror="false">
+	 	  <arg line="-f jvidb2"/>
+	 </exec>
+      </target>
+      
+     <target name="makedb" description="makedb">
+	  <exec executable="makedb"  failonerror="false">
+	    <arg line="jvidb1"/>
+	   </exec>
+	   <exec executable="makedb"  failonerror="false">
+	   	    <arg line="jvidb2"/>
+	   </exec>
+     </target>
+	     
+     <target name="createdb" description="createdb">
+	  <exec executable="createdb"  failonerror="false">
+	    <arg line="jvidb1"/>
+	  </exec>  
+	  <exec executable="createdb"  failonerror="false">
+	  	    <arg line="jvidb2"/>
+	  </exec>  
+    </target>
+    
+    <target name="run" depends="clean,compile, removedb, makedb, createdb"
+            description="Run the demo">
+            <java classname="MemoryMngmt" classpathref="cp" fork="true">
+                <jvmarg line="${jvm.options}"/>
+                <arg line="jvidb1"/>
+            </java>
+            <java classname="GroupWriteObj" classpathref="cp" fork="true">
+                <jvmarg line="${jvm.options}"/>
+                <arg line="jvidb1 0"/>
+            </java>
+            <java classname="GroupWriteObj" classpathref="cp" fork="true">
+                <jvmarg line="${jvm.options}"/>
+                <arg line="jvidb1 1"/>
+            </java>
+            <java classname="GroupWriteObj" classpathref="cp" fork="true">
+                <jvmarg line="${jvm.options}"/>
+                <arg line="jvidb1 2"/>
+            </java>
+            
+    </target>
+    
+    
+
+</project>

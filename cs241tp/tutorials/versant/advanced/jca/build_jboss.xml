@@ -1,0 +1,171 @@
+<project name="buildAll" default="all" basedir=".">
+
+  <property environment="env"/>
+  <property file="common.properties"/>
+  <property file="jboss.properties"/>
+ 
+
+  <target name="all" depends="smp_stateless_compile, smp_stateful_compile,                                setup_internal"/>
+
+ <path id="jboss-client.path">
+      <pathelement path="${JBOSS_HOME}/client/jbossall-client.jar"/>
+      <pathelement path="${JBOSS_HOME}/client/jboss-client.jar"/>
+      <pathelement path="${JBOSS_HOME}/client/jboss-j2ee.jar"/>
+   </path>
+                          
+  <target name="smp_stateless_clean"> 
+    <antcall target="clean">
+      <param name="build" value="smp/stateless/build"/>
+      <param name="ear_staging" value="smp/stateless/ear_staging"/>
+    </antcall>
+  </target>
+
+  <target name="smp_stateful_clean">
+    <antcall target="clean">
+      <param name="build" value="smp/stateful/build"/>
+        <param name="ear_staging" value="smp/stateful/ear_staging"/>
+    </antcall>
+  </target>
+
+  <target name="smp_stateless_compile" depends="smp_stateless_clean">
+    <antcall target="enhancePClass">
+      <param name="build" value="smp/stateless/build"/>
+    </antcall>
+    <antcall target="jar_ejb">
+          <param name="source" value="smp/stateless"/>
+          <param name="client" value="smp/stateless/client"/>
+          <param name="jarfile" value="vodExampleSMPStateless.jar"/>
+          <param name="build" value="smp/stateless/build"/>
+          <param name="deploy" value="smp/stateless/deploy"/>
+    </antcall>
+     <antcall target="build_ear">
+      <param name="source" value="smp/stateless"/>
+      <param name="earfile" value="vodSMPExampleStateless.ear"/>
+      <param name="jarfile" value="vodExampleSMPStateless.jar"/>
+      <param name="ear_staging" value="smp/stateless/ear_staging"/>
+      <param name="deploy" value="smp/stateless/deploy"/>     
+    </antcall>
+      <copy file="smp/stateless/vodSMPExampleStateless.ear" todir="${JBOSS_DEPLOY_DIR}"/> 
+  </target>
+  
+  <target name="smp_stateless_setup" depends="smp_stateless_compile">
+    <antcall target="setup_internal">
+      <param name="build" value="smp/stateless/build"/>
+    </antcall>
+  </target>
+  
+  <target name="smp_stateless_run">
+      <path id="cp">
+          <pathelement path="smp/stateless/build"/>    
+      </path>       
+            <java classname="smp.stateless.client.Main" fork="yes" failonerror="yes">
+                <classpath refid="jboss-client.path"/>
+                <classpath refid="cp"/>
+            </java>
+      </target>
+      
+      <target name="smp_stateful_run">
+      <path id="cp">
+         <pathelement path="smp/stateful/build"/>    
+       </path>       
+       <java classname="smp.stateful.client.Main" fork="yes" failonerror="yes">
+       <classpath refid="jboss-client.path"/>
+       <classpath refid="cp"/>
+        </java>
+    </target>
+   
+  <target name="smp_stateful_compile" depends="smp_stateful_clean">
+    <antcall target="enhancePClass">
+      <param name="build" value="smp/stateful/build"/>
+    </antcall>
+    <antcall target="jar_ejb">
+          <param name="source" value="smp/stateful"/>
+          <param name="client" value="smp/stateful/client"/>
+          <param name="jarfile" value="vodExampleSMPStateful.jar"/>
+          <param name="build" value="smp/stateful/build"/>
+          <param name="deploy" value="smp/stateful/deploy"/>
+    </antcall>
+    <antcall target="build_ear">
+      <param name="source" value="smp/stateful"/>
+      <param name="earfile" value="vodSMPExampleStateful.ear"/>
+      <param name="jarfile" value="vodExampleSMPStateful.jar"/>
+      <param name="ear_staging" value="smp/stateful/ear_staging"/>
+      <param name="deploy" value="smp/stateful/deploy"/>     
+    </antcall>
+       <copy file="smp/stateful/vodSMPExampleStateful.ear" todir="${JBOSS_DEPLOY_DIR}"/> 
+  </target>
+  <target name="smp_stateful_setup" depends="smp_stateful_compile">
+    <antcall target="setup_internal">
+      <param name="build" value="smp/stateful/build"/>
+    </antcall>
+  </target>
+
+  <target name="enhancePClass">
+    <ant antfile="setup.xml" dir = "." target="enhance"/>
+  </target>
+
+  <target name="setup_internal">
+    <ant antfile="setup.xml" dir="." target="enhance"/>
+    <ant antfile="setup.xml" dir="." target="setupdb"/>
+  </target>
+
+  <target name="setup">
+    <ant antfile="setup.xml" dir="." target="enhance"/>
+    <ant antfile="setup.xml" dir="." target="setupdb"/>
+  </target>
+
+  <target name="clean">
+    <delete dir="${build}"/>
+     <delete dir="${ear_staging}"/>
+  </target>
+
+  <!-- Compile classes into the build directory -->
+  <target name="compile">
+    <javac srcdir="${source};${client}" destdir="${build}" 
+      includes="*.java" >
+     <classpath>
+      <path refid="jboss-client.path"/>
+      <pathelement path="${JCA_CLASSPATH}"/>
+     </classpath>
+    </javac> 
+  </target>
+
+  <!-- Make a standard ejb jar file, including XML deployement descriptor -->
+  <target name="jar_ejb" depends="compile">
+    <copy todir="${build}/META-INF">
+      <fileset dir="${deploy}" includes="*ejb-jar.xml, versant*.xml"/>
+      <fileset dir="${deploy}" includes="jboss.xml"/>
+    </copy>
+      <copy file="jboss_jndi.properties" tofile="${build}/model/jndi.properties" filtering="true"  overwrite="true"/>
+      <copy file="jboss_jndi.properties" tofile="${build}/jndi.properties" filtering="true"  overwrite="true"/>
+    <jar jarfile="${source}/${jarfile}"
+      basedir="${build}">
+    </jar>
+    <!--move file="${source}/${jarfile}" tofile="${build}/${jarfile}"/-->
+  </target>
+
+  <!-- Make an ear file, including XML deployement descriptor -->
+  <target name="build_ear"> 
+    <copy todir="${ear_staging}/META-INF">
+      <fileset dir="${deploy}" includes="application.xml"/>
+    </copy>
+    <copy file="${source}/${jarfile}" todir="${ear_staging}"/>
+        <jar jarfile="${source}/${earfile}"
+      basedir="${ear_staging}">
+    </jar>
+    <delete dir="${ear_staging}"/>
+  </target>
+  
+  <!-- Run ejbc to create the deployable jar file -->
+    <target name="ejbc" depends="jar_ejb">
+      <java classname="weblogic.appc" fork="yes" failonerror="yes">
+        <sysproperty key="weblogic.home" value="${WL_HOME}"/>
+        <arg line="-keepgenerated ${build}/${jarfile} ${source}/${jarfile}"/>
+        <classpath>
+          <pathelement path="${WL_HOME}/lib/weblogic_sp.jar;${WL_HOME}/lib/weblogic.jar"/>
+          <pathelement path="${java.class.path}"/>
+        </classpath>
+      </java>
+      </target>
+     
+</project>

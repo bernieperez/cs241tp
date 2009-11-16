@@ -1,0 +1,9 @@
+com.versant.common.dataservice
+com.versant.var
+com.versant.var.common
+com.versant.var.conflict
+com.versant.var.message
+com.versant.var.queue
+com.versant.var.receiver
+com.versant.var.sender
+com.versant.var.transport

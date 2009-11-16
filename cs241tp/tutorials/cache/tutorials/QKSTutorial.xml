@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="22" zv="Cache for Windows (x86-32) 2009.1 (Build 446)" ts="2009-07-16 15:57:13">
+<Class name="ContactDB.Contact">
+<Super>%Persistent,%Populate,%XML.Adaptor</Super>
+<TimeChanged>61558,56949.395695</TimeChanged>
+<TimeCreated>61558,49543.669467</TimeCreated>
+
+<Property name="Name">
+<Type>%String</Type>
+<Required>1</Required>
+</Property>
+
+<Property name="ContactType">
+<Type>%String</Type>
+<Parameter name="VALUELIST" value=",Business,Personal"/>
+</Property>
+
+<Property name="PhoneNumbers">
+<Type>ContactDB.PhoneNumber</Type>
+<Cardinality>children</Cardinality>
+<Inverse>Contact</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>^ContactDB.ContactD</DataLocation>
+<DefaultData>ContactDefaultData</DefaultData>
+<IdLocation>^ContactDB.ContactD</IdLocation>
+<IndexLocation>^ContactDB.ContactI</IndexLocation>
+<StreamLocation>^ContactDB.ContactS</StreamLocation>
+<Data name="ContactDefaultData">
+<Structure>listnode</Structure>
+<Subscript/>
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>Name</Value>
+</Value>
+<Value name="3">
+<Value>ContactType</Value>
+</Value>
+</Data>
+<Property name="ContactType">
+</Property>
+<Property name="Name">
+</Property>
+</Storage>
+</Class>
+
+
+<Class name="ContactDB.HomePage">
+<Description>
+Created using the page template: Default</Description>
+<Super>%ZEN.Component.page</Super>
+<TimeChanged>61558,57215.759355</TimeChanged>
+<TimeCreated>61558,53142.435012</TimeCreated>
+
+<Parameter name="APPLICATION">
+<Description>
+Class name of application this page belongs to.</Description>
+</Parameter>
+
+<Parameter name="PAGENAME">
+<Description>
+Displayed name of this page.</Description>
+<Default>HomePage.cls</Default>
+</Parameter>
+
+<Parameter name="DOMAIN">
+<Description>
+Domain used for localization.</Description>
+</Parameter>
+
+<XData name="Style">
+<Description>
+This Style block contains page-specific CSS style definitions.</Description>
+<Data><![CDATA[
+<style type="text/css">
+</style>
+]]></Data>
+</XData>
+
+<XData name="Contents">
+<Description>
+This XML block defines the contents of this page.</Description>
+<XMLNamespace>http://www.intersystems.com/zen</XMLNamespace>
+<Data><![CDATA[
+<page xmlns="http://www.intersystems.com/zen" title="">
+<tablePane
+   align="center"
+   width="500px"
+   id="ContactTable" 
+   tableName="ContactDB.Contact"
+   useSnapshot="true" 
+   pageSize="10" 
+   showRowNumbers="true"
+   showZebra="true"  
+   extraColumnWidth="5%"
+   caption="US Contacts"
+   valueColumn="ID"
+   onselectrow="zenPage.selectContact(zenThis);"
+ >
+    <column colName="ID" hidden="true"/>
+    <column header="Name"  colName="Name" filterType="text"/>
+    <column header="Type" colName="ContactType" filterType="text"/>
+</tablePane>
+
+<spacer height="20"/>
+<form align="center" 
+         id="ContactForm"
+         width="300px" 
+         layout="vertical" 
+         cellStyle="padding-top: 5px; padding-left: 5px; padding-right: 5px;"
+         labelPosition="left">
+
+    <text hidden="true" id="ID" name="ID"/>
+    
+    <text label="Name:" id="Name" name="Name" size="27" />
+    
+    <dataCombo label="Type:" id="ContactType" name="ContactType" size="24"
+         dropdownHeight="150px"
+         dropdownWidth="100px"
+         editable="false"
+         required="false"
+         sql="SELECT DISTINCT %EXACT ContactType from ContactDB.Contact"
+     />
+
+   <textarea label="Phones:" id="PhoneNumbers" name="PhoneNumbers" cols="25" 
+        rows="5"/>
+        
+   <submit  align = "left" caption="Save" action="save" id="Submit" 
+   name="Submit"/>
+</form>   
+</page>
+]]></Data>
+</XData>
+
+<Method name="selectContact">
+<FormalSpec>conTable</FormalSpec>
+<Language>javascript</Language>
+<Implementation><![CDATA[
+  var ctrl = zenPage.getComponentById('ContactTable');
+  var id = ctrl.getValue();
+  var form = zenPage.getComponentById('ContactForm');
+  this.LoadContact(form,id);
+]]></Implementation>
+</Method>
+
+<Method name="LoadContact">
+<FormalSpec>pForm:%ZEN.Component.form,pID:%ZEN.Datatype.string</FormalSpec>
+<ZenMethod>1</ZenMethod>
+<Implementation><![CDATA[
+ Set tContact = ##class(ContactDB.Contact).%OpenId(pID)
+ Set PhoneNumbers=""
+ If $IsObject(tContact) {
+    Do %page.%SetValueById("Name",tContact.Name)
+    Do %page.%SetValueById("ContactType",tContact.ContactType)
+    Do %page.%SetValueById("ID",tContact.%Id())
+   for i=1:1:tContact.PhoneNumbers.Count()
+{
+  if (PhoneNumbers '= "")
+{
+   Set PhoneNumbers 
+    =PhoneNumbers_$$$NL_tContact.PhoneNumbers.GetAt(i).PhoneNumberType_
+   ":"_tContact.PhoneNumbers.GetAt(i).Number
+ }
+   else
+ {
+    Set PhoneNumbers 
+     =PhoneNumbers_tContact.PhoneNumbers.GetAt(i).PhoneNumberType_
+     ":"_tContact.PhoneNumbers.GetAt(i).Number 
+  }
+}
+
+   }
+   Do %page.%SetValueById("PhoneNumbers",PhoneNumbers)
+]]></Implementation>
+</Method>
+
+<Method name="%OnSubmit">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>pSubmit:%ZEN.Submit</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+ if (pSubmit.%Action = "save") 
+ {
+    Set tID = pSubmit.%GetValue("ID")  
+    Set tContact = ##class(ContactDB.Contact).%OpenId(tID,4)
+    if $IsObject(tContact) 
+    {
+     Do tContact.PhoneNumbers.Clear()
+      Set PhoneNumbers=$ZSTRIP(pSubmit.%GetValue("PhoneNumbers"),"*W")
+      for i=1:1:$Length(PhoneNumbers,$$$NL)
+       {
+         Set pn=$Piece(PhoneNumbers,$$$NL,i)
+         if (pn'="")
+         {
+            Set type = $Piece(pn,":",1)
+            Set num= $Piece(pn,":",2)
+            Set phoneNumber = ##class(ContactDB.PhoneNumber).%New()
+            Set phoneNumber.PhoneNumberType = type   
+            Set phoneNumber.Number = num
+            Set phoneNumber.Contact=tContact
+          }   
+        }
+      Set tContact.Name = pSubmit.%GetValue("Name")
+      Set tContact.ContactType = pSubmit.%GetValue("ContactType")
+     
+       Set tSC = tContact.%Save()
+       if $$$ISERR(tSC) {
+           Do pSubmit.%SetError("ContactID","Error saving this form.")
+}
+     }
+  }
+ Quit $$$OK
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="ContactDB.PhoneNumber">
+<Super>%Persistent,%Populate,%XML.Adaptor</Super>
+<TimeChanged>61558,57326.992663</TimeChanged>
+<TimeCreated>61558,50633.926369</TimeCreated>
+
+<Property name="Number">
+<Type>%String</Type>
+<Parameter name="POPSPEC" value="USPhone()"/>
+</Property>
+
+<Property name="PhoneNumberType">
+<Type>%String</Type>
+<Parameter name="VALUELIST" value=",Business,Home,Fax,Mobile"/>
+</Property>
+
+<Property name="Contact">
+<Type>ContactDB.Contact</Type>
+<Cardinality>parent</Cardinality>
+<Inverse>PhoneNumbers</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>^ContactDB.PhoneNumberD</DataLocation>
+<DefaultData>PhoneNumberDefaultData</DefaultData>
+<IdLocation>^ContactDB.PhoneNumberD</IdLocation>
+<IndexLocation>^ContactDB.PhoneNumberI</IndexLocation>
+<StreamLocation>^ContactDB.PhoneNumberS</StreamLocation>
+<Data name="PhoneNumberDefaultData">
+<Structure>listnode</Structure>
+<Subscript/>
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>PhoneNumber</Value>
+</Value>
+<Value name="3">
+<Value>Type</Value>
+</Value>
+<Value name="4">
+<Value>Number</Value>
+</Value>
+<Value name="5">
+<Value>PhoneNumberType</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+</Export>

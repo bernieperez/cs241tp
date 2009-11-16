@@ -1,0 +1,41 @@
+<!--
+This is imported by all the JVI demo build.xml files.
+-->
+
+<project name="jvidemo" basedir=".">
+
+    <property environment="env"/>
+    <property name="src" value="src"/>
+    <property name="build" value="build"/>
+    <property name="build.classes" value="${build}/classes"/>
+    <property name="versant.root" value="${env.VERSANT_ROOT}"/>
+    <property name="versant.lib" value="${versant.root}/lib"/>
+    <!-- on 64bit platforms -->
+    <!-- <property name="jvm.options" value="-d64"/> -->
+    <property name="jvm.options" value=""/>
+
+    <path id="cp">
+        <pathelement path="${build.classes}"/>
+        <pathelement path="${versant.lib}/jvi7.0.1-jdk1.4.jar"/>
+    </path>
+
+    <target name="clean"
+        description="Get rid of all generated files">
+        <delete dir="${build}"/>
+        <mkdir dir="${build.classes}"/>
+    </target>
+
+    <target name="compile" 
+        description="Compile all Java sources">
+        <javac srcdir="${src}" destdir="${build.classes}" classpathref="cp" compiler="modern" debug="true"/>
+    </target>
+
+    <target name="enhance"
+        description="Enhance all classes">
+        <java classname="com.versant.Enhance" classpathref="cp" fork="yes" failonerror="yes">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="-config ${src}/config.jvi -in ${build.classes} -out ${build.classes}"/>
+        </java>
+    </target>
+
+</project>

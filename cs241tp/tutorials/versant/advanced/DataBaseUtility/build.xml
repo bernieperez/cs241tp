@@ -1,0 +1,86 @@
+<!--
+Demo for JVI DBUtility API.
+-->
+
+<project name="DataBaseUtility" default="run" basedir=".">
+	
+    <import file="../../common.xml"/>
+
+    <target name="run" depends="clean,compile,enhance"
+        description="Run the demo">
+        <java classname="DataBaseUtility.CreateDBs" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="-create jvidb1"/>
+        </java>
+        <java classname="DataBaseUtility.CreateDBs" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="-create jvidb2"/>
+        </java>
+        <java classname="DataBaseUtility.CreateDBs" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="-create jvidb3"/>
+        </java>
+        <java classname="DataBaseUtility.CreateDBs" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="-create jvidb4"/>
+        </java>
+        <java classname="DataBaseUtility.CreateUser" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="-create jvidb1 dbuser versant"/>
+        </java>
+        <java classname="DataBaseUtility.ClassCompDB" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="jvidb1 jvidb2"/>
+        </java>
+        <java classname="DataBaseUtility.CompDB" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="jvidb1 jvidb2"/>
+        </java>
+        <java classname="DataBaseUtility.CopyDB" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="jvidb1 jvidb3"/>
+        </java>
+        <java classname="DataBaseUtility.DBComp" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="jvidb1 jvidb3"/>
+        </java>
+        <java classname="DataBaseUtility.DBInformation" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="localhost ${user.name} jvidb1"/>
+        </java>
+        <java classname="DataBaseUtility.BackupDB" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="jvidb1 ${build}/jvidb1.backup 0"/>
+        </java>
+        <java classname="DataBaseUtility.RestoreDB" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="jvidb1 ${build}/jvidb1.backup 0 jvidb4"/>
+        </java>
+        <java classname="DataBaseUtility.DBStatistics" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="jvidb1"/>
+        </java>
+        <java classname="DataBaseUtility.CreateUser" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="-remove jvidb1 dbuser versant"/>
+        </java>
+        <java classname="DataBaseUtility.CreateDBs" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="-remove jvidb1"/>
+        </java>
+
+        <java classname="DataBaseUtility.CreateDBs" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="-remove jvidb2"/>
+        </java>
+        <java classname="DataBaseUtility.CreateDBs" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="-remove jvidb3"/>
+        </java>
+        <java classname="DataBaseUtility.CreateDBs" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="-remove jvidb4"/>
+        </java>
+    </target>
+
+</project>

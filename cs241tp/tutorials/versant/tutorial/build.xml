@@ -1,0 +1,124 @@
+<!--
+JVI Tutorial.
+-->
+
+<project name="JVITutorial" default="" basedir=".">
+	
+    <import file="../common.xml"/>
+	 <echo>=============================================</echo>
+	 <echo>tutorial demo needs to be run manually !!!</echo>
+	 <echo>Please check the tutorial.pdf </echo>
+	 <echo>=============================================</echo>	
+    <target name="runCreatePerson" depends="clean,compile,enhance"
+        description="Run the CreatePerson application">
+        <java classname="tutorial.CreatePerson" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="tutdb Bob 28"/>
+        </java>
+    </target>
+
+    <target name="runCreatePersonWithRoot" depends="clean,compile,enhance"
+        description="Run the CreatePersonWithRoot application">
+        <java classname="tutorial.CreatePersonWithRoot" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="tutdb Mary 43 mary_root"/>
+        </java>
+    </target>
+
+    <target name="runFindPersonWithRoot" depends="clean,compile,enhance"
+        description="Run the FindPersonWithRoot application">
+        <java classname="tutorial.FindPersonWithRoot" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="tutdb mary_root"/>
+        </java>
+    </target>
+
+    <target name="runFindPersonWithVQL" depends="clean,compile,enhance"
+        description="Run the FindPersonWithVQL application">
+        <java classname="tutorial.FindPersonWithVQL" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="tutdb"/>
+        </java>
+    </target>
+
+    <target name="runIncreaseAge" depends="clean,compile,enhance"
+        description="Run the IncreaseAge application">
+        <java classname="tutorial.IncreaseAge" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="tutdb"/>
+        </java>
+    </target>
+
+    <target name="runDeletePersonWithRoot" depends="clean,compile,enhance"
+        description="Run the DeletePersonWithRoot application">
+        <java classname="tutorial.DeletePersonWithRoot" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="tutdb mary_root"/>
+        </java>
+    </target>
+
+    <target name="runAddEmployees" depends="clean,compile,enhance"
+        description="Run the AddEmployees application">
+        <java classname="tutorial.AddEmployees" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="tutdb"/>
+        </java>
+    </target>
+
+    <target name="runCreateLinkedList" depends="clean,compile,enhance"
+        description="Run the CreateLinkedList application without a root name">
+        <java classname="tutorial.CreateLinkedList" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="tutdb"/>
+        </java>
+    </target>
+
+    <target name="runCreateLinkedListWithRoot" depends="clean,compile,enhance"
+        description="Run the CreateLinkedList application with a root name">
+        <java classname="tutorial.CreateLinkedList" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="tutdb list_root"/>
+        </java>
+    </target>
+
+    <target name="runFindLinkedList" depends="clean,compile,enhance"
+        description="Run the FindLinkedList application">
+        <java classname="tutorial.FindLinkedList" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="tutdb list_root"/>
+        </java>
+    </target>
+
+    <target name="runCreatePersonVector" depends="clean,compile,enhance"
+        description="Run the CreatePersonVector application several times">
+        <java classname="tutorial.CreatePersonVector" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="tutdb Alex 24 friends"/>
+        </java>
+        <java classname="tutorial.CreatePersonVector" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="tutdb Sarah 21 friends"/>
+        </java>
+        <java classname="tutorial.CreatePersonVector" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="tutdb Lee 36 friends"/>
+        </java>
+        <java classname="tutorial.CreatePersonVector" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="tutdb Casper 256 enemies"/>
+        </java>
+        <java classname="tutorial.CreatePersonVector" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="tutdb Garfield 14 enemies"/>
+        </java>
+    </target>
+
+    <target name="runFindPersonVector" depends="clean,compile,enhance"
+        description="Run the FindPersonVector application">
+        <java classname="tutorial.FindPersonVector" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="tutdb friends"/>
+        </java>
+    </target>
+
+ </project>

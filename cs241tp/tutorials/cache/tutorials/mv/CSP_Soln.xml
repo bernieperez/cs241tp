@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="22" zv="Cache for Windows (x86-32) 2008.2 (Build 506U)" ts="2008-10-16 15:26:29">
+<CSP name="Person.CSP" application="/csp/myaccount/" default="1"><![CDATA[
+<%@ PAGE LANGUAGE="mvBASIC" %>
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css"
+href="table_style.css" />
+<title>	Cache Server Page </title>
+
+</head>
+
+<body>
+<img src="gxml_logo.jpg"/>
+<table align="center">
+<tr><th>Name</th><th>Age</th><th >Hair</th> <th>View Phones</th></tr>
+<caption align="center">Person List</caption>
+ <script language="mvbasic" runat="server">
+ OPEN "DICT", "PERSON" ELSE PRINT "DICT NOT OPEN";GOTO 100
+ READV NAME.AMC FROM "NAME",2
+ READV HAIR.AMC FROM "HAIR",2
+ READV AGE.AMC FROM "AGE",2
+ OPEN "PERSON" TO PERSFILE 
+ ELSE PRINT "FILE NOT OPEN";GOTO 100 
+ SELECT PERSFILE 
+ I=1
+ LOOP
+ END.OF.LIST=0
+ READNEXT ID ELSE END.OF.LIST=1
+ UNTIL END.OF.LIST DO
+ IF MOD(I,2)<>0 THEN PRINT "<tr class=odd>" 
+ ELSE PRINT "<tr class=even>"
+ I=I+1
+ GOSUB PERSONS
+ PRINT "</tr>"
+ REPEAT
+ GOTO 100
+ PERSONS:
+ READ PERSON.ITEM FROM PERSFILE, ID 
+ ELSE PRINT "Person not found";GOTO 100
+ PRINT "<td>":PERSON.ITEM<NAME.AMC>:"</td>"
+ PRINT "<td>":PERSON.ITEM<AGE.AMC>:"</td>"
+ PRINT "<td>":PERSON.ITEM<HAIR.AMC>:"</td>"
+ PRINT "<td><a href='Phones.CSP?ID=":ID:"'>View Phones</a></td>"
+ Return
+ 100
+</script>
+</table>
+		
+</body>
+</html>
+]]></CSP>
+
+
+<CSP name="Phones.CSP" application="/csp/myaccount/" default="1"><![CDATA[
+<%@ PAGE LANGUAGE="mvBASIC" %>
+<html>
+<head>
+<link rel="stylesheet" type="text/css"
+href="table_style.css" />
+
+<!-- Put your page Title here -->
+<title>	Cache Server Page </title>
+
+</head>
+
+
+<body>
+<script language="cache" method="GetID" returntype="%String">
+Quit %request.Get("ID")
+</script>  
+<table align="center">
+<tr><th>Name</th><th>Phones</th> </tr>
+<caption>Phone List</caption>
+<script language="mvbasic" runat="server">
+ OPEN "DICT", "PERSON" ELSE PRINT "DICT NOT OPEN";GOTO 100
+ READV NAME.AMC FROM "NAME",2
+ READV PHONE.AMC FROM "PHONE",2
+ OPEN "PERSON" TO PERSFILE ELSE PRINT "FILE NOT OPEN";GOTO 100 
+ ID = @ME->GetID()
+ READV NAME FROM PERSFILE, ID, NAME.AMC ELSE PRINT "Name Not Found";GOTO 100
+ PRINT "<tr>"
+ PRINT "<td>":NAME:"</td>"
+ PRINT "<td>"
+ GOSUB PHONES
+ PRINT "</td>"
+ PRINT "</tr>" 
+ GOTO 100
+ PHONES:
+ VM=CHAR(253)
+ READV ATTR FROM PERSFILE, ID, PHONE.AMC ELSE PRINT "Phone Not Found"; GOTO 100
+ VNO=0
+ LOOP
+ VNO=VNO+1
+ VALUE=FIELD(ATTR,VM,VNO)
+ WHILE COL2() <>0 DO
+ PRINT VALUE: "</br>"
+ REPEAT
+ RETURN
+ 100
+</script>
+
+
+</table>
+</body>
+</html>
+]]></CSP>
+</Export>

@@ -1,0 +1,138 @@
+<!--
+JVI Tutorial.
+-->
+
+<project name="JVITutorial" default="list" basedir=".">
+	
+    <import file="../common.xml"/>
+	
+    <target name="removedb" description="removedb" >
+	  <exec executable="removedb" failonerror="false">
+	  <arg line="-f jviQueryDB"/>
+	 </exec>
+      </target>
+      
+     <target name="makedb" description="makedb">
+	  <exec executable="makedb"  failonerror="false">
+	    <arg line="jviQueryDB"/>
+	   </exec>
+     </target>
+	     
+     <target name="createdb" description="createdb">
+	  <exec executable="createdb"  failonerror="false">
+	    <arg line="jviQueryDB"/>
+	  </exec>  
+    </target>
+    <target name="list" description="list expample application" >
+        <echo message="Example applications:"/> 
+        <echo message="runOrderby"/> 
+        <echo message="runIndexDemo"/>
+        <echo message="runClassDemo"/>
+        <echo message="runCursor"/>
+        <echo message="runExistDemo"/>
+        <echo message="runExistValueDemo"/>
+        <echo message="runCheckInDemo"/>
+        <echo message="runNumericDemo"/>
+        <echo message="runSetParam"/>
+        <echo message="runRedHonda"/>
+        <echo message="runSetDemo"/>
+        <echo message="runSetCandidate"/>
+        <echo message="runStringMatch"/>
+    </target>
+    <target name="runOrderby" depends="clean, compile, enhance, removedb, makedb, createdb"
+        description="Run the Orderby application">
+        <java classname="orderby.Orderby" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="jviQueryDB"/>
+        </java>
+    </target>
+    <target name="runIndexDemo" depends="clean, compile, enhance, removedb, makedb, createdb"
+        description="Run the IndexDemo application">
+        <java classname="index.IndexDemo" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="jviQueryDB"/>
+        </java>
+        <java classname="index.IndexDemo" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="jviQueryDB -run"/>
+        </java>
+    </target>
+    <target name="runClassDemo" depends="clean, compile, enhance, removedb, makedb, createdb"
+        description="Run the ClassDemo application">
+        <java classname="class_match.ClassDemo" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="jviQueryDB -run"/>
+        </java>
+    </target>
+   <target name="runCursor" depends="clean, compile, enhance, removedb, makedb, createdb"
+        description="Run the Cursor application">
+        <java classname="cursor.Cursor" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="jviQueryDB"/>
+        </java>
+    </target>
+   <target name="runExistDemo" depends="clean, compile, enhance, removedb, makedb, createdb"
+        description="Run the ExistDemo application">
+        <java classname="forallexists_link.ExistDemo" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="jviQueryDB"/>
+        </java>
+    </target>
+   <target name="runExistValueDemo" depends="clean, compile, enhance, removedb, makedb, createdb"
+        description="Run the ExistDemo application">
+	<java classname="forallexists_value.ExistValueDemo" classpathref="cp" fork="true">
+        <jvmarg line="${jvm.options}"/>
+        <arg line="jviQueryDB"/>
+	</java>
+    </target>
+   <target name="runCheckInDemo" depends="clean, compile, enhance, removedb, makedb, createdb"
+        description="Run the CheckInDemo application">
+        <java classname="in_expression.CheckInDemo" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="jviQueryDB"/>
+        </java>
+    </target>
+    <target name="runNumericDemo" depends="clean, compile, enhance, removedb, makedb, createdb"
+        description="Run the NumericDemo application">
+        <java classname="numeric_expression.NumericDemo" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="jviQueryDB"/>
+        </java>
+    </target>
+    <target name="runSetParam" depends="clean, compile, enhance, removedb, makedb, createdb"
+        description="Run the SetParam application">
+        <java classname="setparam.SetParam" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="jviQueryDB"/>
+        </java>
+    </target>
+    <target name="runRedHonda" depends="clean, compile, enhance, removedb, makedb, createdb"
+        description="Run the RedHonda application">
+        <java classname="redhonda.RedHonda" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="jviQueryDB"/>
+        </java>
+    </target>
+    <target name="runSetDemo" depends="clean, compile, enhance, removedb, makedb, createdb"
+        description="Run the SetDemo application">
+        <java classname="set_operators.SetDemo" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="jviQueryDB"/>
+        </java>
+    </target>
+    <target name="runSetCandidate" depends="clean, compile, enhance, removedb, makedb, createdb"
+        description="Run the SetCandidate application">
+        <java classname="setcandidate.SetCandidate" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="jviQueryDB"/>
+        </java>
+    </target>
+    <target name="runStringMatch" depends="clean, compile, enhance, removedb, makedb, createdb"
+        description="Run the StringMatch application">
+        <java classname="string_match.StringMatch" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="jviQueryDB"/>
+        </java>
+    </target>
+
+ </project>

@@ -1,0 +1,1349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="22" zv="Cache for Windows (x86-32) 2009.1.2 (Build 602U)" ts="2009-10-26 13:49:23">
+<Project name="BAS" LastModified="2009-10-26 11:15:56">
+  <Items>
+    <ProjectItem name="BASRightTriangle.bas" type="MAC"/>
+    <ProjectItem name="BASdatent1.bas" type="MAC"/>
+    <ProjectItem name="BASdatent2.bas" type="MAC"/>
+    <ProjectItem name="BASdatentobj.bas" type="MAC"/>
+    <ProjectItem name="BASdbconvert.bas" type="MAC"/>
+    <ProjectItem name="BASlookup1.bas" type="MAC"/>
+    <ProjectItem name="BASlookup2.bas" type="MAC"/>
+    <ProjectItem name="BASlookupobj.bas" type="MAC"/>
+    <ProjectItem name="BAStraverse.bas" type="MAC"/>
+    <ProjectItem name="BasTutorial.Person" type="CLS"/>
+  </Items>
+</Project>
+
+
+<Routine name="BASRightTriangle" type="BAS" languagemode="9" timestamp="59198,59868"><![CDATA[
+' RightTriangle compute area and hypotenuse of a right triangle
+' this routine contains examples of Cache Basic features */
+ 
+Sub Run() 
+println "Compute the area and hypotenuse of a right triangle"
+println "given the lengths of its two sides."    
+println
+println "First, choose a unit of measurement. " 
+input "(i)nches, (f)eet, (m)iles, " _
+      , "(c)entimeters, m(e)ters, (k)ilometers: ", units
+println
+' translate units to a full word
+select case left(units, 1)
+	case "i" units = "inches"
+	case "f" units = "feet"
+	case "m" units = "miles"
+	case "c" units = "centimeters"
+	case "e" units = "meters"
+	case "k" units = "kilometers"
+	case else units = "units"
+end select
+ 
+do
+	println
+	input "Length of side 1: ", side1
+	if (side1) = "" then exit do
+loop while IsNegative( side1 )
+if (side1 = "") then exit sub
+ 
+do
+	println
+	input "Length of side 2: ", side2
+	if (side2) = "" then exit do
+loop while IsNegative( side2 )
+if (side2 = "") then exit sub
+ 
+Compute(units, side1, side2)
+end sub
+ 
+public function IsNegative(ByVal num As %String) As %Boolean
+' is num negative?
+	' check in range "1" through "9"
+	if (num < chr(49)) or (num > chr(57)) then
+		print "  Enter a positive number." 
+		return True
+	else
+		print "  Accepted."
+		return False
+	end if
+end function
+ 
+private function Compute(ByVal units As %String, ByVal A As %Integer, ByVal B As %Integer)
+' compute and display area and hypotenuse
+ 
+area  = round((( A * B ) / 2), 2)
+hypot = round(sqr(( A ^ 2 ) + ( B ^ 2 )), 2)
+  
+println : println
+println "The area of this triangle is ", area, " square ", units, "."
+println
+println "The hypotenuse is ", hypot, " ", units, "."
+end function
+ 
+ 
+]]></Routine>
+
+
+<Routine name="BASdatent1" type="BAS" languagemode="9" timestamp="59207,50535"><![CDATA[
+' initial data entry routine
+Option Explicit
+dim name, phone, dob
+ 
+public sub main() ' main loop section
+	do 
+		prompt()
+		if (name = "") then exit sub
+		display()
+		store()
+	loop
+end sub
+ 
+private sub prompt()
+' subroutine for prompting
+ 
+	input "Name: ", name : println
+	if (name = "") then exit sub
+	input "Phone: ", phone : println
+	input "DOB: ", dob : println
+	println
+	
+end sub
+ 
+public sub display()
+' subroutine for displaying data
+ 
+	println "Name:", space(15), name
+	println "Phone:", space(14), phone
+	println "DOB:", space(16), dob
+	println
+end sub
+ 
+public sub store()
+' subroutine for storage
+' to be completed in Exercise 2
+end sub
+]]></Routine>
+
+
+<Routine name="BASdatent2" type="BAS" languagemode="9" timestamp="59207,84924"><![CDATA[
+' finished data entry routine
+Option Explicit
+dim name, phone, dob, intdob
+ 
+public sub main() ' main loop section
+	do 
+		prompt()
+		if (name = "") then exit sub
+		display()
+		store()
+	loop
+end sub
+ 
+private sub prompt()
+' subroutine for prompting
+ 
+	do
+		input "Name: ", name : println
+		if (name = "") then exit sub
+		name = validName(name)
+	loop while name = 0
+	do
+		input "Phone (617): ", phone : println
+		phone = validPhone(phone)
+	loop while phone = 0
+	do
+		input "DOB: ", dob : println
+		intdob = validDOB(dob)
+	loop while intdob = 0
+	println
+	
+end sub
+ 
+public sub display()
+' subroutine for displaying data
+ 
+	println "Name:", space(15), name
+	println "Phone:", space(14), phone
+	println "DOB:", space(16), DateConvert(intdob, vbToExternal)
+	println
+end sub
+ 
+public sub store()
+' store the data
+	dim yn, id, rec, ln, fn
+ 
+	input "Store? (y/n): ", yn ' see if user wants to store
+	' only go on if user says yes
+	if ( yn <> "y" ) then
+		println "...not stored."
+		exit sub
+	end if
+ 
+	id = increment(^PersonD) ' generate a new id
+	rec = name & "^" & phone & "^" & intdob ' concatenate data into a record
+	^PersonD( id ) = rec ' store the record
+ 
+	' break name for storage in index
+	ln = piece(name, ",", 1) : fn = piece(name, ",", 2)
+ 
+	' the next three statements store data in subscripts
+	' because of the automatic sorting of subscripts,
+	' this has the effect of building 3 indexes: name, phone, and DOB
+	^PersonI( "Name", ln, fn, id) = "" ' store the name
+	^PersonI( "Phone", phone) = id     ' store the UNIQUE phone
+	^PersonI( "DOB", intdob, id) = ""  ' store the DOB
+	println "...stored"                ' done
+ 
+end sub
+ 
+public function validName(name As %String) As %String
+' validate a name - just checks for 2 pieces using ","
+' returns 0 for an invalid name and writes error message
+' else returns formatted name
+if len(name, ",") = 2 then
+	return formatName(name)
+else
+	print "Enter Last,First" : println
+	return 0
+end if
+end function
+ 
+public function formatName(name As %String) As %String
+' change user's entry into proper name format
+' SMITH,JOHN and smith,john -> Smith,John
+	dim ln, fn
+	ln = piece(name, ",", 1) : fn = piece(name, ",", 2)
+	ln = ucase(left(ln, 1)) & lcase(mid(ln, 2, len(ln)))
+	fn = ucase(left(fn, 1)) & lcase(mid(fn, 2, len(fn)))
+	return ln & "," & fn
+end function
+ 
+ 
+public function validPhone(phone As %String) As %String
+' validate a phone - just checks for 2-3 pieces using "-" and length
+' returns 0 for an invalid phone and writes error message
+' else returns unchanged phone with default area code added
+	if (len(phone) = 8 and len(phone, "-") = 2) then
+		phone = "617-" & phone ' add default area code
+	end if
+	
+	if (len(phone) = 12 and len(phone, "-") = 3) then
+		if exists( ^PersonI( "Phone", phone)) then
+			print "Phone number in use" : println
+			return 0
+		else
+			return phone
+		end if		
+	else
+		print "Enter ###-###-#### or ###-####" : println
+		return 0
+	end if
+end function
+ 
+public function validDOB(dob As %String) As %Integer
+' validate a date of birth - a valid date before or equal to today
+' returns 0 for invalid dates and writes error message
+' else returns internal format for valid dates
+ 
+On Error Goto BadDate
+	if DateDiff("d", dob, Date) < 0 then
+		print "Enter a date in the past" : println
+		return 0
+	else
+		return DateConvert(dob, vbToInternal)
+	end if
+ 
+BadDate:
+	print "Invalid date" : println
+	return 0
+end function
+]]></Routine>
+
+
+<Routine name="BASdatentobj" type="BAS" languagemode="9" timestamp="59209,60984"><![CDATA[
+' finished data entry routine
+Option Explicit
+dim name, phone, dob, intdob
+ 
+public sub main() ' main loop section
+	do 
+		prompt()
+		if (name = "") then exit sub
+		display()
+		store()
+	loop
+end sub
+ 
+private sub prompt()
+' subroutine for prompting
+ 
+	do
+		input "Name: ", name : println
+		if (name = "") then exit sub
+		name = validName(name)
+	loop while name = 0
+	do
+		input "Phone (617): ", phone : println
+		phone = validPhone(phone)
+	loop while phone = 0
+	do
+		input "DOB: ", dob : println
+		intdob = validDOB(dob)
+	loop while intdob = 0
+	println
+	
+end sub
+ 
+public sub display()
+' subroutine for displaying data
+ 
+	println "Name:", space(15), name
+	println "Phone:", space(14), phone
+	println "DOB:", space(16), DateConvert(intdob, vbToExternal)
+	println
+end sub
+ 
+public sub store()
+' store the data
+	dim yn, per
+ 
+	input "Store? (y/n): ", yn ' see if user wants to store
+	' only go on if user says yes
+	if ( yn <> "y" ) then
+		println "...not stored."
+		exit sub
+	end if
+ 
+	per = New BasTutorial.Person()
+	with per
+		.Name = name
+		.Phone = phone
+		.DOB = intdob
+		.%Save()
+	end with
+	per = Nothing
+	println "...stored"                ' done
+end sub
+ 
+public function validName(name As %String) As %String
+' validate a name - just checks for 2 pieces using ","
+' returns 0 for an invalid name and writes error message
+' else returns formatted name
+if len(name, ",") = 2 then
+	return formatName(name)
+else
+	print "Enter Last,First" : println
+	return 0
+end if
+end function
+ 
+public function formatName(name As %String) As %String
+' change user's entry into proper name format
+' SMITH,JOHN and smith,john -> Smith,John
+	dim ln, fn
+	ln = piece(name, ",", 1) : fn = piece(name, ",", 2)
+	ln = ucase(left(ln, 1)) & lcase(mid(ln, 2, len(ln)))
+	fn = ucase(left(fn, 1)) & lcase(mid(fn, 2, len(fn)))
+	return ln & "," & fn
+end function
+ 
+ 
+public function validPhone(phone As %String) As %String
+' validate a phone - just checks for 2-3 pieces using "-" and length
+' returns 0 for an invalid phone and writes error message
+' else returns unchanged phone with default area code added
+	if (len(phone) = 8 and len(phone, "-") = 2) then
+		phone = "617-" & phone ' add default area code
+	end if
+	
+	if (len(phone) = 12 and len(phone, "-") = 3) then
+		if exists( ^PersonI( "Phone", phone)) then
+			print "Phone number in use" : println
+			return 0
+		else
+			return phone
+		end if		
+	else
+		print "Enter ###-###-#### or ###-####" : println
+		return 0
+	end if
+end function
+ 
+public function validDOB(dob As %String) As %Integer
+' validate a date of birth - a valid date before or equal to today
+' returns 0 for invalid dates and writes error message
+' else returns internal format for valid dates
+ 
+On Error Goto BadDate
+	if DateDiff("d", dob, Date) < 0 then
+		print "Enter a date in the past" : println
+		return 0
+	else
+		return DateConvert(dob, vbToInternal)
+	end if
+ 
+BadDate:
+	print "Invalid date" : println
+	return 0
+end function
+]]></Routine>
+
+
+<Routine name="BASdbconvert" type="BAS" languagemode="9" timestamp="59208,7088"><![CDATA[
+' convert ^PersonD from pieces to lists
+' also make a slight change to the structure of ^PersonI("Phone")
+ 
+public sub main()
+for i = 1 to ^PersonD               ' for each entry in ^PersonD
+	rec = ^PersonD(i)               ' get the record
+	howmany = len(rec, "^")         ' how many ^ pieces are there?
+	newrec = ""					    ' initialize
+	for j = 1 to howmany            ' for each piece, copy into list
+		set newrec = newrec & _
+		             listbuild(piece(rec, "^", j))
+	next j
+	^PersonD(i) = newrec            ' store the record back
+	ph = piece(rec, "^", 2)         ' get the phone number
+	erase ^PersonI("Phone", ph)     ' delete the old record
+	^PersonI("Phone", ph, i)=""     ' save id in the subscript
+next i
+end sub
+ 
+public sub goback()
+' convert back from lists to pieces
+' also make a slight change to the structure of ^PersonI("Phone")
+for i = 1 to ^PersonD               ' for each entry in ^PersonD
+	rec = ^PersonD(i)               ' get the record
+	howmany = listlength(rec)         ' how many list items are there?
+	newrec = ""					    ' initialize
+	for j = 1 to howmany            ' for each item, copy into piece
+         set newrec = newrec & list(rec, j)
+         if j <> howmany then newrec = newrec & "^" 
+	next j
+	^PersonD(i) = newrec            ' store the record back
+	ph = list(rec, 2)               ' get the phone number
+	^PersonI("Phone", ph) = i       ' save id normally
+    erase ^PersonI("Phone", ph, i)  ' delete the old record
+next i
+end sub
+]]></Routine>
+
+
+<Routine name="BASlookup1" type="BAS" languagemode="9" timestamp="59209,63137"><![CDATA[
+' display an ordered list of matches
+' user can enter full or partial name, full or partial phone, or a valid date
+' pick from a list of matches, and see their choice
+Option Explicit
+dim id, name, phone, intdob, matches
+ 
+public sub main()
+	dim done
+	do
+		getsubmit(id, done) ' let user submit a string for lookup
+		if id = 0 then continue do
+		display(id, "table") ' display the chosen person
+	loop until done
+end sub
+ 
+private sub getsubmit(ByRef id as %Integer, ByRef done as %Boolean)
+' ask user what to search for, and take appropriate action
+	dim submit   
+	id = 0 : done = False
+	println : input "Lookup: ", submit : println
+	if (submit = "") then ' user entered nothing
+		done = True
+		exit sub 
+	end if
+	' figure out what user entered
+	if (submit = "?") then ' display help
+		help()
+	elseif (InStr(submit, "-") or (submit > 0 and submit < 999)) then
+		println "...finding phone number"
+		getphone(submit, id)
+	elseif InStr(submit, ",") then
+		submit = formatName@BASdatent2(submit)
+		println "...finding name"
+		getname(submit, id)
+	elseif validDOB@BASdatent2(submit) then
+		println "...finding birthday"
+		getdob(submit, id)
+	' else it's an error
+	end if
+end sub
+ 
+private sub help()
+' display different types of lookups
+	println  "You can enter:"
+	println space(10), "* full name: Smith,John"
+	println space(10), "* last name only: Smith,"
+	println space(10), "* partial name: Sm,J or Smith,J or Sm,John"
+	println space(10), "* phone number with area code: 617-621-0600"
+	println space(10), "* partial phone numbers: 617 or 617-621"
+	println space(10), "* date of birth"
+	println
+end sub
+ 
+private sub getdob(dob as %String, ByRef id As %Integer)
+' perform dob lookup
+' no partial matches
+' if user picks a name from the list, id is returned to the caller
+	dim count, loopid
+	erase matches
+	intdob = validDOB@datent(dob) ' convert dob
+	' is the date of birth in the index?
+	if not exists(^PersonI("DOB", intdob)) then
+		print "...no matches"
+		exit sub
+	end if
+	loopid = ""
+	' loop through ids, and number them
+	do
+		count = count + 1
+		loopid = traverse(^PersonI("DOB", intdob, loopid))
+		if loopid = "" then exit do
+		matches(count) = loopid
+		print count, ") "
+		display(loopid, "line")
+	loop
+	pick(id)
+end sub
+ 
+private sub getphone(origph as %String, ByRef id As %Integer)
+' perform phone lookup
+' if user picks a name from the list, id is returned to the caller
+	erase matches
+	dim count, loopid, ph
+	count = 0 ' assume no matches
+	if (origph > 0 and origph < 999) then
+		origph = origph & "-" ' change to a string instead of a number
+	end if
+	' origph may be an exact match, if not, use traverse()
+	ph = origph
+	if not exists(^PersonI("Phone", origph)) then
+		ph = traverse(^PersonI("Phone", origph), 1, loopid)
+	else
+		loopid = ^PersonI("Phone", origph)
+	end if
+	' loop through phone numbers, and number them, quit as soon as phone doesn't match original
+	' loopid holds the ONE id per phone number
+	do
+		count = count + 1
+     	if left(ph, len(origph)) <> origph then exit do
+		matches(count) = loopid
+		print count, ") "
+		display(loopid, "line")
+		ph = traverse(^PersonI("Phone", ph), 1, loopid)
+	loop
+	if not exists(matches) then ' were there matches?
+		print "...no matches"
+		exit sub
+    end if
+	pick(id)
+end sub
+ 
+private sub getname(name As %String, ByRef id As %Integer)
+' perform name lookup
+' if user picks a name from the list, id is returned to the caller
+	erase matches
+	dim count, loopid, origln, origfn, ln, fn
+	count = 0 ' assume no matches
+	origln = piece(name, ",", 1) : origfn = piece(name, ",", 2)
+	' origln may be an exact match, if not, advance using traverse()
+	ln = origln
+	if not exists(^PersonI("Name", origln)) then
+		set ln = traverse(^PersonI("Name", origln))
+	end if
+	' loop through last names
+	' quit as soon as last name doesn't match original
+	do
+		if (left(ln, len(origln)) <> origln) then exit do
+		' origfn may be an exact match, if not, advance using traverse()
+		fn = origfn
+		if (origfn = "") or not exists(^PersonI("Name", ln, origfn)) then
+			fn = traverse(^PersonI("Name", ln, origfn))
+		end if
+		' loop through first names
+		' quit as soon as first name doesn't match original, or is ""
+		do
+			if ((left(fn, len(origfn)) <> origfn) or (fn = "")) then exit do
+			loopid = ""
+			' loop through ids
+			do
+				loopid = traverse(^PersonI("Name", ln, fn, loopid))
+				if (loopid = "") then exit do
+				count = count + 1
+				matches(count) = loopid
+				print count, ") "
+				display(loopid, "line")
+			loop
+			fn = traverse(^PersonI("Name", ln, fn))
+		loop
+		ln = traverse(^PersonI("Name", ln))
+	loop
+	if  not exists(matches) then ' were there matches?
+		print "...no matches"
+     	exit sub
+    end if
+	pick(id)
+end sub
+ 
+private sub pick(ByRef id As %Integer)
+' choose from the displayed items, and set up id
+' id is 0 if no choice is made, id is >0 when user makes a choice
+	dim choice
+	do
+		input "Choose by number: ", choice : println
+		if (choice = "") then exit sub
+		id = matches(choice)
+		if (id <> "")  then exit sub ' valid choice
+		id = 0
+		println "Invalid choice"
+    loop
+end sub
+ 
+private sub display(id As %Integer, style as %String)
+' given an id, get data and write it
+	dim rec
+	rec = ^PersonD(id)
+	name = piece(rec, "^", 1)
+	phone = piece(rec, "^", 2)
+	intdob = piece(rec, "^", 3)
+	if style = "line" then
+		println name, space(2), phone, space(2), DateConvert(intdob, vbToExternal)
+	else
+		display@BASdatent2()
+    end if
+end sub
+]]></Routine>
+
+
+<Routine name="BASlookup2" type="BAS" languagemode="9" timestamp="59209,63158"><![CDATA[
+' display an ordered list of matches
+' user can enter full or partial name, full or partial phone, or a valid date
+' pick from a list of matches, and EDIT their choice
+Option Explicit
+dim id, name, phone, intdob, matches
+ 
+public sub main()
+	dim done
+	do
+		getsubmit(id, done) ' let user submit a string for lookup
+		if id = 0 then continue do
+		display(id, "table") ' display the chosen person
+		edit(id) ' edit the chosen person
+	loop until done
+end sub
+ 
+private sub getsubmit(ByRef id as %Integer, ByRef done as %Boolean)
+' ask user what to search for, and take appropriate action
+	dim submit   
+	id = 0 : done = False
+	println : input "Lookup: ", submit : println
+	if (submit = "") then ' user entered nothing
+		done = True
+		exit sub 
+	end if
+	' figure out what user entered
+	if (submit = "?") then ' display help
+		help()
+	elseif (InStr(submit, "-") or (submit > 0 and submit < 999)) then
+		println "...finding phone number"
+		getphone(submit, id)
+	elseif InStr(submit, ",") then
+		submit = formatName@BASdatent2(submit)
+		println "...finding name"
+		getname(submit, id)
+	elseif validDOB@BASdatent2(submit) then
+		println "...finding birthday"
+		getdob(submit, id)
+	' else it's an error
+	end if
+end sub
+ 
+private sub help()
+' display different types of lookups
+	println  "You can enter:"
+	println space(10), "* full name: Smith,John"
+	println space(10), "* last name only: Smith,"
+	println space(10), "* partial name: Sm,J or Smith,J or Sm,John"
+	println space(10), "* phone number with area code: 617-621-0600"
+	println space(10), "* partial phone numbers: 617 or 617-621"
+	println space(10), "* date of birth"
+	println
+end sub
+ 
+private sub getdob(dob as %String, ByRef id As %Integer)
+' perform dob lookup
+' no partial matches
+' if user picks a name from the list, id is returned to the caller
+	dim count, loopid
+	erase matches
+	intdob = validDOB@datent(dob) ' convert dob
+	' is the date of birth in the index?
+	if not exists(^PersonI("DOB", intdob)) then
+		print "...no matches"
+		exit sub
+	end if
+	loopid = ""
+	' loop through ids, and number them
+	do
+		count = count + 1
+		loopid = traverse(^PersonI("DOB", intdob, loopid))
+		if loopid = "" then exit do
+		matches(count) = loopid
+		print count, ") "
+		display(loopid, "line")
+	loop
+	pick(id)
+end sub
+ 
+private sub getphone(origph as %String, ByRef id As %Integer)
+' perform phone lookup
+' if user picks a name from the list, id is returned to the caller
+	erase matches
+	dim count, loopid, ph
+	count = 0 ' assume no matches
+	if (origph > 0 and origph < 999) then
+		origph = origph & "-" ' change to a string instead of a number
+	end if
+	' origph may be an exact match, if not, use traverse()
+	ph = origph
+	if not exists(^PersonI("Phone", origph)) then
+		ph = traverse(^PersonI("Phone", origph), 1, loopid)
+	else
+		loopid = ^PersonI("Phone", origph)
+	end if
+	' loop through phone numbers, and number them, quit as soon as phone doesn't match original
+	' loopid holds the ONE id per phone number
+	do
+		count = count + 1
+     	if left(ph, len(origph)) <> origph then exit do
+		matches(count) = loopid
+		print count, ") "
+		display(loopid, "line")
+		ph = traverse(^PersonI("Phone", ph), 1, loopid)
+	loop
+	if not exists(matches) then ' were there matches?
+		print "...no matches"
+		exit sub
+    end if
+	pick(id)
+end sub
+ 
+private sub getname(name As %String, ByRef id As %Integer)
+' perform name lookup
+' if user picks a name from the list, id is returned to the caller
+	erase matches
+	dim count, loopid, origln, origfn, ln, fn
+	count = 0 ' assume no matches
+	origln = piece(name, ",", 1) : origfn = piece(name, ",", 2)
+	' origln may be an exact match, if not, advance using traverse()
+	ln = origln
+	if not exists(^PersonI("Name", origln)) then
+		set ln = traverse(^PersonI("Name", origln))
+	end if
+	' loop through last names
+	' quit as soon as last name doesn't match original
+	do
+		if (left(ln, len(origln)) <> origln) then exit do
+		' origfn may be an exact match, if not, advance using traverse()
+		fn = origfn
+		if (origfn = "") or not exists(^PersonI("Name", ln, origfn)) then
+			fn = traverse(^PersonI("Name", ln, origfn))
+		end if
+		' loop through first names
+		' quit as soon as first name doesn't match original, or is ""
+		do
+			if ((left(fn, len(origfn)) <> origfn) or (fn = "")) then exit do
+			loopid = ""
+			' loop through ids
+			do
+				loopid = traverse(^PersonI("Name", ln, fn, loopid))
+				if (loopid = "") then exit do
+				count = count + 1
+				matches(count) = loopid
+				print count, ") "
+				display(loopid, "line")
+			loop
+			fn = traverse(^PersonI("Name", ln, fn))
+		loop
+		ln = traverse(^PersonI("Name", ln))
+	loop
+	if  not exists(matches) then ' were there matches?
+		print "...no matches"
+     	exit sub
+    end if
+	pick(id)
+end sub
+ 
+private sub pick(ByRef id As %Integer)
+' choose from the displayed items, and set up id
+' id is 0 if no choice is made, id is >0 when user makes a choice
+	dim choice
+	do
+		input "Choose by number: ", choice : println
+		if (choice = "") then exit sub
+		id = matches(choice)
+		if (id <> "")  then exit sub ' valid choice
+		id = 0
+		println "Invalid choice"
+    loop
+end sub
+ 
+private sub display(id As %Integer, style as %String)
+' given an id, get data and write it
+	load(id)
+	if style = "line" then
+		println name, space(2), phone, space(2), DateConvert(intdob, vbToExternal)
+	else
+		display@BASdatent2()
+    end if
+end sub
+ 
+private sub edit(id as %Integer)
+' allow user to choose, and edit their choice
+	dim yn, newname, newphone, newintdob
+	do
+		input "Edit? (y/n): " ,yn : println
+		if yn <> "y" then
+			print "...no changes."
+			exit sub
+		end if
+		' try to lock the record
+		if lock(^PersonD(id), 5) then exit do
+		println "...someone else is editing this person"
+	loop
+	load(id)
+	if reprompt(newname, newphone, newintdob) then
+		input "Store? (y/n): ", yn : println
+		if yn <> "y" then
+			print "...no changes."
+		else
+			update(id, newname, newphone, newintdob)
+		end if
+	end if
+	unlock(^PersonD(id))
+end sub
+ 
+private sub load(id as %Integer)
+' load a person into local variables
+	dim rec
+	rec = ^PersonD(id)
+	name = piece(rec, "^", 1)
+	phone = piece(rec, "^", 2)
+	intdob = piece(rec, "^", 3)
+end sub
+ 
+private function reprompt(ByRef newname As %String,_
+                     ByRef newphone As %String,_
+                     ByRef newintdob As %Integer) As %Boolean
+' show current data and allow user to update it
+	dim changed, newdob
+	changed = False
+	do
+		print "Name: ", name, "=> "
+		input newname : println
+		if (newname = "") then
+			newname = name ' default
+		else
+			newname = validName@BASdatent2(newname)
+		end if
+	loop while newname = 0
+	if name <> newname then changed = True
+	do
+		print "Phone (617): ", phone, "=> "
+		input newphone : println
+		if (newphone = "") then
+			newphone = phone ' default
+		else
+			newphone = validPhone@BASdatent2(newphone)
+		end if
+	loop while newphone = 0
+	if phone <> newphone then changed = True
+	do
+		print "DOB: ", DateConvert(intdob, vbToExternal), "=> "
+		input newdob : println
+		if (newdob = "") then
+			newdob = DateConvert(intdob, vbToExternal) ' default
+			newintdob = intdob
+		else
+			newintdob = validDOB@BASdatent2(newdob)
+		end if
+	loop while newintdob = 0
+	if intdob <> newintdob then changed = True
+	println : println
+	return changed
+end function
+ 
+private sub update(id As %Integer,_
+                   newname As %String,_
+                   newphone As %String,_
+                   newintdob As %Integer)
+' update ^PersonD and ^PersonI
+	dim ln, fn, nln, nfn
+	tstart ' start a transaction
+	^PersonD(id) = newname & "^" & newphone & "^" & newintdob ' store the record
+	if newname <> name then ' erase old name and add new name to index
+		ln = piece(name, ",", 1) : fn = piece(name, ",", 2)
+		nln = piece(newname, ",", 1) : nfn = piece(newname, ",", 2)
+		erase ^PersonI("Name", ln, fn, id)
+		^PersonI("Name", nln, nfn, id) = ""
+	end if
+	if newphone <> phone then ' erase old phone and add new phone to index
+		erase ^PersonI("Phone", phone)
+		^PersonI("Phone", newphone) = id
+	end if
+	if newintdob <> intdob then ' erase old dob and add new dob to index
+		erase ^PersonI("DOB", intdob, id)
+		^PersonI("DOB", newintdob, id) = ""
+	end if
+	tcommit ' commit the transaction
+	println "...updated."
+end sub
+ 
+]]></Routine>
+
+
+<Routine name="BASlookupobj" type="BAS" languagemode="9" timestamp="59209,63031"><![CDATA[
+' display an ordered list of matches
+' user can enter full or partial name, full or partial phone, or a valid date
+' pick from a list of matches, and EDIT their choice
+Option Explicit
+dim id, name, phone, intdob, matches
+ 
+public sub main()
+	dim done
+	do
+		getsubmit(id, done) ' let user submit a string for lookup
+		if id = 0 then continue do
+		display(id, "table") ' display the chosen person
+		edit(id) ' edit the chosen person
+	loop until done
+end sub
+ 
+private sub getsubmit(ByRef id as %Integer, ByRef done as %Boolean)
+' ask user what to search for, and take appropriate action
+	dim submit   
+	id = 0 : done = False
+	println : input "Lookup: ", submit : println
+	if (submit = "") then ' user entered nothing
+		done = True
+		exit sub 
+	end if
+	' figure out what user entered
+	if (submit = "?") then ' display help
+		help()
+	elseif (InStr(submit, "-") or (submit > 0 and submit < 999)) then
+		println "...finding phone number"
+		getphone(submit, id)
+	elseif InStr(submit, ",") then
+		submit = formatName@BASdatent2(submit)
+		println "...finding name"
+		getname(submit, id)
+	elseif validDOB@BASdatent2(submit) then
+		println "...finding birthday"
+		getdob(submit, id)
+	' else it's an error
+	end if
+end sub
+ 
+private sub help()
+' display different types of lookups
+	println  "You can enter:"
+	println space(10), "* full name: Smith,John"
+	println space(10), "* last name only: Smith,"
+	println space(10), "* partial name: Sm,J or Smith,J or Sm,John"
+	println space(10), "* phone number with area code: 617-621-0600"
+	println space(10), "* partial phone numbers: 617 or 617-621"
+	println space(10), "* date of birth"
+	println
+end sub
+ 
+private sub getdob(dob as %String, ByRef id As %Integer)
+' perform dob lookup
+' no partial matches
+' if user picks a name from the list, id is returned to the caller
+	dim count, loopid
+	erase matches
+	intdob = validDOB@datent(dob) ' convert dob
+	' is the date of birth in the index?
+	if not exists(^PersonI("DOB", intdob)) then
+		print "...no matches"
+		exit sub
+	end if
+	loopid = ""
+	' loop through ids, and number them
+	do
+		count = count + 1
+		loopid = traverse(^PersonI("DOB", intdob, loopid))
+		if loopid = "" then exit do
+		matches(count) = loopid
+		print count, ") "
+		display(loopid, "line")
+	loop
+	pick(id)
+end sub
+ 
+private sub getphone(origph as %String, ByRef id As %Integer)
+' perform phone lookup
+' if user picks a name from the list, id is returned to the caller
+	erase matches
+	dim count, loopid, ph
+	count = 0 ' assume no matches
+	if (origph > 0 and origph < 999) then
+		origph = origph & "-" ' change to a string instead of a number
+	end if
+	' origph may be an exact match, if not, use traverse()
+	ph = origph
+	if not exists(^PersonI("Phone", origph)) then
+		ph = traverse(^PersonI("Phone", origph))
+		if ph <> "" then loopid = traverse(^PersonI("Phone", ph, ""))
+	else
+		loopid = traverse(^PersonI("Phone", origph, ""))
+	end if
+	' loop through phone numbers, and number them, quit as soon as phone doesn't match original
+	' loopid holds the ONE id per phone number
+	do
+		count = count + 1
+     	if left(ph, len(origph)) <> origph then exit do
+		matches(count) = loopid
+		print count, ") "
+		display(loopid, "line")
+    	ph = traverse(^PersonI("Phone", ph))
+    	if ph <> "" then loopid = traverse(^PersonI("Phone", ph, ""))
+	loop
+	if not exists(matches) then ' were there matches?
+		print "...no matches"
+		exit sub
+    end if
+	pick(id)
+end sub
+ 
+private sub getname(name As %String, ByRef id As %Integer)
+' perform name lookup
+' if user picks a name from the list, id is returned to the caller
+	erase matches
+	dim count, loopid, origln, origfn, ln, fn
+	count = 0 ' assume no matches
+	origln = piece(name, ",", 1) : origfn = piece(name, ",", 2)
+	' origln may be an exact match, if not, advance using traverse()
+	ln = origln
+	if not exists(^PersonI("Name", origln)) then
+		set ln = traverse(^PersonI("Name", origln))
+	end if
+	' loop through last names
+	' quit as soon as last name doesn't match original
+	do
+		if (left(ln, len(origln)) <> origln) then exit do
+		' origfn may be an exact match, if not, advance using traverse()
+		fn = origfn
+		if (origfn = "") or not exists(^PersonI("Name", ln, origfn)) then
+			fn = traverse(^PersonI("Name", ln, origfn))
+		end if
+		' loop through first names
+		' quit as soon as first name doesn't match original, or is ""
+		do
+			if ((left(fn, len(origfn)) <> origfn) or (fn = "")) then exit do
+			loopid = ""
+			' loop through ids
+			do
+				loopid = traverse(^PersonI("Name", ln, fn, loopid))
+				if (loopid = "") then exit do
+				count = count + 1
+				matches(count) = loopid
+				print count, ") "
+				display(loopid, "line")
+			loop
+			fn = traverse(^PersonI("Name", ln, fn))
+		loop
+		ln = traverse(^PersonI("Name", ln))
+	loop
+	if  not exists(matches) then ' were there matches?
+		print "...no matches"
+     	exit sub
+    end if
+	pick(id)
+end sub
+ 
+private sub pick(ByRef id As %Integer)
+' choose from the displayed items, and set up id
+' id is 0 if no choice is made, id is >0 when user makes a choice
+	dim choice
+	do
+		input "Choose by number: ", choice : println
+		if (choice = "") then exit sub
+		id = matches(choice)
+		if (id <> "")  then exit sub ' valid choice
+		id = 0
+		println "Invalid choice"
+    loop
+end sub
+ 
+private sub display(id As %Integer, style as %String)
+' given an id, get data and write it
+	load(id)
+	if style = "line" then
+		println name, space(2), phone, space(2), DateConvert(intdob, vbToExternal)
+	else
+		display@BASdatent2()
+    end if
+end sub
+ 
+private sub edit(id as %Integer)
+' allow user to choose, and edit their choice
+	dim yn, newname, newphone, newintdob
+	do
+		input "Edit? (y/n): " ,yn : println
+		if yn <> "y" then
+			print "...no changes."
+			exit sub
+		end if
+		' try to lock the record
+		if lock(^PersonD(id), 5) then exit do
+		println "...someone else is editing this person"
+	loop
+	load(id)
+	if reprompt(newname, newphone, newintdob) then
+		input "Store? (y/n): ", yn : println
+		if yn <> "y" then
+			print "...no changes."
+		else
+			update(id, newname, newphone, newintdob)
+		end if
+	end if
+	unlock(^PersonD(id))
+end sub
+ 
+private sub load(id as %Integer)
+' load a person into local variables
+	dim per
+	per = OpenId BasTutorial.Person(id)
+	with per
+		name = .Name
+		phone = .Phone
+		intdob = .DOB
+	end with
+	per = Nothing
+end sub
+ 
+private function reprompt(ByRef newname As %String,_
+                     ByRef newphone As %String,_
+                     ByRef newintdob As %Integer) As %Boolean
+' show current data and allow user to update it
+	dim changed, newdob
+	changed = False
+	do
+		print "Name: ", name, "=> "
+		input newname : println
+		if (newname = "") then
+			newname = name ' default
+		else
+			newname = validName@BASdatent2(newname)
+		end if
+	loop while newname = 0
+	if name <> newname then changed = True
+	do
+		print "Phone (617): ", phone, "=> "
+		input newphone : println
+		if (newphone = "") then
+			newphone = phone ' default
+		else
+			newphone = validPhone@BASdatent2(newphone)
+		end if
+	loop while newphone = 0
+	if phone <> newphone then changed = True
+	do
+		print "DOB: ", DateConvert(intdob, vbToExternal), "=> "
+		input newdob : println
+		if (newdob = "") then
+			newdob = DateConvert(intdob, vbToExternal) ' default
+			newintdob = intdob
+		else
+			newintdob = validDOB@BASdatent2(newdob)
+		end if
+	loop while newintdob = 0
+	if intdob <> newintdob then changed = True
+	println : println
+	return changed
+end function
+ 
+private sub update(id As %Integer,_
+                   newname As %String,_
+                   newphone As %String,_
+                   newintdob As %Integer)
+' update ^PersonD and ^PersonI
+	dim per
+	per = OpenId BasTutorial.Person(id)
+	with per
+		.Name = newname
+		.Phone = newphone
+		.DOB = newintdob
+		.%Save() ' this updates indexes too, all within a transaction!
+	end with
+	per = Nothing
+	println "...updated."
+end sub
+ 
+]]></Routine>
+
+
+<Routine name="BAStraverse" type="BAS" languagemode="9" timestamp="59207,82570"><![CDATA[
+' delete caller and callee below!!!
+ 
+public sub simpleloop()
+' loop through last names
+ln = ""
+do
+	ln = traverse(^PersonI("Name", ln) )
+	if ln = "" then exit do
+	println ln
+loop
+end sub
+ 
+public sub nameloop()
+' loop through all names
+ln = ""
+do
+	ln = traverse(^PersonI("Name", ln) )
+	if ln = "" then exit do
+	fn = ""
+	do
+		fn = traverse(^PersonI("Name", ln, fn) )
+		if fn = "" then exit do
+		id = ""
+		do
+			id = traverse(^PersonI("Name", ln, fn, id) )
+			if id = "" then exit do
+			rec = ^PersonD(id)
+			print piece(rec, "^", 1), space(2), 
+			print piece(rec, "^", 2), space(2)
+			println DateConvert(piece(rec, "^", 3), vbToExternal)
+		loop
+	loop
+loop
+end sub
+ 
+public sub loopstart(substr As %String)
+' loop through last names, starting at substr
+ln = substr
+if not exists(^PersonI("Name", substr)) then
+	ln = traverse(^PersonI("Name", substr))
+end if
+do
+     if ln = "" then exit do
+     println ln
+     ln = traverse(^PersonI("Name", ln) )
+loop
+end sub
+ 
+public sub loopend(substr as %String)
+' loop through last names, starting at substr, only show matches
+ln = substr
+if not exists(^PersonI("Name", substr)) then
+	ln = traverse(^PersonI("Name", substr))
+end if
+do
+	if left(ln, len(substr)) <> substr then exit do
+	println ln
+	ln = traverse(^PersonI("Name", ln) )
+loop
+end sub
+ 
+sub caller(n)
+println "start: ", n
+callee@BAStraverse(n)
+println "end: ", n
+dblbyref1@passbyref(ByVal n)
+println "double: ", n
+end sub
+ 
+sub callee(byref i)
+i = i + 1
+println "inside: ", i
+end sub
+]]></Routine>
+
+
+<Class name="BasTutorial.Person">
+<ClassType>persistent</ClassType>
+<Super>%Persistent</Super>
+<TimeChanged>61660,49589.996132</TimeChanged>
+<TimeCreated>59208,4776.597</TimeCreated>
+
+<Property name="DOB">
+<Type>%Date</Type>
+</Property>
+
+<Property name="Name">
+<Type>%String</Type>
+</Property>
+
+<Property name="LastName">
+<Type>%String</Type>
+<Calculated>1</Calculated>
+<SqlComputeCode>set {LastName}=$p({Name},",",1)</SqlComputeCode>
+<SqlComputed>1</SqlComputed>
+<Parameter name="COLLATION" value="EXACT"/>
+</Property>
+
+<Property name="FirstName">
+<Type>%String</Type>
+<Calculated>1</Calculated>
+<SqlComputeCode>set {FirstName}=$p({Name},",",2)</SqlComputeCode>
+<SqlComputed>1</SqlComputed>
+<Parameter name="COLLATION" value="EXACT"/>
+</Property>
+
+<Property name="Phone">
+<Type>%String</Type>
+<Parameter name="COLLATION" value="EXACT"/>
+<Parameter name="MAXLEN" value="12"/>
+</Property>
+
+<Index name="DOB">
+<Description>
+Index for property DOB</Description>
+<Properties>DOB</Properties>
+</Index>
+
+<Index name="Name">
+<Description>
+Index for LastName,FirstName</Description>
+<Properties>LastName,FirstName</Properties>
+</Index>
+
+<Index name="Phone">
+<Description>
+Uniqueness index for property Phone</Description>
+<Properties>Phone</Properties>
+<Unique>1</Unique>
+</Index>
+
+<Parameter name="MANAGEDEXTENT">
+<Default>0</Default>
+</Parameter>
+
+<Storage name="Default">
+<Type>%CacheStorage</Type>
+<DataLocation>^PersonD</DataLocation>
+<DefaultData>PersonDefaultData</DefaultData>
+<IdLocation>^PersonD</IdLocation>
+<IndexLocation>^PersonI</IndexLocation>
+<StreamLocation>^BasTutor.PersonS</StreamLocation>
+<Data name="PersonDefaultData">
+<Value name="1">
+<Value>Name</Value>
+</Value>
+<Value name="2">
+<Value>Phone</Value>
+</Value>
+<Value name="3">
+<Value>DOB</Value>
+</Value>
+<Value name="4">
+<Value>%%CLASSNAME</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+</Export>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="22" zv="Cache for Windows (Intel) 2007.2 (Build 248U)" ts="2007-05-22 11:15:46">
+<Class name="MVExercise.Update">
+<Language>mvbasic</Language>
+<Super>%RegisteredObject,%XML.Adaptor</Super>
+<TimeCreated>60772,39733.57113</TimeCreated>
+
+<Method name="SetValue">
+<ClassMethod>1</ClassMethod>
+<FormalSpec>ID:%String,ATTRNAME:%String,VNO:%String,VALUE:%String</FormalSpec>
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+	CALL SETVALUE(ID,ATTRNAME,VNO,VALUE)
+	RETURN VALUE
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Document name="SETVALUE.mvb"><![CDATA[
+SUBROUTINE SETVALUE(ID,ATTRNAME,VNO,VALUE)
+OPEN "DICT", "PERSON"ELSE STOP
+READV ATTR.AMC FROM ATTRNAME,2 ELSE STOP
+OPEN "PERSON" TO PERSFILE ELSE STOP
+READ PERSON FROM PERSFILE,ID ELSE STOP
+PERSON = REPLACE(PERSON,ATTR.AMC,VNO;VALUE)
+WRITE PERSON ON PERSFILE, ID
+RETURN
+]]></Document></Export>

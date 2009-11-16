@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="9" zv="Cache for Windows NT (Intel) 5.0.9 (Build 5202)" ts="2004-11-29 11:01:49">
+<Class name="JavaTutorial.Contact">
+<ClassType>persistent</ClassType>
+<Language>basic</Language>
+<ProcedureBlock>1</ProcedureBlock>
+<Super>%Persistent,%Populate</Super>
+<TimeChanged>59868,39663.096468</TimeChanged>
+<ClassDefinitionError>0</ClassDefinitionError>
+
+<Projection name="EJBProjection">
+<Type>%Projection.EJBWebLogic</Type>
+<Parameter name="APPSERVERHOME" value="c:\bea"/>
+<Parameter name="BEANNAME" value="EJBContact"/>
+<Parameter name="JAVAHOME" value="c:\J2sdk1.4.2"/>
+<Parameter name="ROOTDIR" value="C:\EJB"/>
+</Projection>
+
+<Projection name="JavaProjection">
+<Type>%Projection.Java</Type>
+<Parameter name="ROOTDIR" value="c:\cachesys\Dev\tutorials\javaandj2ee"/>
+</Projection>
+
+<Property name="Name">
+<Description>
+Represents a contact's name</Description>
+<Type>%String</Type>
+<Required>1</Required>
+<Parameter name="POPSPEC" value="Name()"/>
+</Property>
+
+<Property name="PhoneNumbers">
+<Type>JavaTutorial.PhoneNumber</Type>
+<Cardinality>children</Cardinality>
+<Inverse>Contact</Inverse>
+<Relationship>1</Relationship>
+<Parameter name="JAVATYPE" value="java.util.Map"/>
+</Property>
+
+<Property name="ContactType">
+<Description>
+Describes the nature of the contact: Personal or Business</Description>
+<Type>%String</Type>
+<Parameter name="VALUELIST" value=",Business,Personal"/>
+</Property>
+
+<Method name="ListOfContacts">
+<ClassMethod>1</ClassMethod>
+<Language>cache</Language>
+<ReturnType>%ListOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+	s contacts=##class(%Library.ListOfDataTypes).%New()
+	
+	&sql(DECLARE C1 CURSOR FOR
+    SELECT %ID
+    INTO :id
+    FROM JavaTutorial.Contact)
+
+	&sql(OPEN C1)
+ 	&sql(FETCH C1)
+	
+	 While (SQLCODE = 0) {
+ 
+    	d contacts.Insert(id)  
+    	&sql(FETCH C1)
+ 	}
+    
+	 &sql(CLOSE C1)
+	
+	q contacts
+]]></Implementation>
+</Method>
+
+<Query name="RetrieveByContactType">
+<Type>%SQLQuery</Type>
+<FormalSpec>type:%String</FormalSpec>
+<SqlQuery>SELECT Name FROM Contact
+ WHERE (ContactType = :type)</SqlQuery>
+</Query>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>^JavaTuto.ContactD</DataLocation>
+<DefaultData>ContactDefaultData</DefaultData>
+<IdLocation>^JavaTuto.ContactD</IdLocation>
+<IndexLocation>^JavaTuto.ContactI</IndexLocation>
+<StreamLocation>^JavaTuto.ContactS</StreamLocation>
+<Data name="ContactDefaultData">
+<Structure>listnode</Structure>
+<Subscript/>
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>ContactType</Value>
+</Value>
+<Value name="3">
+<Value>Name</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+<Class name="JavaTutorial.PhoneNumber">
+<ClassType>persistent</ClassType>
+<ProcedureBlock>1</ProcedureBlock>
+<Super>%Persistent,%Populate</Super>
+<TimeChanged>59868,39643.360355</TimeChanged>
+<ClassDefinitionError>0</ClassDefinitionError>
+
+<Projection name="JavaProjection">
+<Type>%Projection.Java</Type>
+<Parameter name="ROOTDIR" value="c:\cachesys\Dev\tutorials\javaandj2ee"/>
+</Projection>
+
+<Property name="Contact">
+<Type>JavaTutorial.Contact</Type>
+<Cardinality>parent</Cardinality>
+<Inverse>PhoneNumbers</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<Property name="Number">
+<Description>
+Represents a phone number</Description>
+<Type>%String</Type>
+<Parameter name="POPSPEC" value="USPhone()"/>
+</Property>
+
+<Property name="PhoneNumberType">
+<Description>
+Represents the type of phone number, e.g., work, home, mobile, fax, etc.</Description>
+<Type>%String</Type>
+<Parameter name="VALUELIST" value=",Business,Home,Mobile,Fax"/>
+</Property>
+
+<Query name="RetrieveByContactName">
+<Type>%SQLQuery</Type>
+<FormalSpec>name:%String</FormalSpec>
+<SqlQuery><![CDATA[SELECT %ID FROM PhoneNumber
+Where (Contact->Name)=:name
+order by PhoneNumberType]]></SqlQuery>
+</Query>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>{%%PARENT}("PhoneNumbers")</DataLocation>
+<DefaultData>PhoneNumberDefaultData</DefaultData>
+<IdLocation>^JavaTuto.ContactC("PhoneNumbers")</IdLocation>
+<IndexLocation>^JavaTuto.PhoneNumberI</IndexLocation>
+<StreamLocation>^JavaTuto.PhoneNumberS</StreamLocation>
+<Data name="PhoneNumberDefaultData">
+<Structure>listnode</Structure>
+<Subscript/>
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>Number</Value>
+</Value>
+<Value name="3">
+<Value>PhoneNumberType</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+<Checksum value="1395191779"/>
+</Export>

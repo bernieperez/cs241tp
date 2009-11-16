@@ -1,0 +1,49 @@
+<!--
+Demo for JVI ObjectMigrationCopying API.
+-->
+
+<project name="ObjectMigrationCopying" default="run" basedir=".">
+	
+    <import file="../../common.xml"/>
+    
+    <target name="removedb" description="removedb" >
+       <exec executable="removedb" failonerror="false">
+        <arg line="-f sourcedb"/>
+       </exec>
+      <exec executable="removedb" failonerror="false">
+	 <arg line="-f destdb"/>
+      </exec>
+    </target>
+    
+      <target name="makedb" description="makedb">
+            <exec executable="makedb"  failonerror="false">
+            <arg line="sourcedb"/>
+            </exec>
+            <exec executable="makedb" failonerror="false">
+	    	 <arg line="destdb"/>
+      </exec>
+      </target>
+        
+        <target name="createdb" description="createdb">
+             <exec executable="createdb"  failonerror="false">
+                <arg line="sourcedb"/>
+             </exec>
+             <exec executable="createdb"  failonerror="false">
+		   <arg line="destdb"/>
+             </exec>
+    </target>
+	
+    <target name="run" depends="clean,compile,removedb,makedb,createdb"
+        description="Run the demo">
+        <java classname="Migrate" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="sourcedb destdb"/>
+        </java>
+        <java classname="CopyObj" classpathref="cp" fork="true">
+            <jvmarg line="${jvm.options}"/>
+            <arg line="sourcedb destdb"/>
+        </java>
+                
+    </target>
+
+</project>

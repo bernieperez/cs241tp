@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="22" zv="Cache for Windows (x86-32) 2007.2 (Build 354U)" ts="2007-10-29 10:28:42">
+<Class name="SecurityTutorial.Application">
+<Description>
+SecurityTutorial.Application</Description>
+<Super>%ZEN.application</Super>
+<TimeCreated>60823,48937.526498</TimeCreated>
+
+<Parameter name="APPLICATIONNAME">
+<Description>
+This is the name of this application.</Description>
+<Default>Demo</Default>
+</Parameter>
+
+<Parameter name="HOMEPAGE">
+<Description>
+This is the URL of the main starting page of this application.</Description>
+</Parameter>
+
+<XData name="Style">
+<Description>
+This Style block contains application-wide CSS style definitions.</Description>
+<Data><![CDATA[
+<style type="text/css">
+</style>
+]]></Data>
+</XData>
+</Class>
+
+
+<Class name="SecurityTutorial.HomePage">
+<Description>
+Created using the page template: Default</Description>
+<Super>%ZEN.Component.page</Super>
+<TimeCreated>60823,49077.04147</TimeCreated>
+
+<Parameter name="APPLICATION">
+<Description>
+Class name of application this page belongs to.</Description>
+<Default>SecurityTutorial.Application</Default>
+</Parameter>
+
+<Parameter name="PAGENAME">
+<Description>
+Displayed name of this page.</Description>
+<Default>HomePage</Default>
+</Parameter>
+
+<Parameter name="DOMAIN">
+<Description>
+Domain used for localization.</Description>
+</Parameter>
+
+<XData name="Style">
+<Description>
+This Style block contains page-specific CSS style definitions.</Description>
+<Data><![CDATA[
+<style type="text/css">
+</style>
+]]></Data>
+</XData>
+
+<XData name="Contents">
+<Description>
+This XML block defines the contents of this page.</Description>
+<XMLNamespace>http://www.intersystems.com/zen</XMLNamespace>
+<Data><![CDATA[
+<page xmlns="http://www.intersystems.com/zen" title="" >
+<html align="center">
+<h2>Home Page</h2>
+</html>
+<html align="center" OnDrawContent="DrawMessage">
+</html>
+</page>
+]]></Data>
+</XData>
+
+<Method name="DrawMessage">
+<FormalSpec>pSeed:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+
+  &html<<h1>USER: #($UserName)#</h1>>
+  &html<<h1>ROLES: #($ROLES)#</h1>>
+  
+  Quit $$$OK
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="SecurityTutorial.LogIn">
+<Description>
+Created using the page template: Default</Description>
+<Super>%ZEN.Component.page</Super>
+<TimeCreated>60823,48882.439336</TimeCreated>
+
+<Parameter name="APPLICATION">
+<Description>
+Class name of application this page belongs to.</Description>
+<Default>SecurityTutorial.Application</Default>
+</Parameter>
+
+<Parameter name="PAGENAME">
+<Description>
+Displayed name of this page.</Description>
+</Parameter>
+
+<Parameter name="DOMAIN">
+<Description>
+Domain used for localization.</Description>
+</Parameter>
+
+<XData name="Style">
+<Description>
+This Style block contains page-specific CSS style definitions.</Description>
+<Data><![CDATA[
+<style type="text/css">
+</style>
+]]></Data>
+</XData>
+
+<XData name="Contents">
+<Description>
+This XML block defines the contents of this page.</Description>
+<XMLNamespace>http://www.intersystems.com/zen</XMLNamespace>
+<Data><![CDATA[
+<page xmlns="http://www.intersystems.com/zen" title="">
+<html align="center"><h2>Login Page</h2></html>
+<form align="center" id="loginForm" nextPage="SecurityTutorial.HomePage.cls">
+
+    <text name="CacheUserName" label="User:" />
+    <password name="CachePassword" label="Pwd:" />
+    <submit caption="Login" />
+  </form>
+ <html align="center" enclosingStyle="color:red; font-size:x-large" OnDrawContent="DrawMessage">
+</html>
+</page>
+]]></Data>
+</XData>
+
+<Method name="DrawMessage">
+<FormalSpec>pSeed:%String</FormalSpec>
+<ReturnType>%Status</ReturnType>
+<Implementation><![CDATA[
+	
+	if ($Get(%request.Data("$ZENLOGINFAILURE",1))=1)
+	{
+	write "Login Failure"
+	}
+  
+  Quit $$$OK
+]]></Implementation>
+</Method>
+</Class>
+</Export>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="18" zv="Cache for Windows (Intel) 5.1 (Build 775U)" ts="2005-10-06 10:41:19">
+<CSP name="Exercise1.csp" application="/csp/user/" default="1"><![CDATA[
+<html>
+<head>
+
+<!-- Put your page Title here -->
+<title>	Cache Server Page </title>
+
+</head>
+
+<body>
+
+
+<script language="Cache" method="AddValue" arguments="val1:%Integer" returntype="%String">
+quit $case(i,1:"Strongly Agree",2:"Agree",3:"Neutral",4:"Disagree", 5:"Strongly Disagree",:"Neutral")
+</script>
+<form>
+
+<csp:loop counter="i" from="1" to="5" step="1">
+	<p><input type="radio" name="Opinion" value=#(..AddValue(i))#> #(..AddValue(i))# </p>
+</csp:loop>
+
+
+
+
+</form>
+</body>
+</html>
+]]></CSP>
+
+
+<CSP name="Exercise2.csp" application="/csp/user/" default="1"><![CDATA[
+<html>
+<head>
+
+<!-- Put your page Title here -->
+<title>	Cache Server Page </title>
+
+</head>
+
+<body>
+
+<script language="Cache" method="GetContactType" arguments="val1:%Integer" returntype="%String">
+
+quit $case(i,1:"Personal",2:"Business",:"Business")
+
+</script>
+
+<csp:loop counter="i" from="1" to="2" step="1">
+	<script language="Cache" runat="Server">
+	set ContactType=..GetContactType(i)
+	</script>
+	<p>#(ContactType)# Contacts</p>
+	<ul>
+	<csp:query name="query" classname="CSPTutorial.Contact" queryname="ByContactType" P1=#(ContactType)#>
+	 <csp:while condition=query.Next()>
+	 	 <li>#(query.Data("Name"))#</li>
+	</csp:while>
+	</csp:query>
+	</ul>
+	
+</csp:loop>
+
+
+</form>
+</body>
+</html>
+]]></CSP>
+</Export>
