@@ -7,6 +7,8 @@ public class Person {
     private String lastName;
 
     private int age;
+    
+    private Person spouse;
 
     public Person() {
     }
@@ -37,6 +39,14 @@ public class Person {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public void setSpouse(Person spouse) {
+        this.spouse = spouse;
+    }
+
+    public Person getSpouse() {
+        return spouse;
     }
 
 }
