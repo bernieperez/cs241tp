@@ -5,14 +5,20 @@ import java.util.ArrayList;
 public class TAImpl extends Person implements Student, Instructor {
 
     private int sid;
-    
+
     private double salary;
 
     private ArrayList<Course> taught;
 
     private ArrayList<Course> enrolled;
 
+    private Department assigned;
+
     public TAImpl() {
+    }
+    
+    public double getSalary() {
+        return salary;
     }
     
     public ArrayList<Course> getCoursesEnrolled() {
@@ -23,10 +29,14 @@ public class TAImpl extends Person implements Student, Instructor {
         return getSid();
     }
 
+    public Department getAssignedDepartment() {
+        return getAssigned();
+    }
+
     public ArrayList<Course> getCoursesTaught() {
         return getTaught();
     }
-    
+
     /**
      * Getters and Setters
      */
@@ -37,10 +47,6 @@ public class TAImpl extends Person implements Student, Instructor {
 
     public void setSid(int sid) {
         this.sid = sid;
-    }
-
-    public double getSalary() {
-        return salary;
     }
 
     public void setSalary(double salary) {
@@ -63,4 +69,11 @@ public class TAImpl extends Person implements Student, Instructor {
         this.enrolled = enrolled;
     }
 
+    public Department getAssigned() {
+        return assigned;
+    }
+
+    public void setAssigned(Department assigned) {
+        this.assigned = assigned;
+    }
 }
