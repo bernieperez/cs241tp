@@ -7,5 +7,7 @@ public interface Instructor {
     public double getSalary();
 
     public ArrayList<Course> getCoursesTaught();
+    
+    public Department getAssignedDepartment();
 
 }

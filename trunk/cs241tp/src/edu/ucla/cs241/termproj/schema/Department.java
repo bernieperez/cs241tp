@@ -6,8 +6,11 @@ public class Department {
     private String name;
 
     private ArrayList<Course> courses;
+    
+    private ArrayList<Instructor> employeed;
 
-    public Department() {
+    public ArrayList<Instructor> getEmployeed() {
+        return employeed;
     }
 
     /**
@@ -28,6 +31,13 @@ public class Department {
 
     public void setCourses(ArrayList<Course> courses) {
         this.courses = courses;
+    }
+    
+    public void setEmployeed(ArrayList<Instructor> employeed) {
+        this.employeed = employeed;
+    }
+
+    public Department() {
     }
 
 }
