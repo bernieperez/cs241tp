@@ -2,7 +2,7 @@ package edu.ucla.cs241.termproj.schema;
 
 import java.util.ArrayList;
 
-public class TA extends Person implements Student, Instructor {
+public class TAImpl extends Person implements Student, Instructor {
 
     private int sid;
     
@@ -12,7 +12,7 @@ public class TA extends Person implements Student, Instructor {
 
     private ArrayList<Course> enrolled;
 
-    public TA() {
+    public TAImpl() {
     }
     
     public ArrayList<Course> getCoursesEnrolled() {
