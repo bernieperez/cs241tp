@@ -9,6 +9,8 @@ public class Person {
     private int age;
     
     private Person spouse;
+    
+    private String sex;
 
     public Person() {
     }
@@ -47,6 +49,14 @@ public class Person {
 
     public Person getSpouse() {
         return spouse;
+    }
+    
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
 }
