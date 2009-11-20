@@ -17,6 +17,12 @@ public class Course {
 
     public Course() {
     }
+    
+    public Course(String courseName, int courseSection, int courseRoom) {
+        this.name = courseName;
+        this.section = courseSection;
+        this.room = courseRoom;
+    }
 
     /**
      * Getters and Setters
