@@ -10,23 +10,25 @@ public class CourseGenerator {
     private final int MAXSECTION = 400;
     private final int MAXROOM = 5000;
     
+    Random randomGenerator = new Random();
+    
     public CourseGenerator() {
     }
     
-    public ArrayList<Course> getRandomCourses(String department, int size) {
-        String departmentPrefix = department.substring(0, 2);
-        int section;
-        int room;
-        Random randomGenerator = new Random();
-
+    public Course createCourse(String departmentName) {
+        String departmentPrefix = departmentName.substring(0, 2);
+        int section = randomGenerator.nextInt(MAXSECTION);
+        int room = randomGenerator.nextInt(MAXROOM);
+        Course course = new Course(departmentPrefix+section, section, room);
+        return course;
+    }
+    
+    public ArrayList<Course> createCourses(String departmentName, int count) {
         // Build Courses
         ArrayList<Course> courses = new ArrayList<Course>();
-        for(int x = 0; x <= size; x++){
-            section = randomGenerator.nextInt(MAXSECTION);
-            room = randomGenerator.nextInt(MAXROOM);
-            courses.add(new Course(departmentPrefix+section, section, room));
+        for(int x = 0; x <= count; x++){
+            courses.add(createCourse(departmentName));
         }
-
         return courses;
     }
 

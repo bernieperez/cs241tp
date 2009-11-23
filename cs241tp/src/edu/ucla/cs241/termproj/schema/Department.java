@@ -8,11 +8,23 @@ public class Department {
     private ArrayList<Course> courses;
     
     private ArrayList<Instructor> employeed;
+    
+    public Department(String name) {
+        this.name = name;
+    }
 
     public ArrayList<Instructor> getEmployeed() {
         return employeed;
     }
-
+    
+    public void addCourseToDepartment(Course course) {
+        courses.add(course);
+    }
+    
+    public void addInstructorToDepartment(Instructor instructor) {
+        employeed.add(instructor);
+    }
+    
     /**
      * Getters and Setters
      */
@@ -35,9 +47,6 @@ public class Department {
     
     public void setEmployeed(ArrayList<Instructor> employeed) {
         this.employeed = employeed;
-    }
-
-    public Department() {
     }
 
 }
