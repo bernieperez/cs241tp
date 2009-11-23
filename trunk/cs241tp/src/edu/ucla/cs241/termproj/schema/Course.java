@@ -3,7 +3,7 @@ package edu.ucla.cs241.termproj.schema;
 import java.util.ArrayList;
 
 public class Course {
-    private ArrayList<StudentImpl> enrolled;
+    private ArrayList<Student> enrolled;
 
     private Instructor instructor;
 
@@ -28,11 +28,11 @@ public class Course {
      * Getters and Setters
      */
 
-    public ArrayList<StudentImpl> getEnrolled() {
+    public ArrayList<Student> getEnrolled() {
         return enrolled;
     }
 
-    public void setEnrolled(ArrayList<StudentImpl> enrolled) {
+    public void setEnrolled(ArrayList<Student> enrolled) {
         this.enrolled = enrolled;
     }
 

@@ -2,46 +2,63 @@ package edu.ucla.cs241.termproj.script;
 
 import java.util.ArrayList;
 
-import de.beimax.janag.Namegenerator;
 import edu.ucla.cs241.termproj.schema.Course;
+import edu.ucla.cs241.termproj.schema.Department;
+import edu.ucla.cs241.termproj.schema.Instructor;
+import edu.ucla.cs241.termproj.schema.InstructorImpl;
+import edu.ucla.cs241.termproj.schema.Person;
 
 public class DataGenerator {
+    // Large Population or Small
+    private final static int SMALL = 400;
+    private final static int LARGE = 4000;
+    private final static int NUMINSTRUCCOURSE = 3;
 
     /**
      * Creates data to populate our schema.
      */
     public static void main(String[] args) {
-        // Testing Name Generator
-        Namegenerator ng = new Namegenerator("languages.txt", "semantics.txt");
-        String[] males = ng.getRandomName("U.S. Human (1990)", "Male - Top 500+", 100);
-        String[] females = ng.getRandomName("U.S. Human (1990)", "Female - Top 500+", 100);
-        for (String name : males) {
-            System.out.println(name);
+        int size = 0;
+        if (args.length > 0) {
+            size = Integer.parseInt(args[0]);
         }
-        for (String name : females) {
-            System.out.println(name);
+        if (size == 0) {
+            size = SMALL;
+        } else {
+            size = LARGE;
         }
-        System.out.println();
-
-        // Testing Department Generator
+        
+        // Generate Departments
+        ArrayList<Department> departments = new ArrayList<Department>();
         DepartmentGenerator dg = new DepartmentGenerator();
-        ArrayList<String> departments = dg.getAllDepartments();
-        for (String department : departments) {
-            System.out.println(department);
+        for (String name : dg.getAllDepartments()) {
+            departments.add(new Department(name));
         }
-        System.out.println("\nSome random Departments");
-        for (int x = 0; x <= 4; x++) {
-            System.out.println(dg.getRandomDepartment());
-        }
-
-        // Generate Random Courses for a Department
+        
+        // Generate Instructors and give them Courses
+        PersonGenerator pg = new PersonGenerator();
         CourseGenerator cg = new CourseGenerator();
-        for (String department : departments) {
-            System.out.println("\nGenerating course for department: " + department);
-            for (Course course : cg.getRandomCourses(department, 10)) {
-                System.out.println(course.getName());
+        for (Department department : departments) {
+            // Generate an Instructor and give him 3
+            for(int x = 0; x <= size; x++){
+                Instructor instructor = (Instructor) pg.createPerson((Person) new InstructorImpl());
+                // Instructor <-> Department
+                ((InstructorImpl) instructor).setAssigned(department);
+                department.addInstructorToDepartment(instructor);
+                
+                // Added Courses to this instructor
+                for(int i = 0; i <= NUMINSTRUCCOURSE; i++) {
+                    Course course = cg.createCourse(department.getName());
+                    // Setup Relationship Course <-> Department
+                    course.setDepartment(department);
+                    department.addCourseToDepartment(course);
+                    // Setup Course <-> Instructor
+                    course.setInstructor(instructor);
+                    ((InstructorImpl) instructor).addTaughtCourse(course);
+                }
             }
         }
+                
     }
 
 }

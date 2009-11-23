@@ -13,6 +13,10 @@ public class InstructorImpl extends Person implements Instructor {
     public InstructorImpl() {
     }
     
+    public void addTaughtCourse(Course course) {
+        taught.add(course);
+    }
+    
     public double getSalary() {
         return salary;
     }
