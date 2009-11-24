@@ -6,7 +6,7 @@ public class StudentImpl extends Person implements Student {
 
     private int sid;
 
-    private ArrayList<Course> enrolled;
+    private ArrayList<Course> enrolled = new ArrayList<Course>();
 
     public StudentImpl() {
     }

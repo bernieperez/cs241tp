@@ -8,9 +8,9 @@ public class TAImpl extends Person implements Student, Instructor {
 
     private double salary;
 
-    private ArrayList<Course> taught;
+    private ArrayList<Course> taught = new ArrayList<Course>();
 
-    private ArrayList<Course> enrolled;
+    private ArrayList<Course> enrolled = new ArrayList<Course>();
 
     private Department assigned;
 

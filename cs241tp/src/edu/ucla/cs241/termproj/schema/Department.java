@@ -6,9 +6,9 @@ import java.util.Random;
 public class Department {
     private String name;
 
-    private ArrayList<Course> courses;
+    private ArrayList<Course> courses = new ArrayList<Course>();
     
-    private ArrayList<Instructor> employeed;
+    private ArrayList<Instructor> employeed = new ArrayList<Instructor>();
     
     public Department(String name) {
         this.name = name;

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Course {
     private final static int MAXSPACE = 24;
     
-    private ArrayList<Student> enrolled;
+    private ArrayList<Student> enrolled = new ArrayList<Student>();
 
     private Instructor instructor;
 

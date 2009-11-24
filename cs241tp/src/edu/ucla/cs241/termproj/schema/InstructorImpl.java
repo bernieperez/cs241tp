@@ -6,7 +6,7 @@ public class InstructorImpl extends Person implements Instructor {
 
     private double salary;
 
-    private ArrayList<Course> taught;
+    private ArrayList<Course> taught = new ArrayList<Course>();
     
     private Department assigned;
 
