@@ -19,6 +19,10 @@ public class StudentImpl extends Person implements Student {
         return getCourses();
     }
     
+    public void addCourse(Course course) {
+        enrolled.add(course);
+    }
+    
     /**
      * Getters and Setters
      */

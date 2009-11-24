@@ -7,12 +7,18 @@ import edu.ucla.cs241.termproj.schema.Department;
 import edu.ucla.cs241.termproj.schema.Instructor;
 import edu.ucla.cs241.termproj.schema.InstructorImpl;
 import edu.ucla.cs241.termproj.schema.Person;
+import edu.ucla.cs241.termproj.schema.Student;
+import edu.ucla.cs241.termproj.schema.StudentImpl;
 
 public class DataGenerator {
     // Large Population or Small
-    private final static int SMALL = 400;
-    private final static int LARGE = 4000;
+    private final static int SMALL = 40;
+    private final static int LARGE = 400;
     private final static int NUMINSTRUCCOURSE = 3;
+    private final static int STUDENTSINCOURSE = 20;
+    private final static int NUMSTUDENTSCOURSE = 4;
+    private final static int STUDENTID = 1000000;
+    private static int studentIDcount = 0;
 
     /**
      * Creates data to populate our schema.
@@ -55,6 +61,20 @@ public class DataGenerator {
                     // Setup Course <-> Instructor
                     course.setInstructor(instructor);
                     ((InstructorImpl) instructor).addTaughtCourse(course);
+                }
+            }
+            
+            // Create Students and add them to Random Courses
+            int numberStudents = size * NUMINSTRUCCOURSE * STUDENTSINCOURSE / NUMSTUDENTSCOURSE;
+            for(int j = 0; j <= numberStudents; j++) {
+                Student student = (Student) pg.createPerson((Person) new StudentImpl());
+                ((StudentImpl) student).setSid(STUDENTID+studentIDcount++); // Student ID 1000000 - 1999999 
+                while (student.getCoursesEnrolled().size() < NUMSTUDENTSCOURSE) {
+                    Course course = department.getRandomCourse();
+                    if (course.enrollStudent(student)) {
+                        // Student was enrolled
+                        ((StudentImpl) student).addCourse(course);
+                    }
                 }
             }
         }

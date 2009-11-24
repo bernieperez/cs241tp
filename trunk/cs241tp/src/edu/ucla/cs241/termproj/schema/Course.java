@@ -3,6 +3,8 @@ package edu.ucla.cs241.termproj.schema;
 import java.util.ArrayList;
 
 public class Course {
+    private final static int MAXSPACE = 24;
+    
     private ArrayList<Student> enrolled;
 
     private Instructor instructor;
@@ -22,6 +24,17 @@ public class Course {
         this.name = courseName;
         this.section = courseSection;
         this.room = courseRoom;
+    }
+    
+    public boolean enrollStudent(Student student) {
+        if (enrolled.size() < MAXSPACE) {
+            // They can enroll
+            enrolled.add(student);
+            return true;
+        } else {
+            // Class is full
+            return false;
+        }
     }
 
     /**

@@ -1,6 +1,7 @@
 package edu.ucla.cs241.termproj.schema;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Department {
     private String name;
@@ -23,6 +24,10 @@ public class Department {
     
     public void addInstructorToDepartment(Instructor instructor) {
         employeed.add(instructor);
+    }
+    
+    public Course getRandomCourse() {
+        return courses.get(new Random().nextInt(courses.size()));
     }
     
     /**
