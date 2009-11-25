@@ -27,13 +27,13 @@ public class TestQuery {
 
 	public TestQuery(TransSession session) {
 		this.session = session;
-		
+
 		query1();
 		query2();
 		query3();
 		query4();
-		//query5();
-		
+		// query5();
+
 	}
 
 	public void initTimer() {
@@ -61,14 +61,14 @@ public class TestQuery {
 		System.out.println("Query 1");
 		// Get course name to be used in query
 		VQLQuery query_name = new VQLQuery(session,
-		"select selfoid from edu.ucla.cs241.termproj.schema.Course");
+				"select selfoid from edu.ucla.cs241.termproj.schema.Course");
 		Enumeration enum_course = query_name.execute();
 
 		// Pick first course for now to act as base comparison
 		String course_name = ((Course) enum_course.nextElement()).getName();
 		VQLQuery query = new VQLQuery(session,
 				"select selfoid from edu.ucla.cs241.termproj.schema.Course where name like '"
-				+ course_name + "'");
+						+ course_name + "'");
 
 		// Set time variables and begin query
 		initTimer();
@@ -86,8 +86,6 @@ public class TestQuery {
 			System.out.println("Student ID: " + s.getStudentID());
 			count++;
 		}
-
-		
 
 		System.out.println("Total Students: " + count);
 		System.out.println("--------------------");
@@ -111,29 +109,28 @@ public class TestQuery {
 	}
 
 	/**
-	 * Query 2 Simple 
+	 * Query 2 Simple
 	 * 
-	 * Show the Instructor who is teaching the most courses in
-	 * Department e.g., "Mathematics" This Multiple Join query will count all
-	 * Instructor Course from a Department. It will test how efficient each
-	 * ODBMS can extract data from an Object.
+	 * Show the Instructor who is teaching the most courses in Department e.g.,
+	 * "Mathematics" This Multiple Join query will count all Instructor Course
+	 * from a Department. It will test how efficient each ODBMS can extract data
+	 * from an Object.
 	 * 
 	 */
 	public void query2() {
 		System.out.println("Query 2");
 		// Get example department to be used as base search department
 		VQLQuery query_name = new VQLQuery(session,
-		"select selfoid from edu.ucla.cs241.termproj.schema.Department");
+				"select selfoid from edu.ucla.cs241.termproj.schema.Department");
 		Enumeration enum_course = query_name.execute();
 
 		// Pick first department for now to act as base comparison
 		String dept_name = ((Department) enum_course.nextElement()).getName();
 
-		
 		VQLQuery query = new VQLQuery(
 				session,
 				"select selfoid from edu.ucla.cs241.termproj.schema.InstructorImpl where assigned->name like '"
-				+ dept_name + "'");
+						+ dept_name + "'");
 		initTimer();
 		startTimer();
 		Enumeration result = query.execute();
@@ -150,7 +147,6 @@ public class TestQuery {
 		stopTimer();
 		float end_seconds = this.end_time / 1000F;
 		System.out.println("Elapse Time in Seconds: " + end_seconds);
-		
 
 		System.out.println("Instructor Name: " + instructor_max.getName()
 				+ " Dept: " + instructor_max.getAssigned().getName()
@@ -159,16 +155,16 @@ public class TestQuery {
 	}
 
 	/**
-	 * Query 3 Medium 
+	 * Query 3 Medium
 	 * 
-	 * Show which Department has the highest paid Instructors (avg. as a department)
-	 * This will mimic GroupBy test against the ODBMS.
+	 * Show which Department has the highest paid Instructors (avg. as a
+	 * department) This will mimic GroupBy test against the ODBMS.
 	 */
 	public void query3() {
 		System.out.println("Query 3");
 		// Get example department to be used as base search department
 		VQLQuery query_name = new VQLQuery(session,
-		"select selfoid from edu.ucla.cs241.termproj.schema.Department");
+				"select selfoid from edu.ucla.cs241.termproj.schema.Department");
 		initTimer();
 		startTimer();
 		Enumeration enum_departments = query_name.execute();
@@ -176,72 +172,90 @@ public class TestQuery {
 		Department dept_max = null;
 		double max_avg_salary = 0;
 
-		while(enum_departments.hasMoreElements()){
-			Department current_department = (Department)enum_departments.nextElement();
-			ArrayList<Instructor> instructors = current_department.getEmployeed();
+		while (enum_departments.hasMoreElements()) {
+			Department current_department = (Department) enum_departments
+					.nextElement();
+			ArrayList<Instructor> instructors = current_department
+					.getEmployeed();
 			double count = 0;
 			double total_salary = 0;
 
-			for ( Iterator i = instructors.iterator(); i.hasNext();){
-				total_salary += ((Instructor)i.next()).getSalary();
+			for (Iterator i = instructors.iterator(); i.hasNext();) {
+				total_salary += ((Instructor) i.next()).getSalary();
 				count += 1;
 			}
 
-			if ( total_salary/count > max_avg_salary ){
-				max_avg_salary = total_salary/count;
+			if (total_salary / count > max_avg_salary) {
+				max_avg_salary = total_salary / count;
 				dept_max = current_department;
 			}
 		}
 		stopTimer();
 		float end_seconds = this.end_time / 1000F;
 		System.out.println("Elapse Time in Seconds: " + end_seconds);
-		System.out.println("Department: " + dept_max.getName() + " Avg. Salary: " + max_avg_salary );
+		System.out.println("Department: " + dept_max.getName()
+				+ " Avg. Salary: " + max_avg_salary);
 		System.out.println("----------------------------");
-	
+
 	}
+
 	/**
 	 * Query 4 Medium
 	 * 
-	 * Give every Instructor and NOT TA in Department "Computer Science" a 10% raise
-	 * We will benchmark two items in this query. First is how well the ODBMS deals with 
-	 * Interfaces. Also how fast it can update information in the database for an Object.
+	 * Give every Instructor and NOT TA in Department "Computer Science" a 10%
+	 * raise We will benchmark two items in this query. First is how well the
+	 * ODBMS deals with Interfaces. Also how fast it can update information in
+	 * the database for an Object.
 	 */
-	public void query4(){
+	public void query4() {
 		System.out.println("Query 4");
 		// Used variables
 		double raise_percentage = 0.10; // %10 percent raise
-		
+
 		// Get example department to be used as base search department
 		VQLQuery query_name = new VQLQuery(session,
-		"select selfoid from edu.ucla.cs241.termproj.schema.Department");
+				"select selfoid from edu.ucla.cs241.termproj.schema.Department");
 		Enumeration enum_course = query_name.execute();
 
 		Department department = ((Department) enum_course.nextElement());
 		// Pick first department for now to act as base comparison
 		String dept_name = department.getName();
 		System.out.println("Department: " + dept_name);
-		
-		// These instructors are not TAs since they are derived from InstructorImpl
+
+		// These instructors are not TAs since they are derived from
+		// InstructorImpl
 		VQLQuery instructors_name = new VQLQuery(session,
-		"select selfoid from edu.ucla.cs241.termproj.schema.InstructorImpl");
+				"select selfoid from edu.ucla.cs241.termproj.schema.InstructorImpl");
 		initTimer();
 		startTimer();
 		Enumeration enum_instructors = instructors_name.execute();
-		
-		while(enum_instructors.hasMoreElements()){
-			InstructorImpl instructor = (InstructorImpl)enum_instructors.nextElement();
-			if ( instructor.getAssigned().getName().equals(dept_name)){
+
+		while (enum_instructors.hasMoreElements()) {
+			InstructorImpl instructor = (InstructorImpl) enum_instructors
+					.nextElement();
+			if (instructor.getAssigned().getName().equals(dept_name)) {
 				double salary = instructor.getSalary();
 				// Increase salary by raise percentage amount
-				instructor.setSalary(salary + salary*raise_percentage); 
+				instructor.setSalary(salary + salary * raise_percentage);
 			}
 		}
-		
+
 		stopTimer();
 		float end_seconds = this.end_time / 1000F;
 		System.out.println("Elapse Time in Seconds: " + end_seconds);
 
 		System.out.println("----------------------------");
+
+	}
+
+	/**
+	 * Query 5 Complex
+	 * 
+	 * Show if any Student is married to any TA in a Course they are currently
+	 * teaching. This will benchmark multiple joins with recursive relationships
+	 * against the ODBMS.
+	 */
+	public void query5(){
 		
 	}
 }
