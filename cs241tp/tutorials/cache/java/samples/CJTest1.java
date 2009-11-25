@@ -52,8 +52,9 @@ public class CJTest1 {
                 dbconnection = CacheDatabase.getDatabase (url, username, password);
 
 
+           
             /* Print out server info */
-            info = dbconnection.getServerInfo();
+           info = dbconnection.getServerInfo();
             System.out.println( "   Connection URL:   " + info.connectionInfo );
             System.out.println( "   Web Server URL:   " + info.webURL );
             System.out.println( "   Cache' version:   " + info.cacheSystemVersion );
@@ -74,11 +75,11 @@ public class CJTest1 {
             System.out.println( "   System orefs?     " + info.systemOrefsSupported);
             System.out.println( "   Process #         " + info.processNumberString + " (" + info.processNumber + ")");
 
-            /* Get information from MANIFEST.MF via java.lang.Package class */
+             Get information from MANIFEST.MF via java.lang.Package class 
             System.out.println( "   CacheDB.jar Specification version  " + Package.getPackage("com.intersys.cache").getSpecificationVersion());
             System.out.println( "   CacheDB.jar Implementation version  " + Package.getPackage("com.intersys.cache").getImplementationVersion());
 
-            /* Use com.intersys.VersionInfo class for build information */
+             Use com.intersys.VersionInfo class for build information 
             System.out.println( "   Java Client build version  " + VersionInfo.getClientVersion());
 
 

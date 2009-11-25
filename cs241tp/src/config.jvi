@@ -1,0 +1,18 @@
+# Automatically generated Versant Enhancer Configuration File
+
+p edu.ucla.cs241.termproj.Main
+p edu.ucla.cs241.termproj.schema.Course
+p edu.ucla.cs241.termproj.schema.Department
+p edu.ucla.cs241.termproj.schema.Instructor
+p edu.ucla.cs241.termproj.schema.InstructorImpl
+p edu.ucla.cs241.termproj.schema.Person
+p edu.ucla.cs241.termproj.schema.Student
+p edu.ucla.cs241.termproj.schema.StudentImpl
+p edu.ucla.cs241.termproj.schema.TAImpl
+p edu.ucla.cs241.termproj.script.CourseGenerator
+p edu.ucla.cs241.termproj.script.DataGenerator$PopulationSize
+p edu.ucla.cs241.termproj.script.DataGenerator
+p edu.ucla.cs241.termproj.script.DepartmentGenerator
+p edu.ucla.cs241.termproj.script.PersonGenerator
+
+n **
