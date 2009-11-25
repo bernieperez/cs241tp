@@ -36,6 +36,18 @@ public class TAImpl extends Person implements Student, Instructor {
     public ArrayList<Course> getCoursesTaught() {
         return getTaught();
     }
+    
+    public void setStudentID(int studentID) {
+        setSid(studentID);
+    }
+    
+    public void addCourse(Course course) {
+        enrolled.add(course);
+    }
+    
+    public void addTaughtCourse(Course course) {
+        taught.add(course);
+    }
 
     /**
      * Getters and Setters

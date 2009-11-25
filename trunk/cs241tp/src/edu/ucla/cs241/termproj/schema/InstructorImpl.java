@@ -29,6 +29,10 @@ public class InstructorImpl extends Person implements Instructor {
         return getTaught();
     }
     
+    public boolean removeCourse(Course course) {
+        return taught.remove(course);
+    }
+    
     /**
      * Getters and Setters
      */
