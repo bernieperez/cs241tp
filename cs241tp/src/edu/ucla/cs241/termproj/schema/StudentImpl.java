@@ -23,6 +23,10 @@ public class StudentImpl extends Person implements Student {
         enrolled.add(course);
     }
     
+    public void setStudentID(int studentID) {
+        setSid(studentID);
+    }
+    
     /**
      * Getters and Setters
      */

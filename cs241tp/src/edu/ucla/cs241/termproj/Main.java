@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import edu.ucla.cs241.termproj.schema.Course;
 import edu.ucla.cs241.termproj.schema.Department;
-import edu.ucla.cs241.termproj.schema.InstructorImpl;
+import edu.ucla.cs241.termproj.schema.Instructor;
 import edu.ucla.cs241.termproj.schema.Person;
 import edu.ucla.cs241.termproj.schema.Student;
 import edu.ucla.cs241.termproj.script.DataGenerator;
@@ -44,7 +44,11 @@ public class Main {
             // List all Courses in that departments
             System.out.println("Courses\tSection\tRoom\tInstructor");
             for(Course course : department.getCourses()) {
-                System.out.println(course.getName() + "\t" + course.getSection() + "\t" + course.getRoom() + "\t" + ((InstructorImpl)course.getInstructor()).getName());
+                String line = course.getName() + "\t" + course.getSection() + "\t" + course.getRoom() + "\t" + ((Instructor)course.getInstructor()).getName();
+                if (course.getInstructor() instanceof Student) {
+                    line += " - TA";
+                }
+                System.out.println(line);
             }
             System.out.println();
         }
@@ -55,7 +59,11 @@ public class Main {
                 System.out.println(department.getName() + "\\" + course.getName() + " - " + ((Person)course.getInstructor()).getName());
                 System.out.println("Name\t\tSex\tStudentID");
                 for(Student student : course.getEnrolled()) {
-                    System.out.println(((Person)student).getName() + "\t" + ((Person)student).getSex() + "\t" + student.getStudentID());
+                    String line = ((Person)student).getName() + "\t" + ((Person)student).getSex() + "\t" + student.getStudentID();
+                    if (student instanceof Instructor) {
+                        line += " - TA";
+                    }
+                    System.out.println(line);
                 }
                 System.out.println();
             }
