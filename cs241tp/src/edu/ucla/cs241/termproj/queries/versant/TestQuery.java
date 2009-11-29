@@ -112,8 +112,8 @@ public class TestQuery {
 		
 		System.out.println("Course Name: " + course_name);
 		System.out.println("Number of Students: " + students.size());
-		float end_seconds = this.end_time / 1000F;
-		System.out.println("Elapse Time in Seconds: " + end_seconds);
+		
+		System.out.println("Elapse Time in ms: " + this.end_time );
 		System.out.println("--------------------");
 		/*
 		// Pick first course for now to act as base comparison
@@ -197,8 +197,7 @@ public class TestQuery {
 			}
 		}
 		stopTimer();
-		float end_seconds = this.end_time / 1000F;
-		System.out.println("Elapse Time in Seconds: " + end_seconds);
+		System.out.println("Elapse Time in ms: " + this.end_time );
 
 		System.out.println("Instructor Name: " + instructor_max.getName()
 				+ " Dept: " + instructor_max.getAssignedDepartment().getName()
@@ -252,8 +251,7 @@ public class TestQuery {
 		
 		stopTimer();
 		
-		float end_seconds = this.end_time / 1000F;
-		System.out.println("Elapse Time in Seconds: " + end_seconds);
+		System.out.println("Elapse Time in ms: " + this.end_time );
 		System.out.println("Department: " + dept_max.getName()
 				+ " Avg. Salary: " + max_avg_salary);
 		System.out.println("----------------------------");
@@ -309,8 +307,7 @@ public class TestQuery {
 		stopTimer();
 				
 		System.out.println("Avg. Salary: "+salary/(double)count);
-		float end_seconds = this.end_time / 1000F;
-		System.out.println("Elapse Time in Seconds: " + end_seconds);
+		System.out.println("Elapse Time in ms: " + this.end_time );
 
 		System.out.println("----------------------------");
 
@@ -355,8 +352,13 @@ public class TestQuery {
 		} // Department Loop
 		
 		stopTimer();
-		float end_seconds = this.end_time / 1000F;
-		System.out.println("Elapse Time in Seconds: " + end_seconds);
+		
+		for ( Instructor inst : TAs ){
+			System.out.println("Name: " + inst.getName() + " Course TAing: " + inst.getCoursesTaught().get(0).getName() + " Spouse: " + 
+					((Person)inst).getSpouse().getName());
+		}
+		
+		System.out.println("Elapse Time in ms: " + this.end_time );
 		
 	}
 }
