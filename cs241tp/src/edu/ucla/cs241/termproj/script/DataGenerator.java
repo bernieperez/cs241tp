@@ -112,10 +112,44 @@ public class DataGenerator {
                     ((Instructor)student).addTaughtCourse(course);
                     course.setInstructor((Instructor) student);
                 }
+            }// End Student Creation
+            
+            // Lets get some students married (~15%)
+            for(int trys = 0; trys < (numberStudents/6); trys++){
+                Student person1 = department.getRandomCourse().getRandomStudent();
+                Student person2 = department.getRandomCourse().getRandomStudent();
+                if (notSameSexOrMarried(person1, person2)) {
+                    marryThem(person1, person2);
+                }
             }
-        }
+        }// End Department Creation
         
         return departments;
+    }
+
+    private boolean notSameSexOrMarried(Student person1, Student person2) {
+        Person p1 = (Person) person1;
+        Person p2 = (Person) person2;
+
+        // If same sex return false
+        if (p1.getSex().equalsIgnoreCase(p2.getSex())) {
+            return false;
+        }
+        
+        // If one of them is already married return false
+        if ((p1.isMarried()) || (p2.isMarried())) {
+            return false;
+        }
+        
+        // Aside from love, they can get married
+        return true;
+    }
+    
+    private void marryThem(Student person1, Student person2) {
+        Person p1 = (Person) person1;
+        Person p2 = (Person) person2;
+        p1.setSpouse(p2);
+        p2.setSpouse(p1);
     }
 
     private boolean assignAsTA(Department department) {

@@ -6,11 +6,19 @@ public class Person {
 
     private int age;
     
-    private Person spouse;
+    private Person spouse = null;
     
     private String sex;
 
     public Person() {
+    }
+    
+    public boolean isMarried() {
+        if (spouse == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**
