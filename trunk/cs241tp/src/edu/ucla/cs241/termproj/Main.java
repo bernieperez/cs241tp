@@ -58,11 +58,11 @@ public class Main {
       }
     
     private void run() {
+
     	TransSession session = new TransSession("mydb");
-    	
         System.out.println("Hello Team Members of CS 241A Term Project!\nLets generate some data.");
-        //DataGenerator dg = new DataGenerator();
-        
+        DataGenerator dg = new DataGenerator();
+
 //
 //        ArrayList<Department> smallDepartments = dg.generate(PopulationSize.SMALL);
 //        System.out.println("\nDone!\nNow lets print out some information about it.\n");
@@ -73,13 +73,15 @@ public class Main {
 //        printInfo(largeDepartments);
         
         System.out.println("\nTINY!!!!!\n");
-       //ArrayList<Department> tinyDepartments = dg.generate(PopulationSize.TINY);
-        //for ( int i = 0; i < tinyDepartments.size(); ++i){
-        //	session.makePersistent(tinyDepartments.get(i));
-       // }
+        //ArrayList<Department> tinyDepartments = dg.generate(PopulationSize.TINY);
+
+//        for ( int i = 0; i < tinyDepartments.size(); ++i){
+//        	session.makePersistent(tinyDepartments.get(i));
+//        }
 
         TestQuery query1 = new TestQuery(session);
         //session.commit();
+        
         //printInfo(tinyDepartments);
         //session.endSession();
        
