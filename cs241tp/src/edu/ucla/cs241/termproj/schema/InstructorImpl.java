@@ -38,6 +38,12 @@ public class InstructorImpl extends Person implements Instructor {
      */
 
     public void setSalary(double salary) {
+        if (salary > 150) {
+            salary = 150;
+        }
+        if (salary < 10) {
+            salary = 10;
+        }
         this.salary = salary;
     }
 

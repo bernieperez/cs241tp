@@ -44,7 +44,7 @@ public class GeneratorTest {
             System.out.println("Courses\tSection\tRoom\tInstructor");
             for (Course course : department.getCourses()) {
                 String line = course.getName() + "\t" + course.getSection() + "\t" + course.getRoom() + "\t"
-                        + ((Instructor) course.getInstructor()).getName();
+                        + ((Instructor) course.getInstructor()).getName() + "\t" + ((Instructor) course.getInstructor()).getSalary();
                 if (course.getInstructor() instanceof Student) {
                     line += " - TA";
                 }
