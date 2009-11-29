@@ -1,12 +1,27 @@
 package edu.ucla.cs241.termproj.queries.versant;
 
+import java.io.Closeable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.Iterator;
+import java.util.List;
 
+import com.versant.fund.AttrHandleArray;
+import com.versant.fund.AttrString;
+import com.versant.fund.ClassHandle;
+import com.versant.fund.FundQuery;
+import com.versant.fund.FundQueryResult;
+import com.versant.fund.FundVQLQuery;
+import com.versant.fund.Handle;
+import com.versant.fund.HandleEnumeration;
+import com.versant.fund.Predicate;
 import com.versant.fund.QueryExecutionOptions;
+import com.versant.trans.Query;
+import com.versant.trans.QueryResult;
 import com.versant.trans.TransSession;
+import com.versant.trans.VEnumeration;
 import com.versant.trans.VQLQuery;
 
 import edu.ucla.cs241.termproj.schema.Course;
@@ -32,7 +47,7 @@ public class TestQuery {
 		query2();
 		query3();
 		query4();
-		// query5();
+		query5();
 
 	}
 
@@ -60,16 +75,52 @@ public class TestQuery {
 	public void query1() {
 		System.out.println("Query 1");
 		// Get course name to be used in query
-		VQLQuery query_name = new VQLQuery(session,
+		Query query_name = new Query(session,
 				"select selfoid from edu.ucla.cs241.termproj.schema.Course");
-		Enumeration enum_course = query_name.execute();
+		QueryResult result = query_name.execute();
+		
+		String course_name = ((Course) result.next()).getName();
+		
+//		AttrHandleArray  enrolled_array = session.newAttrHandleArray("enrolled");
+//		AttrString course_name_ = session.newAttrString("name");
+//		Predicate pred = course_name_.eq(course_name);
+//		
+//		
+//		ClassHandle cls = session.locateClass ("edu.ucla.cs241.termproj.schema.Course");
+//		Enumeration class_enum = cls.select (pred);
+//		
+//		System.out.println("Handle: " + ((Course)class_enum.nextElement()).getEnrolled().size());
+//		System.out.println("Enrolled Size2: " + course_name);
+		
+//		int count = 0;
+//		while ((hnd = result.next()) != null) {
+//		count++;
+//		}
+		//System.out.println("Found : " + count);
+		query_name.close();
+		
+		VQLQuery query_course = new VQLQuery(session,
+				"select selfoid from edu.ucla.cs241.termproj.schema.Course where name like '"
+						+ course_name + "'");
+		initTimer();
+		startTimer();
+		Enumeration course = query_course.execute();
+		stopTimer();
+		Course c = ((Course)course.nextElement());
+		ArrayList<Student> students = c.getEnrolled();
 
+		System.out.println("Course Name: " + course_name);
+		System.out.println("Number of Students: " + students.size());
+		float end_seconds = this.end_time / 1000F;
+		System.out.println("Elapse Time in Seconds: " + end_seconds);
+		System.out.println("--------------------");
+		/*
 		// Pick first course for now to act as base comparison
 		String course_name = ((Course) enum_course.nextElement()).getName();
 		VQLQuery query = new VQLQuery(session,
 				"select selfoid from edu.ucla.cs241.termproj.schema.Course where name like '"
 						+ course_name + "'");
-
+		
 		// Set time variables and begin query
 		initTimer();
 		startTimer();
@@ -91,7 +142,7 @@ public class TestQuery {
 		System.out.println("--------------------");
 		Object obj = null;
 		int counter = 0;
-
+*/
 		/*
 		 * ArrayList<Person> students = new ArrayList<Person>(); while
 		 * (result.hasMoreElements()) { Person currentStudent = (Person)
@@ -202,7 +253,7 @@ public class TestQuery {
 	/**
 	 * Query 4 Medium
 	 * 
-	 * Give every Instructor and NOT TA in Department "Computer Science" a 10%
+	 * Give every Instructor (NOT TA) in Department "Computer Science" a 10%
 	 * raise We will benchmark two items in this query. First is how well the
 	 * ODBMS deals with Interfaces. Also how fast it can update information in
 	 * the database for an Object.
@@ -229,7 +280,8 @@ public class TestQuery {
 		initTimer();
 		startTimer();
 		Enumeration enum_instructors = instructors_name.execute();
-
+		Double avg_sal = 0.0;
+		double num_instructors = 0;
 		while (enum_instructors.hasMoreElements()) {
 			InstructorImpl instructor = (InstructorImpl) enum_instructors
 					.nextElement();
@@ -237,10 +289,14 @@ public class TestQuery {
 				double salary = instructor.getSalary();
 				// Increase salary by raise percentage amount
 				instructor.setSalary(salary + salary * raise_percentage);
+				avg_sal += salary;
+				num_instructors += 1;
 			}
 		}
-
+		session.commit();
 		stopTimer();
+		
+		System.out.println("New Avg. Sal: " + avg_sal/num_instructors);
 		float end_seconds = this.end_time / 1000F;
 		System.out.println("Elapse Time in Seconds: " + end_seconds);
 
@@ -257,5 +313,57 @@ public class TestQuery {
 	 */
 	public void query5(){
 		
+		
+		FundQuery query_enrolled = new FundQuery(session,
+		"select enrolled from edu.ucla.cs241.termproj.schema.Course");
+		FundQueryResult res_enrolled = query_enrolled.execute();
+		
+		Object enr = res_enrolled.nextRow();
+
+		System.out.println("Enrolled: " + enr);
+		
+		//--------------------------------------------------------------
+
+		System.out.println("Query 5");
+		
+		Query query_name1 = new Query(session,
+				"select name from edu.ucla.cs241.termproj.schema.Course");
+		
+		QueryResult res3 = query_name1.execute();
+
+		String name_str = (String)res3.next();
+		
+		
+
+		//ArrayList<Student> stud = c.getEnrolled();
+		stopTimer();
+		float end_seconds1 = this.end_time / 1000F;
+		System.out.println("Elapse Time in Seconds: " + end_seconds1);
+		System.out.println("Course Name: " + name_str);
+		System.out.println("----------------------------");
+		
+		///------------------------------------------------------
+		
+		// Get course name to be used in query
+		FundVQLQuery query_name = new FundVQLQuery(session,
+				"select selfoid from edu.ucla.cs241.termproj.schema.Course where name like '"+name_str+"'");
+		initTimer();
+		startTimer();
+		
+		HandleEnumeration result =  query_name.execute();
+
+		Handle hnd = result.nextHandle();
+		
+		AttrString desc = session.newAttrString ("name");
+		AttrHandleArray all = session.newAttrHandleArray ("enrolled");
+		
+		System.out.println("Course C1: "+ hnd.get(all).length);
+		System.out.println("Course C1 Name: "+ hnd.get(desc));
+		stopTimer();
+		float end_seconds11 = this.end_time / 1000F;
+		System.out.println("Elapse Time in Seconds: " + end_seconds11);
+		//int section_number = (Integer)result.nextRow();
+	
+		//System.out.println("Section Number: " + section_number);
 	}
 }
