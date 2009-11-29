@@ -1,6 +1,7 @@
 package edu.ucla.cs241.termproj.schema;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Course {
     private final static int MAXSPACE = 24;
@@ -35,6 +36,10 @@ public class Course {
             // Class is full
             return false;
         }
+    }
+    
+    public Student getRandomStudent() {
+        return enrolled.get(new Random().nextInt(enrolled.size()));
     }
 
     /**
