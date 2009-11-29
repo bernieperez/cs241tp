@@ -41,6 +41,13 @@ public class Course {
     public Student getRandomStudent() {
         return enrolled.get(new Random().nextInt(enrolled.size()));
     }
+    
+    public boolean isEnrolled(Student student) {
+    	if (enrolled.contains(student)) {
+    		return true;
+    	}
+    	return false;
+    }
 
     /**
      * Getters and Setters
