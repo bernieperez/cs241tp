@@ -72,8 +72,8 @@ public class Query3 extends QueryAbs {
 
     @Override
     public void tearDown() {
-        results = "Elapse Time in ms: " + getResults();
-        results += "Department: " + dept_max.getName() + " Avg. Salary: " + max_avg_salary;
+        results = "Elapse Time in ms: " + getResults() + newline;
+        results += "Department: " + dept_max.getName() + " Avg. Salary: " + max_avg_salary + newline;
         results += "----------------------------";
     }
 }

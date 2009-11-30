@@ -56,9 +56,9 @@ public class Query1 extends QueryAbs {
     @Override
     public void tearDown() {
         // Just save results
-        results = "Course Name: " + course_name;
-        results += "Number of Students: " + students.size();
-        results += "Elapse Time in ms: " + getResults();
+        results = "Course Name: " + course_name + newline;
+        results += "Number of Students: " + students.size() + newline;
+        results += "Elapse Time in ms: " + getResults() + newline;
         results += "--------------------";
     }
 }
