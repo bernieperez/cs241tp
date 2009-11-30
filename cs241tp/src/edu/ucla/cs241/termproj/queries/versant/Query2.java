@@ -60,9 +60,9 @@ public class Query2 extends QueryAbs {
 
     @Override
     public void tearDown() {
-        results = "Elapse Time in ms: " + getResults();
+        results = "Elapse Time in ms: " + getResults() + newline;
         results += "Instructor Name: " + instructor_max.getName() + " Dept: "
-                + instructor_max.getAssignedDepartment().getName() + " # Courses: " + max_courses;
+                + instructor_max.getAssignedDepartment().getName() + " # Courses: " + max_courses + newline;
         results += "----------------------------";
     }
 }

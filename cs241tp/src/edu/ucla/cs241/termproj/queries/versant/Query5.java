@@ -65,7 +65,7 @@ public class Query5 extends QueryAbs {
         results = "";
         for (Instructor inst : TAs) {
             results += "Name: " + inst.getName() + " Course TAing: " + inst.getCoursesTaught().get(0).getName()
-                    + " Spouse: " + ((Person) inst).getSpouse().getName();
+                    + " Spouse: " + ((Person) inst).getSpouse().getName() + newline;
         }
         results += "Elapse Time in ms: " + getResults();
     }

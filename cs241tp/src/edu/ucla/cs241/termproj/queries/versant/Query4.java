@@ -66,8 +66,8 @@ public class Query4 extends QueryAbs {
 
     @Override
     public void tearDown() {
-        results = "Avg. Salary: " + (salary / (double) count);
-        results += "Elapse Time in ms: " + getResults();
+        results = "Avg. Salary: " + (salary / (double) count) + newline;
+        results += "Elapse Time in ms: " + getResults() + newline;
         results += "----------------------------";
     }
 }

@@ -6,6 +6,7 @@ import com.versant.trans.TransSession;
 public abstract class QueryAbs implements Query {
     protected String name = "";
     protected String results = "";
+    public static String newline = System.getProperty("line.separator");
     
     protected TransSession session;
     
